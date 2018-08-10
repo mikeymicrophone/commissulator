@@ -4,6 +4,8 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Commission</th>
+      <th>Agent</th>
       <th>Address</th>
       <th>Unit number</th>
       <th>Status</th>
@@ -15,6 +17,8 @@
     <% @deals.each do |deal| %>
       <tr>
         <td><%= deal.name %></td>
+        <td><%= number_to_currency deal.commission %></td>
+        <td><%= deal.agent&.email %></td>
         <td><%= deal.address %></td>
         <td><%= deal.unit_number %></td>
         <td><%= deal.status %></td>
