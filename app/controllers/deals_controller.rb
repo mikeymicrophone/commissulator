@@ -56,6 +56,6 @@ class DealsController < ApplicationController
     end
 
     def deal_params
-      params.require(:deal).permit :name, :address, :unit_number, :status
+      params.require(:deal).permit :name, :address, :unit_number, :status, :commission
     end
 end
