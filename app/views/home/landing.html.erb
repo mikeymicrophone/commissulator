@@ -3,14 +3,18 @@
 </section>
 
 <% if current_agent %>
-  <section><%= link_to 'Sign Out', destroy_agent_session_path, :method => :delete %>
+  <nav>
+    <%= link_to 'Deals', deals_path %>
+    
+    <%= link_to 'Sign Out', destroy_agent_session_path, :method => :delete, :id => 'sign_out_link' %>
+  </nav>
 <% else %>
   <section>
     <%= link_to 'Authenticate', new_agent_session_path %> | 
     <%= link_to 'Register', new_agent_registration_path %>
   </section>
+  
+  <section>
+    Once logged in, you will see the deals underway.
+  </section>
 <% end %>
-
-<section>
-  Once logged in, you will see the deals underway.
-</section>
