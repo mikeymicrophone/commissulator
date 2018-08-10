@@ -1,11 +1,12 @@
+<%= link_to '[edit]', edit_participant_path(@participant) %>
 <p>
   <strong>Deal:</strong>
-  <%= @participant.deal&.name %>
+  <%= link_to_name @participant.deal %>
 </p>
 
 <p>
   <strong>Assistant:</strong>
-  <%= @participant.assistant&.name %>
+  <%= link_to_name @participant.assistant %>
 </p>
 
 <p>
@@ -17,6 +18,3 @@
   <strong>Status:</strong>
   <%= @participant.status %>
 </p>
-
-<%= link_to 'Edit', edit_participant_path(@participant) %> |
-<%= link_to 'Back', participants_path %>

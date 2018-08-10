@@ -14,13 +14,12 @@
   <tbody>
     <% @participants.each do |participant| %>
       <tr>
-        <td><%= participant.deal&.name %></td>
-        <td><%= participant.assistant&.name %></td>
+        <td><%= link_to_name participant.deal %></td>
+        <td><%= link_to_name participant.assistant %></td>
         <td><%= participant.role %></td>
         <td><%= participant.status %></td>
         <td><%= link_to 'Show', participant %></td>
         <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
-        <td><%= link_to 'Destroy', participant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

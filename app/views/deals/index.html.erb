@@ -16,7 +16,7 @@
   <tbody>
     <% @deals.each do |deal| %>
       <tr>
-        <td><%= deal.name %></td>
+        <td><%= link_to_name deal %></td>
         <td><%= number_to_currency deal.commission %></td>
         <td><%= deal.agent&.email %></td>
         <td><%= deal.address %></td>
@@ -24,7 +24,6 @@
         <td><%= deal.status %></td>
         <td><%= link_to 'Show', deal %></td>
         <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
-        <td><%= link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
