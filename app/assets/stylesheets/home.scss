@@ -5,3 +5,21 @@
 #sign_out_link {
   float: right;
 }
+
+#top_floor_penthouse_navigation {
+  a {
+    color: #507EDC;
+    
+    &:hover {
+      color: #B766DD;
+    }
+  }
+}
+
+a {
+  color: #3194B0;
+  
+  &:hover {
+    color: #3BCE4E;
+  }
+}

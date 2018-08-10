@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/masarakki/google-webfonts-rails.git
+  revision: 5fe4e93437b141d7cc0c5dcb6055ce8e75820b35
+  branch: for-rails5
+  specs:
+    google-webfonts-rails (0.0.4)
+      activesupport (> 3.2.0, < 6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -221,6 +229,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   crack
   devise
+  google-webfonts-rails!
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg

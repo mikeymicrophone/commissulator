@@ -7,10 +7,11 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= google_fonts %>
   </head>
 
   <body>
-    <nav>
+    <nav id="top_floor_penthouse_navigation">
       <% if current_agent %>
         <%= link_to 'Deals', deals_path %>
         <%= link_to 'Assistants', assistants_path %>
