@@ -14,6 +14,7 @@
       <% if current_agent %>
         <%= link_to 'Deals', deals_path %>
         <%= link_to 'Assistants', assistants_path %>
+        <%= link_to 'Participants', participants_path %>
         <%= link_to 'Sign Out', destroy_agent_session_path, :method => :delete, :id => 'sign_out_link' %>
       <% else %>
         <%= link_to 'Authenticate', new_agent_session_path %> | 

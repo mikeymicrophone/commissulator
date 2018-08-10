@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_10_210124) do
+ActiveRecord::Schema.define(version: 2018_08_10_210907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,4 +61,17 @@ ActiveRecord::Schema.define(version: 2018_08_10_210124) do
     t.index ["agent_id"], name: "index_deals_on_agent_id"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.bigint "deal_id"
+    t.bigint "assistant_id"
+    t.integer "role"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assistant_id"], name: "index_participants_on_assistant_id"
+    t.index ["deal_id"], name: "index_participants_on_deal_id"
+  end
+
+  add_foreign_key "participants", "assistants"
+  add_foreign_key "participants", "deals"
 end

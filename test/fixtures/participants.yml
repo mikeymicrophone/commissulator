@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  deal: one
+  assistant: one
+  role: 1
+  status: 1
+
+two:
+  deal: two
+  assistant: two
+  role: 1
+  status: 1
