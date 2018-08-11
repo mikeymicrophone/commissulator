@@ -2,7 +2,11 @@ class ParticipantsController < ApplicationController
   before_action :set_participant, only: [:show, :edit, :update, :destroy]
 
   def index
-    @participants = Participant.page params[:page]
+    @participants = if params[:filtered_attribute]
+      Participant.where params[:filtered_attribute] => params[:filter_value]
+    else
+      Participant.all
+    end.page params[:page]
   end
 
   def show

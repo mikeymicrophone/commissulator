@@ -19,7 +19,7 @@
         <td><%= link_to_name participant.deal, :reference %></td>
         <td><%= link_to_name participant.assistant %></td>
         <td><%= number_to_currency participant.payout %></td>
-        <td><%= participant.role %></td>
+        <td><%= participation_in participant.role %></td>
         <td><%= participant.status %></td>
         <td><%= link_to 'Show', participant %></td>
         <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
