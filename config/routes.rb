@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :participants
   resources :assistants
-  resources :deals
+  resources :deals do
+    member do
+      get :pick_status_of
+    end
+  end
   root :to => 'home#landing'
   devise_for :agents
 end

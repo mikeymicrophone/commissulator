@@ -3,6 +3,7 @@ class Deal < ApplicationRecord
   has_many :participants
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled]
+  attr_default :status, :preliminary
   
   def subcommissions
     package = Hash.new 0

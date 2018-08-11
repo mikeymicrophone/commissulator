@@ -7,4 +7,16 @@ module DealsHelper
       form.hidden_field(:deal_id)
     end 
   end
+  
+  def status_clicker_for deal
+    div_for deal, :status_clicker_for do
+      link_to deal.status, pick_status_of_deal_path(deal), :remote => true
+    end
+  end
+  
+  def status_picker_for deal
+    div_for deal, :status_picker_for do
+      select_tag :status, options_for_select(Deal.statuses.keys, deal.status)
+    end
+  end
 end

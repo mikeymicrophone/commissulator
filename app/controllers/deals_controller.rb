@@ -1,5 +1,5 @@
 class DealsController < ApplicationController
-  before_action :set_deal, only: [:show, :edit, :update, :destroy]
+  before_action :set_deal, only: [:show, :edit, :pick_status_of, :update, :destroy]
 
   def index
     @deals = Deal.all
@@ -13,6 +13,9 @@ class DealsController < ApplicationController
   end
 
   def edit
+  end
+  
+  def pick_status_of
   end
 
   def create
@@ -33,6 +36,7 @@ class DealsController < ApplicationController
   def update
     respond_to do |format|
       if @deal.update deal_params
+        format.js
         format.html { redirect_to @deal, notice: 'Deal was successfully updated.' }
         format.json { render :show, status: :ok, location: @deal }
       else

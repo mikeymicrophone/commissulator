@@ -23,7 +23,7 @@
         <td><%= deal.agent&.email %></td>
         <td><%= deal.address %></td>
         <td><%= deal.unit_number %></td>
-        <td><%= deal.status %></td>
+        <td><%= status_clicker_for deal %></td>
         <td><%= deal.updated_at&.strftime "%a %-m/%-d %-I:%M%P" %>
         <td><%= link_to 'Show', deal %></td>
         <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
