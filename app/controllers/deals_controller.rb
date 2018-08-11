@@ -2,21 +2,26 @@ class DealsController < ApplicationController
   before_action :set_deal, only: [:show, :edit, :pick_status_of, :update, :destroy]
 
   def index
+    if params[:filtered_attribute]
+      @deals = Deal.where :agent_id => params[:filter_value]
+    else
+      @deals = Deal.all
+    end
     @deals = case params[:sort]
     when 'commission'
-      Deal.order 'commission desc'
+      @deals.order 'commission desc'
     when 'agent'
-      Deal.order 'agent_id'
+      @deals.order 'agent_id'
     when 'address'
-      Deal.order 'address nulls last'
+      @deals.order 'address nulls last'
     when 'unit_number'
-      Deal.order 'unit_number nulls last'
+      @deals.order 'unit_number nulls last'
     when 'status'
-      Deal.order :status
+      @deals.order :status
     when 'updated_at'
-      Deal.order 'updated_at desc'
+      @deals.order 'updated_at desc'
     else
-      Deal.all
+      @deals
     end
   end
 
