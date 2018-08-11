@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
   root :to => 'home#landing'
   devise_for :agents
+  resources :agents, :only => [:edit, :update]
 end

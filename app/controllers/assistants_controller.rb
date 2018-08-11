@@ -1,8 +1,6 @@
 class AssistantsController < ApplicationController
   before_action :set_assistant, only: [:show, :edit, :update, :destroy]
 
-  # GET /assistants
-  # GET /assistants.json
   def index
     @assistants = case params[:sort]
     when 'first_name'
@@ -14,24 +12,18 @@ class AssistantsController < ApplicationController
     end.page params[:page]
   end
 
-  # GET /assistants/1
-  # GET /assistants/1.json
   def show
   end
 
-  # GET /assistants/new
   def new
     @assistant = Assistant.new
   end
 
-  # GET /assistants/1/edit
   def edit
   end
 
-  # POST /assistants
-  # POST /assistants.json
   def create
-    @assistant = Assistant.new(assistant_params)
+    @assistant = Assistant.new assistant_params
 
     respond_to do |format|
       if @assistant.save
@@ -44,11 +36,9 @@ class AssistantsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assistants/1
-  # PATCH/PUT /assistants/1.json
   def update
     respond_to do |format|
-      if @assistant.update(assistant_params)
+      if @assistant.update assistant_params
         format.html { redirect_to @assistant, notice: 'Assistant was successfully updated.' }
         format.json { render :show, status: :ok, location: @assistant }
       else
@@ -58,8 +48,6 @@ class AssistantsController < ApplicationController
     end
   end
 
-  # DELETE /assistants/1
-  # DELETE /assistants/1.json
   def destroy
     @assistant.destroy
     respond_to do |format|
@@ -69,12 +57,10 @@ class AssistantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_assistant
-      @assistant = Assistant.find(params[:id])
+      @assistant = Assistant.find params[:id]
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def assistant_params
       params.require(:assistant).permit(:first_name, :last_name, :phone_number, :email, :status)
     end
