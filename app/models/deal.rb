@@ -2,7 +2,7 @@ class Deal < ApplicationRecord
   belongs_to :agent
   has_many :participants
   
-  enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled]
+  enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary
 
   def reference
