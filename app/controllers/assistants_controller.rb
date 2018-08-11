@@ -4,7 +4,14 @@ class AssistantsController < ApplicationController
   # GET /assistants
   # GET /assistants.json
   def index
-    @assistants = Assistant.page params[:page]
+    @assistants = case params[:sort]
+    when 'first_name'
+      Assistant.order :first_name
+    when 'last_name'
+      Assistant.order :last_name
+    else
+      Assistant.all
+    end.page params[:page]
   end
 
   # GET /assistants/1
