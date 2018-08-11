@@ -22,7 +22,7 @@ class DealsController < ApplicationController
       @deals.order 'updated_at desc'
     else
       @deals
-    end
+    end.page params[:page]
   end
 
   def show

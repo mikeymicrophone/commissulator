@@ -4,7 +4,7 @@ class AssistantsController < ApplicationController
   # GET /assistants
   # GET /assistants.json
   def index
-    @assistants = Assistant.all
+    @assistants = Assistant.page params[:page]
   end
 
   # GET /assistants/1
