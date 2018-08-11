@@ -1,0 +1,5 @@
+<% @agents.each do |agent| %>
+  <%= div_for agent, :class => :agent_list do %>
+    <%= deals_by agent %>
+  <% end %>
+<% end %>

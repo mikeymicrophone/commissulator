@@ -1,27 +1,28 @@
 <%= link_to '[edit]', edit_deal_path(@deal) %>
-<p>
-  <strong>Name:</strong>
-  <%= @deal.name %>
-</p>
 
+<% if @deal.name.present? %>
+  <p>
+    <strong>Name:</strong>
+    <%= @deal.name %>
+  </p>
+<% end %>
 <p>
   <strong>Commission:</strong>
   <%= number_to_currency @deal.commission %>
 </p>
 
 <p>
-  <strong>Address:</strong>
   <%= @deal.address %>
-</p>
-
-<p>
-  <strong>Unit number:</strong>
-  <%= @deal.unit_number %>
+  <strong><%= @deal.unit_number %></strong>
 </p>
 
 <p>
   <strong>Status:</strong>
   <%= @deal.status %>
+</p>
+
+<p class="agent">
+  Agent: <%= deals_by @deal.agent %>
 </p>
 
 <% @deal.participants.chrono.each do |participant| %>

@@ -1,6 +1,10 @@
 class AgentsController < ApplicationController
   before_action :set_agent
   
+  def index
+    @agents = Agent.all
+  end
+  
   def edit
   end
   

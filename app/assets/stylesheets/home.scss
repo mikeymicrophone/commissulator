@@ -2,8 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#sign_out_link {
+#sign_out_link, #profile_link {
   float: right;
+  padding-right: 10px;
 }
 
 #top_floor_penthouse_navigation {
