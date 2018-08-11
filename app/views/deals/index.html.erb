@@ -10,6 +10,7 @@
       <th>Address</th>
       <th>Unit number</th>
       <th>Status</th>
+      <th>Updated</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
         <td><%= deal.address %></td>
         <td><%= deal.unit_number %></td>
         <td><%= deal.status %></td>
+        <td><%= deal.updated_at&.strftime "%a %-m/%-d %-I:%M%P" %>
         <td><%= link_to 'Show', deal %></td>
         <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
       </tr>
