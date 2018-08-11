@@ -35,4 +35,11 @@ module DealsHelper
     
     content_tag :tr, columns.join.html_safe
   end
+  
+  def fabricate_deal_link opts
+    if params[:filtered_attribute] == 'agent_id'
+      opts[:agent_id] = params[:filter_value]
+    end
+    link_to "Fabricate #{opts[:status]} deal", fabricate_deals_path(:deal => opts), :method => :post, :remote => true
+  end
 end

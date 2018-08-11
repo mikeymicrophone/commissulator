@@ -75,11 +75,12 @@ class DealsController < ApplicationController
   end
   
   def fabricate
-    @deal = case params[:status]
+    @agent = Agent.where(:id => params[:deal][:agent_id]).take || current_agent
+    @deal = case params[:deal][:status]
     when 'underway'
-      Fabricate :underway_deal
+      Fabricate :underway_deal, :agent => @agent
     when 'completed'
-      Fabricate :completed_deal
+      Fabricate :completed_deal, :agent => @agent
     end
   end
 
