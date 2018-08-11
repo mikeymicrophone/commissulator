@@ -16,7 +16,7 @@
   <tbody>
     <% @participants.each do |participant| %>
       <tr>
-        <td><%= link_to_name participant.deal %></td>
+        <td><%= link_to_name participant.deal, :reference %></td>
         <td><%= link_to_name participant.assistant %></td>
         <td><%= number_to_currency participant.payout %></td>
         <td><%= participant.role %></td>

@@ -4,6 +4,14 @@ class Deal < ApplicationRecord
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled]
   attr_default :status, :preliminary
+
+  def reference
+    if name.present?
+      name
+    else
+      "#{address} #{unit_number}"
+    end
+  end
   
   def subcommissions
     package = Hash.new 0

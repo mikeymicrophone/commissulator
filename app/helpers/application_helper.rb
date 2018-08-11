@@ -1,7 +1,11 @@
 module ApplicationHelper
-  def link_to_name obj
+  def link_to_name obj, attribute = nil
     return '' unless obj
-    link_to obj.name, obj
+    if attribute
+      link_to obj.send(attribute), obj
+    else
+      link_to obj.name, obj
+    end
   end
   
   def google_fonts

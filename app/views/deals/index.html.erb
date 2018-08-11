@@ -18,7 +18,7 @@
   <tbody>
     <% @deals.each do |deal| %>
       <tr>
-        <td><%= link_to_name deal %></td>
+        <td><%= link_to_name deal, :reference %></td>
         <td><%= number_to_currency deal.commission %></td>
         <td><%= deal.agent&.email %></td>
         <td><%= deal.address %></td>
