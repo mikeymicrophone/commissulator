@@ -6,6 +6,18 @@ class ParticipantsController < ApplicationController
       Participant.where params[:filtered_attribute] => params[:filter_value]
     else
       Participant.all
+    end
+    @participants = case params[:sort]
+    when 'updated_at'
+      @participants.order 'updated_at desc'
+    when 'deal_id'
+      @participants.order 'deal_id desc'
+    when 'assistant_id'
+      @participants.order 'assistant_id desc'
+    when 'payout'
+      Kaminari.paginate_array(@participants.sort_by { |participant| participant.payout }.reverse )
+    else
+      @participants
     end.page params[:page]
   end
 

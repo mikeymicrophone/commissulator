@@ -4,11 +4,12 @@
 <table>
   <thead>
     <tr>
-      <th>Deal</th>
-      <th>Assistant</th>
-      <th>Payout</th>
+      <th><%= link_to 'Deal', :sort => 'deal_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
+      <th><%= link_to 'Assistant', :sort => 'assistant_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
+      <th><%= link_to 'Payout', :sort => 'payout', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
       <th>Role</th>
       <th>Status</th>
+      <th><%= link_to 'Updated', :sort => 'updated_at', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
         <td><%= number_to_currency participant.payout %></td>
         <td><%= participation_in participant.role %></td>
         <td><%= participant.status %></td>
+        <td><%= participant.updated_at.strftime "%a %-m/%-d %-I:%M%P" %></td>
         <td><%= link_to 'Show', participant %></td>
         <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
       </tr>
