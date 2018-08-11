@@ -10,6 +10,10 @@ class Participant < ApplicationRecord
   scope :closing, lambda { where :role => close }
   
   def name
-    "#{role} by #{assistant.first_name}"
+    "#{role} by #{assistant.name}"
+  end
+  
+  def payout
+    deal.rate_for(role) * deal.distributable_commission / deal.participants.where(:role => role).count
   end
 end

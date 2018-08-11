@@ -32,4 +32,12 @@
     </tr>
   <% end %>
 </table>
+
+<% @deal.participants.each do |participant| %>
+  <%= div_for participant do %>
+    <%= linked_name participant %>
+    <%= number_to_currency participant.payout %>
+  <% end %>
+<% end %>
+
 <%= participant_adder @deal %>

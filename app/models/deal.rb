@@ -42,6 +42,10 @@ class Deal < ApplicationRecord
     close_rate * distributable_commission
   end
   
+  def rate_for role
+    send "#{role}_rate"
+  end
+  
   def lead_rate
     0.20
   end

@@ -29,6 +29,7 @@
   <% @assistant.participants.each do |participant| %>
     <tr>
       <td><%= link_to_name participant %></td>
+      <td><%= number_to_currency participant.payout %></td>
     </tr>
   <% end %>
 </table>
