@@ -2,6 +2,8 @@ class Deal < ApplicationRecord
   belongs_to :agent
   has_many :participants
   
+  enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled]
+  
   def subcommissions
     package = Hash.new 0
     participants.leading.each do |participant|

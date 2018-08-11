@@ -30,6 +30,11 @@
     <%= form.label :unit_number %>
     <%= form.text_field :unit_number %>
   </div>
+  
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Deal.statuses.keys %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
