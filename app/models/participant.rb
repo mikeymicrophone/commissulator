@@ -8,6 +8,7 @@ class Participant < ApplicationRecord
   scope :interviewing, lambda { where :role => :interview }
   scope :showing, lambda { where :role => :show }
   scope :closing, lambda { where :role => close }
+  scope :chrono, lambda { order :role }
   
   def name
     "#{role} by #{assistant.name}"

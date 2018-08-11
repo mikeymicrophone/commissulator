@@ -24,16 +24,7 @@
   <%= @deal.status %>
 </p>
 
-<table>
-  <% @deal.subcommissions.each do |roleplay, payout| %>
-    <tr>
-      <td><%= roleplay %></td>
-      <td><%= number_to_currency payout %></td>
-    </tr>
-  <% end %>
-</table>
-
-<% @deal.participants.each do |participant| %>
+<% @deal.participants.chrono.each do |participant| %>
   <%= div_for participant do %>
     <%= linked_name participant %>
     <%= number_to_currency participant.payout %>
