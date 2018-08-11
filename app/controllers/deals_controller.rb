@@ -68,6 +68,15 @@ class DealsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def fabricate
+    case params[:status]
+    when 'underway'
+      Fabricate :underway_deal
+    when 'completed'
+      Fabricate :completed_deal
+    end
+  end
 
   private
     def set_deal

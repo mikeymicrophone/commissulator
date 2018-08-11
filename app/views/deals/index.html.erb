@@ -35,3 +35,5 @@
 <br>
 
 <%= link_to 'New Deal', new_deal_path %>
+<%= link_to 'Fabricate underway deal', fabricate_deals_path(:status => :underway), :method => :post, :remote => true %>
+<%= link_to 'Fabricate completed deal', fabricate_deals_path(:status => :completed), :method => :post, :remote => true %>
