@@ -4,7 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.0'
 
 gem 'devise'
+gem 'kaminari'
 gem 'ap'
+gem 'record_tag_helper'
+gem 'fabrication'
+gem 'faker'
 gem 'google-webfonts-rails', :github => 'masarakki/google-webfonts-rails', :branch => 'for-rails5'
 
 gem 'rails', '~> 5.2.1'
