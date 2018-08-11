@@ -75,7 +75,7 @@ class DealsController < ApplicationController
   end
   
   def fabricate
-    case params[:status]
+    @deal = case params[:status]
     when 'underway'
       Fabricate :underway_deal
     when 'completed'
