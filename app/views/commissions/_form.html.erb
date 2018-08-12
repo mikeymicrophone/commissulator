@@ -98,7 +98,7 @@
       <% end %>
     <% end %>
     
-    <%= link_to 'Add a Tenant', add_tenant_to_commission_path(commission), :remote => true, :id => 'tenant_add_link' %>
+    <%= link_to 'Add a Tenant', add_tenant_to_commissions_path(commission), :remote => true, :id => 'tenant_add_link' %>
   </div>
   
   <div class="commission_form_row">
@@ -134,7 +134,7 @@
     <%= form.number_field :leased_monthly_rent %>
     
     <%= form.label :annualized_rent %>
-    <%= form.number_field :annualized_rent %>
+    <%= form.number_field :annualized_rent, :value => number_with_precision(commission.annualized_rent, :precision => 2) %>
   </div>
   
   <div class="commission_form_row">
@@ -142,24 +142,24 @@
     <%= form.text_field :commission_fee_percentage %>
     
     <%= form.label :total_commission %>
-    <%= form.text_field :total_commission %>
+    <%= form.text_field :total_commission, :value => number_with_precision(commission.total_commission, :precision => 2) %>
     
     <%= form.label :citi_commission %>
-    <%= form.text_field :citi_commission %>
+    <%= form.text_field :citi_commission, :value => number_with_precision(commission.citi_commission, :precision => 2)%>
     
     <%= form.label :co_broke_commission %>
-    <%= form.text_field :co_broke_commission %>
+    <%= form.text_field :co_broke_commission, :value => number_with_precision(commission.co_broke_commission, :precision => 2) %>
   </div>
   
   <div class="commission_form_row">
     <%= form.label :owner_pay_commission %>
-    <%= form.text_field :owner_pay_commission %>
+    <%= form.text_field :owner_pay_commission, :value => number_with_precision(commission.owner_pay_commission, :precision => 2) %>
     
     <%= form.label :listing_side_commission %>
-    <%= form.text_field :listing_side_commission %>
+    <%= form.text_field :listing_side_commission, :value => number_with_precision(commission.listing_side_commission, :precision => 2) %>
     
     <%= form.label :tenant_side_commission %>
-    <%= form.text_field :tenant_side_commission %>
+    <%= form.text_field :tenant_side_commission, :value => number_with_precision(commission.tenant_side_commission, :precision => 2) %>
   </div>
   
   <div class="commission_form_row">
