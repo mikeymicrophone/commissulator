@@ -57,27 +57,29 @@
     <%= form.label :new_development %>
     <%= form.check_box :new_development %>
   </div>
+  <div id="tenant_info_area">
+    <div class="commission_form_row">
+      <%= form.label :tenant_name %>
+      <%= text_field_tag :'commission[tenant_name][]', commission.tenant_name&.first %>
+    
+      <%= form.label :tenant_email %>
+      <%= text_field_tag :'commission[tenant_email][]', commission.tenant_email&.first %>
+    
+      <%= form.label :tenant_phone_number %>
+      <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number&.first %>
+    </div>
   
-  <div class="commission_form_row">
-    <%= form.label :tenant_name %>
-    <%= text_field_tag :'commission[tenant_name][]', commission.tenant_name&.first %>
+    <div class="commission_form_row">
+      <%= form.label :tenant_name %>
+      <%= text_field_tag :'commission[tenant_name][]', commission.tenant_name&.second %>
     
-    <%= form.label :tenant_email %>
-    <%= text_field_tag :'commission[tenant_email][]', commission.tenant_email&.first %>
+      <%= form.label :tenant_email %>
+      <%= text_field_tag :'commission[tenant_email][]', commission.tenant_email&.second %>
     
-    <%= form.label :tenant_phone_number %>
-    <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number&.first %>
-  </div>
-  
-  <div class="commission_form_row">
-    <%= form.label :tenant_name %>
-    <%= text_field_tag :'commission[tenant_name][]', commission.tenant_name&.second %>
-    
-    <%= form.label :tenant_email %>
-    <%= text_field_tag :'commission[tenant_email][]', commission.tenant_email&.second %>
-    
-    <%= form.label :tenant_phone_number %>
-    <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number&.second %>
+      <%= form.label :tenant_phone_number %>
+      <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number&.second %>
+    </div>
+    <%= link_to 'Add a Tenant', add_tenant_to_commission_path(commission), :remote => true, :id => 'tenant_add_link' %>
   </div>
   
   <div class="commission_form_row">

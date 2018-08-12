@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <span>branch_name:</span><%= @commission.branch_name %><br>
-<span>tenant_name:</span><%= @commission.tenant_name %><br>
-<span>tenant_email:</span><%= @commission.tenant_email %><br>
-<span>tenant_phone_number:</span><%= @commission.tenant_phone_number %><br>
+<span>tenant_name:</span><%= @commission.tenant_name.join ', ' %><br>
+<span>tenant_email:</span><%= @commission.tenant_email.join ', ' %><br>
+<span>tenant_phone_number:</span><%= @commission.tenant_phone_number.join ', ' %><br>
 
 <span>landlord_name:</span><%= @commission.landlord_name %><br>
 <span>landlord_email:</span><%= @commission.landlord_email %><br>

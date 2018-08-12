@@ -1,5 +1,5 @@
 class CommissionsController < ApplicationController
-  before_action :set_commission, only: [:show, :edit, :update, :destroy]
+  before_action :set_commission, only: [:show, :add_tenant_to, :edit, :update, :destroy]
 
   def index
     @commissions = Commission.page params[:page]
@@ -10,6 +10,9 @@ class CommissionsController < ApplicationController
 
   def new
     @commission = Commission.new
+  end
+  
+  def add_tenant_to
   end
 
   def edit

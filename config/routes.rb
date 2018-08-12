@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :landlords
-  resources :commissions
+  resources :commissions do
+    member do
+      get :add_tenant_to
+    end
+  end
   resources :participants
   resources :assistants
   resources :deals do
