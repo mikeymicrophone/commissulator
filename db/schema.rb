@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_10_212536) do
+ActiveRecord::Schema.define(version: 2018_08_12_013652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,53 @@ ActiveRecord::Schema.define(version: 2018_08_10_212536) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "commissions", force: :cascade do |t|
+    t.bigint "deal_id"
+    t.bigint "agent_id"
+    t.bigint "landlord_id"
+    t.string "branch_name"
+    t.string "tenant_name"
+    t.string "tenant_email"
+    t.string "tenant_phone_number"
+    t.string "landlord_name"
+    t.string "landlord_email"
+    t.string "landlord_phone_number"
+    t.string "agent_name"
+    t.string "bedrooms"
+    t.string "property_type"
+    t.boolean "new_development"
+    t.date "lease_start_date"
+    t.date "lease_term_date"
+    t.integer "square_footage"
+    t.integer "listed_monthly_rent"
+    t.string "landlord_source"
+    t.string "tenant_source"
+    t.integer "intranet_deal_number"
+    t.boolean "copy_of_lease"
+    t.string "property_address"
+    t.string "apartment_number"
+    t.string "zip_code"
+    t.date "lease_sign_date"
+    t.date "approval_date"
+    t.integer "leased_monthly_rent"
+    t.float "commission_fee_percentage"
+    t.float "agent_split_percentage"
+    t.float "owner_pay_commission"
+    t.float "listing_side_commission"
+    t.float "tenant_side_commission"
+    t.text "reason_for_fee_reduction"
+    t.date "request_date"
+    t.float "annualized_rent"
+    t.float "total_commission"
+    t.float "citi_commission"
+    t.float "co_broke_commission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_commissions_on_agent_id"
+    t.index ["deal_id"], name: "index_commissions_on_deal_id"
+    t.index ["landlord_id"], name: "index_commissions_on_landlord_id"
+  end
+
   create_table "deals", force: :cascade do |t|
     t.string "name"
     t.text "address"
@@ -60,6 +107,14 @@ ActiveRecord::Schema.define(version: 2018_08_10_212536) do
     t.datetime "updated_at", null: false
     t.float "commission"
     t.index ["agent_id"], name: "index_deals_on_agent_id"
+  end
+
+  create_table "landlords", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "participants", force: :cascade do |t|

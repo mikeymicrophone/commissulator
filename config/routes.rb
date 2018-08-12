@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :landlords
+  resources :commissions
   resources :participants
   resources :assistants
   resources :deals do
