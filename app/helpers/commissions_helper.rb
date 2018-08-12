@@ -6,7 +6,8 @@ module CommissionsHelper
       label_tag(:commission_tenant_email, 'Tenant email') +
       text_field_tag(:'commission[tenant_email][]') +
       label_tag(:commission_tenant_phone_number, 'Tenant phone number') +
-      text_field_tag(:'commission[tenant_phone_number][]')
+      text_field_tag(:'commission[tenant_phone_number][]') +
+      link_to('x', '#', :class => 'row_remover')
     end
   end
 end

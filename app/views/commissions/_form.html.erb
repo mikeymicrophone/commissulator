@@ -93,6 +93,7 @@
     
           <%= form.label :tenant_phone_number %>
           <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number[index + 2] %>
+          <%= link_to 'x', '#', :class => 'row_remover' %>
         </div>
       <% end %>
     <% end %>
