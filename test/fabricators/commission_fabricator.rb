@@ -3,9 +3,6 @@ Fabricator :commission do
   agent { |attrs| attrs[:deal].agent }
   landlord { find_or_fabricate :landlord }
   branch_name { 'Park Avenue South' }
-  tenant_name { [Faker::Name.name] }
-  tenant_email { [Faker::Internet.email] }
-  tenant_phone_number { [Faker::PhoneNumber.phone_number] }
   landlord_name { |attrs| attrs[:landlord].name }
   landlord_email { |attrs| attrs[:landlord].email }
   landlord_phone_number { |attrs| attrs[:landlord].phone_number }
@@ -38,4 +35,14 @@ Fabricator :commission do
   total_commission { |attrs| attrs[:owner_pay_commission] + attrs[:tenant_side_commission] }
   citi_commission { |attrs| attrs[:total_commission] * 0.3 }
   co_broke_commission { |attrs| attrs[:total_commission] * 0.2 }
+  before_validation { |commission, transients| add_tenants_to commission }
+end
+
+def add_tenants_to commission
+  (1..5).to_a.sample.times do
+    name = Faker::Name.name
+    commission.tenant_name << name
+    commission.tenant_email << Faker::Internet.email(name)
+    commission.tenant_phone_number << Faker::PhoneNumber.phone_number
+  end
 end

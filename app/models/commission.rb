@@ -5,4 +5,7 @@ class Commission < ApplicationRecord
   serialize :tenant_name
   serialize :tenant_email
   serialize :tenant_phone_number
+  attr_default :tenant_name, []
+  attr_default :tenant_email, []
+  attr_default :tenant_phone_number, []
 end
