@@ -113,14 +113,16 @@
   </div>
   
   <div class="commission_form_row">
-    <%= form.label :lease_sign_date %>
-    <%= form.date_select :lease_sign_date %>
-    
     <%= form.label :lease_start_date %>
     <%= form.date_select :lease_start_date %>
     
     <%= form.label :lease_term_date %>
     <%= form.date_select :lease_term_date %>
+  </div>
+  
+  <div class="commission_form_row">
+    <%= form.label :lease_sign_date %>
+    <%= form.date_select :lease_sign_date %>
     
     <%= form.label :approval_date %>
     <%= form.date_select :approval_date %>
@@ -128,13 +130,13 @@
   
   <div class="commission_form_row">
     <%= form.label :listed_monthly_rent %>
-    <%= form.number_field :listed_monthly_rent %>
+    <%= form.number_field :listed_monthly_rent, :class => 'rent' %>
     
     <%= form.label :leased_monthly_rent %>
-    <%= form.number_field :leased_monthly_rent %>
+    <%= form.number_field :leased_monthly_rent, :class => 'rent' %>
     
     <%= form.label :annualized_rent %>
-    <%= form.number_field :annualized_rent, :value => number_with_precision(commission.annualized_rent, :precision => 2) %>
+    <%= form.number_field :annualized_rent, :class => 'rent', :value => number_with_precision(commission.annualized_rent, :precision => 2) %>
   </div>
   
   <div class="commission_form_row">
@@ -142,24 +144,24 @@
     <%= form.text_field :commission_fee_percentage %>
     
     <%= form.label :total_commission %>
-    <%= form.text_field :total_commission, :value => number_with_precision(commission.total_commission, :precision => 2) %>
+    <%= form.text_field :total_commission, :class => 'commission', :value => number_with_precision(commission.total_commission, :precision => 2) %>
     
     <%= form.label :citi_commission %>
-    <%= form.text_field :citi_commission, :value => number_with_precision(commission.citi_commission, :precision => 2)%>
+    <%= form.text_field :citi_commission, :class => 'commission', :value => number_with_precision(commission.citi_commission, :precision => 2)%>
     
     <%= form.label :co_broke_commission %>
-    <%= form.text_field :co_broke_commission, :value => number_with_precision(commission.co_broke_commission, :precision => 2) %>
+    <%= form.text_field :co_broke_commission, :class => 'commission', :value => number_with_precision(commission.co_broke_commission, :precision => 2) %>
   </div>
   
   <div class="commission_form_row">
     <%= form.label :owner_pay_commission %>
-    <%= form.text_field :owner_pay_commission, :value => number_with_precision(commission.owner_pay_commission, :precision => 2) %>
+    <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2) %>
     
     <%= form.label :listing_side_commission %>
-    <%= form.text_field :listing_side_commission, :value => number_with_precision(commission.listing_side_commission, :precision => 2) %>
+    <%= form.text_field :listing_side_commission, :class => 'commission', :value => number_with_precision(commission.listing_side_commission, :precision => 2) %>
     
     <%= form.label :tenant_side_commission %>
-    <%= form.text_field :tenant_side_commission, :value => number_with_precision(commission.tenant_side_commission, :precision => 2) %>
+    <%= form.text_field :tenant_side_commission, :class => 'commission', :value => number_with_precision(commission.tenant_side_commission, :precision => 2) %>
   </div>
   
   <div class="commission_form_row">
