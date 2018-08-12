@@ -1,4 +1,5 @@
 class CommissionsController < ApplicationController
+  layout 'commissions'
   before_action :set_commission, only: [:show, :edit, :update, :destroy]
 
   def index
