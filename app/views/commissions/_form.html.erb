@@ -79,6 +79,24 @@
       <%= form.label :tenant_phone_number %>
       <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number&.second %>
     </div>
+    
+    <% tenant_length = [commission.tenant_name.length, commission.tenant_email.length, commission.tenant_phone_number.length].max %>
+    <% if tenant_length > 2 %>
+      <% additional_tenants = tenant_length - 2 %>
+      <% additional_tenants.times do |index| %>
+        <div class="commission_form_row">
+          <%= form.label :tenant_name %>
+          <%= text_field_tag :'commission[tenant_name][]', commission.tenant_name[index + 2] %>
+    
+          <%= form.label :tenant_email %>
+          <%= text_field_tag :'commission[tenant_email][]', commission.tenant_email[index + 2] %>
+    
+          <%= form.label :tenant_phone_number %>
+          <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number[index + 2] %>
+        </div>
+      <% end %>
+    <% end %>
+    
     <%= link_to 'Add a Tenant', add_tenant_to_commission_path(commission), :remote => true, :id => 'tenant_add_link' %>
   </div>
   
