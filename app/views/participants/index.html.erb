@@ -22,7 +22,7 @@
         <td><%= number_to_currency participant.payout %></td>
         <td><%= participation_in participant.role %></td>
         <td><%= participant.status %></td>
-        <td><%= participant.updated_at.strftime "%a %-m/%-d %-I:%M%P" %></td>
+        <td><%= participant.updated_at.to_s :descriptive %></td>
         <td><%= link_to 'Show', participant %></td>
         <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
       </tr>

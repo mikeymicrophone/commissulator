@@ -18,7 +18,7 @@ module CommissionsHelper
       content_tag(:td, commission.apartment_number),
       content_tag(:td, commission.landlord_name),
       content_tag(:td, commission.zip_code),
-      content_tag(:td, commission.updated_at.strftime("%a %-m/%-d %-I:%M%P")),
+      content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, link_to('Show', commission)),
       content_tag(:td, link_to('Edit', edit_commission_path(commission)))
     ]

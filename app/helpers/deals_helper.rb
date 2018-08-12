@@ -28,7 +28,7 @@ module DealsHelper
       content_tag(:td, deal.address),
       content_tag(:td, deal.unit_number),
       content_tag(:td, status_clicker_for(deal)),
-      content_tag(:td, deal.updated_at&.strftime("%a %-m/%-d %-I:%M%P")),
+      content_tag(:td, deal.updated_at&.to_s(:descriptive)),
       content_tag(:td, link_to('Show', deal)),
       content_tag(:td, link_to('Edit', edit_deal_path(deal)))
     ]

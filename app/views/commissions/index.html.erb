@@ -17,7 +17,7 @@
         <td><%= commission.apartment_number %></td>
         <td><%= commission.landlord_name %></td>
         <td><%= commission.zip_code %></td>
-        <td><%= commission.updated_at.strftime "%a %-m/%-d %-I:%M%P" %></td>
+        <td><%= commission.updated_at.to_s :descriptive %></td>
         <td><%= link_to 'Show', commission %></td>
         <td><%= link_to 'Edit', edit_commission_path(commission) %></td>
         <td><%= link_to 'Print', commission_path(commission, :format => :pdf) %></td>
