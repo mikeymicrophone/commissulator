@@ -12,14 +12,19 @@
   <tbody>
     <% @commissions.each do |commission| %>
       <tr>
-        
+        <td><%= commission.tenant_name.join ', ' %></td>
+        <td><%= number_to_currency commission.leased_monthly_rent %></td>
+        <td><%= commission.apartment_number %></td>
+        <td><%= commission.landlord_name %></td>
+        <td><%= commission.zip_code %></td>
+        <td><%= commission.updated_at.strftime "%a %-m/%-d %-I:%M%P" %></td>
         <td><%= link_to 'Show', commission %></td>
         <td><%= link_to 'Edit', edit_commission_path(commission) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<%= paginate @commissions %>
 <br>
 
 <%= link_to 'New Commission', new_commission_path %>
