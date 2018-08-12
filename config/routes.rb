@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       get :add_tenant_to
       post :fabricate
     end
+    member do
+      get :print
+    end
   end
   resources :participants
   resources :assistants
