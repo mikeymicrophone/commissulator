@@ -53,6 +53,10 @@ class CommissionsController < ApplicationController
     end
   end
 
+  def fabricate
+    @commission = Fabricate :commission, :agent => current_agent
+  end
+
   private
     def set_commission
       @commission = Commission.find params[:id]

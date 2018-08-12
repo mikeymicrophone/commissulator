@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :commissions do
     collection do
       get :add_tenant_to
+      post :fabricate
     end
   end
   resources :participants

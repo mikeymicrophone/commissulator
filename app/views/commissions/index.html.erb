@@ -9,7 +9,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="commissions_table">
     <% @commissions.each do |commission| %>
       <tr>
         <td><%= commission.tenant_name.join ', ' %></td>
@@ -28,3 +28,4 @@
 <br>
 
 <%= link_to 'New Commission', new_commission_path %>
+<%= fabricate_commission_link %>
