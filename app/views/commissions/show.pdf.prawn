@@ -34,4 +34,10 @@ prawn_document do |pdf|
   pdf.text "Listed Monthly Rent   <u>#{number_to_currency @commission.listed_monthly_rent}</u>   Leased Monthly Rent   <u>#{number_to_currency @commission.leased_monthly_rent}</u>   Annualized Rent   <u>#{number_to_currency @commission.annualized_rent}</u>", :inline_format => true
   pdf.text "Commission Fee %   <u>#{@commission.commission_fee_percentage}</u>   Total Commission   <u>#{number_to_currency @commission.total_commission}</u>   Citi Commission   <u>#{number_to_currency @commission.citi_commission}</u>   Co-Broke Commission   <u>#{number_to_currency @commission.co_broke_commission}</u>", :inline_format => true
   pdf.text "OP Commission   <u>#{number_to_currency @commission.owner_pay_commission}</u>   Listing Side Commission   <u>#{number_to_currency @commission.listing_side_commission}</u>   Tenant Side Commission   <u>#{number_to_currency @commission.tenant_side_commission}</u>", :inline_format => true
+  
+  pdf.text "Reason for fee reduction:", :size => 12
+  
+  pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 40 do
+    pdf.stroke_bounds
+  end
 end
