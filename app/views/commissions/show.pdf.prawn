@@ -1,12 +1,11 @@
 prawn_document do |pdf|
-  pdf.text "Branch Name   #{@commission.branch_name}   Request Date   #{@commission.request_date.strftime("%-m/%-d/%Y")}   Intranet Deal Number"
-  pdf.stroke_line [78, 760], [190, 760]
-  pdf.stroke_line [270, 760], [338, 760]
-  pdf.stroke_line [460, 760], [500, 760]
-  pdf.text "Agent Name   #{@commission.agent_name}     Agent Split %    #{@commission.agent_split_percentage}   Copy of Lease   #{@commission.copy_of_lease}"
-  pdf.stroke_line [71, 745], [144, 745]
-  pdf.stroke_line [238, 745], [266, 745]
-  pdf.stroke_line [356, 745], [390, 745]
-  pdf.text "Property Address   #{@commission.property_address}   Apt #   #{@commission.apartment_number}   Zip Code   #{@commission.zip_code}"
-  pdf.text "Bedrooms   #{@commission.bedrooms}   SQ Footage   #{@commission.square_footage}   Property Type   #{@commission.property_type}   New Development   #{@commission.new_development}"
+  pdf.image "#{Rails.root}/app/assets/images/chLogox1.jpg", :width => 120
+  pdf.draw_text "Rental Request for Commission", :style => :bold, :size => 15, :at => [150, 720]
+  pdf.move_down 50
+  pdf.default_leading 7
+  pdf.font "Helvetica", :style => :bold, :size => 8
+  pdf.text "Branch Name   <u>#{@commission.branch_name}</u>   Request Date   <u>#{@commission.request_date.strftime("%-m/%-d/%Y")}</u>   Intranet Deal Number", :inline_format => true
+  pdf.text "Agent Name   <u>#{@commission.agent_name}</u>     Agent Split %    <u>#{@commission.agent_split_percentage}</u>   Copy of Lease   <u>#{@commission.copy_of_lease}</u>", :inline_format => true
+  pdf.text "Property Address   <u>#{@commission.property_address}</u>   Apt #   <u>#{@commission.apartment_number}</u>   Zip Code   <u>#{@commission.zip_code}</u>", :inline_format => true
+  pdf.text "Bedrooms   <u>#{@commission.bedrooms}</u>   SQ Footage   <u>#{@commission.square_footage}</u>   Property Type   <u>#{@commission.property_type}</u>   New Development   <u>#{@commission.new_development}</u>", :inline_format => true
 end
