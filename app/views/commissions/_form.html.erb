@@ -1,3 +1,6 @@
+<div id="commission_participation_registration">
+  <%= participant_adder @deal %>
+</div>
 <%= form_with(model: commission, local: true) do |form| %>
   <% if commission.errors.any? %>
     <div id="error_explanation">
@@ -31,6 +34,15 @@
     
     <%= form.label :copy_of_lease %>
     <%= form.check_box :copy_of_lease %>
+  </div>
+  
+  <div class="commission_form_row" id="commission_participant_adder">
+    <% @deal.participants.chrono.each do |participant| %>
+      <%= div_for participant do %>
+        <%= linked_name participant %>
+        <%= number_to_currency participant.payout %>
+      <% end %>
+    <% end %>
   </div>
   
   <div class="commission_form_row">
@@ -93,7 +105,6 @@
     
           <%= form.label :tenant_phone_number %>
           <%= text_field_tag :'commission[tenant_phone_number][]', commission.tenant_phone_number[index + 2] %>
-          <%= link_to 'x', '#', :class => 'row_remover' %>
         </div>
       <% end %>
     <% end %>

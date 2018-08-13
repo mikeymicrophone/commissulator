@@ -11,13 +11,15 @@ class CommissionsController < ApplicationController
   end
 
   def new
-    @commission = Commission.new
+    @commission = Commission.new commission_params
+    @deal = @commission.deal || @commission.deal.create
   end
   
   def add_tenant_to
   end
 
   def edit
+    @deal = @commission.deal
   end
 
   def create
@@ -69,6 +71,6 @@ class CommissionsController < ApplicationController
         :listed_monthly_rent, :landlord_source, :tenant_source, :intranet_deal_number, :copy_of_lease, :property_address, :apartment_number,
         :zip_code, :lease_sign_date, :approval_date, :leased_monthly_rent, :commission_fee_percentage, :agent_split_percentage,
         :owner_pay_commission, :listing_side_commission, :tenant_side_commission, :reason_for_fee_reduction, :request_date,
-        :annualized_rent, :total_commission, :citi_commission, :co_broke_commission)
+        :annualized_rent, :total_commission, :citi_commission, :co_broke_commission, :deal_id, :landlord_id)
     end
 end

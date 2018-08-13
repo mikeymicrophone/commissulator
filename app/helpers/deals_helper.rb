@@ -3,9 +3,9 @@ module DealsHelper
     form_with :model => deal.participants.new do |form|
       form.select(:role, Participant.roles.keys) +
       form.select(:assistant_id, options_from_collection_for_select(Assistant.all, :id, :name)) +
-      form.submit(:add) +
+      link_to(:add, '#', :id => 'participant_adder_submission') +
       form.hidden_field(:deal_id)
-    end 
+    end
   end
   
   def status_clicker_for deal

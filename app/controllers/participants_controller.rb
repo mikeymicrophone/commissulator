@@ -36,6 +36,7 @@ class ParticipantsController < ApplicationController
 
     respond_to do |format|
       if @participant.save
+        format.js
         format.html { redirect_to @participant, notice: 'Participant was successfully created.' }
         format.json { render :show, status: :created, location: @participant }
       else
