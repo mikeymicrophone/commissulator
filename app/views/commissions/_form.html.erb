@@ -1,13 +1,6 @@
 <div id="commission_participation_registration">
   <%= participant_adder @deal %>
   <%= assistant_adder @deal %>
-  <div class="commission_form_row" id="commission_participant_adder">
-    <% @deal.participants.chrono.each do |participant| %>
-      <%= div_for participant do %>
-        <%= linked_name participant %>
-      <% end %>
-    <% end %>
-  </div>
 </div>
 <div id="commission_editor" data-turbolinks-permanent>
   <%= form_with(model: commission, local: true) do |form| %>
@@ -46,6 +39,14 @@
     
       <%= form.label :copy_of_lease %>
       <%= form.check_box :copy_of_lease %>
+    </div>
+    
+    <div class="commission_form_row" id="commission_participant_adder">
+      <% @deal.participants.chrono.each do |participant| %>
+        <%= div_for participant do %>
+          <%= linked_name(participant) %>
+        <% end %>
+      <% end %>
     </div>
   
     <div class="commission_form_row">
