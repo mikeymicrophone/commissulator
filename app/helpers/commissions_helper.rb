@@ -20,7 +20,8 @@ module CommissionsHelper
       content_tag(:td, commission.zip_code),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, link_to('Show', commission)),
-      content_tag(:td, link_to('Edit', edit_commission_path(commission)))
+      content_tag(:td, link_to('Edit', edit_commission_path(commission))),
+      content_tag(:td, link_to('Print', commission_path(commission, :format => :pdf)))
     ]
     
     content_tag :tr, columns.join.html_safe
