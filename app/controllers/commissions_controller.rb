@@ -75,6 +75,13 @@ class CommissionsController < ApplicationController
         :listed_monthly_rent, :landlord_source, :tenant_source, :intranet_deal_number, :copy_of_lease, :property_address, :apartment_number,
         :zip_code, :lease_sign_date, :approval_date, :leased_monthly_rent, :commission_fee_percentage, :agent_split_percentage,
         :owner_pay_commission, :listing_side_commission, :tenant_side_commission, :reason_for_fee_reduction, :request_date,
-        :annualized_rent, :total_commission, :citi_commission, :co_broke_commission, :deal_id, :landlord_id)
+        :annualized_rent, :total_commission, :citi_commission, :co_broke_commission, :deal_id, :landlord_id, :referral_payment,
+        :co_exclusive_agency, :co_exclusive_agency_name, :exclusive_agency, :exclusive_agency_name, :exclusive_agent, :exclusive_agent_name,
+        :exclusive_agent_office, :open_listing, :citi_habitats_agent, :citi_habitats_agent_name, :citi_habitats_agent_office,
+        :corcoran_agent, :corcoran_agent_name, :corcoran_agent_office, :co_broke_company, :co_broke_company_name, :direct_deal,
+        :citi_habitats_referral_agent, :citi_habitats_referral_agent_name, :citi_habitats_referral_agent_office,
+        :citi_habitats_referral_agent_amount, :corcoran_referral_agent, :corcoran_referral_agent_name, :corcoran_referral_agent_office,
+        :corcoran_referral_agent_amount, :outside_agency, :outside_agency_name, :outside_agency_amount, :relocation_referral,
+        :relocation_referral_name, :relocation_referral_amount, :listing_fee, :listing_fee_name, :listing_fee_office, :listing_fee_percentage)
     end
 end

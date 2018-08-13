@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_13_141324) do
+ActiveRecord::Schema.define(version: 2018_08_13_222337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,42 @@ ActiveRecord::Schema.define(version: 2018_08_13_141324) do
     t.float "co_broke_commission"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "referral_payment"
+    t.boolean "co_exclusive_agency"
+    t.string "co_exclusive_agency_name"
+    t.boolean "exclusive_agency"
+    t.string "exclusive_agency_name"
+    t.boolean "exclusive_agent"
+    t.string "exclusive_agent_name"
+    t.string "exclusive_agent_office"
+    t.boolean "open_listing"
+    t.boolean "citi_habitats_agent"
+    t.string "citi_habitats_agent_name"
+    t.string "citi_habitats_agent_office"
+    t.boolean "corcoran_agent"
+    t.string "corcoran_agent_name"
+    t.string "corcoran_agent_office"
+    t.boolean "co_broke_company"
+    t.string "co_broke_company_name"
+    t.boolean "direct_deal"
+    t.boolean "citi_habitats_referral_agent"
+    t.string "citi_habitats_referral_agent_name"
+    t.string "citi_habitats_referral_agent_office"
+    t.float "citi_habitats_referral_agent_amount"
+    t.boolean "corcoran_referral_agent"
+    t.string "corcoran_referral_agent_name"
+    t.string "corcoran_referral_agent_office"
+    t.float "corcoran_referral_agent_amount"
+    t.boolean "outside_agency"
+    t.string "outside_agency_name"
+    t.float "outside_agency_amount"
+    t.boolean "relocation_referral"
+    t.string "relocation_referral_name"
+    t.float "relocation_referral_amount"
+    t.boolean "listing_fee"
+    t.string "listing_fee_name"
+    t.string "listing_fee_office"
+    t.float "listing_fee_percentage"
     t.index ["agent_id"], name: "index_commissions_on_agent_id"
     t.index ["deal_id"], name: "index_commissions_on_deal_id"
     t.index ["landlord_id"], name: "index_commissions_on_landlord_id"

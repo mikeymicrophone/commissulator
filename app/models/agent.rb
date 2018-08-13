@@ -4,6 +4,8 @@ class Agent < ApplicationRecord
 
   has_many :deals
   
+  scope :alpha, lambda { order :first_name }
+  
   def name
     "#{first_name} #{last_name}"
   end

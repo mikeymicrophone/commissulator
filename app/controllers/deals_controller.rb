@@ -29,7 +29,7 @@ class DealsController < ApplicationController
   end
 
   def new
-    @deal = Deal.new
+    @deal = Deal.new :agent => current_agent
   end
 
   def edit

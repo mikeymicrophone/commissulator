@@ -1,8 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
-<%= link_to 'Edit', edit_commission_path(@commission) %> |
-<%= link_to 'Back', commissions_path %><br>
+<div class="tools">
+  <%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
+  <%= link_to 'Edit', edit_commission_path(@commission) %> |
+  <%= link_to 'Back', commissions_path %>
+</div>
+
+<div>
+  <%= link_to_name @commission.landlord %><br>
+  <%= link_to_name @commission.deal, :reference %><br>
+  <%= @commission.agent.reference %>
+</div>
 
 <span>branch_name:</span><%= @commission.branch_name %><br>
 <span>tenant_name:</span><%= @commission.tenant_name.join ', ' %><br>

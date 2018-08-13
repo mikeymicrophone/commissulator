@@ -1,0 +1,40 @@
+class AgencySharingOfCommission < ActiveRecord::Migration[5.2]
+  def change
+    add_column :commissions, :referral_payment, :float
+    add_column :commissions, :co_exclusive_agency, :boolean
+    add_column :commissions, :co_exclusive_agency_name, :string
+    add_column :commissions, :exclusive_agency, :boolean
+    add_column :commissions, :exclusive_agency_name, :string
+    add_column :commissions, :exclusive_agent, :boolean
+    add_column :commissions, :exclusive_agent_name, :string
+    add_column :commissions, :exclusive_agent_office, :string
+    add_column :commissions, :open_listing, :boolean
+    add_column :commissions, :citi_habitats_agent, :boolean
+    add_column :commissions, :citi_habitats_agent_name, :string
+    add_column :commissions, :citi_habitats_agent_office, :string
+    add_column :commissions, :corcoran_agent, :boolean
+    add_column :commissions, :corcoran_agent_name, :string
+    add_column :commissions, :corcoran_agent_office, :string
+    add_column :commissions, :co_broke_company, :boolean
+    add_column :commissions, :co_broke_company_name, :string
+    add_column :commissions, :direct_deal, :boolean
+    add_column :commissions, :citi_habitats_referral_agent, :boolean
+    add_column :commissions, :citi_habitats_referral_agent_name, :string
+    add_column :commissions, :citi_habitats_referral_agent_office, :string
+    add_column :commissions, :citi_habitats_referral_agent_amount, :float
+    add_column :commissions, :corcoran_referral_agent, :boolean
+    add_column :commissions, :corcoran_referral_agent_name, :string
+    add_column :commissions, :corcoran_referral_agent_office, :string
+    add_column :commissions, :corcoran_referral_agent_amount, :float
+    add_column :commissions, :outside_agency, :boolean
+    add_column :commissions, :outside_agency_name, :string
+    add_column :commissions, :outside_agency_amount, :float
+    add_column :commissions, :relocation_referral, :boolean
+    add_column :commissions, :relocation_referral_name, :string
+    add_column :commissions, :relocation_referral_amount, :float
+    add_column :commissions, :listing_fee, :boolean
+    add_column :commissions, :listing_fee_name, :string
+    add_column :commissions, :listing_fee_office, :string
+    add_column :commissions, :listing_fee_percentage, :float
+  end
+end
