@@ -9,7 +9,7 @@ class DealsController < ApplicationController
     end
     @deals = case params[:sort]
     when 'commission'
-      @deals.order 'commission desc'
+      @deals.joins(:commission).order 'commissions.total_commission desc nulls last'
     when 'agent'
       @deals.order 'agent_id'
     when 'address'

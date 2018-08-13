@@ -17,7 +17,7 @@
 
 @total = ->
   # if $('#commission_total_commission').val() == ''
-  $('#commission_total_commission').val(parseInt($('#commission_tenant_side_commission').val()) + parseInt($('#commission_owner_pay_commission').val()) + parseInt($('#commission_listing_side_commission').val()))
+  $('#commission_total_commission').val(parseFloat($('#commission_tenant_side_commission').val()) + parseFloat($('#commission_owner_pay_commission').val()) + parseFloat($('#commission_listing_side_commission').val()))
   breakdown()
 
 @breakdown = ->

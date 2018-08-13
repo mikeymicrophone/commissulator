@@ -11,21 +11,8 @@
   </head>
 
   <body>
-    <nav id="top_floor_penthouse_navigation">
-      <% if current_agent %>
-        <%= link_to 'Deals', deals_path %>
-        <%= link_to 'Assistants', assistants_path %>
-        <%= link_to 'Participants', participants_path %>
-        <%= link_to 'Agents', agents_path %>
-        <%= link_to 'Landlords', landlords_path %>
-        <%= link_to 'Commissions', commissions_path %>
-        <%= link_to 'Sign Out', destroy_agent_session_path, :method => :delete, :id => 'sign_out_link' %>
-        <%= link_to 'Me', edit_agent_path(current_agent), :id => 'profile_link' %>
-      <% else %>
-        <%= link_to 'Authenticate', new_agent_session_path %> | 
-        <%= link_to 'Register', new_agent_registration_path %>
-      <% end %>
-    </nav>
+    <%= penthouse_nav %>
+    
     <section class="notice"><%= notice %></section>
     <section class="alert"><%= alert %></section>
     <section class="central">
