@@ -1,5 +1,6 @@
 <div id="commission_participation_registration">
   <%= participant_adder @deal %>
+  <%= assistant_adder @deal %>
 </div>
 <%= form_with(model: commission, local: true) do |form| %>
   <% if commission.errors.any? %>
@@ -13,6 +14,9 @@
       </ul>
     </div>
   <% end %>
+  <%= form.hidden_field :deal_id %>
+  <%= form.hidden_field :landlord_id %>
+  <%= form.hidden_field :agent_id %>
 
   <div class="commission_form_row">
     <%= form.label :branch_name %>
@@ -40,7 +44,6 @@
     <% @deal.participants.chrono.each do |participant| %>
       <%= div_for participant do %>
         <%= linked_name participant %>
-        <%= number_to_currency participant.payout %>
       <% end %>
     <% end %>
   </div>

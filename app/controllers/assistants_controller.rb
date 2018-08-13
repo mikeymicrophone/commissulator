@@ -27,6 +27,7 @@ class AssistantsController < ApplicationController
 
     respond_to do |format|
       if @assistant.save
+        format.js
         format.html { redirect_to @assistant, notice: 'Assistant was successfully created.' }
         format.json { render :show, status: :created, location: @assistant }
       else
