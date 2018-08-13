@@ -44,9 +44,12 @@ prawn_document do |pdf|
   pdf.move_down 20
   pdf.text "Landlord Source:   <u>                              </u>     Tenant Source:   <u>                              </u>_", :inline_format => true, :size => 12
   
+  pdf.text "[checkboxes go here]"
+  
+  pdf.text "Flat Fees/Special Payments/Comments:", :size => 12
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 40 do
     pdf.move_down 10
-    pdf.text @commission.subcommission_payout_summary
+    pdf.text @commission.subcommission_payout_summary, :indent_paragraphs => 5
     pdf.stroke_bounds
   end
   
