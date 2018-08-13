@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
+<%= link_to 'Edit', edit_commission_path(@commission) %> |
+<%= link_to 'Back', commissions_path %><br>
+
 <span>branch_name:</span><%= @commission.branch_name %><br>
 <span>tenant_name:</span><%= @commission.tenant_name.join ', ' %><br>
 <span>tenant_email:</span><%= @commission.tenant_email.join ', ' %><br>
@@ -42,5 +46,6 @@
 <span>citi_commission:</span><%= @commission.citi_commission %><br>
 <span>co_broke_commission:</span><%= @commission.co_broke_commission %><br>
 
+<%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
 <%= link_to 'Edit', edit_commission_path(@commission) %> |
 <%= link_to 'Back', commissions_path %>

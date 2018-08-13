@@ -8,7 +8,8 @@
 <% end %>
 <p>
   <strong>Commission:</strong>
-  <%= number_to_currency @deal.commission %>
+  <%= number_to_currency @deal.commission&.total_commission %><br>
+  <%= link_to 'Paperwork', @deal.commission %>
 </p>
 
 <p>
