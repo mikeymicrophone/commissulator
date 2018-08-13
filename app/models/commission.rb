@@ -1,3 +1,4 @@
+include ActionView::Helpers::NumberHelper
 class Commission < ApplicationRecord
   belongs_to :deal, :optional => true
   belongs_to :agent, :optional => true
@@ -14,4 +15,8 @@ class Commission < ApplicationRecord
   attr_default :copy_of_lease, true
   attr_default :lease_start_date, lambda { Date.civil Date.today.next_month.year, Date.today.next_month.month, 1 }
   attr_default :lease_term_date, lambda { (Date.today + 1.year).end_of_month }
+  
+  def subcommission_payout_summary
+    deal.subcommissions.inject('') { |summary, award| summary + "#{award.first}: #{number_to_currency award.last}   " }
+  end
 end

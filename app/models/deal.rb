@@ -16,19 +16,19 @@ class Deal < ApplicationRecord
   def subcommissions
     package = Hash.new 0
     participants.leading.each do |participant|
-      package[participant.name] += lead_commission / participants.leading.count
+      package[participant.assistant.name] += lead_commission / participants.leading.count
     end
     
     participants.interviewing.each do |participant|
-      package[participant.name] += interview_commission / participants.interviewing.count
+      package[participant.assistant.name] += interview_commission / participants.interviewing.count
     end
     
     participants.showing.each do |participant|
-      package[participant.name] += show_commission / participants.showing.count
+      package[participant.assistant.name] += show_commission / participants.showing.count
     end
     
     participants.closing.each do |participant|
-      package[participant.name] += close_commission / participants.closing.count
+      package[participant.assistant.name] += close_commission / participants.closing.count
     end
     package
   end
