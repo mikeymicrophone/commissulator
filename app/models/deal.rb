@@ -1,6 +1,7 @@
 class Deal < ApplicationRecord
   belongs_to :agent
   has_many :participants
+  has_one :commission
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary
@@ -34,7 +35,7 @@ class Deal < ApplicationRecord
   end
   
   def distributable_commission
-    commission * 0.5
+    commission&.total_commission.to_f * 0.5
   end
   
   def lead_commission

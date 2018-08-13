@@ -1,7 +1,6 @@
 Fabricator :deal do
   address { Faker::Address.street_address }
   unit_number { (1..25).to_a.sample.to_s + (?A..?L).to_a.sample }
-  commission { 20 * rand(700) + 400 }
   agent { find_or_fabricate :agent }
 end
 

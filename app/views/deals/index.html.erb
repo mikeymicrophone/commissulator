@@ -17,17 +17,7 @@
 
   <tbody id="deals_table">
     <% @deals.each do |deal| %>
-      <tr>
-        <td><%= link_to_name deal, :reference %></td>
-        <td><%= number_to_currency deal.commission %></td>
-        <td class="agent"><%= deals_by deal.agent %></td>
-        <td><%= deal.address %></td>
-        <td><%= deal.unit_number %></td>
-        <td><%= status_clicker_for deal %></td>
-        <td><%= deal.updated_at&.to_s :descriptive %>
-        <td><%= link_to 'Show', deal %></td>
-        <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
-      </tr>
+      <%= deal_row_for deal %>
     <% end %>
   </tbody>
 </table>

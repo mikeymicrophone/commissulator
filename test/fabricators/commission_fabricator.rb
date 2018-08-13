@@ -38,7 +38,6 @@ Fabricator :commission do
   co_broke_commission { |attrs| attrs[:total_commission] * 0.2 }
   # intranet_deal_number { rand(342342423) }
   before_validation { |commission, transients| add_tenants_to commission }
-  after_save { |commission, transients| commission.deal.update_attribute :commission, commission.total_commission }
 end
 
 def add_tenants_to commission

@@ -23,7 +23,7 @@ module DealsHelper
   def deal_row_for deal
     columns = [
       content_tag(:td, link_to_name(deal, :reference)),
-      content_tag(:td, number_to_currency(deal.commission)),
+      content_tag(:td, number_to_currency(deal.commission&.total_commission)),
       content_tag(:td, deals_by(deal.agent)),
       content_tag(:td, deal.address),
       content_tag(:td, deal.unit_number),
@@ -32,6 +32,13 @@ module DealsHelper
       content_tag(:td, link_to('Show', deal)),
       content_tag(:td, link_to('Edit', edit_deal_path(deal)))
     ]
+    
+    if deal.commission
+      columns << content_tag(:td, link_to('Paperwork', edit_commission_path(deal.commission)))
+      columns << content_tag(:td, link_to('Report', commission_path(deal.commission, :format => :pdf)))
+    else
+      columns << content_tag(:td, link_to('Paperwork', new_commission_path(:commission => {:deal_id => deal.id})))
+    end
     
     content_tag :tr, columns.join.html_safe
   end
