@@ -2,7 +2,7 @@ class LandlordsController < ApplicationController
   before_action :set_landlord, only: [:show, :edit, :update, :destroy]
 
   def index
-    @landlords = Landlord.all
+    @landlords = Landlord.page params[:page]
   end
 
   def show
@@ -47,6 +47,10 @@ class LandlordsController < ApplicationController
       format.html { redirect_to landlords_url, notice: 'Landlord was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def fabricate
+    @landlord = Fabricate :landlord
   end
 
   private

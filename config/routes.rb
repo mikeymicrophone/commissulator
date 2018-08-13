@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :landlords
+  resources :landlords do
+    collection do
+      post :fabricate
+    end
+  end
   resources :commissions do
     collection do
       get :add_tenant_to
