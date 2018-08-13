@@ -148,7 +148,7 @@
       <%= form.number_field :listed_monthly_rent, :class => 'rent' %>
     
       <%= form.label :leased_monthly_rent %>
-      <%= form.number_field :leased_monthly_rent, :class => 'rent' %>
+      <%= form.number_field :leased_monthly_rent, :class => 'rent', :onblur => 'annualize()' %>
     
       <%= form.label :annualized_rent %>
       <%= form.number_field :annualized_rent, :class => 'rent', :value => number_with_precision(commission.annualized_rent, :precision => 2) %>
@@ -156,7 +156,7 @@
   
     <div class="commission_form_row">
       <%= form.label :commission_fee_percentage %>
-      <%= form.text_field :commission_fee_percentage %>
+      <%= form.text_field :commission_fee_percentage, :onblur => 'ripple()' %>
     
       <%= form.label :total_commission %>
       <%= form.text_field :total_commission, :class => 'commission', :value => number_with_precision(commission.total_commission, :precision => 2) %>
@@ -170,7 +170,7 @@
   
     <div class="commission_form_row">
       <%= form.label :owner_pay_commission %>
-      <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2) %>
+      <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2), :onblur => 'total()' %>
     
       <%= form.label :listing_side_commission %>
       <%= form.text_field :listing_side_commission, :class => 'commission', :value => number_with_precision(commission.listing_side_commission, :precision => 2) %>
