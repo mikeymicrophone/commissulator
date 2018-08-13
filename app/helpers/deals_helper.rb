@@ -37,7 +37,7 @@ module DealsHelper
       columns << content_tag(:td, link_to('Paperwork', edit_commission_path(deal.commission)))
       columns << content_tag(:td, link_to('Report', commission_path(deal.commission, :format => :pdf)))
     else
-      columns << content_tag(:td, link_to('Paperwork', new_commission_path(:commission => {:deal_id => deal.id})))
+      columns << content_tag(:td, link_to('Paperwork', new_commission_path(:deal_id => deal.id)))
     end
     
     content_tag :tr, columns.join.html_safe

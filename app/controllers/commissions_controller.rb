@@ -10,8 +10,13 @@ class CommissionsController < ApplicationController
   end
 
   def new
-    @commission = Commission.new commission_params
-    @deal = @commission.deal || @commission.deal.create
+    @deal = Deal.where(:id => params[:deal_id]).take
+    if @deal
+      @commission = Commission.new :deal => @deal, :property_address => @deal.address, :apartment_number => @deal.unit_number
+    else
+      @commission = Commission.new :deal => Deal.create(:agent => current_agent)
+      @deal = @commission.deal
+    end
   end
   
   def add_tenant_to

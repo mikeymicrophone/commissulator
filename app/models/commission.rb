@@ -19,6 +19,7 @@ class Commission < ApplicationRecord
   attr_default :listing_side_commission, 0
   
   before_save :trim_tenants
+  before_create :meet_landlord
   
   def subcommission_payout_summary
     deal.subcommissions.inject('') { |summary, award| summary + "#{award.first}: #{number_to_currency award.last}   " }
@@ -28,5 +29,9 @@ class Commission < ApplicationRecord
     self.tenant_name.reject! &:blank?
     self.tenant_email.reject! &:blank?
     self.tenant_phone_number.reject! &:blank?
+  end
+  
+  def meet_landlord
+    self.landlord = Landlord.where(:name => landlord_name).take || Landlord.where(:name => landlord_name, :email => landlord_email, :phone_number => landlord_phone_number).create
   end
 end
