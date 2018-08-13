@@ -33,3 +33,17 @@ a {
 
 //  text-align: center;
 }
+
+.tools {
+  font-family: Jua;
+  font-size: 1.15em;
+  
+  a {
+    padding: 6px;
+    color: #F64CA5;
+    
+    &:hover {
+      color: #EE9344;
+    }
+  }
+}
