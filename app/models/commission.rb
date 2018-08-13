@@ -16,7 +16,15 @@ class Commission < ApplicationRecord
   attr_default :lease_start_date, lambda { Date.civil Date.today.next_month.year, Date.today.next_month.month, 1 }
   attr_default :lease_term_date, lambda { (Date.today + 1.year).end_of_month }
   
+  before_save :trim_tenants
+  
   def subcommission_payout_summary
     deal.subcommissions.inject('') { |summary, award| summary + "#{award.first}: #{number_to_currency award.last}   " }
+  end
+  
+  def trim_tenants
+    self.tenant_name.reject! &:blank?
+    self.tenant_email.reject! &:blank?
+    self.tenant_phone_number.reject! &:blank?
   end
 end
