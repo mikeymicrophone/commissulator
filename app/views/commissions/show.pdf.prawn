@@ -44,15 +44,18 @@ prawn_document do |pdf|
   pdf.move_down 20
   pdf.text "Landlord Source:   <u>                              </u>     Tenant Source:   <u>                              </u>_", :inline_format => true, :size => 12
   
-  pdf.text "[checkboxes go here]"
-  
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
-    column_positions = [0, 15, 100, 200, 215, 290, 380, 415, 500]
+    column_positions = [0, 15, 100, 200, 210, 230, 300, 390, 400, 425, 500]
     row_positions = [90, 70, 50, 30, 10]
+    
+    pdf.rectangle [0, row_positions[0] + 10], 10, 10
     pdf.draw_text "Co-exclusive Agency", :at => [column_positions[1], row_positions[0]]
+    pdf.rectangle [0, row_positions[1] + 10], 10, 10
     pdf.draw_text "Exclusive Agency", :at => [column_positions[1], row_positions[1]]
+    pdf.rectangle [0, row_positions[2] + 10], 10, 10
     pdf.draw_text "Exclusive Agent", :at => [column_positions[1], row_positions[2]]
     pdf.draw_text "Office", :at => [column_positions[1], row_positions[3]]
+    pdf.rectangle [0, row_positions[4] + 10], 10, 10
     pdf.draw_text "Open Listing", :at => [column_positions[1], row_positions[4]]
     
     pdf.stroke_line [column_positions[2], row_positions[0]], [column_positions[3], row_positions[0]]
@@ -60,32 +63,44 @@ prawn_document do |pdf|
     pdf.stroke_line [column_positions[2], row_positions[2]], [column_positions[3], row_positions[2]]
     pdf.stroke_line [column_positions[2], row_positions[3]], [column_positions[3], row_positions[3]]
     
-    pdf.draw_text "Citi Habitats Agent", :at => [column_positions[4], row_positions[0]]
-    pdf.draw_text "Corcoran Agent", :at => [column_positions[4], row_positions[1]]
-    pdf.draw_text "Co-Broke Co.", :at => [column_positions[4], row_positions[2]]
-    pdf.draw_text "Direct Deal", :at => [column_positions[4], row_positions[3]]
+    pdf.rectangle [column_positions[4], row_positions[0] + 10], 10, 10
+    pdf.rectangle [column_positions[4], row_positions[1] + 10], 10, 10
+    pdf.rectangle [column_positions[4], row_positions[2] + 10], 10, 10
+    pdf.rectangle [column_positions[4], row_positions[3] + 10], 10, 10
     
-    pdf.stroke_line [column_positions[5], row_positions[0]], [column_positions[6], row_positions[0]]
-    pdf.stroke_line [column_positions[5], row_positions[1]], [column_positions[6], row_positions[1]]
-    pdf.stroke_line [column_positions[5], row_positions[2]], [column_positions[6], row_positions[2]]
+    pdf.draw_text "Citi Habitats Agent", :at => [column_positions[5], row_positions[0]]
+    pdf.draw_text "Corcoran Agent", :at => [column_positions[5], row_positions[1]]
+    pdf.draw_text "Co-Broke Co.", :at => [column_positions[5], row_positions[2]]
+    pdf.draw_text "Direct Deal", :at => [column_positions[5], row_positions[3]]
     
-    pdf.draw_text "Office", :at => [column_positions[6], row_positions[0]]
-    pdf.draw_text "Office", :at => [column_positions[6], row_positions[1]]
+    pdf.stroke_line [column_positions[6], row_positions[0]], [column_positions[7], row_positions[0]]
+    pdf.stroke_line [column_positions[6], row_positions[1]], [column_positions[7], row_positions[1]]
+    pdf.stroke_line [column_positions[6], row_positions[2]], [column_positions[7], row_positions[2]]
     
-    pdf.stroke_line [column_positions[7], row_positions[0]], [column_positions[8], row_positions[0]]
-    pdf.stroke_line [column_positions[7], row_positions[1]], [column_positions[8], row_positions[1]]
+    pdf.draw_text "Office", :at => [column_positions[8], row_positions[0]]
+    pdf.draw_text "Office", :at => [column_positions[8], row_positions[1]]
+    
+    pdf.stroke_line [column_positions[9], row_positions[0]], [column_positions[10], row_positions[0]]
+    pdf.stroke_line [column_positions[9], row_positions[1]], [column_positions[10], row_positions[1]]
   end
   
   pdf.text "Referral Payment:   <u>                              </u>_", :inline_format => true, :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
-    column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 440, 500]
+    column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 450, 500]
     row_positions = [90, 70, 50, 30, 10]
+    
+    pdf.rectangle [0, row_positions[0] + 10], 10, 10
     pdf.draw_text "Citi Habitats Agent", :at => [column_positions[1], row_positions[0]]
+    pdf.rectangle [0, row_positions[1] + 10], 10, 10
     pdf.draw_text "Corcoran Agent", :at => [column_positions[1], row_positions[1]]
+    pdf.rectangle [0, row_positions[2] + 10], 10, 10
     pdf.draw_text "Outside Agency", :at => [column_positions[1], row_positions[2]]
+    pdf.rectangle [0, row_positions[3] + 10], 10, 10
     pdf.draw_text "Relo Referral", :at => [column_positions[1], row_positions[3]]
+    pdf.rectangle [0, row_positions[4] + 10], 10, 10
     pdf.draw_text "Listing Fee", :at => [column_positions[1], row_positions[4]]
+    pdf.stroke
     
     pdf.stroke_line [column_positions[2], row_positions[0]], [column_positions[3], row_positions[0]]
     pdf.stroke_line [column_positions[2], row_positions[1]], [column_positions[3], row_positions[1]]
