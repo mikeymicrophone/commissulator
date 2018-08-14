@@ -34,3 +34,14 @@ input.commission {
   text-align: center;
   padding-bottom: 10px;
 }
+
+#checkboxes {
+  label {
+    display: inline-block;
+    min-width: 130px;
+    
+    &.office {
+      min-width: 40px;
+    }
+  }
+}
