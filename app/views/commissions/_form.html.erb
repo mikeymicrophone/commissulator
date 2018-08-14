@@ -182,118 +182,17 @@
     <div class="commission_form_row">
       <%= form.label :reason_for_fee_reduction %>
       <%= form.text_field :reason_for_fee_reduction %>
+    </div>
     
+    <div class="commission_form_row">
       <%= form.label :landlord_source %>
       <%= form.text_field :landlord_source %>
     
       <%= form.label :tenant_source %>
       <%= form.text_field :tenant_source %>
     </div>
-
-    <div class="commission_form_row">
-      <%= form.label :referral_payment %>
-      <%= form.text_field :referral_payment %>
-    </div>
   
-    <div id="checkboxes">
-      <div class="commission_form_row">
-        <%= form.check_box :co_exclusive_agency %>
-        <%= form.label :co_exclusive_agency %>
-        <%= form.text_field :co_exclusive_agency_name %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :exclusive_agency %>
-        <%= form.label :exclusive_agency %>
-        <%= form.text_field :exclusive_agency_name %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :exclusive_agent %>
-        <%= form.label :exclusive_agent %>
-        <%= form.text_field :exclusive_agent_name %>
-        <%= form.label :exclusive_agent_office, 'Office', :class => 'office' %>
-        <%= form.text_field :exclusive_agent_office %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :open_listing %>
-        <%= form.label :open_listing %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :citi_habitats_agent %>
-        <%= form.label :citi_habitats_agent %>
-        <%= form.text_field :citi_habitats_agent_name %>
-        <%= form.label :citi_habitats_agent_office, 'Office', :class => 'office' %>
-        <%= form.text_field :citi_habitats_agent_office %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :corcoran_agent %>
-        <%= form.label :corcoran_agent %>
-        <%= form.text_field :corcoran_agent_name %>
-        <%= form.label :corcoran_agent_office, 'Office', :class => 'office' %>
-        <%= form.text_field :corcoran_agent_office %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :co_broke_company %>
-        <%= form.label :co_broke_company %>
-        <%= form.text_field :co_broke_company_name %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :direct_deal %>
-        <%= form.label :direct_deal %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :citi_habitats_referral_agent %>
-        <%= form.label :citi_habitats_referral_agent %>
-        <%= form.text_field :citi_habitats_referral_agent_name %>
-        <%= form.label :citi_habitats_referral_agent_office, 'Office', :class => 'office' %>
-        <%= form.text_field :citi_habitats_referral_agent_office %>
-        <%= form.label :citi_habitats_referral_agent_amount, 'Referral Amount' %>
-        <%= form.text_field :citi_habitats_referral_agent_amount %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :corcoran_referral_agent %>
-        <%= form.label :corcoran_referral_agent %>
-        <%= form.text_field :corcoran_referral_agent_name %>
-        <%= form.label :corcoran_referral_agent_office, 'Office', :class => 'office' %>
-        <%= form.text_field :corcoran_referral_agent_office %>
-        <%= form.label :corcoran_referral_agent_amount, 'Referral Amount' %>
-        <%= form.text_field :corcoran_referral_agent_amount %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :outside_agency %>
-        <%= form.label :outside_agency %>
-        <%= form.text_field :outside_agency_name %>
-        <%= form.label :outside_agency_amount, 'Referral Amount' %>
-        <%= form.text_field :outside_agency_amount %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :relocation_referral %>
-        <%= form.label :relocation_referral %>
-        <%= form.text_field :relocation_referral_name %>
-        <%= form.label :relocation_referral_amount, 'Referral Amount' %>
-        <%= form.text_field :relocation_referral_amount %>
-      </div>
-  
-      <div class="commission_form_row">
-        <%= form.check_box :listing_fee %>
-        <%= form.label :listing_fee %>
-        <%= form.text_field :listing_fee_name %>
-        <%= form.label :listing_fee_office, 'Office', :class => 'office' %>
-        <%= form.text_field :listing_fee_office %>
-        <%= form.label :listing_fee_percentage %>
-        <%= form.text_field :listing_fee_percentage %>
-      </div>
-    </div>
+    <%= render :partial => 'affiliate_checkboxes', :locals => {:form => form} %>
 
     <div class="actions">
       <%= form.submit %>
