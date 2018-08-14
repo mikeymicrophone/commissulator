@@ -3,7 +3,7 @@
 <h1>Commissions</h1>
 <div class="tools">
   <%= link_to 'New Commission', new_commission_path %>
-  <%= fabricate_commission_link %>
+  <%= fabricate_commission_link(:position => :top) %>
 </div>
 
 <table>
@@ -28,5 +28,5 @@
 
 <div class="tools">
   <%= link_to 'New Commission', new_commission_path %>
-  <%= fabricate_commission_link %>
+  <%= fabricate_commission_link(:position => :bottom) %>
 </div>

@@ -27,6 +27,6 @@ module CommissionsHelper
   end
   
   def fabricate_commission_link opts = {}
-    link_to 'Fabricate', fabricate_commissions_path(:commission => opts), :method => :post, :remote => true
+    link_to 'Fabricate', fabricate_commissions_path(opts), :method => :post, :remote => true
   end
 end

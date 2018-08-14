@@ -1,1 +1,5 @@
-$('#commissions_table').append('<%=j commission_row_for @commission %>');
+<% if params[:position] == 'top' %>
+  $('#commissions_table').prepend('<%=j commission_row_for @commission %>');
+<% else %>
+  $('#commissions_table').append('<%=j commission_row_for @commission %>');
+<% end %>
