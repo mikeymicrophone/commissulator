@@ -53,4 +53,19 @@ prawn_document do |pdf|
     pdf.stroke_bounds
   end
   
+  pdf.move_down 15
+  pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 90 do
+    pdf.move_down 1
+    pdf.text 'Approvals', :size => 7
+    
+    pdf.draw_text "Requested by: ______________________         _________________________      Date: _____________", :at => [20, 60], :size => 10
+    pdf.draw_text "Approved by:  ______________________         _________________________      Date: _____________", :at => [20, 20], :size => 10
+    
+    pdf.draw_text "Print Agent Name", :at => [120, 50], :size => 7, :style => :bold_italic
+    pdf.draw_text "Print Branch Manager Name", :at => [100, 10], :size => 7, :style => :bold_italic
+    pdf.draw_text "Agent Signature", :at => [280, 50], :size => 7, :style => :italic
+    pdf.draw_text "Branch Manager Signature", :at => [260, 10], :size => 7, :style => :italic
+    
+    pdf.stroke_bounds
+  end
 end

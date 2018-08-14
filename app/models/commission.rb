@@ -11,7 +11,7 @@ class Commission < ApplicationRecord
   attr_default :tenant_phone_number, []
   attr_default :branch_name, 'Park Avenue South'
   attr_default :agent_name, 'Desmond Eaddy'
-  attr_default :agent_split_percentage, '70'
+  # attr_default :agent_split_percentage, '70'
   attr_default :copy_of_lease, true
   attr_default :lease_start_date, lambda { Date.civil Date.today.next_month.year, Date.today.next_month.month, 1 }
   attr_default :lease_term_date, lambda { (Date.today + 1.year).end_of_month }
