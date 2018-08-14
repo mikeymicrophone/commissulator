@@ -34,4 +34,8 @@ class Commission < ApplicationRecord
   def meet_landlord
     self.landlord = Landlord.where(:name => landlord_name).take || Landlord.where(:name => landlord_name, :email => landlord_email, :phone_number => landlord_phone_number).create
   end
+  
+  def boolean_display attribute
+    'X' if attribute # '✓' if attribute
+  end
 end
