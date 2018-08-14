@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       post :fabricate
     end
+    resources :commissions
   end
   resources :commissions do
     collection do

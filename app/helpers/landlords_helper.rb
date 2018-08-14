@@ -2,6 +2,7 @@ module LandlordsHelper
   def landlord_row_for landlord
     columns = [
       content_tag(:td, landlord.name),
+      content_tag(:td, link_to(pluralize(landlord.commissions.count, 'commission'), landlord_commissions_path(landlord))),
       content_tag(:td, landlord.email),
       content_tag(:td, landlord.phone_number),
       content_tag(:td, landlord.updated_at.to_s(:descriptive)),

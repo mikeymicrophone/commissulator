@@ -2,7 +2,11 @@ class CommissionsController < ApplicationController
   before_action :set_commission, only: [:show, :print, :edit, :update, :destroy]
 
   def index
-    @commissions = Commission.page params[:page]
+    @commissions = if params[:landlord_id]
+      Commission.where :landlord_id => params[:landlord_id]
+    else
+      Commission.all
+    end.page params[:page]
   end
 
   def show

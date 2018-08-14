@@ -5,14 +5,7 @@
 <table>
   <tbody id="landlords_table">
     <% @landlords.each do |landlord| %>
-      <tr>
-        <td><%= landlord.name %></td>
-        <td><%= landlord.email %></td>
-        <td><%= landlord.phone_number %></td>
-        <td><%= landlord.updated_at.to_s :descriptive %></td>
-        <td><%= link_to 'Show', landlord %></td>
-        <td><%= link_to 'Edit', edit_landlord_path(landlord) %></td>
-      </tr>
+      <%= landlord_row_for landlord %>
     <% end %>
   </tbody>
 </table>
