@@ -3,6 +3,13 @@
 <h1>Landlords</h1>
 
 <table>
+  <thead>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th><%= link_to 'Last Approval', :sort => 'recent_commission' %></th>
+  </thead>
   <tbody id="landlords_table">
     <% @landlords.each do |landlord| %>
       <%= landlord_row_for landlord %>

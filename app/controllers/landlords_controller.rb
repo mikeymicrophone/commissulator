@@ -2,7 +2,11 @@ class LandlordsController < ApplicationController
   before_action :set_landlord, only: [:show, :edit, :update, :destroy]
 
   def index
-    @landlords = Landlord.page params[:page]
+    @landlords = if params[:sort]
+      Landlord.joins(:commissions).order('commissions.approval_date desc nulls last')
+    else
+      Landlord.all
+    end.page params[:page]
   end
 
   def show
