@@ -29,4 +29,10 @@ module CommissionsHelper
   def fabricate_commission_link opts = {}
     link_to 'Fabricate', fabricate_commissions_path(opts), :method => :post, :remote => true
   end
+  
+  def pad information, width = 15
+    length = information.to_s.length
+    padding = width - length / 2
+    "#{Prawn::Text::NBSP * padding}#{information}#{Prawn::Text::NBSP * padding}"
+  end
 end

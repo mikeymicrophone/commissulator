@@ -4,10 +4,10 @@ prawn_document do |pdf|
   pdf.move_down 50
   pdf.default_leading 7
   pdf.font "Helvetica", :style => :bold, :size => 8
-  pdf.text "Branch Name   <u>#{@commission.branch_name}</u>   Request Date   <u>#{@commission.request_date.to_formatted_s :american}</u>   Intranet Deal Number", :inline_format => true
-  pdf.text "Agent Name   <u>#{@commission.agent_name}</u>     Agent Split %    <u>#{@commission.agent_split_percentage}</u>   Copy of Lease   <u>#{@commission.boolean_display :copy_of_lease}</u>", :inline_format => true
-  pdf.text "Property Address   <u>#{@commission.property_address}</u>   Apt #   <u>#{@commission.apartment_number}</u>   Zip Code   <u>#{@commission.zip_code}</u>", :inline_format => true
-  pdf.text "Bedrooms   <u>#{@commission.bedrooms}</u>   SQ Footage   <u>#{@commission.square_footage}</u>   Property Type   <u>#{@commission.property_type}</u>   New Development   <u>#{@commission.new_development}</u>", :inline_format => true
+  pdf.text "Branch Name   <u>#{pad @commission.branch_name}</u>   Request Date   <u>#{pad @commission.request_date.to_formatted_s(:american), 22}</u>   Intranet Deal Number <u>#{pad ''}</u>", :inline_format => true
+  pdf.text "Agent Name   <u>#{pad @commission.agent_name, 30}</u>     Agent Split %    <u>#{pad @commission.agent_split_percentage, 7}</u>   Copy of Lease   <u>#{pad @commission.boolean_display :copy_of_lease}</u>", :inline_format => true
+  pdf.text "Property Address   <u>#{pad @commission.property_address, 36}</u>   Apt #   <u>#{pad @commission.apartment_number, 7}</u>   Zip Code   <u>#{pad @commission.zip_code, 8}</u>", :inline_format => true
+  pdf.text "Bedrooms   <u>#{pad @commission.bedrooms, 8}</u>   SQ Footage   <u>#{pad @commission.square_footage}</u>   Property Type   <u>#{pad @commission.property_type}</u>   New Development   <u>#{pad @commission.new_development, 3}</u>", :inline_format => true
   
   pdf.draw_text "Tenant Name(s)", :at => [0, 615]
   pdf.draw_text "Tenant Email(s)", :at => [170, 615]
@@ -30,10 +30,10 @@ prawn_document do |pdf|
   pdf.draw_text @commission.landlord_email, :at => [235, y_position], :size => 7
   pdf.draw_text @commission.landlord_phone_number, :at => [428, y_position]
   
-  pdf.text "Lease Sign Date   <u>#{@commission.lease_sign_date.to_s :american}</u>   Lease Start Date   <u>#{@commission.lease_start_date.to_s :american}</u>   Lease Term Date   <u>#{@commission.lease_term_date.to_s :american}</u>   Approval Date   <u>#{@commission.approval_date.to_s :american}</u>", :inline_format => true
-  pdf.text "Listed Monthly Rent   <u>#{number_to_currency @commission.listed_monthly_rent}</u>   Leased Monthly Rent   <u>#{number_to_currency @commission.leased_monthly_rent}</u>   Annualized Rent   <u>#{number_to_currency @commission.annualized_rent}</u>", :inline_format => true
-  pdf.text "Commission Fee %   <u>#{@commission.commission_fee_percentage}</u>   Total Commission   <u>#{number_to_currency @commission.total_commission}</u>   Citi Commission   <u>#{number_to_currency @commission.citi_commission}</u>   Co-Broke Commission   <u>#{number_to_currency @commission.co_broke_commission}</u>", :inline_format => true
-  pdf.text "OP Commission   <u>#{number_to_currency @commission.owner_pay_commission}</u>   Listing Side Commission   <u>#{number_to_currency @commission.listing_side_commission}</u>   Tenant Side Commission   <u>#{number_to_currency @commission.tenant_side_commission}</u>", :inline_format => true
+  pdf.text "Lease Sign Date   <u>#{pad @commission.lease_sign_date.to_s(:american), 8}</u>   Lease Start Date   <u>#{pad @commission.lease_start_date.to_s(:american), 8}</u>   Lease Term Date   <u>#{pad @commission.lease_term_date.to_s(:american), 8}</u>   Approval Date   <u>#{pad @commission.approval_date.to_s(:american), 8}</u>", :inline_format => true
+  pdf.text "Listed Monthly Rent   <u>#{pad number_to_currency @commission.listed_monthly_rent}</u>   Leased Monthly Rent   <u>#{pad number_to_currency @commission.leased_monthly_rent}</u>   Annualized Rent   <u>#{pad number_to_currency @commission.annualized_rent}</u>", :inline_format => true
+  pdf.text "Commission Fee %   <u>#{pad @commission.commission_fee_percentage, 4}</u>   Total Commission   <u>#{pad number_to_currency(@commission.total_commission), 8}</u>   Citi Commission   <u>#{pad number_to_currency(@commission.citi_commission), 8}</u>   Co-Broke Commission   <u>#{pad number_to_currency(@commission.co_broke_commission), 8}</u>", :inline_format => true
+  pdf.text "OP Commission   <u>#{pad number_to_currency(@commission.owner_pay_commission), 8}</u>   Listing Side Commission   <u>#{pad number_to_currency(@commission.listing_side_commission), 14}</u>   Tenant Side Commission   <u>#{pad number_to_currency(@commission.tenant_side_commission), 14}</u>", :inline_format => true
   
   pdf.text "Reason for fee reduction:", :size => 12
   
