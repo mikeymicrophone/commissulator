@@ -133,7 +133,7 @@ prawn_document do |pdf|
     broker_box @commission.listing_fee, pdf, [0, row_positions[4] + 10], :width => 10, :height => 10
     pdf.draw_text "Listing Fee", :at => [column_positions[1], row_positions[4]]
     pdf.stroke_line [column_positions[2], row_positions[4]], [column_positions[3], row_positions[4]]
-    pdf.draw_text number_to_round_currency(@commission.listing_fee_name), :at => [column_positions[2] + indent, row_positions[4] + clearance] # if @commission.listing_fee
+    pdf.draw_text number_to_round_currency(@commission.listing_fee_name&.to_f), :at => [column_positions[2] + indent, row_positions[4] + clearance] # if @commission.listing_fee
     
     
     pdf.draw_text "Office", :at => [column_positions[4], row_positions[0]]

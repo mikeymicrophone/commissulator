@@ -47,7 +47,6 @@ module CommissionsHelper
   end
   
   def number_to_round_currency number
-    number = number.to_f
     number_to_currency number, :precision => (number.round == number) ? 0 : 2 if number
   end
   
