@@ -47,41 +47,58 @@ prawn_document do |pdf|
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 200, 210, 230, 300, 390, 400, 425, 500]
     row_positions = [90, 70, 50, 30, 10]
+    indent = 10
+    clearance = 2
     
-    pdf.rectangle [0, row_positions[0] + 10], 10, 10
+    broker_box @commission.co_exclusive_agency, pdf, [0, row_positions[0] + 10], :width => 10, :height => 10
     pdf.draw_text "Co-exclusive Agency", :at => [column_positions[1], row_positions[0]]
-    pdf.rectangle [0, row_positions[1] + 10], 10, 10
+    pdf.stroke_line [column_positions[2], row_positions[0]], [column_positions[3], row_positions[0]]
+    pdf.draw_text @commission.co_exclusive_agency_name, :at => [column_positions[2] + indent, row_positions[0] + clearance] # if @commission.co_exclusive_agency
+    
+    broker_box @commission.exclusive_agency, pdf, [0, row_positions[1] + 10], :width => 10, :height => 10
     pdf.draw_text "Exclusive Agency", :at => [column_positions[1], row_positions[1]]
-    pdf.rectangle [0, row_positions[2] + 10], 10, 10
+    pdf.stroke_line [column_positions[2], row_positions[1]], [column_positions[3], row_positions[1]]
+    pdf.draw_text @commission.exclusive_agency_name, :at => [column_positions[2] + indent, row_positions[1] + clearance] # if @commission.exclusive_agency
+    
+    broker_box @commission.exclusive_agent, pdf, [0, row_positions[2] + 10], :width => 10, :height => 10
     pdf.draw_text "Exclusive Agent", :at => [column_positions[1], row_positions[2]]
+    pdf.stroke_line [column_positions[2], row_positions[2]], [column_positions[3], row_positions[2]]
+    pdf.draw_text @commission.exclusive_agent_name, :at => [column_positions[2] + indent, row_positions[2] + clearance] # if @commission.exclusive_agent
+    
     pdf.draw_text "Office", :at => [column_positions[1], row_positions[3]]
-    pdf.rectangle [0, row_positions[4] + 10], 10, 10
+    pdf.stroke_line [column_positions[2], row_positions[3]], [column_positions[3], row_positions[3]]
+    pdf.draw_text @commission.exclusive_agent_office, :at => [column_positions[2] + indent, row_positions[3] + clearance] # if @commission.exclusive_agent
+    
+    broker_box @commission.open_listing, pdf, [0, row_positions[4] + 10], :width => 10, :height => 10
     pdf.draw_text "Open Listing", :at => [column_positions[1], row_positions[4]]
     
-    pdf.stroke_line [column_positions[2], row_positions[0]], [column_positions[3], row_positions[0]]
-    pdf.stroke_line [column_positions[2], row_positions[1]], [column_positions[3], row_positions[1]]
-    pdf.stroke_line [column_positions[2], row_positions[2]], [column_positions[3], row_positions[2]]
-    pdf.stroke_line [column_positions[2], row_positions[3]], [column_positions[3], row_positions[3]]
     
-    pdf.rectangle [column_positions[4], row_positions[0] + 10], 10, 10
-    pdf.rectangle [column_positions[4], row_positions[1] + 10], 10, 10
-    pdf.rectangle [column_positions[4], row_positions[2] + 10], 10, 10
-    pdf.rectangle [column_positions[4], row_positions[3] + 10], 10, 10
-    
+    broker_box @commission.citi_habitats_agent, pdf, [column_positions[4], row_positions[0] + 10], :width => 10, :height => 10
     pdf.draw_text "Citi Habitats Agent", :at => [column_positions[5], row_positions[0]]
+    pdf.stroke_line [column_positions[6], row_positions[0]], [column_positions[7], row_positions[0]]
+    pdf.draw_text @commission.citi_habitats_agent_name, :at => [column_positions[6] + indent, row_positions[0] + clearance] # if @commission.co_exclusive_agency
+
+    broker_box @commission.corcoran_agent, pdf, [column_positions[4], row_positions[1] + 10], :width => 10, :height => 10
     pdf.draw_text "Corcoran Agent", :at => [column_positions[5], row_positions[1]]
+    pdf.stroke_line [column_positions[6], row_positions[1]], [column_positions[7], row_positions[1]]
+    pdf.draw_text @commission.corcoran_agent_name, :at => [column_positions[6] + indent, row_positions[1] + clearance] # if @commission.corcoran_agent
+
+    broker_box @commission.co_broke_company, pdf, [column_positions[4], row_positions[2] + 10], :width => 10, :height => 10
     pdf.draw_text "Co-Broke Co.", :at => [column_positions[5], row_positions[2]]
+    pdf.stroke_line [column_positions[6], row_positions[2]], [column_positions[7], row_positions[2]]
+    pdf.draw_text @commission.co_broke_company_name, :at => [column_positions[6] + indent, row_positions[2] + clearance] # if @commission.co_broke_company
+
+    broker_box @commission.direct_deal, pdf, [column_positions[4], row_positions[3] + 10], :width => 10, :height => 10
     pdf.draw_text "Direct Deal", :at => [column_positions[5], row_positions[3]]
     
-    pdf.stroke_line [column_positions[6], row_positions[0]], [column_positions[7], row_positions[0]]
-    pdf.stroke_line [column_positions[6], row_positions[1]], [column_positions[7], row_positions[1]]
-    pdf.stroke_line [column_positions[6], row_positions[2]], [column_positions[7], row_positions[2]]
     
     pdf.draw_text "Office", :at => [column_positions[8], row_positions[0]]
-    pdf.draw_text "Office", :at => [column_positions[8], row_positions[1]]
-    
     pdf.stroke_line [column_positions[9], row_positions[0]], [column_positions[10], row_positions[0]]
+    pdf.draw_text @commission.citi_habitats_agent_office, :at => [column_positions[9] + indent, row_positions[0] + clearance] # if @commission.co_exclusive_agency
+    
+    pdf.draw_text "Office", :at => [column_positions[8], row_positions[1]]
     pdf.stroke_line [column_positions[9], row_positions[1]], [column_positions[10], row_positions[1]]
+    pdf.draw_text @commission.corcoran_agent_office, :at => [column_positions[9] + indent, row_positions[1] + clearance] # if @commission.exclusive_agency
   end
   
   pdf.text "Referral Payment:   <u>                              </u>_", :inline_format => true, :size => 12
@@ -90,31 +107,36 @@ prawn_document do |pdf|
     column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 450, 500]
     row_positions = [90, 70, 50, 30, 10]
     
-    pdf.rectangle [0, row_positions[0] + 10], 10, 10
+    broker_box @commission.citi_habitats_referral_agent, pdf, [0, row_positions[0] + 10], :width => 10, :height => 10
     pdf.draw_text "Citi Habitats Agent", :at => [column_positions[1], row_positions[0]]
-    pdf.rectangle [0, row_positions[1] + 10], 10, 10
-    pdf.draw_text "Corcoran Agent", :at => [column_positions[1], row_positions[1]]
-    pdf.rectangle [0, row_positions[2] + 10], 10, 10
-    pdf.draw_text "Outside Agency", :at => [column_positions[1], row_positions[2]]
-    pdf.rectangle [0, row_positions[3] + 10], 10, 10
-    pdf.draw_text "Relo Referral", :at => [column_positions[1], row_positions[3]]
-    pdf.rectangle [0, row_positions[4] + 10], 10, 10
-    pdf.draw_text "Listing Fee", :at => [column_positions[1], row_positions[4]]
-    pdf.stroke
-    
     pdf.stroke_line [column_positions[2], row_positions[0]], [column_positions[3], row_positions[0]]
+    
+    broker_box @commission.corcoran_referral_agent, pdf, [0, row_positions[1] + 10], :width => 10, :height => 10
+    pdf.draw_text "Corcoran Agent", :at => [column_positions[1], row_positions[1]]
     pdf.stroke_line [column_positions[2], row_positions[1]], [column_positions[3], row_positions[1]]
+    
+    broker_box @commission.outside_agency, pdf, [0, row_positions[2] + 10], :width => 10, :height => 10
+    pdf.draw_text "Outside Agency", :at => [column_positions[1], row_positions[2]]
     pdf.stroke_line [column_positions[2], row_positions[2]], [column_positions[3], row_positions[2]]
+    
+    broker_box @commission.relocation_referral, pdf, [0, row_positions[3] + 10], :width => 10, :height => 10
+    pdf.draw_text "Relo Referral", :at => [column_positions[1], row_positions[3]]
     pdf.stroke_line [column_positions[2], row_positions[3]], [column_positions[3], row_positions[3]]
+    
+    broker_box @commission.listing_fee, pdf, [0, row_positions[4] + 10], :width => 10, :height => 10
+    pdf.draw_text "Listing Fee", :at => [column_positions[1], row_positions[4]]
     pdf.stroke_line [column_positions[2], row_positions[4]], [column_positions[3], row_positions[4]]
     
-    pdf.draw_text "Office", :at => [column_positions[4], row_positions[0]]
-    pdf.draw_text "Office", :at => [column_positions[4], row_positions[1]]
-    pdf.draw_text "Office", :at => [column_positions[4], row_positions[4]]
     
+    pdf.draw_text "Office", :at => [column_positions[4], row_positions[0]]
     pdf.stroke_line [column_positions[5], row_positions[0]], [column_positions[6], row_positions[0]]
+    
+    pdf.draw_text "Office", :at => [column_positions[4], row_positions[1]]
     pdf.stroke_line [column_positions[5], row_positions[1]], [column_positions[6], row_positions[1]]
+    
+    pdf.draw_text "Office", :at => [column_positions[4], row_positions[4]]
     pdf.stroke_line [column_positions[5], row_positions[4]], [column_positions[6], row_positions[4]]
+    
     
     pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[0]]
     pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[1]]

@@ -35,4 +35,11 @@ module CommissionsHelper
     padding = width - length / 2
     "#{Prawn::Text::NBSP * padding}#{information}#{Prawn::Text::NBSP * padding}"
   end
+  
+  def broker_box attribute, pdf, spot, opts
+    pdf.bounding_box spot, :width => 10, :height => 10 do
+      pdf.draw_text 'X', :at => [1, 1], :size => 12 if attribute
+      pdf.stroke_bounds
+    end
+  end
 end
