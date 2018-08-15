@@ -33,7 +33,22 @@ module CommissionsHelper
   def pad information, width = 15
     length = information.to_s.length
     padding = width - length / 2
-    "#{Prawn::Text::NBSP * padding}#{information}#{Prawn::Text::NBSP * padding}"
+    padding > 0 ? "#{Prawn::Text::NBSP * padding}#{information}#{Prawn::Text::NBSP * padding}" : information
+  end
+  
+  def rounded number
+    number = number.to_f
+    cents = number.round(2).to_s[-2..-1]
+    if cents == '00' || cents == '0'
+      number.round
+    else
+      number.round 2
+    end
+  end
+  
+  def number_to_round_currency number
+    number = number.to_f
+    number_to_currency number, :precision => (number.round == number) ? 0 : 2 if number
   end
   
   def broker_box attribute, pdf, spot, opts
