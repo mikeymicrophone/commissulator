@@ -106,49 +106,66 @@ prawn_document do |pdf|
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 450, 500]
     row_positions = [90, 70, 50, 30, 10]
+    indent = 10
+    clearance = 2
     
     broker_box @commission.citi_habitats_referral_agent, pdf, [0, row_positions[0] + 10], :width => 10, :height => 10
     pdf.draw_text "Citi Habitats Agent", :at => [column_positions[1], row_positions[0]]
     pdf.stroke_line [column_positions[2], row_positions[0]], [column_positions[3], row_positions[0]]
+    pdf.draw_text @commission.citi_habitats_referral_agent_name, :at => [column_positions[2] + indent, row_positions[0] + clearance] # if @commission.citi_habitats_referral_agent
     
     broker_box @commission.corcoran_referral_agent, pdf, [0, row_positions[1] + 10], :width => 10, :height => 10
     pdf.draw_text "Corcoran Agent", :at => [column_positions[1], row_positions[1]]
     pdf.stroke_line [column_positions[2], row_positions[1]], [column_positions[3], row_positions[1]]
+    pdf.draw_text @commission.corcoran_referral_agent_name, :at => [column_positions[2] + indent, row_positions[1] + clearance] # if @commission.corcoran_referral_agent
     
     broker_box @commission.outside_agency, pdf, [0, row_positions[2] + 10], :width => 10, :height => 10
     pdf.draw_text "Outside Agency", :at => [column_positions[1], row_positions[2]]
     pdf.stroke_line [column_positions[2], row_positions[2]], [column_positions[3], row_positions[2]]
+    pdf.draw_text @commission.outside_agency_name, :at => [column_positions[2] + indent, row_positions[2] + clearance] # if @commission.outside_agency
     
     broker_box @commission.relocation_referral, pdf, [0, row_positions[3] + 10], :width => 10, :height => 10
     pdf.draw_text "Relo Referral", :at => [column_positions[1], row_positions[3]]
     pdf.stroke_line [column_positions[2], row_positions[3]], [column_positions[3], row_positions[3]]
+    pdf.draw_text @commission.relocation_referral_name, :at => [column_positions[2] + indent, row_positions[3] + clearance] # if @commission.relocation_referral
     
     broker_box @commission.listing_fee, pdf, [0, row_positions[4] + 10], :width => 10, :height => 10
     pdf.draw_text "Listing Fee", :at => [column_positions[1], row_positions[4]]
     pdf.stroke_line [column_positions[2], row_positions[4]], [column_positions[3], row_positions[4]]
+    pdf.draw_text @commission.listing_fee_name, :at => [column_positions[2] + indent, row_positions[4] + clearance] # if @commission.listing_fee
     
     
     pdf.draw_text "Office", :at => [column_positions[4], row_positions[0]]
     pdf.stroke_line [column_positions[5], row_positions[0]], [column_positions[6], row_positions[0]]
+    pdf.draw_text @commission.citi_habitats_referral_agent_office, :at => [column_positions[5] + indent, row_positions[0] + clearance] # if @commission.citi_habitats_referral_agent
     
     pdf.draw_text "Office", :at => [column_positions[4], row_positions[1]]
     pdf.stroke_line [column_positions[5], row_positions[1]], [column_positions[6], row_positions[1]]
+    pdf.draw_text @commission.corcoran_referral_agent_office, :at => [column_positions[5] + indent, row_positions[1] + clearance] # if @commission.corcoran_referral_agent
     
     pdf.draw_text "Office", :at => [column_positions[4], row_positions[4]]
     pdf.stroke_line [column_positions[5], row_positions[4]], [column_positions[6], row_positions[4]]
-    
+    pdf.draw_text @commission.listing_fee_office, :at => [column_positions[5] + indent, row_positions[4] + clearance] # if @commission.listing_fee
     
     pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[0]]
-    pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[1]]
-    pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[2]]
-    pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[3]]
-    pdf.draw_text "Listing Fee %", :at => [column_positions[7], row_positions[4]]
-    
     pdf.stroke_line [column_positions[8], row_positions[0]], [column_positions[9], row_positions[0]]
+    pdf.draw_text @commission.citi_habitats_referral_agent_amount, :at => [column_positions[8] + indent, row_positions[0] + clearance] # if @commission.citi_habitats_referral_agent
+    
+    pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[1]]
     pdf.stroke_line [column_positions[8], row_positions[1]], [column_positions[9], row_positions[1]]
+    pdf.draw_text @commission.corcoran_referral_agent_amount, :at => [column_positions[8] + indent, row_positions[1] + clearance] # if @commission.corcoran_referral_agent
+    
+    pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[2]]
     pdf.stroke_line [column_positions[8], row_positions[2]], [column_positions[9], row_positions[2]]
+    pdf.draw_text @commission.outside_agency_amount, :at => [column_positions[8] + indent, row_positions[2] + clearance] # if @commission.outside_agency
+    
+    pdf.draw_text "Referral Amount", :at => [column_positions[7], row_positions[3]]
     pdf.stroke_line [column_positions[8], row_positions[3]], [column_positions[9], row_positions[3]]
+    pdf.draw_text @commission.relocation_referral_amount, :at => [column_positions[8] + indent, row_positions[3] + clearance] # if @commission.relocation_referral
+    
+    pdf.draw_text "Listing Fee %", :at => [column_positions[7], row_positions[4]]
     pdf.stroke_line [column_positions[8], row_positions[4]], [column_positions[9], row_positions[4]]
+    pdf.draw_text @commission.listing_fee_percentage, :at => [column_positions[8] + indent, row_positions[4] + clearance] # if @commission.listing_fee
   end
   
   
