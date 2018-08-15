@@ -38,11 +38,12 @@ prawn_document do |pdf|
   pdf.text "Reason for fee reduction:", :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 40 do
+    pdf.draw_text @commission.reason_for_fee_reduction, :at => [5, 30]
     pdf.stroke_bounds
   end
   
   pdf.move_down 20
-  pdf.text "Landlord Source:   <u>                              </u>     Tenant Source:   <u>                              </u>_", :inline_format => true, :size => 12
+  pdf.text "Landlord Source:   <u>#{pad @commission.landlord_source}</u>     Tenant Source:   <u>#{pad @commission.tenant_source}</u>", :inline_format => true, :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 200, 210, 230, 300, 390, 400, 425, 500]
