@@ -35,7 +35,11 @@ class Deal < ApplicationRecord
   end
   
   def distributable_commission
-    commission&.total_commission.to_f * 0.5
+    (commission&.total_commission.to_f - referral_payment) * 0.5
+  end
+  
+  def referral_payment
+    commission.citi_habitats_referral_agent_amount.to_f + commission.corcoran_referral_agent_amount.to_f + commission.outside_agency_amount.to_f + commission.relocation_referral_amount.to_f
   end
   
   def lead_commission
