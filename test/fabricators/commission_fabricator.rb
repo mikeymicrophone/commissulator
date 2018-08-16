@@ -10,7 +10,7 @@ Fabricator :commission do
   landlord_email { |attrs| attrs[:landlord].email }
   landlord_phone_number { |attrs| attrs[:landlord].phone_number }
   agent_name { |attrs| attrs[:agent].name }
-  agent_split_percentage { 70 }
+  # agent_split_percentage { 70 }
   
   bedrooms { (2..8).to_a.sample / 2.0 }
   property_type { ['Condo', 'Rental', 'Co-op', 'Rental', 'Loft', 'Rental', 'Townhouse', 'Rental', 'Walk-up', 'Rental', 'Brownstone', 'Rental', 'Condop', 'Rental', 'Green', 'Rental'].sample }
@@ -45,6 +45,41 @@ Fabricator :commission do
   
   # intranet_deal_number { rand(342342423) }
   before_validation { |commission, transients| add_tenants_to commission }
+end
+
+Fabricator :co_exclusive_commission, :from => :commission do
+  co_exclusive_agency true
+  citi_habitats_agent true
+  co_exclusive_agency_name { Faker::Company.name }
+  citi_habitats_agent_name { Faker::Name.name }
+  citi_habitats_agent_office { Faker::Address.street_name }
+  co_broke false
+  # listing side?
+end
+
+Fabricator :exclusive_agency_commission, :from => :commission do
+  exclusive_agency true
+  corcoran_agent true
+  exclusive_agency_name { Faker::Company.name }
+  corcoran_agent_name { Faker::Name.name }
+  corcoran_agent_office { Faker::Address.street_name }
+  co_broke true
+end
+
+Fabricator :exclusive_agent_commission, :from => :commission do
+  exclusive_agent true
+  co_broke_company true
+  exclusive_agent_name { Faker::Name.name }
+  co_broke_company_name { Faker::Company.name }
+  exclusive_agent_office { Faker::Address.street_name }
+  co_broke true
+end
+
+Fabricator :referral_commission, :from => :commission do
+  citi_habitats_referral_agent true
+  citi_habitats_referral_agent_name { Faker::Name.name }
+  citi_habitats_referral_agent_office { Faker::Address.street_name }
+  citi_habitats_referral_agent_amount { (3..8).to_a.sample * 100 }
 end
 
 def add_tenants_to commission
