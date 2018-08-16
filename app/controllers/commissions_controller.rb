@@ -65,7 +65,8 @@ class CommissionsController < ApplicationController
   end
 
   def fabricate
-    @commission = Fabricate :commission, :agent => current_agent
+    fabricator = params[:fabricator] || :commission
+    @commission = Fabricate fabricator.to_sym, :agent => current_agent
   end
 
   private

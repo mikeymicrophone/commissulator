@@ -26,8 +26,8 @@ module CommissionsHelper
     content_tag :tr, columns.join.html_safe
   end
   
-  def fabricate_commission_link opts = {}
-    link_to 'Fabricate', fabricate_commissions_path(opts), :method => :post, :remote => true
+  def fabricate_commission_link fabricator, opts = {}
+    link_to %Q{Fabricate #{fabricator}}, fabricate_commissions_path(opts.merge :fabricator => fabricator), :method => :post, :remote => true
   end
   
   def pad information, width = 15
