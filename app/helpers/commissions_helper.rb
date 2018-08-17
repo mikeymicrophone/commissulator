@@ -39,7 +39,7 @@ module CommissionsHelper
   def rounded number
     number = number.to_f
     cents = number.round(2).to_s[-2..-1]
-    if cents == '00' || cents == '0'
+    if cents == '00' || cents == '.0'
       number.round
     else
       number.round 2

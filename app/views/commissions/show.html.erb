@@ -6,50 +6,44 @@
   <%= link_to 'Back', commissions_path %>
 </div>
 
+
+
 <div>
-  <%= link_to_name @commission.landlord %><br>
+  <div>
+    Tenants: <%= @commission.tenant_name.to_sentence %>
+  </div>
+  
+  <div>
+    <%= @commission.property_address %> <%= @commission.apartment_number %><br>
+    <%= @commission.zip_code %>
+  </div>
+  
+  <div>
+    <%= number_to_round_currency @commission.leased_monthly_rent %><br>
+    <%= @commission.lease_start_date.to_s :american %>-<%= @commission.lease_term_date.to_s :american %>
+  </div>
+</div>
+
+<div>
+  <%= @commission.new_development ? 'new development' : '' %> <%= @commission.square_footage %> sq ft <%= @commission.property_type %> with <%= pluralize @commission.bedrooms, 'bedroom' %>
+</div>
+
+<div>
+  Landlord: <%= link_to_name @commission.landlord %><br>
   <%= link_to_name @commission.deal, :reference %><br>
   <%= @commission.agent.reference %>
 </div>
 
-<span>branch_name:</span><%= @commission.branch_name %><br>
-<span>tenant_name:</span><%= @commission.tenant_name.join ', ' %><br>
-<span>tenant_email:</span><%= @commission.tenant_email.join ', ' %><br>
-<span>tenant_phone_number:</span><%= @commission.tenant_phone_number.join ', ' %><br>
+<span>lease_sign_date:</span><%= @commission.lease_sign_date.to_s :american %><br>
+<span>approval_date:</span><%= @commission.approval_date.to_s :american %><br>
+<span>request_date:</span><%= @commission.request_date.to_s :american %><br>
 
-<span>landlord_name:</span><%= @commission.landlord_name %><br>
-<span>landlord_email:</span><%= @commission.landlord_email %><br>
-<span>landlord_phone_number:</span><%= @commission.landlord_phone_number %><br>
-<span>agent_name:</span><%= @commission.agent_name %><br>
-
-<span>bedrooms:</span><%= @commission.bedrooms %><br>
-<span>property_type:</span><%= @commission.property_type %><br>
-<span>new_development:</span><%= @commission.new_development %><br>
-<span>lease_start_date:</span><%= @commission.lease_start_date %><br>
-<span>lease_term_date:</span><%= @commission.lease_term_date %><br>
-<span>square_footage:</span><%= @commission.square_footage %><br>
-<span>listed_monthly_rent:</span><%= @commission.listed_monthly_rent %><br>
-
-<span>landlord_source:</span><%= @commission.landlord_source %><br>
-<span>tenant_source:</span><%= @commission.tenant_source %><br>
-<span>intranet_deal_number:</span><%= @commission.intranet_deal_number %><br>
-<span>copy_of_lease:</span><%= @commission.copy_of_lease %><br>
-<span>property_address:</span><%= @commission.property_address %><br>
-<span>apartment_number:</span><%= @commission.apartment_number %><br>
-<span>zip_code:</span><%= @commission.zip_code %><br>
-
-<span>lease_sign_date:</span><%= @commission.lease_sign_date %><br>
-<span>approval_date:</span><%= @commission.approval_date %><br>
-<span>leased_monthly_rent:</span><%= @commission.leased_monthly_rent %><br>
+<span>annualized_rent:</span><%= @commission.annualized_rent %><br>
 <span>commission_fee_percentage:</span><%= @commission.commission_fee_percentage %><br>
 <span>agent_split_percentage:</span><%= @commission.agent_split_percentage %><br>
 <span>owner_pay_commission:</span><%= @commission.owner_pay_commission %><br>
 <span>listing_side_commission:</span><%= @commission.listing_side_commission %><br>
 <span>tenant_side_commission:</span><%= @commission.tenant_side_commission %><br>
-<span>reason_for_fee_reduction:</span><%= @commission.reason_for_fee_reduction %><br>
-
-<span>request_date:</span><%= @commission.request_date %><br>
-<span>annualized_rent:</span><%= @commission.annualized_rent %><br>
 <span>total_commission:</span><%= @commission.total_commission %><br>
 <span>citi_commission:</span><%= @commission.citi_commission %><br>
 <span>co_broke_commission:</span><%= @commission.co_broke_commission %><br>
