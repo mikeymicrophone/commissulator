@@ -36,6 +36,7 @@ input.commission {
 }
 
 #checkboxes {
+  
   label {
     display: inline-block;
     min-width: 130px;
@@ -44,4 +45,41 @@ input.commission {
       min-width: 40px;
     }
   }
+}
+
+.commission_vitals {
+  border: 2px solid #C4C4C4;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  
+  div {
+    display: inline-block;
+    padding: 5px;
+  }
+  
+  #lessees {
+    
+  }
+  
+  #location {
+    float: right;
+    text-align: right;
+  }
+  
+  #lease_basics {
+    
+  }
+  
+  #property_description {
+    
+  }
+  
+  #commission_navigation {
+    text-align: right;
+  }
+}
+
+.commission_financials {
+  
 }

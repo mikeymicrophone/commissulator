@@ -30,6 +30,10 @@ module ApplicationHelper
     end
   end
   
+  def clearboth
+    tag.div :class => 'clearboth'
+  end
+  
   def google_fonts
     google_webfonts_init :google => selected_fonts
   end

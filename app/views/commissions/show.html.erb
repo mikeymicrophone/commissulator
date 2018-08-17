@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="tools">
   <%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
   <%= link_to 'Edit', edit_commission_path(@commission) %> |
@@ -8,46 +6,52 @@
 
 
 
-<div>
-  <div>
+<div class="commission_vitals">
+  <div id="lessees">
     Tenants: <%= @commission.tenant_name.to_sentence %>
   </div>
   
-  <div>
+  <div id="location">
     <%= @commission.property_address %> <%= @commission.apartment_number %><br>
     <%= @commission.zip_code %>
   </div>
+  <hr>
+  <%= clearboth %>
   
-  <div>
+  <div id="lease_basics">
     <%= number_to_round_currency @commission.leased_monthly_rent %><br>
-    <%= @commission.lease_start_date.to_s :american %>-<%= @commission.lease_term_date.to_s :american %>
+    <%= @commission.lease_start_date.strftime("%-m/%-d/%Y") %>-<%= @commission.lease_term_date.strftime("%-m/%-d/%Y")%>
+  </div>
+  
+  <div id="property_description">
+    <%= @commission.new_development ? 'new development' : '' %> <%= @commission.square_footage %> sq ft <%= @commission.property_type %> with <%= pluralize @commission.bedrooms, 'bedroom' %>
+  </div>
+  
+  <div id="commission_navigation">
+    Landlord: <%= link_to_name @commission.landlord %><br>
+    <%= link_to_name @commission.deal, :reference %><br>
+    <%= @commission.agent.reference %>
   </div>
 </div>
 
-<div>
-  <%= @commission.new_development ? 'new development' : '' %> <%= @commission.square_footage %> sq ft <%= @commission.property_type %> with <%= pluralize @commission.bedrooms, 'bedroom' %>
+<div class="commission_financials">
+  <span>lease_sign_date:</span><%= @commission.lease_sign_date.strftime("%-m/%-d/%Y") %><br>
+  <span>approval_date:</span><%= @commission.approval_date.strftime("%-m/%-d/%Y") %><br>
+  <span>request_date:</span><%= @commission.request_date.strftime("%-m/%-d/%Y") %><br>
+
+  <span>annualized_rent:</span><%= @commission.annualized_rent %><br>
+
+  <span>owner pay commission:</span><%= number_to_round_currency @commission.owner_pay_commission %><br>
+  <span>listing side commission:</span><%= number_to_round_currency @commission.listing_side_commission %><br>
+  <span>tenant side commission:</span><%= number_to_round_currency @commission.tenant_side_commission %><br>
+
+  <span>co-broke commission:</span><%= number_to_round_currency @commission.co_broke_commission %><br>
+  <span>Citi commission:</span><%= number_to_round_currency @commission.citi_commission %><br>
+  <span>total commission:</span><%= number_to_round_currency @commission.total_commission %><br>
+  <span>commission fee %:</span><%= rounded @commission.commission_fee_percentage %><br>
+
+  <span>agent_split_percentage:</span><%= rounded @commission.agent_split_percentage %><br>
 </div>
-
-<div>
-  Landlord: <%= link_to_name @commission.landlord %><br>
-  <%= link_to_name @commission.deal, :reference %><br>
-  <%= @commission.agent.reference %>
-</div>
-
-<span>lease_sign_date:</span><%= @commission.lease_sign_date.to_s :american %><br>
-<span>approval_date:</span><%= @commission.approval_date.to_s :american %><br>
-<span>request_date:</span><%= @commission.request_date.to_s :american %><br>
-
-<span>annualized_rent:</span><%= @commission.annualized_rent %><br>
-<span>commission_fee_percentage:</span><%= @commission.commission_fee_percentage %><br>
-<span>agent_split_percentage:</span><%= @commission.agent_split_percentage %><br>
-<span>owner_pay_commission:</span><%= @commission.owner_pay_commission %><br>
-<span>listing_side_commission:</span><%= @commission.listing_side_commission %><br>
-<span>tenant_side_commission:</span><%= @commission.tenant_side_commission %><br>
-<span>total_commission:</span><%= @commission.total_commission %><br>
-<span>citi_commission:</span><%= @commission.citi_commission %><br>
-<span>co_broke_commission:</span><%= @commission.co_broke_commission %><br>
-
 <%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
 <%= link_to 'Edit', edit_commission_path(@commission) %> |
 <%= link_to 'Back', commissions_path %>
