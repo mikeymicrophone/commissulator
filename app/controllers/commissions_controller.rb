@@ -6,6 +6,14 @@ class CommissionsController < ApplicationController
       Commission.where :landlord_id => params[:landlord_id]
     else
       Commission.all
+    end
+    @commissions = case params[:sort]
+    when 'updated_at'
+      @commissions.order 'updated_at desc'
+    when 'leased_monthly_rent'
+      @commissions.order 'leased_monthly_rent desc'
+    else
+      @commissions
     end.page params[:page]
   end
 
