@@ -13,7 +13,7 @@ class CommissionsController < ApplicationController
     when 'leased_monthly_rent'
       @commissions.order 'leased_monthly_rent desc'
     else
-      @commissions
+      @commissions.order 'created_at desc'
     end.page params[:page]
   end
 
