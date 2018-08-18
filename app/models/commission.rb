@@ -14,7 +14,7 @@ class Commission < ApplicationRecord
   # attr_default :agent_split_percentage, '70'
   attr_default :copy_of_lease, true
   attr_default :lease_start_date, lambda { Date.civil Date.today.next_month.year, Date.today.next_month.month, 1 }
-  attr_default :lease_term_date, lambda { (Date.today + 1.year).end_of_month }
+  attr_default :lease_term, '12 months'
   attr_default :owner_pay_commission, 0
   attr_default :listing_side_commission, 0
   

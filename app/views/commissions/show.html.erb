@@ -20,7 +20,7 @@
   
   <div id="lease_basics">
     <%= number_to_round_currency @commission.leased_monthly_rent %><br>
-    <%= @commission.lease_start_date.strftime("%-m/%-d/%Y") %>-<%= @commission.lease_term_date.strftime("%-m/%-d/%Y")%>
+    <%= @commission.lease_start_date.strftime("%-m/%-d/%Y") %>-<%= @commission.lease_term %>
   </div>
   
   <div id="property_description">

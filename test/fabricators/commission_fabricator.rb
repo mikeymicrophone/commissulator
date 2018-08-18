@@ -16,7 +16,7 @@ Fabricator :commission do
   property_type { ['Condo', 'Rental', 'Co-op', 'Rental', 'Loft', 'Rental', 'Townhouse', 'Rental', 'Walk-up', 'Rental', 'Brownstone', 'Rental', 'Condop', 'Rental', 'Green', 'Rental'].sample }
   new_development { true if die_roll(7) }
   lease_start_date { Date.civil(Date.today.year, Date.today.month + rand(3), 1) }
-  lease_term_date { |attrs| attrs[:lease_start_date] + [12, 12, 12, 16, 18, 24].sample.months }
+  lease_term { |attrs| [12, 12, 12, 16, 18, 24].sample.to_s + ' months' }
   square_footage { 300 + rand(2000) }
   listed_monthly_rent { |attrs| attrs[:square_footage] * 3 + rand(1300) }
   landlord_source { find_or_fabricate(:assistant).name }

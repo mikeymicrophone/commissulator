@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_18_011220) do
+ActiveRecord::Schema.define(version: 2018_08_18_121740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2018_08_18_011220) do
     t.string "property_type"
     t.boolean "new_development"
     t.date "lease_start_date"
-    t.date "lease_term_date"
+    t.string "lease_term"
     t.decimal "square_footage"
     t.decimal "listed_monthly_rent"
     t.string "landlord_source"
