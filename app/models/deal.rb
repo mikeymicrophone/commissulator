@@ -34,12 +34,20 @@ class Deal < ApplicationRecord
     package
   end
   
+  def inbound_commission
+    commission&.citi_commission.to_d
+  end
+  
   def distributable_commission
-    (commission&.total_commission.to_f - referral_payment) * 0.5
+    (inbound_commission - referral_payment) * 0.5
   end
   
   def referral_payment
-    commission.citi_habitats_referral_agent_amount.to_f + commission.corcoran_referral_agent_amount.to_f + commission.outside_agency_amount.to_f + commission.relocation_referral_amount.to_f
+    listing_fee.to_d + commission.citi_habitats_referral_agent_amount.to_d + commission.corcoran_referral_agent_amount.to_d + commission.outside_agency_amount.to_d + commission.relocation_referral_amount.to_d
+  end
+  
+  def listing_fee
+    (commission.listing_fee_percentage / BigDecimal(100)) *  inbound_commission if commission&.listing_fee?
   end
   
   def lead_commission
