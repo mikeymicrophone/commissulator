@@ -1,5 +1,5 @@
 class CommissionsController < ApplicationController
-  before_action :set_commission, only: [:show, :print, :edit, :update, :destroy]
+  before_action :set_commission, only: [:show, :edit, :update, :destroy]
 
   def index
     @commissions = if params[:landlord_id]
@@ -18,6 +18,7 @@ class CommissionsController < ApplicationController
   end
 
   def show
+    @sensitive = !current_agent.admin
     @filename = "Rental Request for Commission.pdf"
   end
 

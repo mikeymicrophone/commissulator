@@ -5,7 +5,7 @@ prawn_document do |pdf|
   pdf.default_leading 7
   pdf.font "Helvetica", :style => :bold, :size => 8
   pdf.text "Branch Name   <u>#{pad @commission.branch_name}</u>   Request Date   <u>#{pad @commission.request_date.strftime("%-m/%-d/%Y"), 22}</u>   Intranet Deal Number <u>#{pad ''}</u>", :inline_format => true
-  pdf.text "Agent Name   <u>#{pad @commission.agent_name, 30}</u>     Agent Split %    <u>#{pad rounded(@commission.agent_split_percentage), 7}</u>   Copy of Lease   <u>#{pad @commission.boolean_display :copy_of_lease}</u>", :inline_format => true
+  pdf.text "Agent Name   <u>#{pad @commission.agent_name, 30}</u>     Agent Split %    <u>#{pad rounded(@sensitive ? nil : @commission.agent_split_percentage), 7}</u>   Copy of Lease   <u>#{pad @commission.boolean_display :copy_of_lease}</u>", :inline_format => true
   pdf.text "Property Address   <u>#{pad @commission.property_address, 36}</u>   Apt #   <u>#{pad @commission.apartment_number, 7}</u>   Zip Code   <u>#{pad @commission.zip_code, 8}</u>", :inline_format => true
   pdf.text "Bedrooms   <u>#{pad rounded(@commission.bedrooms), 8}</u>   SQ Footage   <u>#{pad @commission.square_footage}</u>   Property Type   <u>#{pad @commission.property_type}</u>   New Development   <u>#{pad @commission.new_development, 3}</u>", :inline_format => true
   
@@ -173,14 +173,14 @@ prawn_document do |pdf|
   pdf.text "Flat Fees/Special Payments/Comments:", :size => 12
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 40 do
     pdf.move_down 10
-    pdf.text @commission.subcommission_payout_summary, :indent_paragraphs => 5
+    pdf.text @commission.subcommission_payout_summary, :indent_paragraphs => 5 unless @sensitive
     pdf.stroke_bounds
   end
   
   pdf.move_down 15
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 90 do
     pdf.move_down 1
-    pdf.text 'Approvals', :size => 7
+    pdf.text 'Approvals', :size => 7, :indent_paragraphs => 1
     
     pdf.draw_text "Requested by: ______________________         _________________________      Date: _____________", :at => [20, 60], :size => 10
     pdf.draw_text "Approved by:  ______________________         _________________________      Date: _____________", :at => [20, 20], :size => 10
