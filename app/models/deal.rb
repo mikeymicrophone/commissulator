@@ -39,6 +39,10 @@ class Deal < ApplicationRecord
     commission&.citi_commission.to_d
   end
   
+  def house_cut
+    (inbound_commission - referral_payment) * (1 - (commission.agent_split_percentage / BigDecimal(100)))
+  end
+  
   def agent_commission
     (inbound_commission - referral_payment) * (commission.agent_split_percentage / BigDecimal(100)) - distributable_commission
   end
