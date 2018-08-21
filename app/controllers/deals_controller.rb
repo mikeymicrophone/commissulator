@@ -69,6 +69,7 @@ class DealsController < ApplicationController
   def destroy
     @deal.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_to deals_url, notice: 'Deal was successfully destroyed.' }
       format.json { head :no_content }
     end

@@ -1,6 +1,6 @@
 class Deal < ApplicationRecord
   belongs_to :agent
-  has_many :participants
+  has_many :participants, :dependent => :destroy
   has_one :commission
   delegate :annualized_rent, :agent_split_percentage, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
   

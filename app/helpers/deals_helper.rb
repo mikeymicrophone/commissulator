@@ -40,7 +40,11 @@ module DealsHelper
       columns << content_tag(:td, link_to('Paperwork', new_commission_path(:deal_id => deal.id)))
     end
     
-    content_tag :tr, columns.join.html_safe
+    if current_agent.admin?
+      columns << content_tag(:td, link_to('Delete', deal, :method => :delete, :remote => true))
+    end
+    
+    content_tag :tr, columns.join.html_safe, :id => dom_id(deal)
   end
   
   def fabricate_deal_link opts = {}
