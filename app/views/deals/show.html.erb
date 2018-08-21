@@ -91,8 +91,11 @@
 
 <% @deal.participants.chrono.each do |participant| %>
   <%= div_for participant do %>
-    <%= linked_name participant %>
-    <%= number_to_currency participant.payout %>
+    <%= content_tag :div, linked_name(participant), :class => 'deal_portion_description' %>
+    <%= content_tag :div, :class => 'deal_portion' do %>
+      <%= @deal.distributable_commission %> * <%= @deal.rate_for participant.role %> = 
+      <%= number_to_currency(participant.payout) %>
+    <% end %>
   <% end %>
 <% end %>
 
