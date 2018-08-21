@@ -2,7 +2,7 @@ class Deal < ApplicationRecord
   belongs_to :agent
   has_many :participants
   has_one :commission
-  delegate :annualized_rent, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission
+  delegate :annualized_rent, :agent_split_percentage, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary
@@ -40,11 +40,11 @@ class Deal < ApplicationRecord
   end
   
   def house_cut
-    (inbound_commission - referral_payment) * (1 - (commission.agent_split_percentage / BigDecimal(100)))
+    (inbound_commission - referral_payment) * (1 - (agent_split_percentage.to_d / BigDecimal(100)))
   end
   
   def agent_commission
-    (inbound_commission - referral_payment) * (commission.agent_split_percentage / BigDecimal(100)) - distributable_commission
+    (inbound_commission - referral_payment) * (agent_split_percentage.to_d / BigDecimal(100)) - distributable_commission
   end
   
   def distributable_commission
@@ -52,7 +52,7 @@ class Deal < ApplicationRecord
   end
   
   def referral_payment
-    listing_fee.to_d + commission.citi_habitats_referral_agent_amount.to_d + commission.corcoran_referral_agent_amount.to_d + commission.outside_agency_amount.to_d + commission.relocation_referral_amount.to_d
+    listing_fee.to_d + commission&.citi_habitats_referral_agent_amount.to_d + commission&.corcoran_referral_agent_amount.to_d + commission&.outside_agency_amount.to_d + commission&.relocation_referral_amount.to_d
   end
   
   def listing_fee
