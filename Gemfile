@@ -9,6 +9,7 @@ gem 'kaminari'
 gem 'ap'
 gem 'record_tag_helper'
 gem 'attr_default'
+gem 'percentage'
 gem 'fabrication'
 gem 'faker'
 gem 'google-webfonts-rails', :github => 'masarakki/google-webfonts-rails', :branch => 'for-rails5'
@@ -40,6 +41,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'rspec-rails'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
