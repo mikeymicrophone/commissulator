@@ -27,7 +27,7 @@ module CommissionsHelper
   end
   
   def fabricate_commission_link fabricator, opts = {}
-    link_to %Q{Fabricate #{fabricator}}, fabricate_commissions_path(opts.merge :fabricator => fabricator), :method => :post, :remote => true
+    link_to %Q{Fabricate #{fabricator}}, fabricate_commissions_path(opts.merge :fabricator => fabricator), :method => :post, :remote => true unless Rails.env.production?
   end
   
   def pad information, width = 15

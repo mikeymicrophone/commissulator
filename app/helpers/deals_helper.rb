@@ -47,6 +47,6 @@ module DealsHelper
     if params[:filtered_attribute] == 'agent_id'
       opts[:agent_id] = params[:filter_value]
     end
-    link_to "Fabricate #{opts[:status]} deal", fabricate_deals_path(:deal => opts), :method => :post, :remote => true
+    link_to "Fabricate #{opts[:status]} deal", fabricate_deals_path(:deal => opts), :method => :post, :remote => true unless Rails.env.production?
   end
 end

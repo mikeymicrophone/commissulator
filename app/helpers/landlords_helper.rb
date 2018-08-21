@@ -15,6 +15,6 @@ module LandlordsHelper
   end
   
   def fabricate_landlord_link
-    link_to 'Fabricate landlord', fabricate_landlords_path, :method => :post, :remote => true
+    link_to 'Fabricate landlord', fabricate_landlords_path, :method => :post, :remote => true unless Rails.env.production?
   end
 end
