@@ -2,6 +2,7 @@ class Deal < ApplicationRecord
   belongs_to :agent
   has_many :participants
   has_one :commission
+  delegate :annualized_rent, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary

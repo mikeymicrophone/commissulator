@@ -9,3 +9,15 @@ body {
 header {
   font-family: 'Cinzel';
 }
+
+
+.deal_portion_description {
+  display: inline-block;
+  width: 48%;
+}
+
+.deal_portion {
+  display: inline-block;
+  width: 48%;
+  text-align: right;
+}

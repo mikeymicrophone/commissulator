@@ -26,6 +26,69 @@
   Agent: <%= deals_by @deal.agent %>
 </p>
 
+<div id="deal_payout_breakdown">
+  <div>
+    <%= content_tag :div, 'Rent', :class => 'deal_portion_description' %>
+    <%= content_tag :div, @deal.annualized_rent, :class => 'deal_portion' %>
+  </div>
+  <%= tag.hr %>
+  
+  <div>
+    <%= content_tag :div, 'Tenant Commission', :class => 'deal_portion_description' %>
+    <%= content_tag :div, @deal.tenant_side_commission, :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Owner Commission', :class => 'deal_portion_description' %>
+    <%= content_tag :div, "+ #{@deal.owner_pay_commission}", :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= tag.div :class => 'deal_portion_description' %>
+    <%= content_tag :div, tag.hr, :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Total Commission', :class => 'deal_portion_description' %>
+    <%= content_tag :div, @deal.total_commission, :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Listing Side', :class => 'deal_portion_description' %>
+    <%= content_tag :div, "- #{@deal.listing_side_commission}", :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Co-Broke', :class => 'deal_portion_description' %>
+    <%= content_tag :div, "- #{@deal.co_broke_commission}", :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Listing Fee', :class => 'deal_portion_description' %>
+    <%= content_tag :div, "- #{@deal.listing_fee}", :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Referral Payment', :class => 'deal_portion_description' %>
+    <%= content_tag :div, "- #{@deal.referral_payment}", :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= tag.div :class => 'deal_portion_description' %>
+    <%= content_tag :div, tag.hr, :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Inbound Commission', :class => 'deal_portion_description' %>
+    <%= content_tag :div, @deal.inbound_commission, :class => 'deal_portion' %>
+  </div>
+  
+  <div>
+    <%= content_tag :div, 'Cuts', :class => 'deal_portion_description' %>
+  </div>
+  
+</div>
+
 <% @deal.participants.chrono.each do |participant| %>
   <%= div_for participant do %>
     <%= linked_name participant %>
