@@ -8,14 +8,23 @@
 }
 
 #top_floor_penthouse_navigation {
-  font-family: Jua;
-  font-size: 1.2em;
+  font-family: 'Fjalla One';
+  
   a {
     padding: 4px;
     color: #507EDC;
     
     &:hover {
       color: #B766DD;
+    }
+    
+    &#commissions_link {
+      font-size: 1.2em;
+    }
+    
+    &#new_commission_link {
+      font-size: 1.2em;
+      color: #D30026;
     }
   }
 }

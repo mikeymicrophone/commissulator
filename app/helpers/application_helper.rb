@@ -9,12 +9,13 @@ module ApplicationHelper
   end
   
   def main_nav
+    link_to('New Commission!', new_commission_path, :id => 'new_commission_link') +
+    link_to('Commissions', commissions_path, :id => 'commissions_link') +
     link_to('Deals', deals_path) +
     link_to('Assistants', assistants_path) +
     link_to('Participants', participants_path) +
     link_to('Agents', agents_path) +
-    link_to('Landlords', landlords_path) +
-    link_to('Commissions', commissions_path)
+    link_to('Landlords', landlords_path)
   end
   
   def penthouse_nav
@@ -39,6 +40,6 @@ module ApplicationHelper
   end
   
   def selected_fonts
-    ['Bitter', 'Arvo', 'Cinzel', 'Jua']
+    ['Arvo', 'Bitter', 'Cinzel', 'Fjalla One', 'Jua', 'Nunito']
   end
 end
