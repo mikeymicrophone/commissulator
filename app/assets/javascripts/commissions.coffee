@@ -26,5 +26,5 @@ $(document).on 'turbolinks:load', ->
     boxes = table.find('input')
     needed_boxes = row.find('input')
     unneeded_boxes = boxes.not(needed_boxes).get()
-    $(unneeded_boxes).each((index, box) => $(box).prop('disabled', selected_box.prop('checked')))
+    # $(unneeded_boxes).each((index, box) => $(box).prop('disabled', selected_box.prop('checked')))
     $(needed_boxes).each((index, box) => $(box).css('border-color', 'green'))
