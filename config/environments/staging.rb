@@ -72,7 +72,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'citipadscommission.com',
+    domain:               'commissulator-staging.herokuapp.com',
     user_name:            Rails.application.credentials.sending_email[:username],
     password:             Rails.application.credentials.sending_email[:password],
     authentication:       'plain',
