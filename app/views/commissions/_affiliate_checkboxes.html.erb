@@ -53,7 +53,7 @@
       <%= content_tag :td, form.label(:citi_habitats_referral_agent_office, 'Office', :class => 'office') %>
       <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_office) %>
       <%= content_tag :td, form.label(:citi_habitats_referral_agent_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_amount) %>
+      <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_amount, :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'corcoran_agent' do %>
@@ -63,7 +63,7 @@
       <%= content_tag :td, form.label(:corcoran_referral_agent_office, 'Office', :class => 'office') %>
       <%= content_tag :td, form.text_field(:corcoran_referral_agent_office) %>
       <%= content_tag :td, form.label(:corcoran_referral_agent_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:corcoran_referral_agent_amount) %>
+      <%= content_tag :td, form.text_field(:corcoran_referral_agent_amount, :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'outside_agency' do %>
@@ -73,7 +73,7 @@
       <%= tag :td %>
       <%= tag :td %>
       <%= content_tag :td, form.label(:outside_agency_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:outside_agency_amount) %>
+      <%= content_tag :td, form.text_field(:outside_agency_amount, :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'relocation_referral' do %>
@@ -83,7 +83,7 @@
       <%= tag :td %>
       <%= tag :td %>
       <%= content_tag :td, form.label(:relocation_referral_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:relocation_referral_amount) %>
+      <%= content_tag :td, form.text_field(:relocation_referral_amount, :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'listing_fee' do %>
