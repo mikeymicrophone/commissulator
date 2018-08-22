@@ -110,7 +110,7 @@ class Commission < ApplicationRecord
   end
   
   def cut?
-    commission_fee_percentage.present? && deal&.staffed? && (co_broke_commission.present? if co_broke?) && (referral_payment.present? if referral?)
+    commission_fee_percentage.present? && deal&.staffed? && (co_broke? ? co_broke_commission.present? : true) && (referral? ? referral_payment.present? : true)
   end
   
   def cut_title
