@@ -10,7 +10,7 @@ RSpec.describe Deal, type: :model do
               let(:deal) { Fabricate :deal }
               let(:commission) { Fabricate :commission, :deal => deal }
               before do
-                deal.agent_split_percentage = 70
+                commission.agent_split_percentage = 70
               end
               
               it 'should distribute 50 percent' do
