@@ -79,7 +79,7 @@ class Commission < ApplicationRecord
     "leased rent, annual rent, lease start date & term, tenant commission"
   end
   
-  def broke?
+  def brokered?
     ((co_exclusive_agency? && co_exclusive_agency_name.present?) ||
     (exclusive_agency? && exclusive_agency_name.present?) ||
     (exclusive_agent? && exclusive_agent_name.present? && exclusive_agent_office.present?) ||
@@ -90,7 +90,7 @@ class Commission < ApplicationRecord
     (direct_deal?))
   end
   
-  def broke_title
+  def brokered_title
     "deal source fully specified"
   end
   

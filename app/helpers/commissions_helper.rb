@@ -17,6 +17,7 @@ module CommissionsHelper
       content_tag(:td, link_to_name(commission.deal, :unit_number)),
       content_tag(:td, link_to_name(commission.landlord)),
       content_tag(:td, commission.zip_code),
+      content_tag(:td, completion_state(commission)),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, link_to('Show', commission)),
       content_tag(:td, link_to('Edit', edit_commission_path(commission))),
@@ -54,6 +55,20 @@ module CommissionsHelper
     pdf.bounding_box spot, :width => 10, :height => 10 do
       pdf.draw_text 'X', :at => [1, 1], :size => 12 if attribute
       pdf.stroke_bounds
+    end
+  end
+  
+  def completion_state commission
+    content_tag :div, :id =>"commission_data_status" do
+      content_tag(:a, 'located', :title => commission.located_title, :class => "commission_status #{commission.located? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'populated', :title => commission.populated_title, :class => "commission_status #{commission.populated? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'known', :title => commission.known_title, :class => "commission_status #{commission.known? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'owned', :title => commission.owned_title, :class => "commission_status #{commission.owned? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'dealt', :title => commission.dealt_title, :class => "commission_status #{commission.dealt? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'brokered', :title => commission.brokered_title, :class => "commission_status #{commission.brokered? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'referred', :title => commission.referred_title, :class => "commission_status #{commission.referred? ? 'satisfied' : 'unsatisfied'} optional") +
+      content_tag(:a, 'cut', :title => commission.cut_title, :class => "commission_status #{commission.cut? ? 'satisfied' : 'unsatisfied'}") +
+      content_tag(:a, 'detailed', :title => commission.detailed_title, :class => "commission_status #{commission.detailed? ? 'satisfied' : 'unsatisfied'}")
     end
   end
 end

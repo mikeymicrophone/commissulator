@@ -5,18 +5,7 @@
 </div>
 
 
-<div id="commission_data_status">
-  <a title="<%= @commission.located_title %>" class="commission_status <%= @commission.located? ? 'satisfied' : 'unsatisfied' %>">located?</a>
-  <a title="<%= @commission.populated_title %>" class="commission_status <%= @commission.populated? ? 'satisfied' : 'unsatisfied' %>">populated?</a>
-  <a title="<%= @commission.known_title %>" class="commission_status <%= @commission.known? ? 'satisfied' : 'unsatisfied' %>">known?</a>
-  <a title="<%= @commission.owned_title %>" class="commission_status <%= @commission.owned? ? 'satisfied' : 'unsatisfied' %>">owned?</a>
-  <a title="<%= @commission.dealt_title %>" class="commission_status <%= @commission.dealt? ? 'satisfied' : 'unsatisfied' %>">dealt?</a>
-  <a title="<%= @commission.broke_title %>" class="commission_status <%= @commission.broke? ? 'satisfied' : 'unsatisfied' %>">broke?</a>
-  <a title="<%= @commission.referred_title %>" class="commission_status <%= @commission.referred? ? 'satisfied' : 'unsatisfied' %> optional">referred?</a>
-  <a title="<%= @commission.cut_title %>" class="commission_status <%= @commission.cut? ? 'satisfied' : 'unsatisfied' %>">cut?</a>
-  <a title="<%= @commission.detailed_title %>" class="commission_status <%= @commission.detailed? ? 'satisfied' : 'unsatisfied' %>">detailed?</a>
-</div>
-
+<%= completion_state @commission %>
 
 <div class="commission_vitals">
   <div id="lessees">
