@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#commissions_table {
+  .commission_removal {
+    display: none;
+  }
+}
+
 input#commission_apartment_number {
   width: 30px;
 }

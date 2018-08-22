@@ -68,6 +68,7 @@ class CommissionsController < ApplicationController
   def destroy
     @commission.destroy
     respond_to do |format|
+      format.js
       format.html { redirect_to commissions_url, notice: 'Commission was destroyed.' }
       format.json { head :no_content }
     end

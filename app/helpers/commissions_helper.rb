@@ -19,12 +19,15 @@ module CommissionsHelper
       content_tag(:td, commission.zip_code),
       content_tag(:td, completion_state(commission)),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
+      content_tag(:td, link_to('Remove', commission, :method => :delete, :remote => true), :class => 'commission_removal'),
       content_tag(:td, link_to('Show', commission)),
       content_tag(:td, link_to('Edit', edit_commission_path(commission))),
       content_tag(:td, link_to('Print', commission_path(commission, :format => :pdf)))
     ]
     
-    content_tag :tr, columns.join.html_safe
+    content_tag_for :tr, commission do
+      columns.join.html_safe
+    end
   end
   
   def fabricate_commission_link fabricator, opts = {}

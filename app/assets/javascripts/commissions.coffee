@@ -28,3 +28,6 @@ $(document).on 'turbolinks:load', ->
     unneeded_boxes = boxes.not(needed_boxes).get()
     # $(unneeded_boxes).each((index, box) => $(box).prop('disabled', selected_box.prop('checked')))
     $(needed_boxes).each((index, box) => $(box).css('border-color', 'green'))
+
+  $('#commission_control').on 'click', '#commission_removal_link', (click_event) ->
+    $('.commission_removal').show()
