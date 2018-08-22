@@ -19,26 +19,25 @@
     <%= form.hidden_field :landlord_id %>
     <%= form.hidden_field :agent_id %>
 
-    <div class="commission_form_row">
-      <%= form.label :branch_name %>
-      <%= form.text_field :branch_name %>
+    <div class="commission_section">
+      <div class="commission_form_row">
+        <%= form.label :branch_name %>
+        <%= form.text_field :branch_name %>
     
-      <%= form.label :request_date %>
-      <%= form.date_select :request_date %>
-    
-      <%= form.label :intranet_deal_number %>
-      <%= form.number_field :intranet_deal_number, :disabled => true %>
-    </div>
+        <%= form.label :request_date %>
+        <%= form.date_select :request_date %>
+      </div>
   
-    <div class="commission_form_row">
-      <%= form.label :agent_name %>
-      <%= form.text_field :agent_name %>
+      <div class="commission_form_row">
+        <%= form.label :agent_name %>
+        <%= form.text_field :agent_name %>
     
-      <%= form.label :agent_split_percentage %>
-      <%= form.text_field :agent_split_percentage, :placeholder => '(leave blank)' %>
+        <%= form.label :agent_split_percentage %>
+        <%= form.text_field :agent_split_percentage, :placeholder => '(leave blank)' %>
     
-      <%= form.label :copy_of_lease %>
-      <%= form.check_box :copy_of_lease %>
+        <%= form.label :copy_of_lease %>
+        <%= form.check_box :copy_of_lease %>
+      </div>
     </div>
     
     <div class="commission_form_row" id="commission_participant_adder">
@@ -49,31 +48,34 @@
       <% end %>
     </div>
   
-    <div class="commission_form_row">
-      <%= form.label :property_address %>
-      <%= form.text_field :property_address %>
+    <div class="commission_section">
+      <div class="commission_form_row">
+        <%= form.label :property_address %>
+        <%= form.text_field :property_address %>
     
-      <%= form.label :apartment_number %>
-      <%= form.text_field :apartment_number %>
+        <%= form.label :apartment_number %>
+        <%= form.text_field :apartment_number %>
     
-      <%= form.label :zip_code %>
-      <%= form.text_field :zip_code %>
-    </div>
+        <%= form.label :zip_code %>
+        <%= form.text_field :zip_code %>
+      </div>
   
-    <div class="commission_form_row">
-      <%= form.label :bedrooms %>
-      <%= form.text_field :bedrooms %>
+      <div class="commission_form_row">
+        <%= form.label :bedrooms %>
+        <%= form.text_field :bedrooms %>
     
-      <%= form.label :square_footage %>
-      <%= form.text_field :square_footage %>
+        <%= form.label :square_footage %>
+        <%= form.text_field :square_footage %>
     
-      <%= form.label :property_type %>
-      <%= form.text_field :property_type %>
+        <%= form.label :property_type %>
+        <%= form.text_field :property_type %>
     
-      <%= form.label :new_development %>
-      <%= form.check_box :new_development %>
+        <%= form.label :new_development %>
+        <%= form.check_box :new_development %>
+      </div>
     </div>
-    <div id="tenant_info_area">
+      
+    <div id="tenant_info_area" class="commission_section">
       <div class="commission_form_row">
         <%= form.label :tenant_name %>
         <%= text_field_tag :'commission[tenant_name][]', commission.tenant_name&.first %>
@@ -116,87 +118,92 @@
       <%= link_to 'Add a Tenant', add_tenant_to_commissions_path(commission), :remote => true, :id => 'tenant_add_link' %>
     </div>
   
-    <div class="commission_form_row">
-      <%= form.label :landlord_name %>
-      <%= form.text_field :landlord_name %>
+    <div class="commission_section">
+      <div class="commission_form_row">
+        <%= form.label :landlord_name %>
+        <%= form.text_field :landlord_name %>
     
-      <%= form.label :landlord_email %>
-      <%= form.email_field :landlord_email %>
+        <%= form.label :landlord_email %>
+        <%= form.email_field :landlord_email %>
     
-      <%= form.label :landlord_phone_number %>
-      <%= form.text_field :landlord_phone_number %>
+        <%= form.label :landlord_phone_number %>
+        <%= form.text_field :landlord_phone_number %>
+      </div>
+  
+      <div class="commission_form_row">
+        <%= form.label :lease_start_date %>
+        <%= form.date_select :lease_start_date %>
+    
+        <%= form.label :lease_term %>
+        <%= form.text_field :lease_term %>
+      </div>
+  
+      <div class="commission_form_row">
+        <%= form.label :lease_sign_date %>
+        <%= form.date_select :lease_sign_date %>
+    
+        <%= form.label :approval_date %>
+        <%= form.date_select :approval_date %>
+      </div>
     </div>
   
-    <div class="commission_form_row">
-      <%= form.label :lease_start_date %>
-      <%= form.date_select :lease_start_date %>
+    <div class="commission_section">
+      <div class="commission_form_row">
+        <%= form.label :listed_monthly_rent %>
+        <%= form.text_field :listed_monthly_rent, :class => 'rent', :placeholder => '[derived]' %>
     
-      <%= form.label :lease_term %>
-      <%= form.text_field :lease_term %>
-    </div>
+        <%= form.label :leased_monthly_rent %>
+        <%= form.text_field :leased_monthly_rent, :class => 'rent', :placeholder => '[fill this]', :onblur => 'derive()' %>
+    
+        <%= form.label :annualized_rent %>
+        <%= form.text_field :annualized_rent, :class => 'rent', :value => number_with_precision(commission.annualized_rent, :precision => 2), :placeholder => '[derived]' %>
+      </div>
   
-    <div class="commission_form_row">
-      <%= form.label :lease_sign_date %>
-      <%= form.date_select :lease_sign_date %>
+      <div class="commission_form_row">
+        <%= form.label :commission_fee_percentage %>
+        <%= form.text_field :commission_fee_percentage, :placeholder => '[derived]' %>
     
-      <%= form.label :approval_date %>
-      <%= form.date_select :approval_date %>
-    </div>
+        <%= form.label :total_commission %>
+        <%= form.text_field :total_commission, :class => 'commission', :value => number_with_precision(commission.total_commission, :precision => 2), :placeholder => '[derived]' %>
+    
+        <%= form.label :citi_commission %>
+        <%= form.text_field :citi_commission, :class => 'commission', :value => number_with_precision(commission.citi_commission, :precision => 2), :placeholder => '[derived]' %>
+    
+        <%= form.label :co_broke_commission %>
+        <%= form.text_field :co_broke_commission, :class => 'commission', :value => number_with_precision(commission.co_broke_commission, :precision => 2), :placeholder => '[derived]' %>
+      </div>
   
-    <div class="commission_form_row">
-      <%= form.label :listed_monthly_rent %>
-      <%= form.text_field :listed_monthly_rent, :class => 'rent', :placeholder => '[derived]' %>
+      <div class="commission_form_row">
+        <%= form.label :owner_pay_commission %>
+        <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2), :placeholder => '[fill this]' %>
     
-      <%= form.label :leased_monthly_rent %>
-      <%= form.text_field :leased_monthly_rent, :class => 'rent', :placeholder => '[fill this]', :onblur => 'derive()' %>
+        <%= form.label :listing_side_commission %>
+        <%= form.text_field :listing_side_commission, :class => 'commission', :value => number_with_precision(commission.listing_side_commission, :precision => 2), :placeholder => '[fill this]' %>
     
-      <%= form.label :annualized_rent %>
-      <%= form.text_field :annualized_rent, :class => 'rent', :value => number_with_precision(commission.annualized_rent, :precision => 2), :placeholder => '[derived]' %>
-    </div>
+        <%= form.label :tenant_side_commission %>
+        <%= form.text_field :tenant_side_commission, :class => 'commission', :value => number_with_precision(commission.tenant_side_commission, :precision => 2), :placeholder => '[derived]' %>
+      </div>
   
-    <div class="commission_form_row">
-      <%= form.label :commission_fee_percentage %>
-      <%= form.text_field :commission_fee_percentage, :placeholder => '[derived]' %>
-    
-      <%= form.label :total_commission %>
-      <%= form.text_field :total_commission, :class => 'commission', :value => number_with_precision(commission.total_commission, :precision => 2), :placeholder => '[derived]' %>
-    
-      <%= form.label :citi_commission %>
-      <%= form.text_field :citi_commission, :class => 'commission', :value => number_with_precision(commission.citi_commission, :precision => 2), :placeholder => '[derived]' %>
-    
-      <%= form.label :co_broke_commission %>
-      <%= form.text_field :co_broke_commission, :class => 'commission', :value => number_with_precision(commission.co_broke_commission, :precision => 2), :placeholder => '[derived]' %>
-    </div>
-  
-    <div class="commission_form_row">
-      <%= form.label :owner_pay_commission %>
-      <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2), :placeholder => '[fill this]' %>
-    
-      <%= form.label :listing_side_commission %>
-      <%= form.text_field :listing_side_commission, :class => 'commission', :value => number_with_precision(commission.listing_side_commission, :precision => 2), :placeholder => '[fill this]' %>
-    
-      <%= form.label :tenant_side_commission %>
-      <%= form.text_field :tenant_side_commission, :class => 'commission', :value => number_with_precision(commission.tenant_side_commission, :precision => 2), :placeholder => '[derived]' %>
-    </div>
-  
-    <div class="commission_form_row">
-      <%= form.label :reason_for_fee_reduction %>
-      <%= form.text_field :reason_for_fee_reduction %>
+      <div class="commission_form_row">
+        <%= form.label :reason_for_fee_reduction %>
+        <%= form.text_field :reason_for_fee_reduction %>
       
-      <%= check_box_tag :suspend_calculation %>
-      <%= label_tag :suspend_calculation, 'Pause calculation of figures (so you may override)' %>
+        <%= check_box_tag :suspend_calculation %>
+        <%= label_tag :suspend_calculation, 'Pause calculation of figures (so you may override)' %>
+      </div>
     </div>
     
-    <div class="commission_form_row">
-      <%= form.label :landlord_source %>
-      <%= form.text_field :landlord_source %>
+    <div class="commission_section">
+      <div class="commission_form_row">
+        <%= form.label :landlord_source %>
+        <%= form.text_field :landlord_source %>
     
-      <%= form.label :tenant_source %>
-      <%= form.text_field :tenant_source %>
-    </div>
+        <%= form.label :tenant_source %>
+        <%= form.text_field :tenant_source %>
+      </div>
   
-    <%= render :partial => 'affiliate_checkboxes', :locals => {:form => form} %>
-
+      <%= render :partial => 'affiliate_checkboxes', :locals => {:form => form} %>
+    </div>
     <div class="actions">
       <%= form.submit %>
     </div>
