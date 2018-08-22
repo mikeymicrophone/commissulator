@@ -83,3 +83,20 @@ input.commission {
 .commission_financials {
   
 }
+
+#commission_data_status {
+  .commission_status {
+    display: inline-block;
+    &.satisfied {
+      color: #23AD23;
+    }
+    
+    &.unsatisfied {
+      color: #C62F0C;
+      
+      &.optional {
+        color: #2363F2;
+      }
+    }
+  }
+}

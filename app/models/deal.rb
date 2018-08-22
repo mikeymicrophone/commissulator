@@ -75,6 +75,10 @@ class Deal < ApplicationRecord
     close_rate * distributable_commission
   end
   
+  def staffed?
+    participants.leading.present? && participants.interviewing.present? && participants.showing.present? && participants.closing.present?
+  end
+  
   def rate_for role
     send "#{role}_rate"
   end
