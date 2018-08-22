@@ -40,6 +40,7 @@ class AssistantsController < ApplicationController
   def update
     respond_to do |format|
       if @assistant.update assistant_params
+        format.js
         format.html { redirect_to @assistant, notice: 'Assistant was successfully updated.' }
         format.json { render :show, status: :ok, location: @assistant }
       else
