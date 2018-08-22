@@ -1,7 +1,7 @@
 <div id="checkboxes">
   <%= content_tag :table, :id => 'broker_checkboxes' do %>
     <%= content_tag :tr, :id => 'co_exclusive' do %>
-      <%= content_tag :td, form.check_box(:co_exclusive_agency) %>
+      <%= content_tag :td, form.check_box(:co_exclusive_agency, :class => 'co_broke') %>
       <%= content_tag :td, form.label(:co_exclusive_agency, 'Co-Exclusive Agency') %>
       <%= content_tag :td, form.text_field(:co_exclusive_agency_name) %>
       <%= content_tag :td, form.check_box(:citi_habitats_agent) %>
@@ -12,7 +12,7 @@
     <% end %>
     
     <%= content_tag :tr, :id => 'exclusive_agency' do %>
-      <%= content_tag :td, form.check_box(:exclusive_agency) %>
+      <%= content_tag :td, form.check_box(:exclusive_agency, :class => 'co_broke') %>
       <%= content_tag :td, form.label(:exclusive_agency, 'Exclusive Agency') %>
       <%= content_tag :td, form.text_field(:exclusive_agency_name) %>
       <%= content_tag :td, form.check_box(:corcoran_agent) %>
@@ -23,7 +23,7 @@
     <% end %>
     
     <%= content_tag :tr, :id => 'exclusive_agent' do %>
-      <%= content_tag :td, form.check_box(:exclusive_agent) %>
+      <%= content_tag :td, form.check_box(:exclusive_agent, :class => 'co_broke') %>
       <%= content_tag :td, form.label(:exclusive_agent, 'Exclusive Agent') %>
       <%= content_tag :td, form.text_field(:exclusive_agent_name) %>
       <%= content_tag :td, form.check_box(:co_broke_company) %>
@@ -36,7 +36,9 @@
     <%= content_tag :tr do %>
       <%= content_tag :td, form.check_box(:open_listing) %>
       <%= content_tag :td, form.label(:open_listing, 'Open Listing') %>
-      <%= content_tag :td, form.check_box(:direct_deal) + form.label(:direct_deal, 'Direct Deal') %>
+      <%= tag :td %>
+      <%= content_tag :td, form.check_box(:direct_deal) %>
+      <%= content_tag :td, form.label(:direct_deal, 'Direct Deal') %>
     <% end %>
   <% end %>
 
@@ -47,53 +49,53 @@
 
   <%= content_tag :table, :id => 'referrer_checkboxes' do %>
     <%= content_tag :tr, :id => 'citi_habitats_agent' do %>
-      <%= content_tag :td, form.check_box(:citi_habitats_referral_agent) %>
+      <%= content_tag :td, form.check_box(:citi_habitats_referral_agent, :class => 'referral') %>
       <%= content_tag :td, form.label(:citi_habitats_referral_agent, 'Citi Habitats Agent') %>
       <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_name) %>
       <%= content_tag :td, form.label(:citi_habitats_referral_agent_office, 'Office', :class => 'office') %>
       <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_office) %>
       <%= content_tag :td, form.label(:citi_habitats_referral_agent_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_amount, :onblur => 'referral(this)') %>
+      <%= content_tag :td, form.text_field(:citi_habitats_referral_agent_amount, :class => 'referral', :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'corcoran_agent' do %>
-      <%= content_tag :td, form.check_box(:corcoran_referral_agent) %>
+      <%= content_tag :td, form.check_box(:corcoran_referral_agent, :class => 'referral') %>
       <%= content_tag :td, form.label(:corcoran_referral_agent, 'Corcoran Agent') %>
       <%= content_tag :td, form.text_field(:corcoran_referral_agent_name) %>
       <%= content_tag :td, form.label(:corcoran_referral_agent_office, 'Office', :class => 'office') %>
       <%= content_tag :td, form.text_field(:corcoran_referral_agent_office) %>
       <%= content_tag :td, form.label(:corcoran_referral_agent_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:corcoran_referral_agent_amount, :onblur => 'referral(this)') %>
+      <%= content_tag :td, form.text_field(:corcoran_referral_agent_amount, :class => 'referral', :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'outside_agency' do %>
-      <%= content_tag :td, form.check_box(:outside_agency) %>
+      <%= content_tag :td, form.check_box(:outside_agency, :class => 'referral') %>
       <%= content_tag :td, form.label(:outside_agency, 'Outside Agency') %>
       <%= content_tag :td, form.text_field(:outside_agency_name) %>
       <%= tag :td %>
       <%= tag :td %>
       <%= content_tag :td, form.label(:outside_agency_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:outside_agency_amount, :onblur => 'referral(this)') %>
+      <%= content_tag :td, form.text_field(:outside_agency_amount, :class => 'referral', :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'relocation_referral' do %>
-      <%= content_tag :td, form.check_box(:relocation_referral) %>
+      <%= content_tag :td, form.check_box(:relocation_referral, :class => 'referral') %>
       <%= content_tag :td, form.label(:relocation_referral, 'Relocation Referral') %>
       <%= content_tag :td, form.text_field(:relocation_referral_name) %>
       <%= tag :td %>
       <%= tag :td %>
       <%= content_tag :td, form.label(:relocation_referral_amount, 'Referral Amount') %>
-      <%= content_tag :td, form.text_field(:relocation_referral_amount, :onblur => 'referral(this)') %>
+      <%= content_tag :td, form.text_field(:relocation_referral_amount, :class => 'referral', :onblur => 'referral(this)') %>
     <% end %>
     
     <%= content_tag :tr, :id => 'listing_fee' do %>
-      <%= content_tag :td, form.check_box(:listing_fee) %>
+      <%= content_tag :td, form.check_box(:listing_fee, :class => 'listing_fee') %>
       <%= content_tag :td, form.label(:listing_fee, 'Listing Fee') %>
       <%= content_tag :td, form.text_field(:listing_fee_name) %>
       <%= content_tag :td, form.label(:listing_fee_office, 'Office', :class => 'office') %>
       <%= content_tag :td, form.text_field(:listing_fee_office) %>
       <%= content_tag :td, form.label(:listing_fee_percentage, 'Listing Fee %') %>
-      <%= content_tag :td, form.text_field(:listing_fee_percentage) %>
+      <%= content_tag :td, form.text_field(:listing_fee_percentage, :class => 'referral') %>
     <% end %>
   <% end %>
 </div>
