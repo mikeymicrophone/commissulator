@@ -83,14 +83,14 @@
     <%= content_tag :div, @deal.inbound_commission, :class => 'deal_portion' %>
   </div>
   
-  <div>
-    <%= content_tag :div, 'Cuts', :class => 'deal_portion_description' %>
-  </div>
-  
   <% if current_agent.admin? %>
     <div>
-      <%= content_tag :div, 'House Cut', :class => 'deal_portion_description' %>
+      <%= content_tag :div, 'Citi Habitats Cut', :class => 'deal_portion_description' %>
       <%= content_tag :div, @deal.house_cut, :class => 'deal_portion' %>
+    </div>
+    <div>
+      <%= content_tag :div, 'Citipads Closeout', :class => 'deal_portion_description' %>
+      <%= content_tag :div, @deal.closeout, :class => 'deal_portion' %>
     </div>
     <div>
       <%= content_tag :div, 'Agent Payment', :class => 'deal_portion_description' %>
@@ -109,5 +109,9 @@
     <% end %>
   <% end %>
 <% end %>
+
+<div class="payout">
+  <%= @deal.commission.subcommission_payout_summary %>
+</div>
 
 <%= participant_adder @deal %>
