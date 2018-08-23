@@ -1,6 +1,7 @@
 class Assistant < ApplicationRecord
   has_many :participants, :dependent => :destroy
   enum :status => [:active, :inactive]
+  attr_default :status, 'active'
   
   scope :active, lambda { where :status => 'active' }
   scope :recent, lambda { order 'updated_at desc'}
