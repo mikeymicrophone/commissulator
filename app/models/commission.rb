@@ -20,7 +20,7 @@ class Commission < ApplicationRecord
   attr_default :reason_for_fee_reduction, 'N/A'
   
   before_save :trim_tenants
-  before_create :meet_landlord
+  before_create :meet_landlord, :name_agent
   after_save :address_deal
   
   acts_as_paranoid
@@ -37,6 +37,10 @@ class Commission < ApplicationRecord
   
   def meet_landlord
     self.landlord = Landlord.where(:name => landlord_name).take || Landlord.where(:name => landlord_name, :email => landlord_email, :phone_number => landlord_phone_number).create
+  end
+  
+  def name_agent
+    self.agent_name = agent.name
   end
   
   def address_deal

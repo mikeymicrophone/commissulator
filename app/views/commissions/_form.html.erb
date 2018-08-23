@@ -17,7 +17,6 @@
     <% end %>
     <%= form.hidden_field :deal_id %>
     <%= form.hidden_field :landlord_id %>
-    <%= form.hidden_field :agent_id %>
 
     <div class="commission_section">
       <div class="commission_form_row">
@@ -29,8 +28,8 @@
       </div>
   
       <div class="commission_form_row">
-        <%= form.label :agent_name %>
-        <%= form.text_field :agent_name %>
+        <%= form.label :agent_id %>
+        <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :name, @commission.agent_id) %>
     
         <%= form.label :agent_split_percentage %>
         <%= form.text_field :agent_split_percentage, :placeholder => '(leave blank)' %>

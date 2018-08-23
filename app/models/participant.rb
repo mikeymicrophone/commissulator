@@ -18,7 +18,7 @@ class Participant < ApplicationRecord
   end
   
   def payout
-    deal.rate_for(role) * deal.distributable_commission(rate) / deal.participants.where(:role => role).count if deal.commission
+    deal.rate_for(role) * deal.distributable_commission(rate) / deal.participants.where(:role => role).count + adjustment.to_d if deal.commission
   end
   
   def infer_rate

@@ -102,7 +102,7 @@ prawn_document do |pdf|
     pdf.draw_text @commission.corcoran_agent_office, :at => [column_positions[9] + indent, row_positions[1] + clearance] # if @commission.exclusive_agency
   end
   
-  pdf.text "Referral Payment:   <u>#{pad @commission.referral_payment, 20} </u>_", :inline_format => true, :size => 12
+  pdf.text "Referral Payment:   <u>#{pad rounded(@commission.referral_payment), 17} </u>", :inline_format => true, :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 450, 500]
@@ -166,7 +166,7 @@ prawn_document do |pdf|
     
     pdf.draw_text "Listing Fee %", :at => [column_positions[7], row_positions[4]]
     pdf.stroke_line [column_positions[8], row_positions[4]], [column_positions[9], row_positions[4]]
-    pdf.draw_text @commission.listing_fee_percentage, :at => [column_positions[8] + indent, row_positions[4] + clearance] # if @commission.listing_fee
+    pdf.draw_text rounded(@commission.listing_fee_percentage), :at => [column_positions[8] + indent, row_positions[4] + clearance] # if @commission.listing_fee
   end
   
   

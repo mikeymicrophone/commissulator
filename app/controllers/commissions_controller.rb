@@ -29,6 +29,7 @@ class CommissionsController < ApplicationController
     else
       @commission = Commission.new :deal => Deal.create(:agent => current_agent)
       @deal = @commission.deal
+      @commission.agent = Agent.where(:first_name => 'Desmond').take
     end
   end
   
@@ -97,7 +98,7 @@ class CommissionsController < ApplicationController
     end
 
     def commission_params
-      params.require(:commission).permit(:branch_name, {:tenant_name => []}, {:tenant_email => []}, {:tenant_phone_number => []}, :landlord_name, :landlord_email, :landlord_phone_number,
+      params.require(:commission).permit(:agent_id, :branch_name, {:tenant_name => []}, {:tenant_email => []}, {:tenant_phone_number => []}, :landlord_name, :landlord_email, :landlord_phone_number,
         :agent_name, :bedrooms, :property_type, :new_development, :lease_start_date, :lease_term, :square_footage,
         :listed_monthly_rent, :landlord_source, :tenant_source, :intranet_deal_number, :copy_of_lease, :property_address, :apartment_number,
         :zip_code, :lease_sign_date, :approval_date, :leased_monthly_rent, :commission_fee_percentage, :agent_split_percentage,

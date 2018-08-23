@@ -73,6 +73,6 @@ class ParticipantsController < ApplicationController
     end
 
     def participant_params
-      params.require(:participant).permit :deal_id, :assistant_id, :role, :status, :rate
+      params.require(:participant).permit :deal_id, :assistant_id, :role, :status, :rate, :adjustment
     end
 end

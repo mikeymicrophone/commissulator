@@ -17,20 +17,8 @@ class Deal < ApplicationRecord
   
   def subcommissions
     package = Hash.new 0
-    participants.leading.each do |participant|
-      package[participant.assistant.name] += lead_commission(participant) / participants.leading.count
-    end
-    
-    participants.interviewing.each do |participant|
-      package[participant.assistant.name] += interview_commission(participant) / participants.interviewing.count
-    end
-    
-    participants.showing.each do |participant|
-      package[participant.assistant.name] += show_commission(participant) / participants.showing.count
-    end
-    
-    participants.closing.each do |participant|
-      package[participant.assistant.name] += close_commission(participant) / participants.closing.count
+    participants.each do |participant|
+      package[participant.assistant.name] += participant.payout
     end
     
     package[agent.name] += agent_commission
@@ -54,7 +42,7 @@ class Deal < ApplicationRecord
   end
   
   def distributable_commission participation_rate
-    participation_rate.percent_of (inbound_commission - referral_payment)
+    participation_rate.percent_of(inbound_commission - referral_payment)
   end
   
   def distributed_commission
@@ -67,22 +55,6 @@ class Deal < ApplicationRecord
   
   def listing_fee
     (commission.listing_fee_percentage / BigDecimal(100)) *  inbound_commission if commission&.listing_fee?
-  end
-  
-  def lead_commission participant
-    lead_rate * distributable_commission(participant.rate)
-  end
-  
-  def interview_commission participant
-    interview_rate * distributable_commission(participant.rate)
-  end
-  
-  def show_commission participant
-    show_rate * distributable_commission(participant.rate)
-  end
-  
-  def close_commission participant
-    close_rate * distributable_commission(participant.rate)
   end
   
   def staffed?
