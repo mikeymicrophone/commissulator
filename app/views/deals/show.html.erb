@@ -65,7 +65,7 @@
   
   <div>
     <%= content_tag :div, 'Listing Fee', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{@deal.listing_fee}", :class => 'deal_portion' %>
+    <%= content_tag :div, "#{@deal.listing_fee}", :class => 'deal_portion' %>
   </div>
   
   <div>
@@ -104,7 +104,7 @@
   <%= div_for participant do %>
     <%= content_tag :div, linked_name(participant), :class => 'deal_portion_description' %>
     <%= content_tag :div, :class => 'deal_portion' do %>
-      <%= @deal.distributable_commission %> * <%= @deal.rate_for participant.role %> = 
+      <%= @deal.distributable_commission participant.rate %> * <%= @deal.rate_for participant.role %> = 
       <%= number_to_currency(participant.payout) %>
     <% end %>
   <% end %>

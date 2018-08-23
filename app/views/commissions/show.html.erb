@@ -1,5 +1,6 @@
 <div class="tools">
   <%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
+  <%= link_to 'Deal', @commission.deal %> |
   <%= link_to 'Edit', edit_commission_path(@commission) %> |
   <%= link_to 'Back', commissions_path %>
 </div>
