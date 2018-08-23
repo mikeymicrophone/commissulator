@@ -1,0 +1,13 @@
+<p>
+  <%= link_to 'paperwork', edit_commission_url(@commission) %>
+</p>
+
+<p>
+  <%= link_to 'printout', commission_url(@commission, :format => :pdf) %>
+</p>
+
+<p>
+  <%= link_to 'structure', deal_url(@commission.deal) %>
+</p>
+
+Have a super day!

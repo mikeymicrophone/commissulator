@@ -1,5 +1,5 @@
 class CommissionsController < ApplicationController
-  before_action :set_commission, only: [:show, :edit, :update, :destroy]
+  before_action :set_commission, only: [:show, :edit, :update, :submit, :destroy]
 
   def index
     @commissions = if params[:landlord_id]
@@ -80,6 +80,10 @@ class CommissionsController < ApplicationController
       format.html { redirect_to commissions_url, notice: 'Commission was destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def submit
+    DistributionMailer.with(:commission => @commission).submit_to_senior.deliver
   end
 
   def fabricate

@@ -22,7 +22,8 @@ module CommissionsHelper
       content_tag(:td, link_to('Remove', commission, :method => :delete, :remote => true), :class => 'commission_removal'),
       content_tag(:td, link_to('Show', commission)),
       content_tag(:td, link_to('Edit', edit_commission_path(commission))),
-      content_tag(:td, link_to('Print', commission_path(commission, :format => :pdf)))
+      content_tag(:td, link_to('Print', commission_path(commission, :format => :pdf))),
+      content_tag(:td, link_to('Submit', submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for)))
     ]
     
     content_tag_for :tr, commission do
