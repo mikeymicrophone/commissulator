@@ -11,11 +11,13 @@ module ApplicationHelper
   def main_nav
     link_to('New Commission!', new_commission_path, :id => 'new_commission_link') +
     link_to('Commissions', commissions_path, :id => 'commissions_link') +
-    link_to('Deals', deals_path) +
-    link_to('Assistants', assistants_path) +
-    link_to('Participants', participants_path) +
-    link_to('Agents', agents_path) +
-    link_to('Landlords', landlords_path)
+    if current_agent.admin?
+      link_to('Deals', deals_path) +
+      link_to('Assistants', assistants_path) +
+      link_to('Participants', participants_path) +
+      link_to('Agents', agents_path) +
+      link_to('Landlords', landlords_path)
+    end
   end
   
   def penthouse_nav
