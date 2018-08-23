@@ -21,6 +21,7 @@ class Commission < ApplicationRecord
   
   before_save :trim_tenants
   before_create :meet_landlord
+  after_save :address_deal
   
   acts_as_paranoid
   
@@ -36,6 +37,12 @@ class Commission < ApplicationRecord
   
   def meet_landlord
     self.landlord = Landlord.where(:name => landlord_name).take || Landlord.where(:name => landlord_name, :email => landlord_email, :phone_number => landlord_phone_number).create
+  end
+  
+  def address_deal
+    deal.address = property_address
+    deal.unit_number = apartment_number
+    deal.save
   end
   
   def boolean_display attribute
