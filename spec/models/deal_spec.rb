@@ -8,7 +8,8 @@ RSpec.describe Deal, type: :model do
           context 'with open listing' do
             context 'with direct deal' do
               let(:deal) { Fabricate :deal }
-              let(:commission) { Fabricate :commission, :deal => deal }
+              let(:commission) { Fabricate :commission, :deal => deal, :co_broke => false }
+              
               before do
                 commission.agent_split_percentage = 70
               end

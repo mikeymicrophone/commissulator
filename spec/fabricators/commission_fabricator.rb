@@ -43,6 +43,8 @@ Fabricator :commission do
   co_broke_commission { |attrs| attrs[:co_broke] ? attrs[:total_commission] * 0.5 : 0 }
   citi_commission { |attrs| attrs[:total_commission] - attrs[:co_broke_commission] }
   
+  open_listing { !attrs[:co_broke] }
+  
   # intranet_deal_number { rand(342342423) }
   before_validation { |commission, transients| add_tenants_to commission }
 end
