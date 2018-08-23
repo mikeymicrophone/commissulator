@@ -44,8 +44,12 @@ class CommissionsController < ApplicationController
 
     respond_to do |format|
       if @commission.save
-        format.html { redirect_to @commission, notice: 'Commission was created.' }
-        format.json { render :show, status: :created, location: @commission }
+        if params[:commit] == 'Save and Print'
+          format.html { redirect_to commission_path(@commission, :format => :pdf) }
+        else
+          format.html { redirect_to @commission, notice: 'Commission was created.' }
+          format.json { render :show, status: :created, location: @commission }
+        end
       else
         format.html { render :new }
         format.json { render json: @commission.errors, status: :unprocessable_entity }
@@ -56,8 +60,12 @@ class CommissionsController < ApplicationController
   def update
     respond_to do |format|
       if @commission.update commission_params
-        format.html { redirect_to @commission, notice: 'Commission was updated.' }
-        format.json { render :show, status: :ok, location: @commission }
+        if params[:commit] == 'Save and Print'
+          format.html { redirect_to commission_path(@commission, :format => :pdf) }
+        else
+          format.html { redirect_to @commission, notice: 'Commission was updated.' }
+          format.json { render :show, status: :ok, location: @commission }
+        end
       else
         format.html { render :edit }
         format.json { render json: @commission.errors, status: :unprocessable_entity }
