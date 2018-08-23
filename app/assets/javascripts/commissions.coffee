@@ -65,8 +65,8 @@ update_inbound = ->
     $('#commission_co_broke_commission').val co_broke_commission().toFixed 2
     base = commission() - co_broke_commission()
     final = base
-    if listing_fee_owed()
-      final = final * ((100 - $('#commission_listing_fee_percentage').val()) / 100)
+    # if listing_fee_owed()
+    #   final = final * ((100 - $('#commission_listing_fee_percentage').val()) / 100)
     if referral_owed()
       final = final - $('#commission_referral_payment').val()
     $('#commission_citi_commission').val final.toFixed 2
