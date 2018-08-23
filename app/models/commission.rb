@@ -70,11 +70,11 @@ class Commission < ApplicationRecord
   end
   
   def known?
-    property_type.present? && square_footage.present? && bedrooms.present? && listed_monthly_rent.present?
+    property_type.present? && bedrooms.present? && listed_monthly_rent.present?
   end
   
   def known_title
-    "property type, footage, bedrooms, and listed rent"
+    "property type, bedrooms, and listed rent"
   end
   
   def owned?
