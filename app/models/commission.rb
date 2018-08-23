@@ -25,7 +25,7 @@ class Commission < ApplicationRecord
   acts_as_paranoid
   
   def subcommission_payout_summary
-    deal.subcommissions.inject("#{agent_name}: #{number_to_currency deal.agent_commission}") { |summary, award| summary + "   #{award.first}: #{number_to_currency award.last}" }
+    deal.subcommissions.inject("") { |summary, award| summary + "   #{award.first}: #{number_to_currency award.last}" }
   end
   
   def trim_tenants

@@ -32,6 +32,8 @@ class Deal < ApplicationRecord
     participants.closing.each do |participant|
       package[participant.assistant.name] += close_commission / participants.closing.count
     end
+    
+    package[agent.name] += agent_commission
     package
   end
   
