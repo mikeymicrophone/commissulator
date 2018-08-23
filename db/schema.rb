@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_22_143204) do
+ActiveRecord::Schema.define(version: 2018_08_23_170701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_08_22_143204) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "rate"
   end
 
   create_table "commissions", force: :cascade do |t|
@@ -162,6 +163,7 @@ ActiveRecord::Schema.define(version: 2018_08_22_143204) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "rate"
     t.index ["assistant_id"], name: "index_participants_on_assistant_id"
     t.index ["deal_id"], name: "index_participants_on_deal_id"
   end

@@ -18,19 +18,19 @@ class Deal < ApplicationRecord
   def subcommissions
     package = Hash.new 0
     participants.leading.each do |participant|
-      package[participant.assistant.name] += lead_commission / participants.leading.count
+      package[participant.assistant.name] += lead_commission(participant) / participants.leading.count
     end
     
     participants.interviewing.each do |participant|
-      package[participant.assistant.name] += interview_commission / participants.interviewing.count
+      package[participant.assistant.name] += interview_commission(participant) / participants.interviewing.count
     end
     
     participants.showing.each do |participant|
-      package[participant.assistant.name] += show_commission / participants.showing.count
+      package[participant.assistant.name] += show_commission(participant) / participants.showing.count
     end
     
     participants.closing.each do |participant|
-      package[participant.assistant.name] += close_commission / participants.closing.count
+      package[participant.assistant.name] += close_commission(participant) / participants.closing.count
     end
     
     package[agent.name] += agent_commission
@@ -46,11 +46,15 @@ class Deal < ApplicationRecord
   end
   
   def agent_commission
-    (inbound_commission - referral_payment) * (agent_split_percentage.to_d / BigDecimal(100)) - distributable_commission
+    (inbound_commission - referral_payment) * (agent_split_percentage.to_d / BigDecimal(100)) - distributed_commission
   end
   
-  def distributable_commission
-    (inbound_commission - referral_payment) * 0.5
+  def distributable_commission participation_rate
+    participation_rate.percent_of (inbound_commission - referral_payment)
+  end
+  
+  def distributed_commission
+    participants.inject(0) { |sum, participant| sum + participant.payout }
   end
   
   def referral_payment
@@ -61,20 +65,20 @@ class Deal < ApplicationRecord
     (commission.listing_fee_percentage / BigDecimal(100)) *  inbound_commission if commission&.listing_fee?
   end
   
-  def lead_commission
-    lead_rate * distributable_commission
+  def lead_commission participant
+    lead_rate * distributable_commission(participant.rate)
   end
   
-  def interview_commission
-    interview_rate * distributable_commission
+  def interview_commission participant
+    interview_rate * distributable_commission(participant.rate)
   end
   
-  def show_commission
-    show_rate * distributable_commission
+  def show_commission participant
+    show_rate * distributable_commission(participant.rate)
   end
   
-  def close_commission
-    close_rate * distributable_commission
+  def close_commission participant
+    close_rate * distributable_commission(participant.rate)
   end
   
   def staffed?

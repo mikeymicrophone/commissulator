@@ -3,6 +3,9 @@ class Participant < ApplicationRecord
   belongs_to :assistant
   enum :role => [:lead, :interview, :show, :close]
   enum :status => [:preliminary, :active, :removed]
+  attr_default :rate, 50
+  
+  before_create :infer_rate
   
   scope :leading, lambda { where :role => :lead }
   scope :interviewing, lambda { where :role => :interview }
@@ -15,6 +18,10 @@ class Participant < ApplicationRecord
   end
   
   def payout
-    deal.rate_for(role) * deal.distributable_commission / deal.participants.where(:role => role).count if deal.commission
+    deal.rate_for(role) * deal.distributable_commission(rate) / deal.participants.where(:role => role).count if deal.commission
+  end
+  
+  def infer_rate
+    self.rate = assistant.rate
   end
 end

@@ -30,6 +30,11 @@
     <%= form.label :status %>
     <%= form.select :status, Participant.statuses.keys %>
   </div>
+  
+  <div class="field">
+    <%= form.label :rate %>
+    <%= form.text_field :rate %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

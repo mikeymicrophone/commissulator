@@ -58,8 +58,6 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  # DELETE /participants/1
-  # DELETE /participants/1.json
   def destroy
     @participant.destroy
     respond_to do |format|
@@ -75,6 +73,6 @@ class ParticipantsController < ApplicationController
     end
 
     def participant_params
-      params.require(:participant).permit :deal_id, :assistant_id, :role, :status
+      params.require(:participant).permit :deal_id, :assistant_id, :role, :status, :rate
     end
 end
