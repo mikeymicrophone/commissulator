@@ -52,13 +52,13 @@ co_broke_commission = ->
     0
 
 co_broke_owed = ->
-  $('input:checkbox.co_broke:checked')[0]
+  $('input:checkbox.co_broke:checked').exists()
 
 listing_fee_owed = ->
-  $('input:checkbox.listing_fee:checked')[0]
+  $('input:checkbox.listing_fee:checked').exists()
 
 referral_owed = ->
-  $('input:checkbox.referral:checked')[0]
+  $('input:checkbox.referral:checked').exists()
 
 update_inbound = ->
   unless calculation_suspended()
@@ -72,7 +72,7 @@ update_inbound = ->
     $('#commission_citi_commission').val final.toFixed 2
 
 @referral = (field)->
-  if $('#commission_referral_payment').val() == ''
+  unless calculation_suspended()
     referral_fee = parseFloat($(field).val())
     $('#commission_referral_payment').val referral_fee.toFixed 2
 
@@ -84,6 +84,7 @@ $(document).on 'turbolinks:load', ->
     update_inbound()
   
   $('#checkboxes').on 'blur', 'input.referral', ->
+    referral(this)
     update_inbound()
   
   $('#checkboxes').on 'change', 'input:checkbox', (change_event) ->
