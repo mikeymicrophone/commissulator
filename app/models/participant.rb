@@ -22,6 +22,6 @@ class Participant < ApplicationRecord
   end
   
   def infer_rate
-    self.rate = assistant.rate
+    self.rate = assistant.rate if assistant.rate.present?
   end
 end
