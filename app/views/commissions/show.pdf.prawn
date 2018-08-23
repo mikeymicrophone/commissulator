@@ -7,7 +7,7 @@ prawn_document do |pdf|
   pdf.text "Branch Name   <u>#{pad @commission.branch_name}</u>   Request Date   <u>#{pad @commission.request_date.strftime("%-m/%-d/%Y"), 22}</u>   Intranet Deal Number <u>#{pad ''}</u>", :inline_format => true
   pdf.text "Agent Name   <u>#{pad @commission.agent_name, 30}</u>     Agent Split %    <u>#{pad rounded(@sensitive ? nil : @commission.agent_split_percentage), 7}</u>   Copy of Lease   <u>#{pad @commission.boolean_display :copy_of_lease}</u>", :inline_format => true
   pdf.text "Property Address   <u>#{pad @commission.property_address, 36}</u>   Apt #   <u>#{pad @commission.apartment_number, 7}</u>   Zip Code   <u>#{pad @commission.zip_code, 8}</u>", :inline_format => true
-  pdf.text "Bedrooms   <u>#{pad rounded(@commission.bedrooms), 8}</u>   SQ Footage   <u>#{pad @commission.square_footage}</u>   Property Type   <u>#{pad @commission.property_type}</u>   New Development   <u>#{pad @commission.new_development, 3}</u>", :inline_format => true
+  pdf.text "Bedrooms   <u>#{pad rounded(@commission.bedrooms), 8}</u>   SQ Footage   <u>#{pad @commission.square_footage}</u>   Property Type   <u>#{pad @commission.property_type}</u>   New Development   <u>#{pad @commission.boolean_display(@commission.new_development), 3}</u>", :inline_format => true
   
   pdf.draw_text "Tenant Name(s)", :at => [0, 615]
   pdf.draw_text "Tenant Email(s)", :at => [170, 615]
