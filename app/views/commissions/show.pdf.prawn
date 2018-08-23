@@ -102,7 +102,7 @@ prawn_document do |pdf|
     pdf.draw_text @commission.corcoran_agent_office, :at => [column_positions[9] + indent, row_positions[1] + clearance] # if @commission.exclusive_agency
   end
   
-  pdf.text "Referral Payment:   <u>                              </u>_", :inline_format => true, :size => 12
+  pdf.text "Referral Payment:   <u>#{pad @commission.referral_payment, 20} </u>_", :inline_format => true, :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 450, 500]
@@ -184,6 +184,9 @@ prawn_document do |pdf|
     
     pdf.draw_text "Requested by: ______________________         _________________________      Date: _____________", :at => [20, 60], :size => 10
     pdf.draw_text "Approved by:  ______________________         _________________________      Date: _____________", :at => [20, 20], :size => 10
+    
+    pdf.draw_text @commission.agent&.name, :at => [100, 61], :size => 12
+    pdf.draw_text Date.today.strftime("%-m/%-d/%y"), :at => [440, 61], :size => 11
     
     pdf.draw_text "Print Agent Name", :at => [120, 50], :size => 7, :style => :bold_italic
     pdf.draw_text "Print Branch Manager Name", :at => [100, 10], :size => 7, :style => :bold_italic
