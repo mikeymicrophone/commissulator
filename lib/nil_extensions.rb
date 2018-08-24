@@ -6,4 +6,8 @@ class NilClass
   def percent_of n
     0.percent_of n
   end
+  
+  def changed?
+    false
+  end
 end

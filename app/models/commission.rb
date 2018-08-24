@@ -1,4 +1,5 @@
 include ActionView::Helpers::NumberHelper
+Tenant = Struct.new :name, :email, :phone
 class Commission < ApplicationRecord
   belongs_to :deal, :optional => true
   belongs_to :agent, :optional => true
@@ -47,6 +48,30 @@ class Commission < ApplicationRecord
     deal.address = property_address
     deal.unit_number = apartment_number
     deal.save
+  end
+  
+  def tenants
+    group = []
+    tenant_name.each_with_index do |name, index|
+      tenant = Tenant.new name, tenant_email[index], tenant_phone_number[index]
+      group << tenant
+    end
+    group
+  end
+  
+  def fub_people
+    people = []
+    tenants.each do |tenant|
+      first_name = tenant.name.split.first
+      last_name = tenant.name.split[1..-1].join ' '
+      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :emails => [{:value => tenant.email}], :phones => [{:value => tenant.phone}]
+      people << person
+    end
+    people
+  end
+  
+  def follow_up
+    fub_people.each &:save
   end
   
   def boolean_display attribute
