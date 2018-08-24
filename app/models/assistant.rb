@@ -9,4 +9,12 @@ class Assistant < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+  
+  def payable_name
+    if payable_first_name.present?
+      "#{payable_first_name} #{payable_last_name}"
+    else
+      name
+    end
+  end
 end

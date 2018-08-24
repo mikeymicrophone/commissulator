@@ -18,7 +18,7 @@ class Deal < ApplicationRecord
   def subcommissions
     package = Hash.new 0
     participants.each do |participant|
-      package[participant.assistant.name] += participant.payout
+      package[participant.assistant.payable_name] += participant.payout
     end
     
     package[agent.name] += agent_commission

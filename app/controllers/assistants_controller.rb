@@ -64,6 +64,6 @@ class AssistantsController < ApplicationController
     end
 
     def assistant_params
-      params.require(:assistant).permit(:first_name, :last_name, :phone_number, :email, :status, :rate)
+      params.require(:assistant).permit(:first_name, :last_name, :phone_number, :email, :status, :rate, :payable_first_name, :payable_last_name)
     end
 end
