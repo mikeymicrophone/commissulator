@@ -27,9 +27,9 @@ class CommissionsController < ApplicationController
     if @deal
       @commission = Commission.new :deal => @deal, :property_address => @deal.address, :apartment_number => @deal.unit_number
     else
-      @commission = Commission.new :deal => Deal.create(:agent => current_agent)
-      @deal = @commission.deal
-      @commission.agent = Agent.where(:first_name => 'Desmond').take
+      @agent = Agent.where(:first_name => 'Desmond').take
+      @deal = Deal.create(:agent => @agent)
+      @commission = Commission.new :deal => @deal, :agent => @agent
     end
   end
   

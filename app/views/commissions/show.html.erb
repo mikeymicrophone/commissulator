@@ -50,8 +50,6 @@
   <span>Citi commission:</span><%= number_to_round_currency @commission.citi_commission %><br>
   <span>total commission:</span><%= number_to_round_currency @commission.total_commission %><br>
   <span>commission fee %:</span><%= rounded @commission.commission_fee_percentage %><br>
-
-  <span>agent_split_percentage:</span><%= rounded @commission.agent_split_percentage %><br>
 </div>
 <%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
 <%= link_to 'Edit', edit_commission_path(@commission) %> |
