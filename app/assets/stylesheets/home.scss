@@ -1,13 +1,10 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 #sign_out_link, #profile_link {
   float: right;
   padding-right: 10px;
 }
 
 #top_floor_penthouse_navigation {
+  margin-left: 60px;
   font-family: 'Fjalla One';
   
   a {
@@ -25,6 +22,43 @@
     &#new_commission_link {
       font-size: 1.2em;
       color: #D30026;
+    }
+  }
+}
+
+#landing {
+  padding-top: 100px;
+  section {
+    padding: 30px;
+    font-size: 2em;
+    font-style: italic;
+    text-align: center;
+  }
+}
+
+.devise {
+  text-align: center;
+  font-size: 1.13em;
+  
+  form {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    
+    input {
+      width: 200px;
+    
+      &.devise_check {
+        width: 30px;
+      }
+    }
+  }
+  
+  #devise_links {
+    a {
+      display: block;
+      padding: 8px;
+      font-style: italic;
+      font-size: 0.8em;
     }
   }
 }

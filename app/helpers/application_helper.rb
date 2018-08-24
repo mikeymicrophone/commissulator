@@ -27,7 +27,7 @@ module ApplicationHelper
         link_to('Sign Out', destroy_agent_session_path, :method => :delete, :id => 'sign_out_link') +
         link_to('Me', edit_agent_path(current_agent), :id => 'profile_link')
       else
-        link_to('Authenticate', new_agent_session_path) +
+        link_to('Log In', new_agent_session_path) +
         link_to('Register', new_agent_registration_path)
       end
     end

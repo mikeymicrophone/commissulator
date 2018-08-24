@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.select :status, Participant.statuses.keys %>
+    <%= form.select :status, Participant.statuses.keys, :include_blank => true %>
   </div>
   
   <div class="field">
