@@ -17,7 +17,6 @@ module CommissionsHelper
       content_tag(:td, link_to_name(commission.deal, :unit_number)),
       content_tag(:td, link_to_name(commission.landlord)),
       content_tag(:td, commission.zip_code),
-      content_tag(:td, completion_state(commission)),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, link_to('Remove', commission, :method => :delete, :remote => true), :class => 'commission_removal'),
       content_tag(:td, link_to('Show', commission)),
