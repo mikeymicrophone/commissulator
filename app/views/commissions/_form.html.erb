@@ -131,7 +131,7 @@
   
       <div class="commission_form_row">
         <%= form.label :lease_start_date %>
-        <%= form.date_select :lease_start_date %>
+        <%= form.date_select :lease_start_date, :order => [:month, :day, :year], :use_month_numbers => true, :start_year => Date.today.last_year.year, :end_year => Date.today.next_year.year %>
     
         <%= form.label :lease_term %>
         <%= form.text_field :lease_term %>
@@ -139,10 +139,10 @@
   
       <div class="commission_form_row">
         <%= form.label :lease_sign_date %>
-        <%= form.date_select :lease_sign_date %>
+        <%= form.date_select :lease_sign_date, :order => [:month, :day, :year], :use_month_numbers => true, :start_year => Date.today.last_year.year, :end_year => Date.today.next_year.year %>
     
         <%= form.label :approval_date %>
-        <%= form.date_select :approval_date %>
+        <%= form.date_select :approval_date, :order => [:month, :day, :year], :use_month_numbers => true, :start_year => Date.today.last_year.year, :end_year => Date.today.next_year.year %>
       </div>
     </div>
   
