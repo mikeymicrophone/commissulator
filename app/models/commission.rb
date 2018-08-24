@@ -24,6 +24,9 @@ class Commission < ApplicationRecord
   before_create :meet_landlord, :name_agent
   after_save :address_deal
   
+  enum :follow_up => [:unsubmitted, :submitted]
+  attr_default :follow_up, :unsubmitted
+  
   acts_as_paranoid
   
   def subcommission_payout_summary
@@ -70,8 +73,14 @@ class Commission < ApplicationRecord
     people
   end
   
-  def follow_up
-    fub_people.each &:save
+  def follow_up!
+    fub_people.each do |person|
+      begin
+        person.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
+    end
   end
   
   def boolean_display attribute

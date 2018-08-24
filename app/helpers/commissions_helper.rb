@@ -26,6 +26,10 @@ module CommissionsHelper
       content_tag(:td, link_to('Submit', submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for)))
     ]
     
+    if commission.follow_up == 'unsubmitted'
+      columns << content_tag(:td, link_to('Follow Up', follow_up_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :follow_up_for)))
+    end
+    
     content_tag_for :tr, commission do
       columns.join.html_safe
     end

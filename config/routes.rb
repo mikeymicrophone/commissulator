@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     member do
       put :submit
+      put :follow_up
     end
   end
   resources :participants

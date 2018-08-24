@@ -1,5 +1,5 @@
 class CommissionsController < ApplicationController
-  before_action :set_commission, only: [:show, :edit, :update, :submit, :destroy]
+  before_action :set_commission, only: [:show, :edit, :update, :submit, :follow_up, :destroy]
 
   def index
     @commissions = if params[:landlord_id]
@@ -34,6 +34,11 @@ class CommissionsController < ApplicationController
   end
   
   def add_tenant_to
+  end
+  
+  def follow_up
+    @commission.follow_up!
+    @commission.update_attribute :follow_up, :submitted
   end
 
   def edit
