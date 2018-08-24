@@ -1,7 +1,7 @@
 class Participant < ApplicationRecord
   belongs_to :deal
   belongs_to :assistant
-  enum :role => [:lead, :interview, :show, :close]
+  enum :role => [:lead, :interview, :show, :close, :custom]
   enum :status => [:preliminary, :active, :removed]
   attr_default :rate, 50
   

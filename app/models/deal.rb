@@ -80,4 +80,8 @@ class Deal < ApplicationRecord
   def close_rate
     0.25
   end
+  
+  def custom_rate
+    0
+  end
 end
