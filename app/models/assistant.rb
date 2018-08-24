@@ -1,5 +1,5 @@
 class Assistant < ApplicationRecord
-  has_many :participants, :dependent => :destroy
+  has_many :participants, :dependent => :nullify
   enum :status => [:active, :inactive]
   attr_default :status, 'active'
   

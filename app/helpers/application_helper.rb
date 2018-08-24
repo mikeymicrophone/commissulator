@@ -9,7 +9,7 @@ module ApplicationHelper
   end
   
   def main_nav
-    link_to('New Commission!', new_commission_path, :id => 'new_commission_link') +
+    link_to('New Commission', new_commission_path, :id => 'new_commission_link') +
     link_to('Commissions', commissions_path, :id => 'commissions_link') +
     if current_agent.admin?
       link_to('Deals', deals_path) +

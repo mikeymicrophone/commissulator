@@ -2,6 +2,14 @@
   <%= participant_adder @deal %>
   <%= assistant_adder @deal %>
 </div>
+<div class="commission_form_row" id="commission_participant_adder">
+  <% @deal.participants.chrono.each do |participant| %>
+    <%= div_for participant do %>
+      <%= linked_name(participant) %>
+    <% end %>
+  <% end %>
+</div>
+
 <div id="commission_editor" data-turbolinks-permanent>
   <%= form_with(model: commission, local: true) do |form| %>
     <% if commission.errors.any? %>
@@ -39,14 +47,6 @@
       </div>
     </div>
     
-    <div class="commission_form_row" id="commission_participant_adder">
-      <% @deal.participants.chrono.each do |participant| %>
-        <%= div_for participant do %>
-          <%= linked_name(participant) %>
-        <% end %>
-      <% end %>
-    </div>
-  
     <div class="commission_section">
       <div class="commission_form_row">
         <%= form.label :property_address %>
