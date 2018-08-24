@@ -44,7 +44,9 @@ module CommissionsHelper
   def rounded number
     number = number.to_d
     cents = number.round(2).to_s[-2..-1]
-    if cents == '00' || cents == '.0'
+    if number == BigDecimal(0)
+      ''
+    elsif cents == '00' || cents == '.0'
       number.round
     else
       number.round 2
