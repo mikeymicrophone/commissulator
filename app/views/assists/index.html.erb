@@ -1,4 +1,4 @@
-<h1>Participants</h1>
+<h1>Assists</h1>
 <header>These objects track who played a role in each deal.</header>
 
 <table>
@@ -15,24 +15,24 @@
   </thead>
 
   <tbody>
-    <% @participants.each do |participant| %>
+    <% @assists.each do |assist| %>
       <tr>
-        <td><%= link_to_name participant.deal, :reference %></td>
-        <td><%= link_to_name participant.assistant %></td>
-        <td><%= number_to_currency participant.payout %></td>
-        <td><%= participation_in participant.role %></td>
-        <td><%= participant.status %></td>
-        <td><%= participant.updated_at.to_s :descriptive %></td>
-        <td><%= link_to 'Show', participant %></td>
-        <td><%= link_to 'Edit', edit_participant_path(participant) %></td>
+        <td><%= link_to_name assist.deal, :reference %></td>
+        <td><%= link_to_name assist.assistant %></td>
+        <td><%= number_to_currency assist.payout %></td>
+        <td><%= participation_in assist.role %></td>
+        <td><%= assist.status %></td>
+        <td><%= assist.updated_at.to_s :descriptive %></td>
+        <td><%= link_to 'Show', assist %></td>
+        <td><%= link_to 'Edit', edit_assist_path(assist) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= paginate @participants %>
+<%= paginate @assists %>
 
 <br>
 
 <div class="tools">
-  <%= link_to 'New Participant', new_participant_path %>
+  <%= link_to 'New Assist', new_assist_path %>
 </div>

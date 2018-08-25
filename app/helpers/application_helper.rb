@@ -14,7 +14,7 @@ module ApplicationHelper
     if current_agent.admin?
       link_to('Deals', deals_path) +
       link_to('Assistants', assistants_path) +
-      link_to('Participants', participants_path) +
+      link_to('Assists', assists_path) +
       link_to('Agents', agents_path) +
       link_to('Landlords', landlords_path)
     end

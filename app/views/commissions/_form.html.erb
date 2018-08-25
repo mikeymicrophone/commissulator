@@ -1,11 +1,11 @@
 <div id="commission_participation_registration" data-turbolinks-permanent>
-  <%= participant_adder @deal %>
+  <%= assist_adder @deal %>
   <%= assistant_adder @deal %>
 </div>
-<div class="commission_form_row" id="commission_participant_adder">
-  <% @deal.participants.chrono.each do |participant| %>
-    <%= div_for participant do %>
-      <%= linked_name(participant) %>
+<div class="commission_form_row" id="commission_assist_adder">
+  <% @deal.assists.chrono.each do |assist| %>
+    <%= div_for assist do %>
+      <%= linked_name(assist) %>
     <% end %>
   <% end %>
 </div>

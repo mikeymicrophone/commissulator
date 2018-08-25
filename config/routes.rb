@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       put :follow_up
     end
   end
-  resources :participants
+  resources :assists
   resources :assistants
   resources :deals do
     collection do

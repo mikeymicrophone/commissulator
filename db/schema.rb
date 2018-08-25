@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_24_215754) do
+ActiveRecord::Schema.define(version: 2018_08_25_152308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,19 @@ ActiveRecord::Schema.define(version: 2018_08_24_215754) do
     t.decimal "rate"
     t.string "payable_first_name"
     t.string "payable_last_name"
+  end
+
+  create_table "assists", force: :cascade do |t|
+    t.bigint "deal_id"
+    t.bigint "assistant_id"
+    t.integer "role"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "rate"
+    t.decimal "adjustment"
+    t.index ["assistant_id"], name: "index_assists_on_assistant_id"
+    t.index ["deal_id"], name: "index_assists_on_deal_id"
   end
 
   create_table "commissions", force: :cascade do |t|
@@ -159,19 +172,6 @@ ActiveRecord::Schema.define(version: 2018_08_24_215754) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "participants", force: :cascade do |t|
-    t.bigint "deal_id"
-    t.bigint "assistant_id"
-    t.integer "role"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "rate"
-    t.decimal "adjustment"
-    t.index ["assistant_id"], name: "index_participants_on_assistant_id"
-    t.index ["deal_id"], name: "index_participants_on_deal_id"
-  end
-
-  add_foreign_key "participants", "assistants"
-  add_foreign_key "participants", "deals"
+  add_foreign_key "assists", "assistants"
+  add_foreign_key "assists", "deals"
 end

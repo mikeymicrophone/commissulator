@@ -159,7 +159,7 @@ class Commission < ApplicationRecord
   end
   
   def cut_title
-    "commission fee %, deal participants, co-broke and referral payment amounts if applicable"
+    "commission fee %, deal assists, co-broke and referral payment amounts if applicable"
   end
   
   def detailed?

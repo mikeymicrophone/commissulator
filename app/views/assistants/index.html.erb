@@ -21,7 +21,7 @@
         <td><%= assistant.phone_number %></td>
         <td><%= assistant.email %></td>
         <td><%= assistant.status %></td>
-        <td><%= link_to pluralize(assistant.participants.count, 'assist'), participants_path(:filtered_attribute => :assistant_id, :filter_value => assistant.id) %></td>
+        <td><%= link_to pluralize(assistant.assists.count, 'assist'), assists_path(:filtered_attribute => :assistant_id, :filter_value => assistant.id) %></td>
         <td><%= link_to 'Show', assistant %></td>
         <td><%= link_to 'Edit', edit_assistant_path(assistant) %></td>
         <td><%= activation_of assistant %></td>

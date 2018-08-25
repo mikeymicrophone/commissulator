@@ -26,10 +26,10 @@
 </p>
 
 <table>
-  <% @assistant.participants.each do |participant| %>
+  <% @assistant.assists.each do |assist| %>
     <tr>
-      <td><%= link_to_name participant %></td>
-      <td><%= number_to_currency participant.payout %></td>
+      <td><%= link_to_name assist %></td>
+      <td><%= number_to_currency assist.payout %></td>
     </tr>
   <% end %>
 </table>
