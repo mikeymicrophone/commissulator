@@ -5,7 +5,7 @@
 <div class="commission_form_row" id="commission_assist_adder">
   <% @deal.assists.chrono.each do |assist| %>
     <%= div_for assist do %>
-      <%= linked_name(assist) %>
+      <%= linked_name assist %>
     <% end %>
   <% end %>
 </div>
