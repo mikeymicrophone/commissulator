@@ -83,7 +83,7 @@ $(document).on 'turbolinks:load', ->
   $('#checkboxes').on 'change', 'input:checkbox', ->
     update_inbound()
   
-  $('#checkboxes').on 'blur', 'input.referral', ->
+  $('#checkboxes').on 'blur', 'input.referral_amount', ->
     referral(this)
     update_inbound()
   
@@ -102,4 +102,6 @@ $(document).on 'turbolinks:load', ->
   
   $('#commission_participation_registration').on 'change', '#assist_assistant_id', ->
     if $('#assist_assistant_id').val() == 'Add Name'
-      $('#assistant_adder').css 'display', 'block'
+      $('#assistant_adder').slideToggle(700)
+    else
+      $('#assistant_adder').slideToggle(1300)

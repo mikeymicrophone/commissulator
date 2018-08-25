@@ -19,6 +19,10 @@
   border-radius: 9px;
 }
 
+input#agent_split_percentage_entry {
+  width: 15px;
+}
+
 input#commission_apartment_number {
   width: 30px;
 }
@@ -43,7 +47,7 @@ input.rent {
   width: 56px;
 }
 
-input.commission, input.referral, input.listing {
+input.commission, input.referral_amount, input.listing {
   width: 60px;
 }
 
