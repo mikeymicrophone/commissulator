@@ -17,4 +17,8 @@ class Assistant < ApplicationRecord
       name
     end
   end
+  
+  def distinct_payable_name
+    "#{payable_first_name} #{payable_last_name}"
+  end
 end

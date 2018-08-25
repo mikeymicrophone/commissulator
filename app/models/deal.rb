@@ -1,6 +1,7 @@
 class Deal < ApplicationRecord
   belongs_to :agent
   has_many :participants, :dependent => :destroy
+  has_many :assistants, :through => :participants
   has_one :commission
   delegate :annualized_rent, :agent_split_percentage, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
   
@@ -59,6 +60,21 @@ class Deal < ApplicationRecord
   
   def staffed?
     participants.leading.present? && participants.interviewing.present? && participants.showing.present? && participants.closing.present?
+  end
+  
+  def special_efforts
+    participants.group_by(&:assistant_id).select do |assistant_id, participants|
+      participants.reject(&:new_record?).inject(0) { |sum, participant| sum + participant.role_rate } > 0.45
+    end
+  end
+  
+  def special_payments
+    special_efforts.map do |assistant_id, participants|
+      assistant = Assistant.find assistant_id
+      if assistants.map(&:name).append(agent.name).include? assistant.distinct_payable_name
+        "Special payment from #{assistant.payable_name} to #{assistant.name}: #{number_to_currency 10.percent_of closeout}"
+      end
+    end
   end
   
   def rate_for role

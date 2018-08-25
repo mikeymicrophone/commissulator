@@ -53,4 +53,8 @@ module DealsHelper
     end
     link_to "Fabricate #{opts[:status]} deal", fabricate_deals_path(:deal => opts), :method => :post, :remote => true unless Rails.env.production?
   end
+  
+  def special_payments_on deal
+    deal.special_payments.join
+  end
 end
