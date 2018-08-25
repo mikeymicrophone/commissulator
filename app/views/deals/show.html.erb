@@ -92,6 +92,7 @@
       <%= content_tag :div, 'Citipads Closeout', :class => 'deal_portion_description' %>
       <%= content_tag :div, rounded(@deal.closeout), :class => 'deal_portion' %>
     </div>
+    
     <div>
       <%= content_tag :div, 'Agent Payment', :class => 'deal_portion_description' %>
       <%= content_tag :div, rounded(@deal.agent_commission), :class => 'deal_portion' %>
@@ -104,11 +105,15 @@
   <%= div_for assist do %>
     <%= content_tag :div, linked_name(assist), :class => 'deal_portion_description' %>
     <%= content_tag :div, :class => 'deal_portion' do %>
-      <%= @deal.distributable_commission assist.rate %> * <%= @deal.rate_for assist.role %> <%= rounded assist.adjustment %>
+      <%= rounded @deal.distributable_commission assist.rate %> * <%= assist.role_rate %>
+      <%= '+ ' if assist.adjustment.to_d > 0 %>
+      <%= rounded assist.adjustment %>
+      <%= '+ ' if assist.expense.to_d > 0 %>
+      <%= rounded assist.expense %>
       <% if @deal.assists.where(:role => assist.role).count > 1 %>
         / <%= @deal.assists.where(:role => assist.role).count %>
       <% end %>
-      =<%= number_to_currency(assist.payout) %>
+      = <%= number_to_currency(assist.payout) %>
     <% end %>
   <% end %>
 <% end %>

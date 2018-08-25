@@ -18,7 +18,7 @@ class Assist < ApplicationRecord
   end
   
   def payout
-    role_rate * deal.distributable_commission(rate) / deal.assists.where(:role => role).count + adjustment.to_d if deal.commission
+    role_rate * deal.distributable_commission(rate) / deal.assists.where(:role => role).count + adjustment.to_d + expense.to_d if deal.commission
   end
   
   def role_rate

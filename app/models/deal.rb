@@ -43,11 +43,15 @@ class Deal < ApplicationRecord
   end
   
   def distributable_commission participation_rate
-    participation_rate.percent_of(inbound_commission - referral_payment)
+    participation_rate.percent_of(inbound_commission - referral_payment - expenses)
   end
   
   def distributed_commission
     assists.inject(0) { |sum, assist| sum + assist.payout.to_d }
+  end
+  
+  def expenses
+    assists.sum :expense
   end
   
   def referral_payment
