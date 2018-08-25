@@ -1,12 +1,8 @@
 <div class="tools">
-  <%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
-  <%= link_to 'Deal', @commission.deal %> |
-  <%= link_to 'Edit', edit_commission_path(@commission) %> |
-  <%= link_to 'Back', commissions_path %>
+  <%= link_to 'Printout', commission_path(@commission, :format => :pdf) %> |
+  <%= link_to 'Paperwork', edit_commission_path(@commission) %> |
+  <%= link_to 'Breakdown', @commission.deal %>
 </div>
-
-
-<%= completion_state @commission %>
 
 <div class="commission_vitals">
   <div id="lessees">
@@ -22,7 +18,7 @@
   
   <div id="lease_basics">
     <%= number_to_round_currency @commission.leased_monthly_rent %><br>
-    <%= @commission.lease_start_date.strftime("%-m/%-d/%Y") %>-<%= @commission.lease_term %>
+    <%= @commission.lease_start_date.strftime("%-m/%-d/%y") %> + <%= @commission.lease_term %>
   </div>
   
   <div id="property_description">
@@ -36,21 +32,32 @@
 </div>
 
 <div class="commission_financials">
-  <span>lease_sign_date:</span><%= @commission.lease_sign_date.strftime("%-m/%-d/%Y") %><br>
-  <span>approval_date:</span><%= @commission.approval_date.strftime("%-m/%-d/%Y") %><br>
-  <span>request_date:</span><%= @commission.request_date.strftime("%-m/%-d/%Y") %><br>
+  <span>Annualized Rent:</span> <%= number_to_round_currency @commission.annualized_rent %><br>
+  <span>Total Commission:</span> <%= number_to_round_currency @commission.total_commission %>
+  (<%= rounded @commission.commission_fee_percentage %>%)<br>
+  
+  <% if @commission.owner_pay_commission > 0 %>
+    <span>Owner Pay Commission:</span> <%= number_to_round_currency @commission.owner_pay_commission %><br>
+  <% end %>
+  
+  <% if @commission.listing_side_commission > 0 %>
+    <span>Listing Side Commission:</span> <%= number_to_round_currency @commission.listing_side_commission %><br>
+  <% end %>
+  
+  <span>Tenant Side Commission:</span> <%= number_to_round_currency @commission.tenant_side_commission %><br>
 
-  <span>annualized_rent:</span><%= @commission.annualized_rent %><br>
-
-  <span>owner pay commission:</span><%= number_to_round_currency @commission.owner_pay_commission %><br>
-  <span>listing side commission:</span><%= number_to_round_currency @commission.listing_side_commission %><br>
-  <span>tenant side commission:</span><%= number_to_round_currency @commission.tenant_side_commission %><br>
-
-  <span>co-broke commission:</span><%= number_to_round_currency @commission.co_broke_commission %><br>
-  <span>Citi commission:</span><%= number_to_round_currency @commission.citi_commission %><br>
-  <span>total commission:</span><%= number_to_round_currency @commission.total_commission %><br>
-  <span>commission fee %:</span><%= rounded @commission.commission_fee_percentage %><br>
+  <% if @commission.co_broke_commission > 0 %>
+    <span>Co-Broke Commission:</span> <%= number_to_round_currency @commission.co_broke_commission %><br>
+  <% end %>
+  <span>Citi Commission:</span> <%= number_to_round_currency @commission.citi_commission %><br>
+  
+  <span>Lease signed on </span> <%= @commission.lease_sign_date.strftime("%-m/%-d") %><span> and approved</span> <%= @commission.approval_date.strftime("%-m/%-d") %>.
+  <span>Commission requested</span> <%= @commission.request_date.strftime("%-m/%-d") %>.<br>
+  <%= completion_state @commission %>
 </div>
-<%= link_to 'Print', commission_path(@commission, :format => :pdf) %> |
-<%= link_to 'Edit', edit_commission_path(@commission) %> |
-<%= link_to 'Back', commissions_path %>
+
+<div class="tools">
+  <%= link_to 'Printout', commission_path(@commission, :format => :pdf) %> |
+  <%= link_to 'Paperwork', edit_commission_path(@commission) %> |
+  <%= link_to 'Breakdown', @commission.deal %>
+</div>

@@ -1,4 +1,7 @@
-<%= link_to '[edit]', edit_deal_path(@deal) %>
+<div class="tools">
+  <%= link_to 'Paperwork', edit_commission_path(@deal.commission) %>
+  <%= link_to 'Input', edit_deal_path(@deal) %>
+</div>
 
 <% if @deal.name.present? %>
   <p>
@@ -9,7 +12,6 @@
 <p>
   <strong>Commission:</strong>
   <%= number_to_currency @deal.commission&.total_commission %><br>
-  <%= link_to 'Paperwork', @deal.commission %>
 </p>
 
 <p>

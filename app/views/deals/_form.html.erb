@@ -33,7 +33,7 @@
   
   <div class="field">
     <%= form.label :status %>
-    <%= form.select :status, Deal.statuses.keys %>
+    <%= form.select :status, Deal.statuses.keys, :include_blank => true %>
   </div>
 
   <div class="actions">
