@@ -99,3 +99,7 @@ $(document).on 'turbolinks:load', ->
 
   $('#commission_control').on 'click', '#commission_removal_link', (click_event) ->
     $('.commission_removal').slideToggle(1200)
+  
+  $('#commission_participation_registration').on 'change', '#assist_assistant_id', ->
+    if $('#assist_assistant_id').val() == 'Add Name'
+      $('#assistant_adder').css 'display', 'block'

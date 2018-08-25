@@ -50,6 +50,10 @@ input.commission, input.referral, input.listing {
 #commission_participation_registration {
   text-align: center;
   padding-bottom: 10px;
+  
+  #assistant_adder {
+    display: none;
+  }
 }
 
 #checkboxes {

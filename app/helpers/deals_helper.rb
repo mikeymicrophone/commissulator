@@ -2,10 +2,14 @@ module DealsHelper
   def assist_adder deal
     form_with :model => deal.assists.new, :id => 'assist_adder' do |form|
       form.select(:role, Assist.roles.keys) +
-      form.select(:assistant_id, options_from_collection_for_select(Assistant.recent.active, :id, :name)) +
+      form.select(:assistant_id, options_from_collection_for_select(Assistant.recent.active, :id, :name) + (add_name_option)) +
       form.submit(:add) +
       form.hidden_field(:deal_id)
     end
+  end
+  
+  def add_name_option
+    content_tag :option, 'Add Name', :id => 'add_name_option', :value => 'Add Name'
   end
   
   def status_clicker_for deal
