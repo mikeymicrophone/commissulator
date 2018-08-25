@@ -29,18 +29,18 @@
 <div id="deal_payout_breakdown">
   <div>
     <%= content_tag :div, 'Rent', :class => 'deal_portion_description' %>
-    <%= content_tag :div, @deal.annualized_rent, :class => 'deal_portion' %>
+    <%= content_tag :div, rounded(@deal.annualized_rent), :class => 'deal_portion' %>
   </div>
   <%= tag.hr %>
   
   <div>
     <%= content_tag :div, 'Tenant Commission', :class => 'deal_portion_description' %>
-    <%= content_tag :div, @deal.tenant_side_commission, :class => 'deal_portion' %>
+    <%= content_tag :div, rounded(@deal.tenant_side_commission), :class => 'deal_portion' %>
   </div>
   
   <div>
     <%= content_tag :div, 'Owner Commission', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "+ #{@deal.owner_pay_commission}", :class => 'deal_portion' %>
+    <%= content_tag :div, "+ #{rounded @deal.owner_pay_commission}", :class => 'deal_portion' %>
   </div>
   
   <div>
@@ -50,27 +50,27 @@
   
   <div>
     <%= content_tag :div, 'Total Commission', :class => 'deal_portion_description' %>
-    <%= content_tag :div, @deal.total_commission, :class => 'deal_portion' %>
+    <%= content_tag :div, rounded(@deal.total_commission), :class => 'deal_portion' %>
   </div>
   
   <div>
     <%= content_tag :div, 'Listing Side', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{@deal.listing_side_commission}", :class => 'deal_portion' %>
+    <%= content_tag :div, "- #{rounded @deal.listing_side_commission}", :class => 'deal_portion' %>
   </div>
   
   <div>
     <%= content_tag :div, 'Co-Broke', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{@deal.co_broke_commission}", :class => 'deal_portion' %>
+    <%= content_tag :div, "- #{rounded @deal.co_broke_commission}", :class => 'deal_portion' %>
   </div>
   
   <div>
     <%= content_tag :div, 'Listing Fee', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "#{@deal.listing_fee}", :class => 'deal_portion' %>
+    <%= content_tag :div, "#{rounded @deal.listing_fee}", :class => 'deal_portion' %>
   </div>
   
   <div>
     <%= content_tag :div, 'Referral Payment', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{@deal.referral_payment}", :class => 'deal_portion' %>
+    <%= content_tag :div, "- #{rounded @deal.referral_payment}", :class => 'deal_portion' %>
   </div>
   
   <div>
@@ -104,8 +104,11 @@
   <%= div_for assist do %>
     <%= content_tag :div, linked_name(assist), :class => 'deal_portion_description' %>
     <%= content_tag :div, :class => 'deal_portion' do %>
-      <%= @deal.distributable_commission assist.rate %> * <%= @deal.rate_for assist.role %> <%= rounded assist.adjustment %>= 
-      <%= number_to_currency(assist.payout) %>
+      <%= @deal.distributable_commission assist.rate %> * <%= @deal.rate_for assist.role %> <%= rounded assist.adjustment %>
+      <% if @deal.assists.where(:role => assist.role).count > 1 %>
+        / <%= @deal.assists.where(:role => assist.role).count %>
+      <% end %>
+      =<%= number_to_currency(assist.payout) %>
     <% end %>
   <% end %>
 <% end %>

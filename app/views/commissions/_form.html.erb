@@ -40,7 +40,7 @@
         <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :name, @commission.agent_id) %>
     
         <%= form.label :agent_split_percentage %>
-        <%= form.text_field :agent_split_percentage %>
+        <%= form.text_field :agent_split_percentage, :value => rounded(commission.agent_split_percentage) %>
     
         <%= form.label :copy_of_lease %>
         <%= form.check_box :copy_of_lease %>
@@ -61,7 +61,7 @@
   
       <div class="commission_form_row">
         <%= form.label :bedrooms %>
-        <%= form.text_field :bedrooms %>
+        <%= form.text_field :bedrooms, :value => rounded(commission.bedrooms) %>
     
         <%= form.label :square_footage %>
         <%= form.text_field :square_footage %>
