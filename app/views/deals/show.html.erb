@@ -111,7 +111,7 @@
 <% end %>
 
 <div class="payout">
-  <%= @deal.commission.subcommission_payout_summary %>
+  <%= @deal.commission&.subcommission_payout_summary %>
 </div>
 
 <%= participant_adder @deal %>

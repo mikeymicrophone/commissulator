@@ -47,7 +47,7 @@ class Deal < ApplicationRecord
   end
   
   def distributed_commission
-    participants.inject(0) { |sum, participant| sum + participant.payout }
+    participants.inject(0) { |sum, participant| sum + participant.payout.to_d }
   end
   
   def referral_payment
