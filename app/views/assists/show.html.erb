@@ -1,4 +1,3 @@
-<%= link_to '[edit]', edit_assist_path(@assist) %>
 <p>
   <strong>Deal:</strong>
   <%= link_to_name @assist.deal, :reference %>
@@ -15,11 +14,6 @@
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @assist.status %>
-</p>
-
-<p>
   <strong>Adjustment:</strong>
   <%= @assist.adjustment %>
 </p>
@@ -28,3 +22,5 @@
   <strong>Expense:</strong>
   <%= @assist.expense %>
 </p>
+
+<%= link_to '[edit]', edit_assist_path(@assist) %>

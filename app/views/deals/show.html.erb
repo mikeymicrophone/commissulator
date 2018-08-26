@@ -1,6 +1,24 @@
 <div class="tools">
-  <%= link_to 'Paperwork', edit_commission_path(@deal.commission) %>
+  <% if @deal.commission %>
+    <%= link_to 'Paperwork', edit_commission_path(@deal.commission) %>
+  <% else %>
+    <%= link_to 'Paperwork', new_commission_path(:deal_id => @deal) %>
+  <% end %>
   <%= link_to 'Input', edit_deal_path(@deal) %>
+</div>
+
+<div class="document_list">
+  <header>
+    <%= pluralize @deal.documents.count, 'Document' %>
+    <%= link_to fa_icon(:file_signature), new_document_path(:document => {:deal_id => @deal}) %>
+  </header>
+  <table>
+    <% @deal.documents.each do |document| %>
+      <%= div_for document do %>
+        <%= document_row_for document %>
+      <% end %>
+    <% end %>
+  </table>
 </div>
 
 <% if @deal.name.present? %>

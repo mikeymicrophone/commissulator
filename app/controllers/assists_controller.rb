@@ -15,7 +15,7 @@ class AssistsController < ApplicationController
     when 'assistant_id'
       @assists.order 'assistant_id desc'
     when 'payout'
-      Kaminari.paginate_array(@assists.sort_by { |assist| assist.payout }.reverse )
+      Kaminari.paginate_array(@assists.sort_by { |assist| assist.payout.to_d }.reverse )
     else
       @assists
     end.page params[:page]

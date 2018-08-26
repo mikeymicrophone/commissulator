@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, 'Nickname (optional)' %>
+    <%= form.label :name, 'Nickname (optional)' %><br>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
+    <%= form.label :address %><br>
     <%= form.text_field :address %>
   </div>
 
   <div class="field">
-    <%= form.label :unit_number %>
+    <%= form.label :unit_number %><br>
     <%= form.text_field :unit_number %>
   </div>
   
   <div class="field">
-    <%= form.label :agent %>
+    <%= form.label :agent %><br>
     <%= form.select :agent_id, options_from_collection_for_select(Agent.alpha, :id, :name, deal.agent_id) %>
   </div>
   
   <div class="field">
-    <%= form.label :status %>
+    <%= form.label :status %><br>
     <%= form.select :status, Deal.statuses.keys, :include_blank => true %>
   </div>
 

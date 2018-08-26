@@ -102,6 +102,6 @@ $(document).on 'turbolinks:load', ->
   
   $('#commission_participation_registration').on 'change', '#assist_assistant_id', ->
     if $('#assist_assistant_id').val() == 'Add Name'
-      $('#assistant_adder').slideToggle(700)
+      $('#assistant_adder').slideDown(700)
     else
-      $('#assistant_adder').slideToggle(1300)
+      $('#assistant_adder').slideUp(1300)
