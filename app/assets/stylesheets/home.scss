@@ -86,10 +86,11 @@ a {
 .tools {
   padding: 10px 2px;
   font-weight: bold;
-  font-size: 1.15em;
+  font-size: 2em;
+  text-align: center;
   
   a {
-    padding: 6px 1px;
+    padding: 16px;
     color: #F64CA5;
     
     &:hover {

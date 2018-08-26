@@ -10,3 +10,7 @@
       data: 
         deal: 
           status: change_event.currentTarget.value
+
+$(document).on 'turbolinks:load', ->
+  $('#deal_control').on 'click', '#deal_removal_link', (click_event) ->
+    $('.deal_removal').slideToggle(1200)

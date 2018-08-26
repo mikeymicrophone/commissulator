@@ -36,3 +36,13 @@ header {
 .deletion {
   color: #DD4320;
 }
+
+#deals_table {
+  .deal_removal {
+    display: none;
+    
+    a {
+      color: #900046;
+    }
+  }
+}

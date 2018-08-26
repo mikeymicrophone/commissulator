@@ -48,7 +48,7 @@ module DealsHelper
     columns << content_tag(:td, deal.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{deal.documents.count})"), documents_path(:filtered_attribute => :deal_id, :filter_value => deal), :title => pluralize(deal.documents.count, 'Uploaded Document')) : '', :class => 'document_list')
     
     if current_agent.admin?
-      columns << content_tag(:td, link_to(fa_icon(:joint, :class => 'deletion'), deal, :title => 'Delete Deal and its Assists', :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}))
+      columns << content_tag(:td, link_to(fa_icon(:joint, :class => 'deletion'), deal, :title => 'Delete Deal and its Assists', :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}), :class => 'deal_removal')
     end
     
     content_tag :tr, columns.join.html_safe, :id => dom_id(deal)
