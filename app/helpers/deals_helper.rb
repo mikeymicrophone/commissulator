@@ -33,21 +33,22 @@ module DealsHelper
       content_tag(:td, deal.unit_number),
       content_tag(:td, status_clicker_for(deal)),
       content_tag(:td, deal.updated_at&.to_s(:descriptive)),
-      content_tag(:td, link_to('Breakdown', deal)),
-      content_tag(:td, link_to('Edit', edit_deal_path(deal))),
-      content_tag(:td, deal.documents.present? ? link_to(pluralize(deal.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => deal)) : '', :class => 'document_list'),
-      content_tag(:td, link_to('Attach', new_document_path(:document => {:deal_id => deal})))
+      content_tag(:td, link_to(fa_icon(:file_invoice_dollar), deal, :title => 'Finance Breakdown')),
+      content_tag(:td, link_to(fa_icon(:atlas), edit_deal_path(deal), :title => 'Manage Deal Details')),
+      content_tag(:td, link_to(fa_icon(:file_signature), new_document_path(:document => {:deal_id => deal}), :title => 'Attach Document'))
     ]
     
     if deal.commission
-      columns << content_tag(:td, link_to('Paperwork', edit_commission_path(deal.commission)))
-      columns << content_tag(:td, link_to('Printout', commission_path(deal.commission, :format => :pdf)))
+      columns << content_tag(:td, link_to(fa_icon(:newspaper), edit_commission_path(deal.commission), :title => 'Update Paperwork'))
+      columns << content_tag(:td, link_to(fa_icon(:file_export), commission_path(deal.commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission'))
     else
-      columns << content_tag(:td, link_to('Paperwork', new_commission_path(:deal_id => deal.id)))
+      columns << content_tag(:td, link_to(fa_icon(:newspaper), new_commission_path(:deal_id => deal.id), :title => 'Begin Paperwork'))
     end
     
+    columns << content_tag(:td, deal.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{deal.documents.count})"), documents_path(:filtered_attribute => :deal_id, :filter_value => deal), :title => pluralize(deal.documents.count, 'Uploaded Document')) : '', :class => 'document_list')
+    
     if current_agent.admin?
-      columns << content_tag(:td, link_to('Delete', deal, :method => :delete, :remote => true))
+      columns << content_tag(:td, link_to(fa_icon(:joint, :class => 'deletion'), deal, :title => 'Delete Deal and its Assists', :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}))
     end
     
     content_tag :tr, columns.join.html_safe, :id => dom_id(deal)

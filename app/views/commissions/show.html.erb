@@ -1,6 +1,6 @@
 <div class="tools">
-  <%= link_to 'Printout', commission_path(@commission, :format => :pdf) %> |
-  <%= link_to 'Paperwork', edit_commission_path(@commission) %> |
+  <%= link_to fa_icon(:file_export), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %> |
+  <%= link_to fa_icon(:newspaper), edit_commission_path(@commission), :title => 'Edit Paperwork' %> |
   <%= link_to 'Breakdown', @commission.deal %>
 </div>
 
@@ -57,7 +57,7 @@
 </div>
 
 <div class="tools">
-  <%= link_to 'Printout', commission_path(@commission, :format => :pdf) %> |
-  <%= link_to 'Paperwork', edit_commission_path(@commission) %> |
+  <%= link_to fa_icon(:file_export), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %> |
+  <%= link_to fa_icon(:newspaper), edit_commission_path(@commission), :title => 'Edit Paperwork' %> |
   <%= link_to 'Breakdown', @commission.deal %>
 </div>

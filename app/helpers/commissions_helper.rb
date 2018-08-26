@@ -20,10 +20,10 @@ module CommissionsHelper
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, link_to('Remove', commission, :method => :delete, :remote => true), :class => 'commission_removal'),
       content_tag(:td, link_to('Review', commission)),
-      content_tag(:td, link_to('Paperwork', edit_commission_path(commission))),
-      content_tag(:td, link_to('Printout', commission_path(commission, :format => :pdf))),
+      content_tag(:td, link_to(fa_icon(:newspaper), edit_commission_path(commission), :title => 'Update Paperwork')),
+      content_tag(:td, link_to(fa_icon(:file_export), commission_path(commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission')),
       content_tag(:td, commission.documents.present? ? link_to(pluralize(commission.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal)) : '', :class => 'document_list'),
-      content_tag(:td, link_to('Attach', new_document_path(:document => {:deal_id => commission.deal}))),
+      content_tag(:td, link_to(fa_icon(:file_signature), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
       content_tag(:td, link_to('Submit', submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for)))
     ]
     
