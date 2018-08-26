@@ -11,15 +11,18 @@
     </div>
   <% end %>
 
-  <%= form.file_field :capture %>
+  <div class="field">
+    <%= form.label :capture, 'Document' %><br>
+    <%= form.file_field :capture %>
+  </div>
 
   <div class="field">
-    <%= form.label :name, 'Nickname (optional)' %>
+    <%= form.label :name, 'Nickname (optional)' %><br>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :role %>
+    <%= form.label :role %><br>
     <%= form.text_field :role %>
   </div>
   
@@ -28,4 +31,5 @@
   </div>
   
   <%= form.hidden_field :deal_id %>
+  <%= form.hidden_field :agent_id %>
 <% end %>

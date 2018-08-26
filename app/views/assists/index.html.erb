@@ -19,7 +19,7 @@
       <tr>
         <td><%= link_to_name assist.deal, :reference %></td>
         <td><%= link_to_name assist.assistant %></td>
-        <td><%= number_to_currency assist.payout %></td>
+        <td><%= number_to_currency assist.payout if current_agent.admin? %></td>
         <td><%= participation_in assist.role %></td>
         <td><%= assist.status %></td>
         <td><%= assist.updated_at.to_s :descriptive %></td>

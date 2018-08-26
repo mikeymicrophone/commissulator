@@ -1,5 +1,6 @@
 include ActionView::Helpers::NumberHelper
 Tenant = Struct.new :name, :email, :phone
+
 class Commission < ApplicationRecord
   belongs_to :deal, :optional => true
   belongs_to :agent, :optional => true

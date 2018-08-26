@@ -10,4 +10,8 @@ class NilClass
   def changed?
     false
   end
+  
+  def > n
+    0 > n
+  end
 end

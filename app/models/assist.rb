@@ -1,6 +1,7 @@
 class Assist < ApplicationRecord
   belongs_to :deal
   belongs_to :assistant
+  has_one :commission, :through => :deal
   enum :role => [:lead, :interview, :show, :close, :custom]
   enum :status => [:preliminary, :active, :removed]
   attr_default :rate, 50
