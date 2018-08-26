@@ -35,7 +35,7 @@ module DealsHelper
       content_tag(:td, deal.updated_at&.to_s(:descriptive)),
       content_tag(:td, link_to('Breakdown', deal)),
       content_tag(:td, link_to('Edit', edit_deal_path(deal))),
-      content_tag(:td, link_to(pluralize(deal.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => deal))),
+      content_tag(:td, deal.documents.present? ? link_to(pluralize(deal.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => deal)) : '', :class => 'document_list'),
       content_tag(:td, link_to('Attach', new_document_path(:document => {:deal_id => deal})))
     ]
     

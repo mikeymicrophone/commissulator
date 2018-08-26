@@ -22,13 +22,13 @@ module CommissionsHelper
       content_tag(:td, link_to('Review', commission)),
       content_tag(:td, link_to('Paperwork', edit_commission_path(commission))),
       content_tag(:td, link_to('Printout', commission_path(commission, :format => :pdf))),
-      content_tag(:td, link_to(pluralize(commission.deal.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal))),
+      content_tag(:td, commission.documents.present? ? link_to(pluralize(commission.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal)) : '', :class => 'document_list'),
       content_tag(:td, link_to('Attach', new_document_path(:document => {:deal_id => commission.deal}))),
       content_tag(:td, link_to('Submit', submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for)))
     ]
     
     if commission.follow_up == 'unsubmitted'
-      columns << content_tag(:td, link_to('Follow Up', follow_up_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :follow_up_for)))
+      columns << content_tag(:td, link_to('Follow Up', follow_up_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :follow_up_for)), :class => 'follow_up')
     end
     
     content_tag_for :tr, commission do
