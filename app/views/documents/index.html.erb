@@ -26,4 +26,4 @@
 <%= paginate @documents %>
 <br>
 
-<%= link_to 'New Document', new_document_path %>
+<%= link_to 'New Document', new_document_path(:document => {:agent_id => current_agent}) %>
