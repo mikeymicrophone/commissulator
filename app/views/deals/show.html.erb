@@ -121,10 +121,12 @@
   <% end %>
 </div>
 
-<div class="payout">
-  <%= @deal.commission&.subcommission_payout_summary %>
-</div>
+<% if current_agent.admin? %>
+  <div class="payout">
+    <%= @deal.commission&.subcommission_payout_summary %>
+  </div>
+<% end %>
 
 <%= assist_adder @deal %>
 
-<%= special_payments_on @deal %>
+<%= special_payments_on @deal if current_agent.admin? %>

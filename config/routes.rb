@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :documents
   resources :landlords do
     collection do
       post :fabricate

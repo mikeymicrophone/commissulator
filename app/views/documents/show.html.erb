@@ -1,0 +1,12 @@
+<header><%= @document.name %></header>
+
+<div>
+  <span>What this document is for:</span>
+  <%= @document.role %>
+</div>
+
+<div>
+  <%= @document.capture.filename %>
+</div>
+
+<%= link_to '[Edit]', edit_document_path(@document) %>

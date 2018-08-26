@@ -1,0 +1,31 @@
+<%= form_with(model: document, local: true) do |form| %>
+  <% if document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
+
+      <ul>
+      <% document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.file_field :capture %>
+
+  <div class="field">
+    <%= form.label :name, 'Nickname (optional)' %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.text_field :role %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  
+  <%= form.hidden_field :deal_id %>
+<% end %>

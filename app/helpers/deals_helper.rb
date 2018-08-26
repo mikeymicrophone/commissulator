@@ -33,13 +33,13 @@ module DealsHelper
       content_tag(:td, deal.unit_number),
       content_tag(:td, status_clicker_for(deal)),
       content_tag(:td, deal.updated_at&.to_s(:descriptive)),
-      content_tag(:td, link_to('Show', deal)),
+      content_tag(:td, link_to('Breakdown', deal)),
       content_tag(:td, link_to('Edit', edit_deal_path(deal)))
     ]
     
     if deal.commission
       columns << content_tag(:td, link_to('Paperwork', edit_commission_path(deal.commission)))
-      columns << content_tag(:td, link_to('Report', commission_path(deal.commission, :format => :pdf)))
+      columns << content_tag(:td, link_to('Printout', commission_path(deal.commission, :format => :pdf)))
     else
       columns << content_tag(:td, link_to('Paperwork', new_commission_path(:deal_id => deal.id)))
     end
