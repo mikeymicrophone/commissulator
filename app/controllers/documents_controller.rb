@@ -2,21 +2,26 @@ class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
   def index
-    @documents = Document.all
+    @documents = if params[:filtered_attribute]
+      Document.where params[:filtered_attribute] => params[:filter_value]
+    else
+      Document.all
+    end.page params[:page]
   end
 
   def show
   end
 
   def new
-    @document = Document.new
+    @document = Document.new document_params
   end
 
   def edit
   end
 
   def create
-    @document = Document.new(document_params)
+    @document = Document.new document_params
+    @document.agent = current_agent
 
     respond_to do |format|
       if @document.save

@@ -22,6 +22,8 @@ module CommissionsHelper
       content_tag(:td, link_to('Review', commission)),
       content_tag(:td, link_to('Paperwork', edit_commission_path(commission))),
       content_tag(:td, link_to('Printout', commission_path(commission, :format => :pdf))),
+      content_tag(:td, link_to(pluralize(commission.deal.documents.count, 'document'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal))),
+      content_tag(:td, link_to('Attach', new_document_path(:document => {:deal_id => commission.deal}))),
       content_tag(:td, link_to('Submit', submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for)))
     ]
     

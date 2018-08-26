@@ -3,6 +3,7 @@ class Deal < ApplicationRecord
   has_many :assists, :dependent => :destroy
   has_many :assistants, :through => :assists
   has_one :commission
+  has_many :documents
   delegate :annualized_rent, :agent_split_percentage, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
