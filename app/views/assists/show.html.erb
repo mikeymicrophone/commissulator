@@ -25,7 +25,9 @@
 
 <%= link_to '[edit]', edit_assist_path(@assist) %>
 
-<p>
-  <strong>Payout:</strong>
-  <%= number_to_round_currency @assist.payout %>
-</p>
+<% if current_agent.admin? %>
+  <p>
+    <strong>Payout:</strong>
+    <%= number_to_round_currency @assist.payout %>
+  </p>
+<% end %>

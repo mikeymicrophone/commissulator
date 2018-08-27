@@ -1,5 +1,5 @@
 module AssistsHelper
-  def linked_name assist, admin_tools = current_agent.admin?
+  def linked_name assist
     admin_tools = [
       link_to(fa_icon(:highlighter), edit_assist_path(assist), :title => 'Adjust'),
       link_to(fa_icon(:backspace), assist, :method => :delete, :remote => true, :title => 'Delete')
@@ -14,7 +14,7 @@ module AssistsHelper
     when 'close'
       :hand_holding_usd #:paste
     end
-    "#{link_to fa_icon(icon, :text => assist.role.capitalize), assist} by #{link_to_name assist.assistant}. #{admin_tools.join if admin_tools}".html_safe
+    "#{link_to fa_icon(icon, :text => assist.role.capitalize), assist} by #{link_to_name assist.assistant}. #{admin_tools.join if current_agent.admin?}".html_safe
   end
   
   def participation_in role

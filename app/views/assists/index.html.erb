@@ -6,7 +6,9 @@
     <tr>
       <th><%= link_to 'Deal', :sort => 'deal_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
       <th><%= link_to 'Assistant', :sort => 'assistant_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
-      <th><%= link_to 'Payout', :sort => 'payout', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
+      <% if current_agent.admin? %>
+        <th><%= link_to 'Payout', :sort => 'payout', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
+      <% end %>
       <th>Role</th>
       <th>Status</th>
       <th><%= link_to 'Updated', :sort => 'updated_at', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
@@ -19,7 +21,9 @@
       <tr>
         <td><%= link_to_name assist.deal, :reference %></td>
         <td><%= link_to_name assist.assistant %></td>
-        <td><%= number_to_currency assist.payout if current_agent.admin? %></td>
+        <% if current_agent.admin? %>
+          <td><%= number_to_currency assist.payout %></td>
+        <% end %>
         <td><%= participation_in assist.role %></td>
         <td><%= assist.status %></td>
         <td><%= assist.updated_at.to_s :descriptive %></td>
