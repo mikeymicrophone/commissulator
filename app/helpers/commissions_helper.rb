@@ -60,7 +60,7 @@ module CommissionsHelper
   end
   
   def number_to_round_currency number
-    number_to_currency number, :precision => (number.round == number) ? 0 : 2 if number
+    number_to_currency number, :precision => (number.round == number) ? 0 : 2 if number > 0
   end
   
   def broker_box attribute, pdf, spot, opts

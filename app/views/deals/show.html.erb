@@ -1,5 +1,6 @@
 <div class="tools">
   <% if @deal.commission %>
+    <%= link_to fa_icon(:file_export, :size => '2x'), commission_path(@deal.commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
     <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@deal.commission), :title => 'Fill Out Paperwork' %>
   <% else %>
     <%= link_to fa_icon(:newspaper, :size => '2x'), new_commission_path(:deal_id => @deal), :title => 'Begin Paperwork' %>
@@ -25,15 +26,10 @@
 
 <% if @deal.name.present? %>
   <p>
-    <strong>Name:</strong>
+    <strong>Nickname:</strong>
     <%= @deal.name %>
   </p>
 <% end %>
-<p>
-  <strong>Commission:</strong>
-  <%= number_to_currency @deal.commission&.total_commission %><br>
-</p>
-
 <p>
   <%= @deal.address %>
   <strong><%= @deal.unit_number %></strong>
@@ -45,7 +41,7 @@
 </p>
 
 <p class="agent">
-  Agent: <%= deals_by @deal.agent %>
+  Agent: <%= link_to_name @deal.agent %>
 </p>
 
 <div id="deal_payout_breakdown">
@@ -60,10 +56,12 @@
     <%= content_tag :div, rounded(@deal.tenant_side_commission), :class => 'deal_portion' %>
   </div>
   
-  <div>
-    <%= content_tag :div, 'Owner Commission', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "+ #{rounded @deal.owner_pay_commission}", :class => 'deal_portion' %>
-  </div>
+  <% if @deal.owner_pay_commission.present? %>
+    <div>
+      <%= content_tag :div, 'Owner Commission', :class => 'deal_portion_description' %>
+      <%= content_tag :div, "+ #{rounded @deal.owner_pay_commission}", :class => 'deal_portion' %>
+    </div>
+  <% end %>
   
   <div>
     <%= tag.div :class => 'deal_portion_description' %>
@@ -75,25 +73,33 @@
     <%= content_tag :div, rounded(@deal.total_commission), :class => 'deal_portion' %>
   </div>
   
-  <div>
-    <%= content_tag :div, 'Listing Side', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{rounded @deal.listing_side_commission}", :class => 'deal_portion' %>
-  </div>
+  <% if @deal.listing_side_commission.present? %>
+    <div>
+      <%= content_tag :div, 'Listing Side', :class => 'deal_portion_description' %>
+      <%= content_tag :div, "- #{rounded @deal.listing_side_commission}", :class => 'deal_portion' %>
+    </div>
+  <% end %>
   
-  <div>
-    <%= content_tag :div, 'Co-Broke', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{rounded @deal.co_broke_commission}", :class => 'deal_portion' %>
-  </div>
+  <% if @deal.co_broke_commission.present? %>
+    <div>
+      <%= content_tag :div, 'Co-Broke', :class => 'deal_portion_description' %>
+      <%= content_tag :div, "- #{rounded @deal.co_broke_commission}", :class => 'deal_portion' %>
+    </div>
+  <% end %>
   
-  <div>
-    <%= content_tag :div, 'Listing Fee', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "#{rounded @deal.listing_fee}", :class => 'deal_portion' %>
-  </div>
+  <% if @deal.listing_fee.present? %>
+    <div>
+      <%= content_tag :div, 'Listing Fee', :class => 'deal_portion_description' %>
+      <%= content_tag :div, "#{rounded @deal.listing_fee}", :class => 'deal_portion' %>
+    </div>
+  <% end %>
   
-  <div>
-    <%= content_tag :div, 'Referral Payment', :class => 'deal_portion_description' %>
-    <%= content_tag :div, "- #{rounded @deal.referral_payment}", :class => 'deal_portion' %>
-  </div>
+  <% if @deal.referral_payment > 0 %>
+    <div>
+      <%= content_tag :div, 'Referral Payment', :class => 'deal_portion_description' %>
+      <%= content_tag :div, "- #{rounded @deal.referral_payment}", :class => 'deal_portion' %>
+    </div>
+  <% end %>
   
   <div>
     <%= tag.div :class => 'deal_portion_description' %>
