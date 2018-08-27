@@ -14,11 +14,11 @@
       <th>Zip</th>
       <th><%= link_to 'Updated', :sort => :updated_at %></th>
       <th colspan='7'></th>
-      <th><%= link_to 'Remove', '#', :id => 'commission_removal_link' if current_agent.admin? %></th>
+      <th><%= link_to 'Remove', prune_commissions_path, :remote => true, :id => 'commission_removal_link' if current_agent.admin? %></th>
     </tr>
   </thead>
 
-  <tbody id="commissions_table" data-turbolinks-permanent>
+  <tbody id="commissions_table">
     <% @commissions.each do |commission| %>
       <%= commission_row_for commission %>
     <% end %>

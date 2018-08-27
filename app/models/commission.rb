@@ -164,11 +164,11 @@ class Commission < ApplicationRecord
     "commission fee %, deal assists, co-broke and referral payment amounts if applicable"
   end
   
-  def detailed?
+  def dated?
     lease_sign_date.present? && approval_date.present? && request_date.present?
   end
   
-  def detailed_title
+  def dated_title
     "lease sign date, approval date, request date"
   end
   

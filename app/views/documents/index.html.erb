@@ -18,4 +18,4 @@
 <%= paginate @documents %>
 <br>
 
-<%= link_to fa_icon(:file_signature), new_document_path(:document => {:agent_id => current_agent}), :title => 'Upload Document' %>
+<%= link_to fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:agent_id => current_agent}), :title => 'Upload Document' %>

@@ -4,12 +4,12 @@ Rails.application.routes.draw do
     collection do
       post :fabricate
     end
-    resources :commissions
   end
   resources :commissions do
     collection do
       get :add_tenant_to
       post :fabricate
+      get :prune
     end
     member do
       put :submit
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :deals do
     collection do
       post :fabricate
+      get :prune
     end
     member do
       get :pick_status_of
@@ -28,5 +29,5 @@ Rails.application.routes.draw do
   end
   root :to => 'home#landing'
   devise_for :agents
-  resources :agents, :only => [:index, :edit, :update]
+  resources :agents, :only => [:index, :show, :edit, :update]
 end

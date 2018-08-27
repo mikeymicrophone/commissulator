@@ -8,6 +8,8 @@ class Deal < ApplicationRecord
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary
+  
+  scope :this_week, -> { where Deal.arel_table[:created_at].gt 1.week.ago }
 
   def reference
     if name.present?

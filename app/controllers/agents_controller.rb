@@ -5,6 +5,10 @@ class AgentsController < ApplicationController
     @agents = Agent.all
   end
   
+  def show
+    @agent = Agent.find params[:id] if current_agent.admin?
+  end
+  
   def edit
   end
   

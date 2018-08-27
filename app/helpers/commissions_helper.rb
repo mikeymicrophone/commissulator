@@ -18,18 +18,18 @@ module CommissionsHelper
       content_tag(:td, link_to_name(commission.landlord)),
       content_tag(:td, commission.zip_code),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
-      content_tag(:td, link_to(fa_icon(:stream), commission, :title => 'Review Commission Data')),
-      content_tag(:td, link_to(fa_icon(:file_invoice_dollar), commission.deal, :title => 'Finance Breakdown')),
-      content_tag(:td, link_to(fa_icon(:newspaper), edit_commission_path(commission), :title => 'Update Paperwork')),
-      content_tag(:td, link_to(fa_icon(:file_export), commission_path(commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission')),
-      content_tag(:td, commission.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{commission.documents.count})"), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal), :title => pluralize(commission.documents.count, 'Uploaded Document')) : '', :class => 'document_list'),
-      content_tag(:td, link_to(fa_icon(:file_signature), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
-      content_tag(:td, link_to(fa_icon(:paper_plane), submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for), :title => 'Submit to Senior Agent via Email')),
-      content_tag(:td, link_to(fa_icon(:joint), commission, :method => :delete, :remote => true, :title => 'Delete Commission Entry', :data => {:confirm => 'Are you sure?'}), :class => 'commission_removal')
+      content_tag(:td, link_to(fa_icon(:stream, :size => '2x'), commission, :title => 'Review Commission Data')),
+      content_tag(:td, link_to(fa_icon(:file_invoice_dollar, :size => '2x'), commission.deal, :title => 'Finance Breakdown')),
+      content_tag(:td, link_to(fa_icon(:newspaper, :size => '2x'), edit_commission_path(commission), :title => 'Update Paperwork')),
+      content_tag(:td, link_to(fa_icon(:file_export, :size => '2x'), commission_path(commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission')),
+      content_tag(:td, commission.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{commission.documents.count})", :size => '2x'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal), :title => pluralize(commission.documents.count, 'Uploaded Document')) : '', :class => 'document_list'),
+      content_tag(:td, link_to(fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
+      content_tag(:td, link_to(fa_icon(:paper_plane, :size => '2x'), submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for), :title => 'Submit to Senior Agent via Email')),
+      content_tag(:td, link_to(fa_icon(:joint, :size => '2x'), commission, :method => :delete, :remote => true, :title => 'Delete Commission Entry', :data => {:confirm => 'Are you sure?'}), :class => 'commission_removal')
     ]
     
     if commission.follow_up == 'unsubmitted'
-      columns << content_tag(:td, link_to(fa_icon(:people_carry), follow_up_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :follow_up_for)), :class => 'follow_up', :title => 'Sync Tenants to Follow Up Boss')
+      columns << content_tag(:td, link_to(fa_icon(:people_carry, :size => '2x'), follow_up_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :follow_up_for)), :class => 'follow_up', :title => 'Sync Tenants to Follow Up Boss')
     end
     
     content_tag_for :tr, commission do
@@ -80,7 +80,7 @@ module CommissionsHelper
       content_tag(:a, 'brokered', :title => commission.brokered_title, :class => "commission_status #{commission.brokered? ? 'satisfied' : 'unsatisfied'}") +
       content_tag(:a, 'referred', :title => commission.referred_title, :class => "commission_status #{commission.referred? ? 'satisfied' : 'unsatisfied'} optional") +
       content_tag(:a, 'cut', :title => commission.cut_title, :class => "commission_status #{commission.cut? ? 'satisfied' : 'unsatisfied'}") +
-      content_tag(:a, 'detailed', :title => commission.detailed_title, :class => "commission_status #{commission.detailed? ? 'satisfied' : 'unsatisfied'}")
+      content_tag(:a, 'dated', :title => commission.dated_title, :class => "commission_status #{commission.dated? ? 'satisfied' : 'unsatisfied'}")
     end
   end
 end

@@ -10,16 +10,13 @@ module ApplicationHelper
   
   def main_nav
     link_to('New Commission', new_commission_path, :id => 'new_commission_link') +
-    link_to('Commissions', commissions_path, :id => 'commissions_link') +
-    link_to('Documents', documents_path) +
-    if current_agent.admin?
-      link_to('Deals', deals_path) +
-      link_to('Assistants', assistants_path) +
-      link_to('Assists', assists_path) +
-      link_to('Documents', documents_path) +
-      link_to('Agents', agents_path) +
-      link_to('Landlords', landlords_path)
-    end
+    link_to(fa_icon(:chart_pie, :text => 'Commissions'), commissions_path, :id => 'commissions_link') +
+    link_to(fa_icon(:clipboard_list, :text => 'Documents'), documents_path) +
+    link_to(fa_icon(:balance_scale, :text => 'Deals'), deals_path) +
+    link_to(fa_icon(:users, :text => 'Assistants'), assistants_path) +
+    link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
+    link_to(fa_icon(:user_tie, :text => 'Agents'), agents_path) +
+    link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path)
   end
   
   def penthouse_nav
@@ -33,6 +30,10 @@ module ApplicationHelper
         link_to('Register', new_agent_registration_path)
       end
     end
+  end
+  
+  def filter_params record = nil
+    record ? {:filtered_attribute => record.foreign_key_name, :filter_value => record.id} : {:filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value]}
   end
   
   def clearboth

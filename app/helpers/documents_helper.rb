@@ -4,11 +4,11 @@ module DocumentsHelper
       content_tag(:td, document.name),
       content_tag(:td, document.role),
       content_tag(:td, link_to_name(document.deal, :reference)),
-      content_tag(:td, link_to('View', document.capture)),
-      content_tag(:td, link_to('Download', rails_blob_path(document.capture, disposition: "attachment"))),
-      content_tag(:td, link_to('Details', document)),
-      content_tag(:td, link_to('Edit', edit_document_path(document))),
-      content_tag(:td, link_to('Delete', document, method: :delete, data: { confirm: 'Are you sure?' }))
+      content_tag(:td, link_to(fa_icon(:crosshairs, :size => '2x'), document.capture, :title => 'Quick View')),
+      content_tag(:td, link_to(fa_icon(:cloud_download_alt, :size => '2x'), rails_blob_path(document.capture, disposition: 'attachment'), :title => 'Download')),
+      content_tag(:td, link_to(fa_icon(:envelope_open, :size => '2x'), document, :title => 'Details')),
+      content_tag(:td, link_to(fa_icon(:edit, :size => '2x'), edit_document_path(document), :title => 'Edit Metadata')),
+      content_tag(:td, link_to(fa_icon(:joint, :size => '2x'), document, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete'))
     ]
     
     content_tag :tr, columns.join.html_safe

@@ -4,8 +4,8 @@
 <table>
   <thead>
     <tr>
-      <th><%= link_to 'First name', :sort => 'first_name' %></th>
-      <th><%= link_to 'Last name', :sort => 'last_name' %></th>
+      <th><%= link_to 'First name', filter_params.merge(:sort => 'first_name') %></th>
+      <th><%= link_to 'Last name', filter_params.merge(:sort => 'last_name') %></th>
       <th>Phone number</th>
       <th>Email</th>
       <th>Status</th>

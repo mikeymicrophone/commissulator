@@ -1,11 +1,11 @@
 <div class="tools">
   <% if @deal.commission %>
-    <%= link_to fa_icon(:newspaper), edit_commission_path(@deal.commission), :title => 'Fill Out Paperwork' %>
+    <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@deal.commission), :title => 'Fill Out Paperwork' %>
   <% else %>
-    <%= link_to fa_icon(:newspaper), new_commission_path(:deal_id => @deal), :title => 'Begin Paperwork' %>
+    <%= link_to fa_icon(:newspaper, :size => '2x'), new_commission_path(:deal_id => @deal), :title => 'Begin Paperwork' %>
   <% end %>
-  <%= link_to fa_icon(:atlas), edit_deal_path(@deal), :title => 'Manage Deal Details' %>
-  <%= link_to fa_icon(:file_signature), new_document_path(:document => {:deal_id => @deal}), :title => 'Attach Document' %>
+  <%= link_to fa_icon(:atlas, :size => '2x'), edit_deal_path(@deal), :title => 'Manage Deal Details' %>
+  <%= link_to fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => @deal}), :title => 'Attach Document' %>
 </div>
 
 <div class="document_list">

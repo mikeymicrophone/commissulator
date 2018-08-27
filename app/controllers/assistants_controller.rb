@@ -2,13 +2,21 @@ class AssistantsController < ApplicationController
   before_action :set_assistant, only: [:show, :edit, :update, :destroy]
 
   def index
+    @assistants = case params[:filtered_attribute]
+    when 'agent_id'
+      Agent.find(params[:filter_value]).assistants
+    when nil
+      Assistant.all
+    else
+      Assistant.where params[:filtered_attribute] => params[:filter_value]
+    end
     @assistants = case params[:sort]
     when 'first_name'
-      Assistant.order :first_name
+      @assistants.order :first_name
     when 'last_name'
-      Assistant.order :last_name
+      @assistants.order :last_name
     else
-      Assistant.all
+      @assistants.all
     end.page params[:page]
   end
 

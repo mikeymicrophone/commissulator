@@ -1,7 +1,7 @@
 <div class="tools">
-  <%= link_to fa_icon(:file_export), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
-  <%= link_to fa_icon(:newspaper), edit_commission_path(@commission), :title => 'Edit Paperwork' %>
-  <%= link_to fa_icon(:file_invoice_dollar), @commission.deal, :title => 'Finance Breakdown' %>
+  <%= link_to fa_icon(:file_export, :size => '2x'), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
+  <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@commission), :title => 'Edit Paperwork' %>
+  <%= link_to fa_icon(:file_invoice_dollar, :size => '2x'), @commission.deal, :title => 'Finance Breakdown' %>
 </div>
 
 <div class="commission_vitals">
@@ -54,10 +54,4 @@
   <span>Lease signed on </span> <%= @commission.lease_sign_date.strftime("%-m/%-d") %><span> and approved</span> <%= @commission.approval_date.strftime("%-m/%-d") %>.
   <span>Commission requested</span> <%= @commission.request_date.strftime("%-m/%-d") %>.<br>
   <%= completion_state @commission %>
-</div>
-
-<div class="tools">
-  <%= link_to fa_icon(:file_export), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
-  <%= link_to fa_icon(:newspaper), edit_commission_path(@commission), :title => 'Edit Paperwork' %>
-  <%= link_to fa_icon(:file_invoice_dollar), @commission.deal, :title => 'Finance Breakdown' %>
 </div>

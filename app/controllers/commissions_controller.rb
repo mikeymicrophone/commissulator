@@ -2,8 +2,8 @@ class CommissionsController < ApplicationController
   before_action :set_commission, only: [:show, :edit, :update, :submit, :follow_up, :destroy]
 
   def index
-    @commissions = if params[:landlord_id]
-      Commission.where :landlord_id => params[:landlord_id]
+    @commissions = if params[:filtered_attribute]
+      Commission.where params[:filtered_attribute] => params[:filter_value]
     else
       Commission.all
     end
@@ -77,6 +77,10 @@ class CommissionsController < ApplicationController
         format.json { render json: @commission.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def prune
+    
   end
 
   def destroy
