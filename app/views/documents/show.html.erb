@@ -1,6 +1,8 @@
 <header><%= @document.name %></header>
 
 <div class="tools">
+  <%= link_to(fa_icon(:stream, :size => '2x'), @document.commission, :title => 'Review Commission Data') if @document.commission %>
+  <%= link_to(fa_icon(:file_invoice_dollar, :size => '2x'), @document.deal, :title => 'Finance Breakdown') if @document.deal %>
   <%= link_to(fa_icon(:crosshairs, :size => '2x'), @document.capture, :title => 'Quick View') %>
   <%= link_to(fa_icon(:cloud_download_alt, :size => '2x'), rails_blob_path(@document.capture, disposition: 'attachment'), :title => 'Download') %>
   <%= link_to(fa_icon(:edit, :size => '2x'), edit_document_path(@document), :title => 'Edit Metadata') %>
@@ -8,10 +10,14 @@
 </div>
 
 <div>
-  <span>What this document is for:</span>
+  <%= @document.capture.filename %>
+</div>
+
+<div>
+  <span><em>This document is for:</em></span>
   <%= @document.role %>
 </div>
 
 <div>
-  <%= @document.capture.filename %>
+  <%= link_to_name @document.deal, :reference %>
 </div>

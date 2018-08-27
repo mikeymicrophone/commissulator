@@ -1,9 +1,11 @@
 <div class="tools">
-  <%= link_to fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => @commission.deal}), :title => 'Attach Document' %>
+  <%= link_to fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => @commission.deal}), :remote => true, :title => 'Attach Document' %>
   <%= link_to fa_icon(:file_export, :size => '2x'), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
   <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@commission), :title => 'Edit Paperwork' %>
   <%= link_to fa_icon(:file_invoice_dollar, :size => '2x'), @commission.deal, :title => 'Finance Breakdown' %>
 </div>
+
+<%= document_uploader_area %>
 
 <div class="commission_vitals">
   <div id="lessees">
@@ -52,7 +54,13 @@
   <% end %>
   <span>Citi Commission:</span> <%= number_to_round_currency @commission.citi_commission %><br>
   
-  <span>Lease signed on </span> <%= @commission.lease_sign_date.strftime("%-m/%-d") %><span> and approved</span> <%= @commission.approval_date.strftime("%-m/%-d") %>.
-  <span>Commission requested</span> <%= @commission.request_date.strftime("%-m/%-d") %>.<br>
+  <span>Lease signed on </span> <%= @commission.lease_sign_date.strftime "%-m/%-d" %><span> and approved</span> <%= @commission.approval_date.strftime "%-m/%-d" %>.
+  <span>Commission requested</span> <%= @commission.request_date.strftime "%-m/%-d" %>.<br>
   <%= completion_state @commission %>
 </div>
+
+<table id="commission_documentation">
+  <% @commission.documents.each do |document| %>
+    <%= document_row_for document %>
+  <% end %>
+</table>

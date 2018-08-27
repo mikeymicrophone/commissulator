@@ -29,4 +29,8 @@ module DocumentsHelper
       'Other'
     ]
   end
+  
+  def document_uploader_area
+    tag.div :id => 'document_uploader_area'
+  end
 end
