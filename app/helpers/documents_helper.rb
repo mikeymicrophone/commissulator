@@ -3,7 +3,8 @@ module DocumentsHelper
     columns = [
       content_tag(:td, document.name),
       content_tag(:td, document.role),
-      content_tag(:td, link_to_name(document.deal, :reference)),
+      content_tag(:td, document.commission ? link_to(fa_icon(:stream, :size => '2x'), document.commission, :title => 'Review Commission Data') : ''),
+      content_tag(:td, link_to(fa_icon(:file_invoice_dollar, :text => document.deal&.reference, :size => '2x'), document.deal)),
       content_tag(:td, link_to(fa_icon(:crosshairs, :size => '2x'), document.capture, :title => 'Quick View')),
       content_tag(:td, link_to(fa_icon(:cloud_download_alt, :size => '2x'), rails_blob_path(document.capture, disposition: 'attachment'), :title => 'Download')),
       content_tag(:td, link_to(fa_icon(:envelope_open, :size => '2x'), document, :title => 'Details')),

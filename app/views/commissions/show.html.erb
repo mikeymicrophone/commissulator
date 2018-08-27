@@ -59,6 +59,12 @@
   <%= completion_state @commission %>
 </div>
 
+<%= @commission.documentation_status %>
+<% if @commission.documents.present? %>
+  <header>
+    <%= pluralize @commission.documents.count, 'Document' %>
+  </header>
+<% end %>
 <table id="commission_documentation">
   <% @commission.documents.each do |document| %>
     <%= document_row_for document %>

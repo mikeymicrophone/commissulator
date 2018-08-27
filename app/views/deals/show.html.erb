@@ -1,5 +1,6 @@
 <div class="tools">
   <% if @deal.commission %>
+    <%= link_to fa_icon(:stream, :size => '2x'), @deal.commission, :title => 'Review Commission Data' if @deal.commission.present? %>
     <%= link_to fa_icon(:file_export, :size => '2x'), commission_path(@deal.commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
     <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@deal.commission), :title => 'Fill Out Paperwork' %>
   <% else %>
@@ -7,21 +8,6 @@
   <% end %>
   <%= link_to fa_icon(:atlas, :size => '2x'), edit_deal_path(@deal), :title => 'Manage Deal Details' %>
   <%= link_to fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => @deal}), :title => 'Attach Document' %>
-</div>
-
-<div class="document_list">
-  <% if @deal.documents.present? %>
-    <header>
-      <%= pluralize @deal.documents.count, 'Document' %>
-    </header>
-  <% end %>
-  <table>
-    <% @deal.documents.each do |document| %>
-      <%= div_for document do %>
-        <%= document_row_for document %>
-      <% end %>
-    <% end %>
-  </table>
 </div>
 
 <% if @deal.name.present? %>
@@ -158,3 +144,18 @@
 <%= assist_adder @deal %>
 
 <%= special_payments_on @deal if current_agent.admin? %>
+
+<div class="document_list">
+  <% if @deal.documents.present? %>
+    <header>
+      <%= pluralize @deal.documents.count, 'Document' %>
+    </header>
+  <% end %>
+  <table>
+    <% @deal.documents.each do |document| %>
+      <%= div_for document do %>
+        <%= document_row_for document %>
+      <% end %>
+    <% end %>
+  </table>
+</div>

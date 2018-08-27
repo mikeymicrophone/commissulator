@@ -179,4 +179,39 @@ class Commission < ApplicationRecord
   def referral?
     citi_habitats_referral_agent? || corcoran_referral_agent? || outside_agency? || relocation_referral?
   end
+  
+  def Commission.document_roles
+    [
+      'Listing (from LEAR)',
+      'Lease (First Page and Signature Page)',
+      'NY State Agency Disclosure',
+      'Proof of Commission Payment',
+      'Exclusive Agreement with Landlord',
+      'Owner Pay Invoice',
+      'Other'
+    ]
+  end
+  
+  def required_document_roles
+    requirements = [
+      'Listing (from LEAR)',
+      'Lease (First Page and Signature Page)',
+      'NY State Agency Disclosure',
+      'Proof of Commission Payment'
+    ]
+    requirements << 'Owner Pay Invoice' if owner_pay_commission > 0
+    requirements << 'Exclusive Agreement with Landlord' if co_exclusive_agency? || exclusive_agency? || exclusive_agent?
+  end
+  
+  def missing_documentation
+    required_document_roles - documents.map(&:role)
+  end
+  
+  def documentation_status
+    if missing_documentation.present?
+      missing_documentation.to_sentence.chomp + ' still needed.'
+    else
+      "Required documentation present."
+    end
+  end
 end
