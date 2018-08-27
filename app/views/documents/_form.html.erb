@@ -1,4 +1,4 @@
-<%= form_with(model: document, local: true) do |form| %>
+<%= form_with(:model => document, :local => true, :class => 'document') do |form| %>
   <% if document.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -12,18 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :capture, 'Document' %><br>
+    <%= form.label :capture, 'Document Capture (scan or photo)' %><br>
     <%= form.file_field :capture %>
   </div>
 
   <div class="field">
-    <%= form.label :name, 'Nickname (optional)' %><br>
-    <%= form.text_field :name %>
+    <%= form.label :role %><br>
+    <%= form.select :role, document_role_options, :include_blank => true %>
   </div>
 
   <div class="field">
-    <%= form.label :role %><br>
-    <%= form.text_field :role %>
+    <%= form.label :name, 'Nickname or Note (optional)' %><br>
+    <%= form.text_field :name %>
+    <div id="check_instructions">
+      &lt;-- Type the value of the payment or checks here.  Example: "2090.80", or <strong>"1250 + 1388.25"</strong> when multiple.
+    </div>
   </div>
   
   <div class="actions">

@@ -1,4 +1,5 @@
 <div class="tools">
+  <%= link_to fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => @commission.deal}), :title => 'Attach Document' %>
   <%= link_to fa_icon(:file_export, :size => '2x'), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
   <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@commission), :title => 'Edit Paperwork' %>
   <%= link_to fa_icon(:file_invoice_dollar, :size => '2x'), @commission.deal, :title => 'Finance Breakdown' %>

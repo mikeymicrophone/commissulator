@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'turbolinks:load', ->
+  $('form.document').on 'change', '#document_role', ->
+    if $('#document_role').val() == 'Proof of Commission Payment'
+      $('#check_instructions').css 'display', 'inline-block'
+    else
+      $('#check_instructions').css 'display', 'none'

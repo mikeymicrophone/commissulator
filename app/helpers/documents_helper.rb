@@ -13,4 +13,20 @@ module DocumentsHelper
     
     content_tag :tr, columns.join.html_safe
   end
+  
+  def document_role_options
+    options_for_select document_roles
+  end
+  
+  def document_roles
+    [
+      'Listing (from LEAR)',
+      'Lease (First Page and Signature Page)',
+      'NY State Agency Disclosure',
+      'Proof of Commission Payment',
+      'Exclusive Agreement with Landlord',
+      'Owner Pay Invoice',
+      'Other'
+    ]
+  end
 end
