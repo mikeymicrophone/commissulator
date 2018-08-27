@@ -49,6 +49,9 @@
           <%= form.check_box :copy_of_lease %>
         </div>
       </div>
+    <% else %>
+      <%= form.hidden_field :request_date, :value => Date.today %>
+      <%= form.hidden_field :agent_id %>
     <% end %>
     
     <div class="commission_section">
