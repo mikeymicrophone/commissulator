@@ -25,7 +25,7 @@
   </div>
   
   <div id="property_description">
-    <%= @commission.new_development ? 'new development' : '' %> <%= rounded @commission.square_footage %> sq ft <%= @commission.property_type %> with <%= pluralize rounded(@commission.bedrooms), 'bedroom' %>
+    <%= @commission.new_development ? 'new development' : '' %> <%= @commission.square_footage.present? ? "#{rounded @commission.square_footage} sq ft}" : '' %> <%= @commission.property_type %> with <%= pluralize rounded(@commission.bedrooms), 'bedroom' %>
   </div>
   
   <div id="commission_navigation">

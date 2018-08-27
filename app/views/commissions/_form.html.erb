@@ -212,7 +212,7 @@
     </div>
     <div class="actions">
       <%= form.submit 'Save' %>
-      <%= form.submit 'Save and Print' %>
+      <%= form.submit 'Save and Print' unless commission.new_record? %>
     </div>
   <% end %>
 </div>

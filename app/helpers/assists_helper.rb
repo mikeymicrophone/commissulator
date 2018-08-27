@@ -4,7 +4,12 @@ module AssistsHelper
       link_to(fa_icon(:highlighter), edit_assist_path(assist), :title => 'Adjust'),
       link_to(fa_icon(:backspace), assist, :method => :delete, :remote => true, :title => 'Delete')
     ]
-    icon = case assist.role
+    icon = 
+    "#{link_to icon_for(assist.role), assist} by #{link_to_name assist.assistant}. #{admin_tools.join if current_agent.admin?}".html_safe
+  end
+  
+  def icon_for role
+    icon = case role
     when 'lead'
       :hand_paper #:list
     when 'interview'
@@ -13,11 +18,13 @@ module AssistsHelper
       :hands_helping #:key
     when 'close'
       :hand_holding_usd #:paste
+    when 'custom'
+      :bolt
     end
-    "#{link_to fa_icon(icon, :text => assist.role.capitalize), assist} by #{link_to_name assist.assistant}. #{admin_tools.join if current_agent.admin?}".html_safe
+    fa_icon(icon, :text => role.capitalize)
   end
   
   def participation_in role
-    link_to role, assists_path(:filtered_attribute => :role, :filter_value => role)
+    link_to icon_for(role), assists_path(:filtered_attribute => :role, :filter_value => role)
   end
 end

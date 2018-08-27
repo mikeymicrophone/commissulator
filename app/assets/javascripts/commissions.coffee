@@ -2,7 +2,8 @@ calculation_suspended = ->
   $('#suspend_calculation').prop('checked')
 
 list = ->
-  $('#commission_listed_monthly_rent').val($('#commission_leased_monthly_rent').val())
+  if $('#commission_listed_monthly_rent').val() == ''
+    $('#commission_listed_monthly_rent').val($('#commission_leased_monthly_rent').val())
 
 @derive = ->
   unless calculation_suspended()
