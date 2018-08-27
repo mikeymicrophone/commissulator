@@ -214,4 +214,8 @@ class Commission < ApplicationRecord
       "Required documentation present."
     end
   end
+  
+  def documented_commission
+    documents.commission_payments.inject(0) { |sum, payment| sum + BigDecimal(eval(payment.name)) if payment.name =~ /[\d\s\+\.]+/ }
+  end
 end

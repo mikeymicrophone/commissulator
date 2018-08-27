@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :role %><br>
-    <%= form.select :role, document_role_options, :include_blank => true %>
+    <%= form.select :role, document_role_options(document.role), :include_blank => true %>
   </div>
 
   <div class="field">

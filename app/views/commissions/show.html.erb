@@ -52,7 +52,9 @@
   <% if @commission.co_broke_commission > 0 %>
     <span>Co-Broke Commission:</span> <%= number_to_round_currency @commission.co_broke_commission %><br>
   <% end %>
-  <span>Citi Commission:</span> <%= number_to_round_currency @commission.citi_commission %><br>
+  <span>Citi Commission:</span> <%= number_to_round_currency @commission.citi_commission %>
+  <span>(Documented: <%= number_to_round_currency @commission.documented_commission %>)</span>
+  <br>
   
   <span>Lease signed on </span> <%= @commission.lease_sign_date.strftime "%-m/%-d" %><span> and approved</span> <%= @commission.approval_date.strftime "%-m/%-d" %>.
   <span>Commission requested</span> <%= @commission.request_date.strftime "%-m/%-d" %>.<br>

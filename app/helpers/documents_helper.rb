@@ -15,8 +15,8 @@ module DocumentsHelper
     content_tag :tr, columns.join.html_safe
   end
   
-  def document_role_options
-    options_for_select document_roles
+  def document_role_options role = nil
+    options_for_select document_roles, role
   end
   
   def document_roles
