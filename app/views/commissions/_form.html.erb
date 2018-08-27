@@ -26,28 +26,30 @@
     <%= form.hidden_field :deal_id %>
     <%= form.hidden_field :landlord_id %>
 
-    <div class="commission_section">
-      <div class="commission_form_row">
-        <%= form.label :branch_name, 'Branch Name' %>
-        <%= form.text_field :branch_name %>
+    <% if current_agent.admin? %>
+      <div class="commission_section">
+        <div class="commission_form_row">
+          <%= form.label :branch_name, 'Branch Name' %>
+          <%= form.text_field :branch_name %>
     
-        <%= form.label :request_date, 'Request Date' %>
-        <%= form.date_select :request_date %>
-      </div>
+          <%= form.label :request_date, 'Request Date' %>
+          <%= form.date_select :request_date %>
+        </div>
   
-      <div class="commission_form_row">
-        <%= form.label :agent_id %>
-        <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :name, @commission.agent_id) %>
+        <div class="commission_form_row">
+          <%= form.label :agent_id %>
+          <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :name, @commission.agent_id) %>
     
-        <% if current_agent.admin? %>
-          <%= form.label :agent_split_percentage, 'Agent Split Percentage' %>
-          <%= form.text_field :agent_split_percentage, :value => rounded(commission.agent_split_percentage), :id => 'agent_split_percentage_entry' %>
-        <% end %>
+          <% if current_agent.admin? %>
+            <%= form.label :agent_split_percentage, 'Agent Split Percentage' %>
+            <%= form.text_field :agent_split_percentage, :value => rounded(commission.agent_split_percentage), :id => 'agent_split_percentage_entry' %>
+          <% end %>
     
-        <%= form.label :copy_of_lease, 'Copy of Lease' %>
-        <%= form.check_box :copy_of_lease %>
+          <%= form.label :copy_of_lease, 'Copy of Lease' %>
+          <%= form.check_box :copy_of_lease %>
+        </div>
       </div>
-    </div>
+    <% end %>
     
     <div class="commission_section">
       <div class="commission_form_row">

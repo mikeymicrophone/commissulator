@@ -185,7 +185,7 @@ prawn_document do |pdf|
     pdf.draw_text "Requested by: ______________________         _________________________      Date: _____________", :at => [20, 60], :size => 10
     pdf.draw_text "Approved by:  ______________________         _________________________      Date: _____________", :at => [20, 20], :size => 10
     
-    pdf.draw_text @commission.agent&.name, :at => [100, 61], :size => 12
+    pdf.draw_text @commission.agent_name, :at => [100, 61], :size => 12
     pdf.draw_text Date.today.strftime("%-m/%-d/%y"), :at => [440, 61], :size => 11
     
     pdf.draw_text "Print Agent Name", :at => [120, 50], :size => 7, :style => :bold_italic

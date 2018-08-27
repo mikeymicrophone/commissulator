@@ -200,7 +200,6 @@ class Commission < ApplicationRecord
       'Proof of Commission Payment'
     ]
     requirements << 'Owner Pay Invoice' if owner_pay_commission > 0
-    requirements << 'Exclusive Agreement with Landlord' if co_exclusive_agency? || exclusive_agency? || exclusive_agent?
     requirements
   end
   
@@ -212,8 +211,12 @@ class Commission < ApplicationRecord
     if missing_documentation.present?
       missing_documentation.to_sentence.chomp + ' still needed.'
     else
-      "Required documentation present."
+      'Required documentation present.'
     end
+  end
+  
+  def documented?
+    documentation_status == 'Required documentation present.'
   end
   
   def documented_commission
