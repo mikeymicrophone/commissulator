@@ -201,6 +201,7 @@ class Commission < ApplicationRecord
     ]
     requirements << 'Owner Pay Invoice' if owner_pay_commission > 0
     requirements << 'Exclusive Agreement with Landlord' if co_exclusive_agency? || exclusive_agency? || exclusive_agent?
+    requirements
   end
   
   def missing_documentation
