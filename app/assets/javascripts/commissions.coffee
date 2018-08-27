@@ -19,13 +19,16 @@ ripple = ->
   unless calculation_suspended()
     broker_fee = $('#commission_annualized_rent').val() * 0.15 # assuming 15% because that is currently the standard rate
     $('#commission_tenant_side_commission').val(broker_fee.toFixed 2)
+    $('#commission_commission_fee_percentage').val(15)
 
-@total = ->
+total = ->
   unless calculation_suspended()
-    commission = tenant_side() + owner_side()
-    $('#commission_total_commission').val(commission.toFixed 2)
-    $('#commission_commission_fee_percentage').val((commission * 100/ annual()).toFixed 1)
-    commission
+    accrued_commission = tenant_side() + owner_side()
+    $('#commission_total_commission').val accrued_commission.toFixed 2
+    accrued_commission
+
+percent = ->
+  $('#commission_commission_fee_percentage').val((commission() * 100/ annual()).toFixed 1)
 
 annual = ->
   $('#commission_annualized_rent').val()
@@ -60,13 +63,18 @@ listing_fee_owed = ->
 referral_owed = ->
   $('input:checkbox.referral:checked').exists()
 
+update_tenant_side = ->
+  unless calculation_suspended()
+    tenant_side_commission = annual() * $('#commission_commission_fee_percentage').val() / 100
+    $('#commission_tenant_side_commission').val tenant_side_commission.toFixed 2
+    accrued_commission = tenant_side_commission + owner_side()
+    $('#commission_total_commission').val accrued_commission.toFixed 2
+
 update_inbound = ->
   unless calculation_suspended()
     $('#commission_co_broke_commission').val co_broke_commission().toFixed 2
     base = commission() - co_broke_commission()
     final = base
-    # if listing_fee_owed()
-    #   final = final * ((100 - $('#commission_listing_fee_percentage').val()) / 100)
     if referral_owed()
       final = final - $('#commission_referral_payment').val()
     $('#commission_citi_commission').val final.toFixed 2
@@ -79,6 +87,10 @@ update_inbound = ->
 $(document).on 'turbolinks:load', ->
   $('#commission_editor').on 'blur', 'input.commission', ->
     update_inbound()
+    percent()
+  
+  $('#commission_editor').on 'blur', '#commission_commission_fee_percentage', ->
+    update_tenant_side()
   
   $('#checkboxes').on 'change', 'input:checkbox', ->
     update_inbound()
@@ -86,16 +98,6 @@ $(document).on 'turbolinks:load', ->
   $('#checkboxes').on 'blur', 'input.referral_amount', ->
     referral(this)
     update_inbound()
-  
-  $('#checkboxes').on 'change', 'input:checkbox', (change_event) ->
-    selected_box = $(change_event.currentTarget)
-    row = $(selected_box).closest 'tr'
-    table = $(selected_box).closest 'table'
-    boxes = table.find 'input'
-    needed_boxes = row.find 'input'
-    unneeded_boxes = boxes.not(needed_boxes).get()
-    # $(unneeded_boxes).each((index, box) => $(box).prop('disabled', selected_box.prop('checked')))
-    # $(needed_boxes).each((index, box) => $(box).css('border-color', 'green'))
   
   $('#commission_participation_registration').on 'change', '#assist_assistant_id', ->
     if $('#assist_assistant_id').val() == 'Add Name'
