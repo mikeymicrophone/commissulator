@@ -12,9 +12,11 @@ module CommissionsHelper
   
   def commission_row_for commission
     columns = [
+      content_tag(:td, commission.property_address),
+      content_tag(:td, link_to_name(commission.deal, :unit_number)),
       content_tag(:td, commission.tenant_name.join(', ')),
       content_tag(:td, number_to_currency(commission.leased_monthly_rent)),
-      content_tag(:td, link_to_name(commission.deal, :unit_number)),
+      content_tag(:td, link_to(number_to_currency(commission.total_commission), commission)),
       content_tag(:td, link_to_name(commission.landlord)),
       content_tag(:td, commission.zip_code),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
