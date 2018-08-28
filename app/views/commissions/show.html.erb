@@ -3,6 +3,7 @@
   <%= link_to fa_icon(:file_export, :size => '2x'), commission_path(@commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission' %>
   <%= link_to fa_icon(:newspaper, :size => '2x'), edit_commission_path(@commission), :title => 'Edit Paperwork' %>
   <%= link_to fa_icon(:file_invoice_dollar, :size => '2x'), @commission.deal, :title => 'Finance Breakdown' %>
+  <%= link_to fa_icon(:paper_plane, :size => '2x'), submit_commission_path(@commission), :method => :put, :remote => true, :id => dom_id(@commission, :submission_link_for), :title => 'Submit to Senior Agent via Email' %>
 </div>
 
 <%= document_uploader_area %>
