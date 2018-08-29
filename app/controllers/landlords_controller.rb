@@ -2,8 +2,13 @@ class LandlordsController < ApplicationController
   before_action :set_landlord, only: [:show, :edit, :update, :destroy]
 
   def index
-    @landlords = if params[:sort]
+    @landlords = case params[:sort]
+    when 'recent_commission'
       Landlord.joins(:commissions).order('commissions.approval_date desc nulls last')
+    when 'name'
+      Landlord.order :name
+    when 'deal_count'
+      Kaminari.paginate_array Landlord.all.sort_by { |landlord| landlord.commissions.count }.reverse
     else
       Landlord.all
     end.page params[:page]
