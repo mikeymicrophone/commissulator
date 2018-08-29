@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+landlords = {
+  url: "/landlords.json"
+  getValue: 'name'
+  list:
+    onSelectItemEvent: () ->
+      landlord = $('#commission_landlord_name').getSelectedItemData()
+      $('#commission_landlord_email').val(landlord.email)
+      $('#commission_landlord_phone_number').val(landlord.phone_number)
+}
+
+$(document).on 'turbolinks:load', ->
+  $('#commission_landlord_name').easyAutocomplete landlords

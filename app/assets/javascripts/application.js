@@ -15,4 +15,5 @@
 //= require activestorage
 //= require turbolinks
 //= require font_awesome5
+//= require jquery.easy-autocomplete
 //= require_tree .
