@@ -13,10 +13,12 @@ module ApplicationHelper
     link_to(fa_icon(:chart_pie, :text => 'Commissions'), commissions_path, :id => 'commissions_link') +
     # link_to(fa_icon(:clipboard_list, :text => 'Documents'), documents_path) +
     # link_to(fa_icon(:balance_scale, :text => 'Deals'), deals_path) +
-    # link_to(fa_icon(:users, :text => 'Assistants'), assistants_path) +
     # link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
     # link_to(fa_icon(:user_tie, :text => 'Agents'), agents_path) +
-    link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path)
+    link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path) +
+    if current_agent.admin?
+      link_to(fa_icon(:users, :text => 'Assistants'), assistants_path)
+    end
   end
   
   def penthouse_nav
