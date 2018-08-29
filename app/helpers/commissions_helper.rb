@@ -13,19 +13,19 @@ module CommissionsHelper
   def commission_row_for commission
     columns = [
       content_tag(:td, commission.property_address),
-      content_tag(:td, link_to_name(commission.deal, :unit_number)),
+      content_tag(:td, commission.apartment_number),
       content_tag(:td, commission.tenant_name.join(', ')),
       content_tag(:td, number_to_currency(commission.leased_monthly_rent)),
       content_tag(:td, link_to(number_to_currency(commission.total_commission), commission)),
       content_tag(:td, link_to_name(commission.landlord)),
-      content_tag(:td, commission.zip_code),
+      # content_tag(:td, commission.zip_code),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, link_to(fa_icon(:stream, :size => '2x'), commission, :title => 'Review Commission Data')),
-      content_tag(:td, link_to(fa_icon(:file_invoice_dollar, :size => '2x'), commission.deal, :title => 'Finance Breakdown')),
+      # content_tag(:td, link_to(fa_icon(:file_invoice_dollar, :size => '2x'), commission.deal, :title => 'Finance Breakdown')),
       content_tag(:td, link_to(fa_icon(:newspaper, :size => '2x'), edit_commission_path(commission), :title => 'Update Paperwork')),
       content_tag(:td, link_to(fa_icon(:file_export, :size => '2x'), commission_path(commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission')),
-      content_tag(:td, commission.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{commission.documents.count})", :size => '2x'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal), :title => pluralize(commission.documents.count, 'Uploaded Document')) : '', :class => 'document_list'),
-      content_tag(:td, link_to(fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
+      # content_tag(:td, commission.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{commission.documents.count})", :size => '2x'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal), :title => pluralize(commission.documents.count, 'Uploaded Document')) : '', :class => 'document_list'),
+      # content_tag(:td, link_to(fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
       content_tag(:td, commission.documented? ? link_to(fa_icon(:paper_plane, :size => '2x'), submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for), :title => 'Submit to Senior Agent via Email') : ''),
       content_tag(:td, link_to(fa_icon(:joint, :size => '2x'), commission, :method => :delete, :remote => true, :title => 'Delete Commission Entry', :data => {:confirm => 'Are you sure?'}), :class => 'commission_removal')
     ]

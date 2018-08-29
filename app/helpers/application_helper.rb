@@ -11,11 +11,11 @@ module ApplicationHelper
   def main_nav
     link_to('New Commission', new_commission_path, :id => 'new_commission_link') +
     link_to(fa_icon(:chart_pie, :text => 'Commissions'), commissions_path, :id => 'commissions_link') +
-    link_to(fa_icon(:clipboard_list, :text => 'Documents'), documents_path) +
-    link_to(fa_icon(:balance_scale, :text => 'Deals'), deals_path) +
-    link_to(fa_icon(:users, :text => 'Assistants'), assistants_path) +
-    link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
-    link_to(fa_icon(:user_tie, :text => 'Agents'), agents_path) +
+    # link_to(fa_icon(:clipboard_list, :text => 'Documents'), documents_path) +
+    # link_to(fa_icon(:balance_scale, :text => 'Deals'), deals_path) +
+    # link_to(fa_icon(:users, :text => 'Assistants'), assistants_path) +
+    # link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
+    # link_to(fa_icon(:user_tie, :text => 'Agents'), agents_path) +
     link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path)
   end
   
