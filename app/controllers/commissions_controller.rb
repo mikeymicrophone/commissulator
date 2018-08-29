@@ -93,6 +93,7 @@ class CommissionsController < ApplicationController
   end
   
   def submit
+    @commission.update_attribute :submitted_on, Time.now
     DistributionMailer.with(:commission => @commission).submit_to_senior.deliver
   end
 

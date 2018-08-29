@@ -45,6 +45,11 @@
     <%= form.label :payable_last_name %>
     <%= form.text_field :payable_last_name %>
   </div>
+  
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :email, @assistant.agent_id), :include_blank => true %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

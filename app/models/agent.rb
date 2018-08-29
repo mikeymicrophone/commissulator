@@ -5,6 +5,7 @@ class Agent < ApplicationRecord
   has_many :deals
   has_many :assistants, -> { distinct }, :through => :deals
   has_many :commissions
+  has_one :assistant
   
   scope :alpha, lambda { order :first_name }
   
