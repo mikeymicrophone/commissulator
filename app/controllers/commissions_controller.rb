@@ -12,6 +12,10 @@ class CommissionsController < ApplicationController
       @commissions.order 'updated_at desc'
     when 'leased_monthly_rent'
       @commissions.order 'leased_monthly_rent desc'
+    when 'total_commission'
+      @commissions.order 'total_commission desc nulls last'
+    when 'property_address'
+      @commissions.order 'property_address'
     else
       @commissions.order 'created_at desc'
     end.page params[:page]
