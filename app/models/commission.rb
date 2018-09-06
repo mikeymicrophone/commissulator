@@ -220,6 +220,6 @@ class Commission < ApplicationRecord
   end
   
   def documented_commission
-    documents.commission_payments.inject(0) { |sum, payment| sum + BigDecimal(eval(payment.name)) rescue nil if payment.name =~ /[\d\s\+\.]+/ }
+    documents.commission_payments.inject(0) { |sum, payment| sum + BigDecimal(sprintf '%.2f', eval(payment.name)) rescue nil if payment.name =~ /[\d\s\+\.]+/ }
   end
 end
