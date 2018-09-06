@@ -33,20 +33,24 @@ class Deal < ApplicationRecord
     commission&.citi_commission.to_d
   end
   
+  def remaining_commission
+    inbound_commission - referral_payment
+  end
+  
   def closeout
-    agent_split_percentage.percent_of (inbound_commission - referral_payment)
+    agent_split_percentage.percent_of remaining_commission
   end
   
   def house_cut
-    (inbound_commission - referral_payment) * (1 - (agent_split_percentage.to_d / BigDecimal(100)))
+    remaining_commission * (1 - (agent_split_percentage.to_d / BigDecimal(100)))
   end
   
   def agent_commission
-    (inbound_commission - referral_payment) * (agent_split_percentage.to_d / BigDecimal(100)) - distributed_commission
+    remaining_commission * (agent_split_percentage.to_d / BigDecimal(100)) - distributed_commission
   end
   
   def distributable_commission participation_rate
-    participation_rate.percent_of(inbound_commission - referral_payment - expenses)
+    participation_rate.percent_of(remaining_commission - expenses)
   end
   
   def distributed_commission
@@ -62,7 +66,7 @@ class Deal < ApplicationRecord
   end
   
   def listing_fee
-    (commission.listing_fee_percentage / BigDecimal(100)) *  inbound_commission if commission&.listing_fee?
+    (commission.listing_fee_percentage / BigDecimal(100)) * inbound_commission if commission&.listing_fee?
   end
   
   def staffed?
@@ -79,7 +83,7 @@ class Deal < ApplicationRecord
     special_efforts.map do |assistant_id, assists|
       assistant = Assistant.find assistant_id
       if assistants.map(&:name).append(agent.name).include? assistant.distinct_payable_name
-        "Override payment from #{assistant.payable_name} to #{assistant.name}: #{number_to_currency 10.percent_of closeout}"
+        "Override payment from #{assistant.payable_name} to #{assistant.name}: #{number_to_currency 10.percent_of remaining_commission}"
       end
     end
   end
