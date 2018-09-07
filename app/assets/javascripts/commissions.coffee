@@ -29,40 +29,49 @@ total = ->
     accrued_commission
 
 percent = ->
-  $('#commission_commission_fee_percentage').val((commission() * 100/ annual()).toFixed 1)
+  unless calculation_suspended()
+    $('#commission_commission_fee_percentage').val((commission() * 100/ annual()).toFixed 1)
 
 annual = ->
-  $('#commission_annualized_rent').val()
+  unless calculation_suspended()
+    $('#commission_annualized_rent').val()
 
 tenant_side = ->
-  if $('#commission_tenant_side_commission').val() != ''
-    parseFloat $('#commission_tenant_side_commission').val()
-  else
-    0
+  unless calculation_suspended()
+    if $('#commission_tenant_side_commission').val() != ''
+      parseFloat $('#commission_tenant_side_commission').val()
+    else
+      0
 
 owner_side = ->
-  if $('#commission_owner_pay_commission').val() != ''
-    parseFloat $('#commission_owner_pay_commission').val()
-  else
-    0
+  unless calculation_suspended()
+    if $('#commission_owner_pay_commission').val() != ''
+      parseFloat $('#commission_owner_pay_commission').val()
+    else
+      0
 
 commission = ->
-  total()
+  unless calculation_suspended()
+    total()
 
 co_broke_commission = ->
-  if co_broke_owed()
-    commission() / 2
-  else
-    0
+  unless calculation_suspended()
+    if co_broke_owed()
+      commission() / 2
+    else
+      0
 
 co_broke_owed = ->
-  $('input:checkbox.co_broke:checked').exists()
+  unless calculation_suspended()
+    $('input:checkbox.co_broke:checked').exists()
 
 listing_fee_owed = ->
-  $('input:checkbox.listing_fee:checked').exists()
+  unless calculation_suspended()
+    $('input:checkbox.listing_fee:checked').exists()
 
 referral_owed = ->
-  $('input:checkbox.referral:checked').exists()
+  unless calculation_suspended()
+    $('input:checkbox.referral:checked').exists()
 
 update_tenant_side = ->
   unless calculation_suspended()
