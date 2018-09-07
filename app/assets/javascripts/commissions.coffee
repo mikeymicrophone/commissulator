@@ -2,8 +2,9 @@ calculation_suspended = ->
   $('#suspend_calculation').prop('checked')
 
 list = ->
-  if $('#commission_listed_monthly_rent').val() == ''
-    $('#commission_listed_monthly_rent').val($('#commission_leased_monthly_rent').val())
+  unless calculation_suspended()
+    if $('#commission_listed_monthly_rent').val() == ''
+      $('#commission_listed_monthly_rent').val($('#commission_leased_monthly_rent').val())
 
 @derive = ->
   unless calculation_suspended()
@@ -68,9 +69,20 @@ co_broke_commission = ->
     else
       0
 
+listing_side_commission = ->
+  unless calculation_suspended()
+    if listing_side_owed()
+      tenant_side() / 2
+    else
+      0
+
 co_broke_owed = ->
   unless calculation_suspended()
     $('input:checkbox.co_broke:checked').exists()
+
+listing_side_owed = ->
+  unless calculation_suspended()
+    $('input:checkbox#commission_citi_habitats_agent:checked').exists()
 
 listing_fee_owed = ->
   unless calculation_suspended()
@@ -89,6 +101,10 @@ update_tenant_side = ->
 
 update_inbound = ->
   unless calculation_suspended()
+    if listing_side_owed()
+      unless listing_side() > 0
+        $('#commission_listing_side_commission').val listing_side_commission().toFixed 2
+        $('#commission_tenant_side_commission').val listing_side_commission().toFixed 2
     $('#commission_co_broke_commission').val co_broke_commission().toFixed 2
     base = commission() - co_broke_commission()
     final = base
