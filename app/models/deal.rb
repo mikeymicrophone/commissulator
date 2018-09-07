@@ -4,7 +4,7 @@ class Deal < ApplicationRecord
   has_many :assistants, :through => :assists
   has_one :commission
   has_many :documents
-  delegate :annualized_rent, :agent_split_percentage, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
+  delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary
@@ -30,7 +30,7 @@ class Deal < ApplicationRecord
   end
   
   def inbound_commission
-    commission&.citi_commission.to_d
+    citi_commission.to_d - listing_side_commission.to_d
   end
   
   def remaining_commission

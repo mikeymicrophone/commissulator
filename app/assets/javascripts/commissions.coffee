@@ -24,7 +24,7 @@ ripple = ->
 
 total = ->
   unless calculation_suspended()
-    accrued_commission = tenant_side() + owner_side()
+    accrued_commission = tenant_side() + listing_side() + owner_side()
     $('#commission_total_commission').val accrued_commission.toFixed 2
     accrued_commission
 
@@ -40,6 +40,13 @@ tenant_side = ->
   unless calculation_suspended()
     if $('#commission_tenant_side_commission').val() != ''
       parseFloat $('#commission_tenant_side_commission').val()
+    else
+      0
+
+listing_side = ->
+  unless calculation_suspended()
+    if $('#commission_listing_side_commission').val() != ''
+      parseFloat $('#commission_listing_side_commission').val()
     else
       0
 
