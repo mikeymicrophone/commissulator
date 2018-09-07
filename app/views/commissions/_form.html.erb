@@ -181,10 +181,10 @@
   
       <div class="commission_form_row">
         <%= form.label :owner_pay_commission, 'Owner Pay Commission' %>
-        <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2), :placeholder => '[fill this]' %>
+        <%= form.text_field :owner_pay_commission, :class => 'commission', :value => number_with_precision(commission.owner_pay_commission, :precision => 2) %>
     
         <%= form.label :listing_side_commission, 'Listing Side Commission' %>
-        <%= form.text_field :listing_side_commission, :class => 'commission', :value => number_with_precision(commission.listing_side_commission, :precision => 2), :placeholder => '[fill this]' %>
+        <%= form.text_field :listing_side_commission, :class => 'commission', :value => number_with_precision(commission.listing_side_commission, :precision => 2), :placeholder => '[derived]' %>
     
         <%= form.label :tenant_side_commission, 'Tenant Side Commission' %>
         <%= form.text_field :tenant_side_commission, :class => 'commission', :value => number_with_precision(commission.tenant_side_commission, :precision => 2), :placeholder => '[derived]' %>
