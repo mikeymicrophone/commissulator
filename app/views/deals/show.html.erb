@@ -42,14 +42,14 @@
     <%= content_tag :div, rounded(@deal.tenant_side_commission), :class => 'deal_portion' %>
   </div>
   
-  <% if @deal.listing_side_commission.present? %>
+  <% if @deal.listing_side_commission > 0 %>
     <div>
       <%= content_tag :div, 'Listing Side Commission', :class => 'deal_portion_description' %>
       <%= content_tag :div, "+ #{rounded @deal.listing_side_commission}", :class => 'deal_portion' %>
     </div>
   <% end %>
   
-  <% if @deal.owner_pay_commission.present? %>
+  <% if @deal.owner_pay_commission > 0 %>
     <div>
       <%= content_tag :div, 'Owner Commission', :class => 'deal_portion_description' %>
       <%= content_tag :div, "+ #{rounded @deal.owner_pay_commission}", :class => 'deal_portion' %>
@@ -66,7 +66,7 @@
     <%= content_tag :div, rounded(@deal.total_commission), :class => 'deal_portion' %>
   </div>
   
-  <% if @deal.listing_side_commission.present? %>
+  <% if @deal.listing_side_commission > 0 %>
     <div>
       <%= content_tag :div, 'Listing Side', :class => 'deal_portion_description' %>
       <%= content_tag :div, "- #{rounded @deal.listing_side_commission}", :class => 'deal_portion' %>
