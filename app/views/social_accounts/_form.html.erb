@@ -1,0 +1,42 @@
+<%= form_with(model: social_account, local: true) do |form| %>
+  <% if social_account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(social_account.errors.count, "error") %> prohibited this social_account from being saved:</h2>
+
+      <ul>
+      <% social_account.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :variety %>
+    <%= form.text_field :variety %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :moniker %>
+    <%= form.text_field :moniker %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_id %>
+    <%= form.text_field :client_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :employer_id %>
+    <%= form.text_field :employer_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

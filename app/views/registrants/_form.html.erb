@@ -1,0 +1,32 @@
+<%= form_with(model: registrant, local: true) do |form| %>
+  <% if registrant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(registrant.errors.count, "error") %> prohibited this registrant from being saved:</h2>
+
+      <ul>
+      <% registrant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :other_fund_sources %>
+    <%= form.text_area :other_fund_sources %>
+  </div>
+
+  <div class="field">
+    <%= form.label :client_id %>
+    <%= form.text_field :client_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :registration_id %>
+    <%= form.text_field :registration_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

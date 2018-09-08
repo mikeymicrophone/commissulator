@@ -1,0 +1,58 @@
+#registration_interface {
+  
+  .reg_form_quadrant {
+    margin: 5px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #E6E6E6;
+    font-family: 'M PLUS Rounded 1c';
+    font-size: 1.2em;
+  }
+
+  input, textarea {
+    border: 1px solid #bbb;
+    padding: 2px;
+    font-family: 'M PLUS Rounded 1c';
+    font-size: 1.2em;
+  
+    &.name_part {
+      width: 150px;
+    }
+
+    &.address_part {
+      width: 40px;
+    }
+  
+    &.street {
+      width: 150px;
+    }
+  
+    &.zip {
+      width: 90px;
+    }
+  
+    &.medium {
+      width: 110px;
+    }
+  }
+
+  select {
+    font-size: 1.2em;
+
+    option {
+      font-family: 'M PLUS Rounded 1c';
+    }
+  }
+
+  .inline {
+    display: inline-block;
+  }
+
+  .bordered {
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+    padding: 5px;
+  }
+
+}

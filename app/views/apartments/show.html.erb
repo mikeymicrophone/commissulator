@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Unit number:</strong>
+  <%= @apartment.unit_number %>
+</p>
+
+<p>
+  <strong>Street number:</strong>
+  <%= @apartment.street_number %>
+</p>
+
+<p>
+  <strong>Street name:</strong>
+  <%= @apartment.street_name %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @apartment.zip_code %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @apartment.size %>
+</p>
+
+<p>
+  <strong>Rent:</strong>
+  <%= @apartment.rent %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @apartment.comment %>
+</p>
+
+<p>
+  <strong>Registration:</strong>
+  <%= @apartment.registration %>
+</p>
+
+<%= link_to 'Edit', edit_apartment_path(@apartment) %> |
+<%= link_to 'Back', apartments_path %>

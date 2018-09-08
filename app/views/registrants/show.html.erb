@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Other fund sources:</strong>
+  <%= @registrant.other_fund_sources %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @registrant.client %>
+</p>
+
+<p>
+  <strong>Registration:</strong>
+  <%= @registrant.registration %>
+</p>
+
+<%= link_to 'Edit', edit_registrant_path(@registrant) %> |
+<%= link_to 'Back', registrants_path %>

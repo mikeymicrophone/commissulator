@@ -62,6 +62,20 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
   end
 
+  create_table "apartments", force: :cascade do |t|
+    t.string "unit_number"
+    t.string "street_number"
+    t.string "street_name"
+    t.string "zip_code"
+    t.string "size"
+    t.decimal "rent"
+    t.string "comment"
+    t.bigint "registration_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["registration_id"], name: "index_apartments_on_registration_id"
+  end
+
   create_table "assistants", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -88,6 +102,14 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.decimal "expense"
     t.index ["assistant_id"], name: "index_assists_on_assistant_id"
     t.index ["deal_id"], name: "index_assists_on_deal_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "date_of_birth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "commissions", force: :cascade do |t|
@@ -199,6 +221,43 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.index ["deal_id"], name: "index_documents_on_deal_id"
   end
 
+  create_table "emails", force: :cascade do |t|
+    t.string "variety"
+    t.string "address"
+    t.bigint "client_id"
+    t.bigint "employer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_emails_on_client_id"
+    t.index ["employer_id"], name: "index_emails_on_employer_id"
+  end
+
+  create_table "employers", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employments", force: :cascade do |t|
+    t.string "position"
+    t.decimal "income"
+    t.date "start_date"
+    t.bigint "client_id"
+    t.bigint "employer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_employments_on_client_id"
+    t.index ["employer_id"], name: "index_employments_on_employer_id"
+  end
+
+  create_table "industries", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "landlords", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -207,6 +266,104 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "leases", force: :cascade do |t|
+    t.string "apartment_number"
+    t.string "street_number"
+    t.string "street_name"
+    t.string "zip_code"
+    t.bigint "landlord_id"
+    t.bigint "client_id"
+    t.bigint "registration_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_leases_on_client_id"
+    t.index ["landlord_id"], name: "index_leases_on_landlord_id"
+    t.index ["registration_id"], name: "index_leases_on_registration_id"
+  end
+
+  create_table "niches", force: :cascade do |t|
+    t.bigint "employer_id"
+    t.bigint "industry_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employer_id"], name: "index_niches_on_employer_id"
+    t.index ["industry_id"], name: "index_niches_on_industry_id"
+  end
+
+  create_table "phones", force: :cascade do |t|
+    t.string "variety"
+    t.string "number"
+    t.bigint "client_id"
+    t.bigint "employer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_phones_on_client_id"
+    t.index ["employer_id"], name: "index_phones_on_employer_id"
+  end
+
+  create_table "referral_sources", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registrants", force: :cascade do |t|
+    t.text "other_fund_sources"
+    t.bigint "client_id"
+    t.bigint "registration_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_registrants_on_client_id"
+    t.index ["registration_id"], name: "index_registrants_on_registration_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.decimal "minimum_price"
+    t.decimal "maximum_price"
+    t.string "size"
+    t.date "move_by"
+    t.text "reason_for_moving"
+    t.integer "occupants"
+    t.string "pets"
+    t.bigint "referral_source_id"
+    t.bigint "agent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_registrations_on_agent_id"
+    t.index ["referral_source_id"], name: "index_registrations_on_referral_source_id"
+  end
+
+  create_table "social_accounts", force: :cascade do |t|
+    t.string "variety"
+    t.string "url"
+    t.string "moniker"
+    t.bigint "client_id"
+    t.bigint "employer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_social_accounts_on_client_id"
+    t.index ["employer_id"], name: "index_social_accounts_on_employer_id"
+  end
+
+  add_foreign_key "apartments", "registrations"
   add_foreign_key "assists", "assistants"
   add_foreign_key "assists", "deals"
+  add_foreign_key "emails", "clients"
+  add_foreign_key "emails", "employers"
+  add_foreign_key "employments", "clients"
+  add_foreign_key "employments", "employers"
+  add_foreign_key "leases", "clients"
+  add_foreign_key "leases", "landlords"
+  add_foreign_key "leases", "registrations"
+  add_foreign_key "niches", "employers"
+  add_foreign_key "niches", "industries"
+  add_foreign_key "phones", "clients"
+  add_foreign_key "phones", "employers"
+  add_foreign_key "registrants", "clients"
+  add_foreign_key "registrants", "registrations"
+  add_foreign_key "registrations", "agents"
+  add_foreign_key "registrations", "referral_sources"
+  add_foreign_key "social_accounts", "clients"
+  add_foreign_key "social_accounts", "employers"
 end

@@ -1,11 +1,31 @@
 module ApplicationHelper
-  def link_to_name obj, attribute = nil
-    return '' unless obj
-    if attribute
-      link_to obj.send(attribute), obj
-    else
-      link_to obj.name, obj
+  def link_to_name object, attribute = :name
+    link_to object.send(attribute), object if object
+  end
+  
+  def agent_nav
+    content_tag :nav do
+      [
+        resource_path(Client),
+        resource_path(Registration),
+        resource_path(Employer),
+        resource_path(Employment),
+        resource_path(Industry),
+        resource_path(Niche),
+        resource_path(Landlord),
+        resource_path(Lease),
+        resource_path(Phone),
+        resource_path(Email),
+        resource_path(SocialAccount),
+        resource_path(ReferralSource),
+        resource_path(Registrant),
+        resource_path(Apartment)
+      ].join(' ').html_safe
     end
+  end
+  
+  def resource_path resource
+    link_to resource.name.pluralize, send("#{resource.name.underscore.pluralize}_path")
   end
   
   def main_nav

@@ -30,4 +30,19 @@ Rails.application.routes.draw do
   root :to => 'home#landing'
   devise_for :agents
   resources :agents, :only => [:index, :show, :edit, :update]
+  resources :apartments
+  resources :social_accounts
+  resources :emails
+  resources :phones
+  resources :niches
+  resources :industries
+  resources :employments
+  resources :employers
+  resources :leases
+  resources :registrants
+  resources :clients
+  resources :referral_sources
+  resources :registrations
+  get '/register' => 'home#registration', :as => 'begin_registration'
+  post '/register' => 'home#submit', :as => 'submit_registration'
 end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @referral_source.name %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @referral_source.active %>
+</p>
+
+<%= link_to 'Edit', edit_referral_source_path(@referral_source) %> |
+<%= link_to 'Back', referral_sources_path %>

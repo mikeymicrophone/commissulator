@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Referral Sources</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @referral_sources.each do |referral_source| %>
+      <tr>
+        <td><%= referral_source.name %></td>
+        <td><%= referral_source.active %></td>
+        <td><%= link_to 'Show', referral_source %></td>
+        <td><%= link_to 'Edit', edit_referral_source_path(referral_source) %></td>
+        <td><%= link_to 'Destroy', referral_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Referral Source', new_referral_source_path %>

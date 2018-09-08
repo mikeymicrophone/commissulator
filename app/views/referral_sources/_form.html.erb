@@ -1,0 +1,27 @@
+<%= form_with(model: referral_source, local: true) do |form| %>
+  <% if referral_source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(referral_source.errors.count, "error") %> prohibited this referral_source from being saved:</h2>
+
+      <ul>
+      <% referral_source.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :active %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

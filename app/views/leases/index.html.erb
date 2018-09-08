@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Leases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Apartment number</th>
+      <th>Street number</th>
+      <th>Street name</th>
+      <th>Zip code</th>
+      <th>Landlord</th>
+      <th>Client</th>
+      <th>Registration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leases.each do |lease| %>
+      <tr>
+        <td><%= lease.apartment_number %></td>
+        <td><%= lease.street_number %></td>
+        <td><%= lease.street_name %></td>
+        <td><%= lease.zip_code %></td>
+        <td><%= link_to_name lease.landlord %></td>
+        <td><%= link_to_name lease.client %></td>
+        <td><%= link_to_name lease.registration %></td>
+        <td><%= link_to 'Show', lease %></td>
+        <td><%= link_to 'Edit', edit_lease_path(lease) %></td>
+        <td><%= link_to 'Destroy', lease, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lease', new_lease_path %>

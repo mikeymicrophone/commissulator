@@ -1,0 +1,62 @@
+<%= form_with(model: registration, local: true) do |form| %>
+  <% if registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(registration.errors.count, "error") %> prohibited this registration from being saved:</h2>
+
+      <ul>
+      <% registration.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :minimum_price %>
+    <%= form.text_field :minimum_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :maximum_price %>
+    <%= form.text_field :maximum_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :move_by %>
+    <%= form.date_select :move_by %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reason_for_moving %>
+    <%= form.text_area :reason_for_moving %>
+  </div>
+
+  <div class="field">
+    <%= form.label :occupants %>
+    <%= form.number_field :occupants %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pets %>
+    <%= form.text_field :pets %>
+  </div>
+
+  <div class="field">
+    <%= form.label :referral_source_id %>
+    <%= form.text_field :referral_source_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

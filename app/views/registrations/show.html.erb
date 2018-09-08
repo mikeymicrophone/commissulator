@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Minimum price:</strong>
+  <%= @registration.minimum_price %>
+</p>
+
+<p>
+  <strong>Maximum price:</strong>
+  <%= @registration.maximum_price %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @registration.size %>
+</p>
+
+<p>
+  <strong>Move by:</strong>
+  <%= @registration.move_by %>
+</p>
+
+<p>
+  <strong>Reason for moving:</strong>
+  <%= @registration.reason_for_moving %>
+</p>
+
+<p>
+  <strong>Occupants:</strong>
+  <%= @registration.occupants %>
+</p>
+
+<p>
+  <strong>Pets:</strong>
+  <%= @registration.pets %>
+</p>
+
+<p>
+  <strong>Referral source:</strong>
+  <%= @registration.referral_source %>
+</p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @registration.agent %>
+</p>
+
+<%= link_to 'Edit', edit_registration_path(@registration) %> |
+<%= link_to 'Back', registrations_path %>

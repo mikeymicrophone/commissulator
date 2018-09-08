@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Registrations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Minimum price</th>
+      <th>Maximum price</th>
+      <th>Size</th>
+      <th>Move by</th>
+      <th>Reason for moving</th>
+      <th>Occupants</th>
+      <th>Pets</th>
+      <th>Referral source</th>
+      <th>Agent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registrations.each do |registration| %>
+      <tr>
+        <td><%= registration.minimum_price %></td>
+        <td><%= registration.maximum_price %></td>
+        <td><%= registration.size %></td>
+        <td><%= registration.move_by %></td>
+        <td><%= registration.reason_for_moving %></td>
+        <td><%= registration.occupants %></td>
+        <td><%= registration.pets %></td>
+        <td><%= link_to_name registration.referral_source %></td>
+        <td><%= registration.agent %></td>
+        <td><%= link_to 'Show', registration %></td>
+        <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
+        <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Registration', new_registration_path %>

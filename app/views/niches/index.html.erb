@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Niches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Employer</th>
+      <th>Industry</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @niches.each do |nich| %>
+      <tr>
+        <td><%= link_to_name nich.employer %></td>
+        <td><%= link_to_name nich.industry %></td>
+        <td><%= link_to 'Show', nich %></td>
+        <td><%= link_to 'Edit', edit_nich_path(nich) %></td>
+        <td><%= link_to 'Destroy', nich, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nich', new_nich_path %>

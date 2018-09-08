@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Variety:</strong>
+  <%= @social_account.variety %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @social_account.url %>
+</p>
+
+<p>
+  <strong>Moniker:</strong>
+  <%= @social_account.moniker %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @social_account.client %>
+</p>
+
+<p>
+  <strong>Employer:</strong>
+  <%= @social_account.employer %>
+</p>
+
+<%= link_to 'Edit', edit_social_account_path(@social_account) %> |
+<%= link_to 'Back', social_accounts_path %>

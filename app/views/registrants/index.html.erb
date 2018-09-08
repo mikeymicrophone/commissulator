@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Registrants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Other fund sources</th>
+      <th>Client</th>
+      <th>Registration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registrants.each do |registrant| %>
+      <tr>
+        <td><%= registrant.other_fund_sources %></td>
+        <td><%= link_to_name registrant.client %></td>
+        <td><%= link_to_name registrant.registration %></td>
+        <td><%= link_to 'Show', registrant %></td>
+        <td><%= link_to 'Edit', edit_registrant_path(registrant) %></td>
+        <td><%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Registrant', new_registrant_path %>

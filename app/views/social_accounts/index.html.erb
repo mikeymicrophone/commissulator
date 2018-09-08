@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Social Accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variety</th>
+      <th>Url</th>
+      <th>Moniker</th>
+      <th>Client</th>
+      <th>Employer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @social_accounts.each do |social_account| %>
+      <tr>
+        <td><%= social_account.variety %></td>
+        <td><%= social_account.url %></td>
+        <td><%= social_account.moniker %></td>
+        <td><%= link_to_name social_account.client %></td>
+        <td><%= link_to_name social_account.employer %></td>
+        <td><%= link_to 'Show', social_account %></td>
+        <td><%= link_to 'Edit', edit_social_account_path(social_account) %></td>
+        <td><%= link_to 'Destroy', social_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Social Account', new_social_account_path %>
