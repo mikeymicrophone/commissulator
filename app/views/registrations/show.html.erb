@@ -45,5 +45,87 @@
   <%= @registration.agent %>
 </p>
 
+<%= div_for @registration do %>
+  <%= div_for @registration, :landlords_of do %>
+    <% @registration.landlords.each do |landlord| %>
+      <%= div_for landlord do %>
+        <%= link_to_name landlord %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <%= div_for @registration, :leases_of do %>
+    <% @registration.leases.each do |lease| %>
+      <%= div_for lease do %>
+        <%= link_to_name lease %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <%= div_for @registration, :apartments_of do %>
+    <% @registration.apartments.each do |apartment| %>
+      <%= div_for apartment do %>
+        <%= link_to_name apartment %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% @registration.clients.each do |client| %>
+    <%= div_for client do %>
+      <%= link_to_name client %>
+    
+      <%= div_for client, :registrant_for do %>
+        <% registrant = client.registrants.where(:registration_id => @registration).take %>
+        <%= registrant.other_fund_sources %>
+        <%= link_to_name registrant %>
+      <% end %>
+    
+      <%= div_for client, :employment_of do %>
+        <% client.employments.each do |employment| %>
+          <%= div_for employment do %>
+            <%= link_to_name employment %>
+            <%= link_to_name employment.employer %>
+            <% employment.employer.industries.each do |industry| %>
+              <%= div_for industry do %>
+                <%= link_to_name industry %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    
+      <%= div_for client, :contacts_for do %>
+        <% div_for client, :emails_for do %>
+          <% client.emails.each do |email| %>
+            <%= div_for email do %>
+              <%= link_to_name email, :address %>
+              (<%= email.variety %>)
+            <% end %>
+          <% end %>
+        <% end %>
+      
+        <%= div_for client, :phones_for do %>
+          <% client.phones.each do |phone| %>
+            <%= div_for phone do %>
+              <%= link_to_name phone, :number %>
+              (<%= phone.variety %>)
+            <% end %>
+          <% end %>
+        <% end %>
+      
+        <%= div_for client, :social_accounts_for do %>
+          <% client.social_accounts.each do |social_account| %>
+            <%= div_for social_account do %>
+              <%= link_to_name social_account, :moniker %>
+              <%= link_to social_account.url %>
+              (<%= social_account.variety %>)
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_registration_path(@registration) %> |
 <%= link_to 'Back', registrations_path %>
