@@ -4,7 +4,11 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.json
   def index
-    @phones = Phone.all
+    @phones = if params[:filtered_attribute]
+      Phone.where params[:filtered_attribute] => params[:filter_value]
+    else
+      Phone.all
+    end
   end
 
   # GET /phones/1

@@ -28,6 +28,10 @@ module ApplicationHelper
     link_to resource.name.pluralize, send("#{resource.name.underscore.pluralize}_path"), options
   end
   
+  def link_to_associated object, resource
+    link_to pluralize(object.send(resource).count, resource.to_s.singularize), send("#{resource}_path", filter_params(object)) if object.send(resource).present?
+  end
+  
   def main_nav
     link_to('New Commission', new_commission_path, :id => 'new_commission_link') +
     link_to(fa_icon(:chart_pie, :text => 'Commissions'), commissions_path, :id => 'commissions_link') +

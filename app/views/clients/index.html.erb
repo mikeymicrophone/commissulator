@@ -8,6 +8,10 @@
       <th>First name</th>
       <th>Last name</th>
       <th>Date of birth</th>
+      <th>Registration</th>
+      <th>Emails</th>
+      <th>Phones</th>
+      <th>Social Accounts</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +22,10 @@
         <td><%= client.first_name %></td>
         <td><%= client.last_name %></td>
         <td><%= client.date_of_birth %></td>
+        <td><%= link_to_name client.registrations.last %></td>
+        <td><%= link_to_associated client, :emails %></td>
+        <td><%= link_to_associated client, :phones %></td>
+        <td><%= link_to_associated client, :social_accounts %></td>
         <td><%= link_to 'Show', client %></td>
         <td><%= link_to 'Edit', edit_client_path(client) %></td>
         <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>

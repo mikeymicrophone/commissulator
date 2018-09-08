@@ -4,7 +4,11 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    @emails = if params[:filtered_attribute]
+      Email.where params[:filtered_attribute] => params[:filter_value]
+    else
+      Email.all
+    end
   end
 
   # GET /emails/1
