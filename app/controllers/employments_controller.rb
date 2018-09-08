@@ -7,6 +7,8 @@ class EmploymentsController < ApplicationController
     @employments = case params[:filtered_attribute]
     when 'registration_id'
       Registration.find(params[:filter_value]).employments
+    when 'industry_id'
+      Industry.find(params[:filter_value]).employments
     when nil
       Employment.all
     else

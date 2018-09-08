@@ -4,10 +4,13 @@ class SocialAccountsController < ApplicationController
   # GET /social_accounts
   # GET /social_accounts.json
   def index
-    @social_accounts = if params[:filtered_attribute]
-      SocialAccount.where params[:filtered_attribute] => params[:filter_value]
-    else
+    @social_accounts = case params[:filtered_attribute]
+    when 'industry_id'
+      Industry.find(params[:filter_value]).social_accounts
+    when nil
       SocialAccount.all
+    else
+      SocialAccount.where params[:filtered_attribute] => params[:filter_value]
     end
   end
 
