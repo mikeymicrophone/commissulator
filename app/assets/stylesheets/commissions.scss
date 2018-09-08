@@ -17,6 +17,10 @@
   padding: 8px 5px;
   border: 1px solid black;
   border-radius: 9px;
+  
+  .easy-autocomplete {
+    display: inline-block;
+  }
 }
 
 input#agent_split_percentage_entry {
