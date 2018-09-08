@@ -27,7 +27,7 @@
         <td><%= apartment.size %></td>
         <td><%= apartment.rent %></td>
         <td><%= apartment.comment %></td>
-        <td><%= apartment.registration %></td>
+        <td><%= link_to_name apartment.registration %></td>
         <td><%= link_to 'Show', apartment %></td>
         <td><%= link_to 'Edit', edit_apartment_path(apartment) %></td>
         <td><%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
