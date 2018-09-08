@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= form.label :client_id %>
-    <%= form.text_field :client_id %>
+    <%= form.select :client_id, options_from_collection_for_select(Client.all, :id, :name, registrant.client_id) %>
   </div>
 
   <div class="field">
     <%= form.label :registration_id %>
-    <%= form.text_field :registration_id %>
+    <%= form.select :registration_id, options_from_collection_for_select(Registration.all, :id, :name, registrant.registration_id) %>
   </div>
 
   <div class="actions">

@@ -12,12 +12,12 @@
 
 <p>
   <strong>Client:</strong>
-  <%= @email.client %>
+  <%= link_to_name @email.client %>
 </p>
 
 <p>
   <strong>Employer:</strong>
-  <%= @email.employer %>
+  <%= link_to_name @email.employer %>
 </p>
 
 <%= link_to 'Edit', edit_email_path(@email) %> |

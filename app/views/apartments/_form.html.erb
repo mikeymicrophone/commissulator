@@ -48,7 +48,7 @@
 
   <div class="field">
     <%= form.label :registration_id %>
-    <%= form.text_field :registration_id %>
+    <%= form.select :registration_id, options_from_collection_for_select(Registration.all, :id, :name, apartment.registration_id), :include_blank => true %>
   </div>
 
   <div class="actions">

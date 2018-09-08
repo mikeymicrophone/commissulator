@@ -12,13 +12,13 @@
   </thead>
 
   <tbody>
-    <% @niches.each do |nich| %>
+    <% @niches.each do |niche| %>
       <tr>
-        <td><%= link_to_name nich.employer %></td>
-        <td><%= link_to_name nich.industry %></td>
-        <td><%= link_to 'Show', nich %></td>
-        <td><%= link_to 'Edit', edit_nich_path(nich) %></td>
-        <td><%= link_to 'Destroy', nich, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to_name niche.employer %></td>
+        <td><%= link_to_name niche.industry %></td>
+        <td><%= link_to 'Show', niche %></td>
+        <td><%= link_to 'Edit', edit_niche_path(niche) %></td>
+        <td><%= link_to 'Destroy', niche, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Nich', new_nich_path %>
+<%= link_to 'New Niche', new_niche_path %>

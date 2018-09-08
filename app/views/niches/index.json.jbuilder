@@ -1,1 +1,1 @@
-json.array! @niches, partial: 'niches/nich', as: :nich
+json.array! @niches, partial: 'niches/niche', as: :nich

@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :client_id %>
-    <%= form.text_field :client_id %>
+    <%= form.select :client_id, options_from_collection_for_select(Client.all, :id, :name, phone.client_id), :include_blank => true %>
   </div>
 
   <div class="field">
     <%= form.label :employer_id %>
-    <%= form.text_field :employer_id %>
+    <%= form.select :employer_id, options_from_collection_for_select(Employer.all, :id, :name, phone.employer_id), :include_blank => true %>
   </div>
 
   <div class="actions">

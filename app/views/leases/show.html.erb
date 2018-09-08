@@ -22,17 +22,17 @@
 
 <p>
   <strong>Landlord:</strong>
-  <%= @lease.landlord %>
+  <%= link_to_name @lease.landlord %>
 </p>
 
 <p>
   <strong>Client:</strong>
-  <%= @lease.client %>
+  <%= link_to_name @lease.client %>
 </p>
 
 <p>
   <strong>Registration:</strong>
-  <%= @lease.registration %>
+  <%= link_to_name @lease.registration %>
 </p>
 
 <%= link_to 'Edit', edit_lease_path(@lease) %> |

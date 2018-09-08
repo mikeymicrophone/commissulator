@@ -2,13 +2,13 @@
 
 <p>
   <strong>Employer:</strong>
-  <%= @nich.employer %>
+  <%= link_to_name @niche.employer %>
 </p>
 
 <p>
   <strong>Industry:</strong>
-  <%= @nich.industry %>
+  <%= link_to_name @niche.industry %>
 </p>
 
-<%= link_to 'Edit', edit_nich_path(@nich) %> |
+<%= link_to 'Edit', edit_niche_path(@niche) %> |
 <%= link_to 'Back', niches_path %>

@@ -1,10 +1,10 @@
-<%= form_with(model: nich, local: true) do |form| %>
-  <% if nich.errors.any? %>
+<%= form_with(model: niche, local: true) do |form| %>
+  <% if niche.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(nich.errors.count, "error") %> prohibited this nich from being saved:</h2>
+      <h2><%= pluralize(nich.errors.count, "error") %> prohibited this niche from being saved:</h2>
 
       <ul>
-      <% nich.errors.full_messages.each do |message| %>
+      <% niche.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :employer_id %>
-    <%= form.text_field :employer_id %>
+    <%= form.select :employer_id, options_from_collection_for_select(Employer.all, :id, :name, niche.employer_id) %>
   </div>
 
   <div class="field">
     <%= form.label :industry_id %>
-    <%= form.text_field :industry_id %>
+    <%= form.select :industry_id, options_from_collection_for_select(Industry.all, :id, :name, niche.industry_id) %>
   </div>
 
   <div class="actions">
