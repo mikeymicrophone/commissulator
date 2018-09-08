@@ -56,3 +56,22 @@
   }
 
 }
+
+nav#registration_navigation {
+  margin: 4px;
+  
+  a {
+    padding: 4px;
+    font-style: italic;
+    
+    &.secondary {
+      font-size: 0.88em;
+      color: #9BDAEF;
+    }
+    
+    &.join {
+      font-size: 0.82em;
+      color: #CE7FEB;
+    }
+  }
+}

@@ -4,28 +4,28 @@ module ApplicationHelper
   end
   
   def agent_nav
-    content_tag :nav do
+    content_tag :nav, :id => 'registration_navigation' do
       [
         resource_path(Client),
         resource_path(Registration),
         resource_path(Employer),
-        resource_path(Employment),
         resource_path(Industry),
-        resource_path(Niche),
         resource_path(Landlord),
-        resource_path(Lease),
-        resource_path(Phone),
-        resource_path(Email),
-        resource_path(SocialAccount),
         resource_path(ReferralSource),
-        resource_path(Registrant),
-        resource_path(Apartment)
+        resource_path(Apartment, :class => :secondary),
+        resource_path(Lease, :class => :secondary),
+        resource_path(Phone, :class => :secondary),
+        resource_path(Email, :class => :secondary),
+        resource_path(SocialAccount, :class => :secondary),
+        resource_path(Registrant, :class => :join),
+        resource_path(Employment, :class => :join),
+        resource_path(Niche, :class => :join)
       ].join(' ').html_safe
-    end
+    end if current_agent&.admin?
   end
   
-  def resource_path resource
-    link_to resource.name.pluralize, send("#{resource.name.underscore.pluralize}_path")
+  def resource_path resource, options = {}
+    link_to resource.name.pluralize, send("#{resource.name.underscore.pluralize}_path"), options
   end
   
   def main_nav
