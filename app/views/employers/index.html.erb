@@ -6,6 +6,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Industries</th>
+      <th>Employments</th>
+      <th colspan="3"></th>
       <th>Address</th>
       <th>Url</th>
       <th colspan="3"></th>
@@ -16,6 +19,11 @@
     <% @employers.each do |employer| %>
       <tr>
         <td><%= employer.name %></td>
+        <td><%= link_to_associated employer, :industries %></td>
+        <td><%= link_to_associated employer, :employments %></td>
+        <td><%= link_to_associated employer, :emails %></td>
+        <td><%= link_to_associated employer, :phones %></td>
+        <td><%= link_to_associated employer, :social_accounts %></td>
         <td><%= employer.address %></td>
         <td><%= employer.url %></td>
         <td><%= link_to 'Show', employer %></td>

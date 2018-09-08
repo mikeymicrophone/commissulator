@@ -4,7 +4,14 @@ class IndustriesController < ApplicationController
   # GET /industries
   # GET /industries.json
   def index
-    @industries = Industry.all
+    @industries = case params[:filtered_attribute]
+    when 'employer_id'
+      Employer.find(params[:filter_value]).industries
+    when nil
+      Industry.all
+    else
+      Industry.where params[:filtered_attribute] => params[:filter_value]
+    end
   end
 
   # GET /industries/1
