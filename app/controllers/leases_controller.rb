@@ -4,10 +4,13 @@ class LeasesController < ApplicationController
   # GET /leases
   # GET /leases.json
   def index
-    @leases = if params[:filtered_attribute]
-      Lease.where params[:filtered_attribute] => params[:filter_value]
-    else
+    @leases = case params[:filtered_attribute]
+    when 'referral_source_id'
+      ReferralSource.find(params[:filter_value]).leases
+    when nil
       Lease.all
+    else
+      Lease.where params[:filtered_attribute] => params[:filter_value]
     end
   end
 

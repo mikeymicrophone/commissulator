@@ -2,15 +2,24 @@ class LandlordsController < ApplicationController
   before_action :set_landlord, only: [:show, :edit, :update, :destroy]
 
   def index
+    @landlords = case params[:filtered_attribute]
+    when 'referral_source_id'
+      ReferralSource.find(params[:filter_value]).landlords
+    when nil
+      Landlord.all
+    else
+      Landlord.where params[:filtered_attribute] => params[:filter_value]
+    end
+    
     @landlords = case params[:sort]
     when 'recent_commission'
-      Landlord.joins(:commissions).order('commissions.approval_date desc nulls last')
+      @landlords.joins(:commissions).order('commissions.approval_date desc nulls last')
     when 'name'
-      Landlord.order :name
+      @landlords.order :name
     when 'deal_count'
-      Kaminari.paginate_array Landlord.all.sort_by { |landlord| landlord.commissions.count }.reverse
+      Kaminari.paginate_array @landlords.sort_by { |landlord| landlord.commissions.count }.reverse
     else
-      Landlord.all
+      @landlords
     end.page params[:page]
   end
 

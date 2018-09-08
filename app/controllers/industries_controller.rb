@@ -5,6 +5,8 @@ class IndustriesController < ApplicationController
   # GET /industries.json
   def index
     @industries = case params[:filtered_attribute]
+    when 'referral_source_id'
+      ReferralSource.find(params[:filter_value]).industries
     when 'employer_id'
       Employer.find(params[:filter_value]).industries
     when nil

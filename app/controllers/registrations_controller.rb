@@ -4,7 +4,13 @@ class RegistrationsController < ApplicationController
   # GET /registrations
   # GET /registrations.json
   def index
-    @registrations = Registration.all
+    @registrations = case params[:filtered_attribute]
+      
+    when nil
+      Registration.all
+    else
+      Registration.where params[:filtered_attribute] => params[:filter_value]
+    end
   end
 
   # GET /registrations/1

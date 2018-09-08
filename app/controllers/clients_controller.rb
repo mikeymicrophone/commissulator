@@ -5,6 +5,8 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     @clients = case params[:filtered_attribute]
+    when 'referral_source_id'
+      ReferralSource.find(params[:filter_value]).clients
     when 'registration_id'
       Registration.find(params[:filter_value]).clients
     when nil
