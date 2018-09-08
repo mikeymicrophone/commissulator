@@ -4,7 +4,11 @@ class LeasesController < ApplicationController
   # GET /leases
   # GET /leases.json
   def index
-    @leases = Lease.all
+    @leases = if params[:filtered_attribute]
+      Lease.where params[:filtered_attribute] => params[:filter_value]
+    else
+      Lease.all
+    end
   end
 
   # GET /leases/1

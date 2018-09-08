@@ -5,6 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Clients</th>
+      <th>Employments</th>
+      <th>Apartments</th>
+      <th>Leases</th>
       <th>Minimum price</th>
       <th>Maximum price</th>
       <th>Size</th>
@@ -21,6 +25,10 @@
   <tbody>
     <% @registrations.each do |registration| %>
       <tr>
+        <td><%= link_to_associated registration, :clients %></td>
+        <td><%= link_to_associated registration, :employments %></td>
+        <td><%= link_to_associated registration, :apartments %></td>
+        <td><%= link_to_associated registration, :leases %></td>
         <td><%= registration.minimum_price %></td>
         <td><%= registration.maximum_price %></td>
         <td><%= registration.size %></td>

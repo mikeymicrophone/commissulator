@@ -4,7 +4,14 @@ class EmploymentsController < ApplicationController
   # GET /employments
   # GET /employments.json
   def index
-    @employments = Employment.all
+    @employments = case params[:filtered_attribute]
+    when 'registration_id'
+      Registration.find(params[:filter_value]).employments
+    when nil
+      Employment.all
+    else
+      Employment.where params[:filtered_attribute] => params[:filter_value]
+    end
   end
 
   # GET /employments/1

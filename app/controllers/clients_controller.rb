@@ -4,7 +4,14 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = case params[:filtered_attribute]
+    when 'registration_id'
+      Registration.find(params[:filter_value]).clients
+    when nil
+      Client.all
+    else
+      Client.where(params[:filtered_attribute] => params[:filter_value])
+    end
   end
 
   # GET /clients/1

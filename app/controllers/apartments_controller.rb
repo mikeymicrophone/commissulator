@@ -4,7 +4,11 @@ class ApartmentsController < ApplicationController
   # GET /apartments
   # GET /apartments.json
   def index
-    @apartments = Apartment.all
+    @apartments = if params[:filtered_attribute]
+      Apartment.where params[:filtered_attribute] => params[:filter_value]
+    else
+      Apartment.all
+    end
   end
 
   # GET /apartments/1
