@@ -35,6 +35,16 @@ class ApplicationRecord < ActiveRecord::Base
       :building
     when Apartment
       :bed #:archway
+    when Deal
+      :balance_scale
+    when Assistant
+      :users
+    when Agent
+      :user_tie
+    when Document
+      :clipboard_list
+    when Assist
+      :basketball_ball
     end
   end
   

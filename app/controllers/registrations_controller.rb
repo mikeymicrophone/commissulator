@@ -69,7 +69,7 @@ class RegistrationsController < ApplicationController
   
   def fabricate
     @registration = Fabricate :complete_registration
-    redirect_to :action => :index
+    redirect_to @registration
   end
 
   private

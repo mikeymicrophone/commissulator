@@ -1,9 +1,22 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @industry.name %>
 </p>
+
+<% @industry.employers.each do |employer| %>
+  <%= div_for employer do %>
+    <%= link_to_name_with_icon employer %>
+    <%= div_for employer, :employments_at do %>
+      <%= link_to_associated employer, :employments %>
+      
+      <% employer.employments.each do |employment| %>
+        <%= div_for employment do %>
+          <%= link_to_name_with_icon employment %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_industry_path(@industry) %> |
 <%= link_to 'Back', industries_path %>

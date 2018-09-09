@@ -40,7 +40,8 @@ module ApplicationHelper
   end
   
   def link_to_associated object, resource
-    link_to pluralize(object.send(resource).count, resource.to_s.singularize), send("#{resource}_path", filter_params(object)) if object.send(resource).present?
+    anchor = ApplicationController.helpers.fa_icon resource.to_s.classify.constantize.new.icon, :text => pluralize(object.send(resource).count, resource.to_s.singularize)
+    link_to anchor, send("#{resource}_path", filter_params(object)) if object.send(resource).present?
   end
   
   def main_nav
