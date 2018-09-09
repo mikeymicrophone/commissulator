@@ -74,6 +74,10 @@ module ApplicationHelper
     record ? {:filtered_attribute => record.foreign_key_name, :filter_value => record.id} : {:filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value]}
   end
   
+  def title
+    @title || 'Citi Pads'
+  end
+  
   def clearboth
     tag.div :class => 'clearboth'
   end
