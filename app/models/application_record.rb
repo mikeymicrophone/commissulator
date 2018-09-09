@@ -1,6 +1,8 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
   
+  scope :recent, lambda { order 'updated_at desc'}
+  
   def foreign_key_name
     self.class.name.underscore + '_id'
   end

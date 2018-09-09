@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Other fund sources</th>
-      <th>Client</th>
+      <th><%= link_to 'First', filter_params.merge(:sort => 'first_name') %> <%= link_to 'Last', filter_params.merge(:sort => 'last_name') %></th>
       <th>Registration</th>
       <th colspan="3"></th>
     </tr>
