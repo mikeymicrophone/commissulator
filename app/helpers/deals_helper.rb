@@ -52,7 +52,7 @@ module DealsHelper
       columns << content_tag(:td, link_to(fa_icon(:hdd, :size => '2x'), documents_path, :title => pluralize(deal.documents.count, 'Uploaded Document')), :class => 'document_list')
     end
     
-    if current_agent.admin?
+    if current_avatar.admin?
       columns << content_tag(:td, link_to(fa_icon(:joint, :class => 'deletion', :size => '2x'), deal, :title => 'Delete Deal and its Assists', :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}), :class => 'deal_removal')
     end
     

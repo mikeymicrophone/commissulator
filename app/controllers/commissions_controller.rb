@@ -22,7 +22,7 @@ class CommissionsController < ApplicationController
   end
 
   def show
-    @sensitive = !current_agent.admin
+    @sensitive = !current_avatar.admin
     @filename = "Rental Request for Commission.pdf"
   end
 
@@ -103,7 +103,7 @@ class CommissionsController < ApplicationController
 
   def fabricate
     fabricator = params[:fabricator] || :commission
-    @commission = Fabricate fabricator.to_sym, :agent => current_agent
+    @commission = Fabricate fabricator.to_sym, :agent => current_avatar
   end
 
   private

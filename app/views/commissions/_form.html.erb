@@ -26,7 +26,7 @@
     <%= form.hidden_field :deal_id %>
     <%= form.hidden_field :landlord_id %>
 
-    <% if current_agent.admin? %>
+    <% if current_avatar.admin? %>
       <div class="commission_section">
         <div class="commission_form_row">
           <%= form.label :branch_name, 'Branch Name' %>
@@ -40,7 +40,7 @@
           <%= form.label :agent_id %>
           <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :name, @commission.agent_id) %>
     
-          <% if current_agent.admin? %>
+          <% if current_avatar.admin? %>
             <%= form.label :agent_split_percentage, 'Agent Split Percentage' %>
             <%= form.text_field :agent_split_percentage, :value => rounded(commission.agent_split_percentage), :id => 'agent_split_percentage_entry' %>
           <% end %>
@@ -51,7 +51,7 @@
       </div>
     <% else %>
       <%= form.hidden_field :request_date, :value => Date.today %>
-      <%= form.hidden_field :agent_id %>
+      <%= form.hidden_field :avatar_id %>
     <% end %>
     
     <div class="commission_section">

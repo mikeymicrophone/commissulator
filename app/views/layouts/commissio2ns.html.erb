@@ -12,13 +12,13 @@
 
   <body>
     <nav id="top_floor_penthouse_navigation">
-      <% if current_agent %>
+      <% if current_avatar %>
         <%= link_to 'Landlords', landlords_path %>
         <%= link_to 'Commissions', commissions_path %>
-        <%= link_to 'Sign Out', destroy_agent_session_path, :method => :delete, :id => 'sign_out_link' %>
+        <%= link_to 'Sign Out', destroy_avatar_session_path, :method => :delete, :id => 'sign_out_link' %>
       <% else %>
-        <%= link_to 'Authenticate', new_agent_session_path %> | 
-        <%= link_to 'Register', new_agent_registration_path %>
+        <%= link_to 'Authenticate', new_avatar_session_path %> | 
+        <%= link_to 'Register', new_avatar_registration_path %>
       <% end %>
     </nav>
     <section class="notice"><%= notice %></section>

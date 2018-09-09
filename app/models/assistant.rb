@@ -1,6 +1,6 @@
 class Assistant < ApplicationRecord
   has_many :assists, :dependent => :nullify
-  belongs_to :agent, :optional => true
+  belongs_to :avatar, :optional => true
   enum :status => [:active, :inactive]
   attr_default :status, 'active'
   

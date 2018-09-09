@@ -104,7 +104,7 @@
     <%= content_tag :div, rounded(@deal.inbound_commission), :class => 'deal_portion' %>
   </div>
   
-  <% if current_agent.admin? %>
+  <% if current_avatar.admin? %>
     <div>
       <%= content_tag :div, 'Citi Habitats Cut', :class => 'deal_portion_description' %>
       <%= content_tag :div, rounded(@deal.house_cut), :class => 'deal_portion' %>
@@ -125,7 +125,7 @@
   <% @deal.assists.chrono.each do |assist| %>
     <%= div_for assist do %>
       <%= content_tag :div, linked_name(assist), :class => 'deal_portion_description' %>
-      <% if current_agent.admin? || assist.assistant.agent == current_agent %>
+      <% if current_avatar.admin? || assist.assistant.avatar == current_avatar %>
         <%= content_tag :div, :class => 'deal_portion' do %>
           <%= rounded @deal.distributable_commission assist.rate %> * <%= assist.role_rate %>
           <%= '+ ' if assist.adjustment.to_d > 0 %>
@@ -142,7 +142,7 @@
   <% end %>
 </div>
 
-<% if current_agent.admin? %>
+<% if current_avatar.admin? %>
   <div class="payout">
     <%= @deal.commission&.subcommission_payout_summary %>
   </div>
@@ -150,7 +150,7 @@
 
 <%= assist_adder @deal %>
 
-<%= special_payments_on @deal if current_agent.admin? %>
+<%= special_payments_on @deal if current_avatar.admin? %>
 
 <div class="document_list">
   <% if @deal.documents.present? %>

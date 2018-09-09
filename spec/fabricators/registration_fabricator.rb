@@ -7,7 +7,7 @@ Fabricator :registration do
   occupants { occs = []; (1..6).to_a.each { |num| num.times { occs << (7 - num) } }; occs.sample }
   pets { pet_text if die_roll }
   referral_source { find_or_fabricate :referral_source }
-  agent { find_or_fabricate :agent }
+  avatar { find_or_fabricate :avatar }
 end
 
 def pet_text

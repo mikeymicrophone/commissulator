@@ -41,7 +41,7 @@ class ApplicationRecord < ActiveRecord::Base
       :balance_scale
     when Assistant
       :users
-    when Agent
+    when Avatar
       :user_tie
     when Document
       :clipboard_list

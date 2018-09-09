@@ -14,7 +14,7 @@ module ApplicationHelper
     end
   end
   
-  def agent_nav
+  def avatar_nav
     content_tag :nav, :id => 'registration_navigation' do
       [
         resource_path(Client),
@@ -31,7 +31,7 @@ module ApplicationHelper
         resource_path(Employment, :class => :join),
         resource_path(Niche, :class => :join)
       ].join(' ').html_safe
-    end if current_agent&.admin?
+    end if current_avatar&.admin?
   end
   
   def resource_path resource, options = {}
@@ -50,22 +50,22 @@ module ApplicationHelper
     # link_to(fa_icon(:clipboard_list, :text => 'Documents'), documents_path) +
     # link_to(fa_icon(:balance_scale, :text => 'Deals'), deals_path) +
     # link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
-    # link_to(fa_icon(:user_tie, :text => 'Agents'), agents_path) +
+    # link_to(fa_icon(:user_tie, :text => 'Avatars'), avatars_path) +
     link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path) +
-    if current_agent.admin?
+    if current_avatar.admin?
       link_to(fa_icon(:users, :text => 'Assistants'), assistants_path)
     end
   end
   
   def penthouse_nav
     content_tag :nav, :id => 'top_floor_penthouse_navigation' do
-      if current_agent
+      if current_avatar
         main_nav +
-        link_to('Sign Out', destroy_agent_session_path, :method => :delete, :id => 'sign_out_link') +
-        link_to('Me', edit_agent_path(current_agent), :id => 'profile_link')
+        link_to('Sign Out', destroy_avatar_session_path, :method => :delete, :id => 'sign_out_link') +
+        link_to('Me', edit_avatar_path(current_avatar), :id => 'profile_link')
       else
-        link_to('Log In', new_agent_session_path) +
-        link_to('Register', new_agent_registration_path)
+        link_to('Log In', new_avatar_session_path) +
+        link_to('Register', new_avatar_registration_path)
       end
     end
   end

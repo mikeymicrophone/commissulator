@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_010933) do
+ActiveRecord::Schema.define(version: 2018_09_09_230125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,32 +34,6 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "agents", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "admin"
-    t.index ["confirmation_token"], name: "index_agents_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_agents_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_agents_on_reset_password_token", unique: true
   end
 
   create_table "apartments", force: :cascade do |t|
@@ -87,7 +61,7 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.decimal "rate"
     t.string "payable_first_name"
     t.string "payable_last_name"
-    t.integer "agent_id"
+    t.integer "avatar_id"
   end
 
   create_table "assists", force: :cascade do |t|
@@ -102,6 +76,32 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.decimal "expense"
     t.index ["assistant_id"], name: "index_assists_on_assistant_id"
     t.index ["deal_id"], name: "index_assists_on_deal_id"
+  end
+
+  create_table "avatars", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin"
+    t.index ["confirmation_token"], name: "index_avatars_on_confirmation_token"
+    t.index ["email"], name: "index_avatars_on_email"
+    t.index ["reset_password_token"], name: "index_avatars_on_reset_password_token"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -214,10 +214,10 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
     t.string "name"
     t.string "role"
     t.bigint "deal_id"
-    t.bigint "agent_id"
+    t.bigint "avatar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_documents_on_agent_id"
+    t.index ["avatar_id"], name: "index_documents_on_avatar_id"
     t.index ["deal_id"], name: "index_documents_on_deal_id"
   end
 
@@ -362,7 +362,7 @@ ActiveRecord::Schema.define(version: 2018_08_29_010933) do
   add_foreign_key "phones", "employers"
   add_foreign_key "registrants", "clients"
   add_foreign_key "registrants", "registrations"
-  add_foreign_key "registrations", "agents"
+  add_foreign_key "registrations", "avatars", column: "agent_id"
   add_foreign_key "registrations", "referral_sources"
   add_foreign_key "social_accounts", "clients"
   add_foreign_key "social_accounts", "employers"

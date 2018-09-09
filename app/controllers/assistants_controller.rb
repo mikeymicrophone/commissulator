@@ -3,8 +3,8 @@ class AssistantsController < ApplicationController
 
   def index
     @assistants = case params[:filtered_attribute]
-    when 'agent_id'
-      Agent.find(params[:filter_value]).assistants
+    when 'avatar_id'
+      Avatar.find(params[:filter_value]).assistants
     when nil
       Assistant.all
     else
@@ -72,6 +72,6 @@ class AssistantsController < ApplicationController
     end
 
     def assistant_params
-      params.require(:assistant).permit(:first_name, :last_name, :phone_number, :email, :status, :rate, :payable_first_name, :payable_last_name, :agent_id)
+      params.require(:assistant).permit(:first_name, :last_name, :phone_number, :email, :status, :rate, :payable_first_name, :payable_last_name, :avatar_id)
     end
 end

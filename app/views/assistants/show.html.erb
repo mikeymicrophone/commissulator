@@ -31,7 +31,7 @@
       <td><%= link_to_name_with_icon assist %></td>
       <td><%= link_to_name_with_icon assist.deal, :reference %></td>
       <td><%= link_to fa_icon(:clipboard_list), assist.commission, :title => 'Review' if assist.commission %>
-      <td><%= number_to_currency assist.payout if current_agent.admin? %></td>
+      <td><%= number_to_currency assist.payout if current_avatar.admin? %></td>
     </tr>
   <% end %>
 </table>

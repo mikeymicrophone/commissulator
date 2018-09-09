@@ -1,5 +1,5 @@
 class Document < ApplicationRecord
-  belongs_to :agent
+  belongs_to :avatar
   belongs_to :deal, :optional => true
   has_one :commission, :through => :deal
   

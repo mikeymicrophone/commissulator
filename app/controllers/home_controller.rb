@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_agent!
+  skip_before_action :authenticate_avatar!
 
   def landing
   end

@@ -28,8 +28,8 @@ Rails.application.routes.draw do
     end
   end
   root :to => 'home#landing'
-  devise_for :agents
-  resources :agents, :only => [:index, :show, :edit, :update]
+  devise_for :avatars
+  resources :avatars, :only => [:index, :show, :edit, :update]
   resources :apartments
   resources :social_accounts
   resources :emails

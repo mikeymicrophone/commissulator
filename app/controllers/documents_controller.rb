@@ -21,7 +21,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new document_params
-    @document.agent = current_agent
+    @document.avatar = current_avatar
 
     respond_to do |format|
       if @document.save
@@ -60,6 +60,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit :capture, :name, :role, :deal_id, :agent_id
+      params.require(:document).permit :capture, :name, :role, :deal_id, :avatar_id
     end
 end

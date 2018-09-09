@@ -1,7 +1,7 @@
 Fabricator :deal do
   address { Faker::Address.street_address }
   unit_number { (1..25).to_a.sample.to_s + (?A..?L).to_a.sample }
-  agent { find_or_fabricate :agent }
+  avatar { find_or_fabricate :avatar }
 end
 
 Fabricator :underway_deal, :from => :deal do

@@ -47,8 +47,8 @@
   </div>
   
   <div class="field">
-    <%= form.label :agent_id %>
-    <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :email, @assistant.agent_id), :include_blank => true %>
+    <%= form.label :avatar_id %>
+    <%= form.select :avatar_id, options_from_collection_for_select(Avatar.all, :id, :email, @assistant.avatar_id), :include_blank => true %>
   </div>
 
   <div class="actions">
