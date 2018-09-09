@@ -31,6 +31,10 @@ class Commission < ApplicationRecord
   
   acts_as_paranoid
   
+  def name
+    deal.reference
+  end
+  
   def subcommission_payout_summary
     deal.subcommissions.inject("") { |summary, award| summary + "   #{award.first}: #{number_to_currency award.last}" }
   end

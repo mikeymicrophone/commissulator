@@ -45,6 +45,8 @@ class ApplicationRecord < ActiveRecord::Base
       :clipboard_list
     when Assist
       :basketball_ball
+    when Commission
+      :chart_pie
     end
   end
   

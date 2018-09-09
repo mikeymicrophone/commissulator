@@ -15,5 +15,17 @@
   <%= @landlord.phone_number %>
 </p>
 
+<% @landlord.commissions.each do |commission| %>
+  <%= div_for commission do %>
+    <%= link_to_name_with_icon commission %>
+  <% end %>
+<% end %>
+
+<% @landlord.leases.each do |lease| %>
+  <%= div_for lease do %>
+    <%= link_to_name_with_icon lease %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_landlord_path(@landlord) %> |
 <%= link_to 'Back', landlords_path %>
