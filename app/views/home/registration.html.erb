@@ -10,6 +10,17 @@
         <%= label :registration, :size, 'Size:' %><br>
         <%= select :registration, :size, size_options, :include_blank => '[Minimum]' %>
       </div>
+      <div class="bordered inline">
+        <div>
+          <%= select :registration, :referral_source_id, referral_source_options, :include_blank => 'How did you hear about us?' %>
+        </div>
+      </div>
+      <div class="bordered inline">
+        <div>
+          <%= label :registration, :move_by, 'I must move by:' %>
+          <%= date_select :registration, :move_by, :order => [:month, :day, :year] %>
+        </div>
+      </div>
     </div>
   
     <div class="reg_form_quadrant">
@@ -79,19 +90,12 @@
         </div>
         <div class="inline">
           <div>
-            <%= select :registration, :referral_source_id, referral_source_options, :include_blank => 'How did you hear about us?' %>
+            <%= text_field :registration, :occupants, :placeholder => 'Number of Occupants' %>
           </div>
           <div>
-            <%= label :registration, :move_by, 'I must move by:' %>
-            <%= date_select :registration, :move_by, :order => [:month, :day, :year] %>
+            <%= text_field :registration, :pets, :placeholder => 'Type and Size of Any Pets' %>
           </div>
         </div>
-      </div>
-      <div class="bordered">
-        <%= text_field :registration, :occupants, :placeholder => 'Number of Occupants' %>
-      </div>
-      <div class="bordered">
-        <%= text_field :registration, :pets, :placeholder => 'Type and Size of Any Pets' %>
       </div>
     </div>
 
