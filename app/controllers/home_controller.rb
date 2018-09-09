@@ -10,6 +10,8 @@ class HomeController < ApplicationController
   
   def submit
     @registration = Registration.create registration_params
+    
+    params[:client][:date_of_birth] = Date.strptime client_params[:date_of_birth], '%m/%d/%Y'
     @client = Client.create client_params
     @registrant = Registrant.create registrant_params.merge(:registration => @registration, :client => @client)
     @landlord = Landlord.create landlord_params

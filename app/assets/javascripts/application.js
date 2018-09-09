@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require jquery_ujs
+//= require jquery-ui/datepicker
 //= require activestorage
 //= require turbolinks
 //= require font_awesome5

@@ -14,4 +14,5 @@
  *= require_self
  *= require font_awesome5
  *= require easy-autocomplete
+ *= require jquery-ui/datepicker
  */
