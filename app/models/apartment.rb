@@ -1,3 +1,4 @@
+include ActionView::Helpers::NumberHelper
 class Apartment < ApplicationRecord
   belongs_to :registration
   

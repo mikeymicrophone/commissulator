@@ -13,7 +13,7 @@ class ClientsController < ApplicationController
       Client.all
     else
       Client.where(params[:filtered_attribute] => params[:filter_value])
-    end
+    end.page params[:page]
   end
 
   # GET /clients/1
