@@ -9,15 +9,15 @@
       <th>Employments</th>
       <th>Apartments</th>
       <th>Leases</th>
-      <th>Minimum price</th>
-      <th>Maximum price</th>
+      <th><%= link_to 'Minimum price', filter_params.merge(:sort => 'minimum_price') %></th>
+      <th><%= link_to 'Maximum price', filter_params.merge(:sort => 'maximum_price') %></th>
       <th>Size</th>
       <th>Move by</th>
       <th>Reason for moving</th>
       <th>Occupants</th>
       <th>Pets</th>
-      <th>Referral source</th>
-      <th>Agent</th>
+      <th><%= link_to 'Referral source', filter_params.merge(:sort => 'referral_source_id') %></th>
+      <th><%= link_to 'Agent', filter_params.merge(:sort => 'agent_id') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
