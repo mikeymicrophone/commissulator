@@ -2,22 +2,22 @@
   
   .reg_form_quadrant {
     margin: 5px;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-radius: 6px;
-    background-color: #E6E6E6;
+    
     font-family: 'M PLUS Rounded 1c';
     font-size: 1.2em;
+    display: inline-flex;
   }
 
   input, textarea {
     border: 1px solid #bbb;
+    border-radius: 3px;
     padding: 2px;
     font-family: 'M PLUS Rounded 1c';
     font-size: 1.2em;
+    max-size: 75%;
   
     &.name_part {
-      width: 150px;
+      width: 140px;
     }
 
     &.address_part {
@@ -54,11 +54,12 @@
   }
 
   .bordered {
+    margin: 5px;
     border: 1px solid black;
-    border-bottom: none;
-    border-right: none;
     border-radius: 6px;
-    padding: 5px;
+    padding: 8px;
+    background-color: #DAE2E5;
+    box-shadow: 4px 4px 5px #6290C7;
   }
 
 }

@@ -32,8 +32,8 @@
             <%= text_field :client, :date_of_birth, :placeholder => 'Birthdate', :class => 'datepicker birthdate' %>
           </div>
           <div>
-            <%= text_field :lease, :apartment_number, :placeholder => 'Apt', :class => 'address_part' %>
-            <%= text_field :lease, :street_number, :placeholder => '#', :class => 'address_part' %>
+            <%= text_field :lease, :apartment_number, :placeholder => 'Apt', :class => 'address_part', :title => 'Apartment Number' %>
+            <%= text_field :lease, :street_number, :placeholder => 'Bldg', :class => 'address_part', :title => 'Street Address (number)' %>
             <%= text_field :lease, :street_name, :placeholder => 'Street', :class => 'street' %>
             <%= text_field :lease, :zip_code, :placeholder => 'Zip', :class => 'zip' %>
           </div>
@@ -166,8 +166,8 @@
     <div class="reg_form_quadrant">
       <div class="bordered">
         <div class="inline">
-          <%= text_field :apartment_1, :unit_number, :placeholder => 'Apt', :class => 'address_part' %>
-          <%= text_field :apartment_1, :street_number, :placeholder => '#', :class => 'address_part' %>
+          <%= text_field :apartment_1, :unit_number, :placeholder => 'Apt', :class => 'address_part', :title => 'Apartment Number' %>
+          <%= text_field :apartment_1, :street_number, :placeholder => 'Bldg', :class => 'address_part', :title => 'Street Address (number)' %>
           <%= text_field :apartment_1, :street_name, :placeholder => 'Street', :class => 'street' %>
           <%= text_field :apartment_1, :zip_code, :placeholder => 'Zip', :class => 'zip' %>
         </div>
@@ -183,8 +183,8 @@
       </div>
       <div class="bordered">
         <div class="inline">
-          <%= text_field :apartment_2, :unit_number, :placeholder => 'Apt', :class => 'address_part' %>
-          <%= text_field :apartment_2, :street_number, :placeholder => '#', :class => 'address_part' %>
+          <%= text_field :apartment_2, :unit_number, :placeholder => 'Apt', :class => 'address_part', :title => 'Apartment Number' %>
+          <%= text_field :apartment_2, :street_number, :placeholder => 'Bldg', :class => 'address_part', :title => 'Street Address (number)' %>
           <%= text_field :apartment_2, :street_name, :placeholder => 'Street', :class => 'street' %>
           <%= text_field :apartment_2, :zip_code, :placeholder => 'Zip', :class => 'zip' %>
         </div>
