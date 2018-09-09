@@ -4,7 +4,7 @@ class RegistrantsController < ApplicationController
   # GET /registrants
   # GET /registrants.json
   def index
-    @registrants = Registrant.all
+    @registrants = Registrant.page params[:page]
   end
 
   # GET /registrants/1

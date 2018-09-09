@@ -4,7 +4,7 @@ class NichesController < ApplicationController
   # GET /niches
   # GET /niches.json
   def index
-    @niches = Niche.all
+    @niches = Niche.page params[:page]
   end
 
   # GET /niches/1

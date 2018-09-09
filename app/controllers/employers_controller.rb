@@ -11,7 +11,7 @@ class EmployersController < ApplicationController
       Employer.all
     else
       Employer.where params[:filtered_attribute] => params[:filter_value]
-    end
+    end.page params[:page]
   end
 
   # GET /employers/1

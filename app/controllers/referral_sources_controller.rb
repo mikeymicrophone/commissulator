@@ -4,7 +4,7 @@ class ReferralSourcesController < ApplicationController
   # GET /referral_sources
   # GET /referral_sources.json
   def index
-    @referral_sources = ReferralSource.all
+    @referral_sources = ReferralSource.page params[:page]
   end
 
   # GET /referral_sources/1

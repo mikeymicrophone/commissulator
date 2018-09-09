@@ -18,7 +18,7 @@
     <% @employments.each do |employment| %>
       <tr>
         <td><%= employment.position %></td>
-        <td><%= employment.income %></td>
+        <td><%= number_to_currency employment.income %></td>
         <td><%= employment.start_date %></td>
         <td><%= link_to_name employment.client %></td>
         <td><%= link_to_name employment.employer %></td>
@@ -30,6 +30,7 @@
   </tbody>
 </table>
 
+<%= paginate @employments %>
 <br>
 
 <%= link_to 'New Employment', new_employment_path %>

@@ -11,7 +11,7 @@ class SocialAccountsController < ApplicationController
       SocialAccount.all
     else
       SocialAccount.where params[:filtered_attribute] => params[:filter_value]
-    end
+    end.page params[:page]
   end
 
   # GET /social_accounts/1
