@@ -25,7 +25,7 @@
         <td><%= apartment.street_name %></td>
         <td><%= apartment.zip_code %></td>
         <td><%= apartment.size %></td>
-        <td><%= apartment.rent %></td>
+        <td><%= number_to_round_currency apartment.rent %></td>
         <td><%= apartment.comment %></td>
         <td><%= link_to_name_with_icon apartment.registration %></td>
         <td><%= link_to 'Show', apartment %></td>

@@ -2,12 +2,12 @@
 
 <p>
   <strong>Minimum price:</strong>
-  <%= @registration.minimum_price %>
+  <%= number_to_round_currency @registration.minimum_price %>
 </p>
 
 <p>
   <strong>Maximum price:</strong>
-  <%= @registration.maximum_price %>
+  <%= number_to_round_currency @registration.maximum_price %>
 </p>
 
 <p>

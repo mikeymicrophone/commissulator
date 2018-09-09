@@ -18,7 +18,7 @@
     <% @employments.each do |employment| %>
       <tr>
         <td><%= employment.position %></td>
-        <td><%= number_to_currency employment.income %></td>
+        <td><%= number_to_round_currency employment.income %></td>
         <td><%= employment.start_date %></td>
         <td><%= link_to_name_with_icon employment.client %></td>
         <td><%= link_to_name_with_icon employment.employer %></td>

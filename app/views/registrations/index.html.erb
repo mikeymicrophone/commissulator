@@ -29,8 +29,8 @@
         <td><%= link_to_associated registration, :employments %></td>
         <td><%= link_to_associated registration, :apartments %></td>
         <td><%= link_to_associated registration, :leases %></td>
-        <td><%= registration.minimum_price %></td>
-        <td><%= registration.maximum_price %></td>
+        <td><%= number_to_round_currency registration.minimum_price %></td>
+        <td><%= number_to_round_currency registration.maximum_price %></td>
         <td><%= registration.size %></td>
         <td><%= registration.move_by %></td>
         <td><%= registration.reason_for_moving %></td>
