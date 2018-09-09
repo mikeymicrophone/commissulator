@@ -21,7 +21,6 @@ module ApplicationHelper
         resource_path(Registration),
         resource_path(Employer),
         resource_path(Industry),
-        resource_path(Landlord),
         resource_path(ReferralSource),
         resource_path(Apartment, :class => :secondary),
         resource_path(Lease, :class => :secondary),
@@ -36,7 +35,8 @@ module ApplicationHelper
   end
   
   def resource_path resource, options = {}
-    link_to resource.name.pluralize, send("#{resource.name.underscore.pluralize}_path"), options
+    anchor = ApplicationController.helpers.fa_icon resource.new.icon, :text => resource.name.pluralize
+    link_to anchor, send("#{resource.name.underscore.pluralize}_path"), options
   end
   
   def link_to_associated object, resource
