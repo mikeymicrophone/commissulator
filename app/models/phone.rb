@@ -4,4 +4,8 @@ class Phone < ApplicationRecord
   validates :number, :presence => true
   
   VARIETIES = ['cell', 'home', 'work', 'office']
+  
+  def name
+    number
+  end
 end

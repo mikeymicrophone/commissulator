@@ -38,7 +38,7 @@ def qualify_and_locate registration
   home_phone = Fabricate :phone, :client => client
   cell_phone = Fabricate :phone, :client => client, :variety => 'cell'
   email = Fabricate :email, :client => client
-  work_phone = Fabricate :work_phone, :client => client, :employer => employer
+  work_phone = Fabricate :phone, :client => client, :employer => employer, :variety => 'office'
 end
 
 def apartments_considered_by registration

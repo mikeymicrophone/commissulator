@@ -4,4 +4,8 @@ class Email < ApplicationRecord
   validates :address, :presence => true
   
   VARIETIES = ['home', 'school', 'work', 'office']
+  
+  def name
+    address
+  end
 end

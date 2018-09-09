@@ -15,5 +15,17 @@
   <%= @employer.url %>
 </p>
 
+<% @employer.employments.each do |employment| %>
+  <%= div_for employment do %>
+    <%= link_to_name_with_icon employment %>
+    
+    <% employment.contacts.each do |contact| %>
+      <%= div_for contact do %>
+        <%= link_to_name_with_icon contact %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_employer_path(@employer) %> |
 <%= link_to 'Back', employers_path %>
