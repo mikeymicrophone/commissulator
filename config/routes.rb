@@ -42,7 +42,11 @@ Rails.application.routes.draw do
   resources :registrants
   resources :clients
   resources :referral_sources
-  resources :registrations
+  resources :registrations do
+    collection do
+      post :fabricate
+    end
+  end
   get '/register' => 'home#registration', :as => 'begin_registration'
   post '/register' => 'home#submit', :as => 'submit_registration'
 end

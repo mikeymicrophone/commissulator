@@ -66,6 +66,11 @@ class RegistrationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def fabricate
+    @registration = Fabricate :complete_registration
+    redirect_to :action => :index
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
