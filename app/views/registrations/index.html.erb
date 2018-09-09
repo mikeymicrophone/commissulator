@@ -37,7 +37,7 @@
         <td><%= registration.occupants %></td>
         <td><%= registration.pets %></td>
         <td><%= link_to_name registration.referral_source %></td>
-        <td><%= registration.agent %></td>
+        <td><%= link_to_name registration.agent %></td>
         <td><%= link_to 'Show', registration %></td>
         <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
         <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>

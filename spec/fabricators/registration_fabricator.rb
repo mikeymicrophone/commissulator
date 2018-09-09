@@ -20,3 +20,43 @@ def pet_text
   end
   text.chomp
 end
+
+Fabricator :complete_registration, :from => :registration do
+  after_create { |registration, transients| qualify_and_locate registration }
+  after_create { |registration, transients| apartments_considered_by registration }
+  after_create { |registration, transients| roommates_added_by registration }
+end
+
+def qualify_and_locate registration
+  client = find_or_fabricate :client
+  registrant = find_or_fabricate :registrant, :client => client, :registration => registration
+  employer = find_or_fabricate :employer
+  employment = Fabricate :employment, :client => client, :employer => employer
+  niche = find_or_fabricate :niche, :employer => employer
+  landlord = find_or_fabricate :landlord
+  lease = Fabricate :lease, :client => client, :registration => registration, :landlord => landlord
+  home_phone = Fabricate :phone, :client => client
+  cell_phone = Fabricate :cell_phone, :client => client
+  email = Fabricate :email, :client => client
+  work_phone = Fabricate :work_phone, :client => client, :employer => employer
+end
+
+def apartments_considered_by registration
+  (1..5).to_a.sample.times do
+    Fabricate :apartment, :registration => registration
+  end
+end
+
+def roommates_added_by registration
+  (0..4).to_a.sample.times do
+    roommate_in registration
+  end
+end
+
+def roommate_in registration
+  client = Fabricate :client
+  registrant = Fabricate :registrant, :client => client, :registration => registration
+  employer = find_or_fabricate :employer
+  employment = Fabricate :employment, :client => client, :employer => employer
+  phone = Fabricate :cell_phone, :client => client
+end

@@ -1,7 +1,7 @@
 Fabricator :email do
   client { find_or_fabricate :client }
   employer { find_or_fabricate :employer if die_roll(5) }
-  number { Faker::Internet.email }
+  address { Faker::Internet.email }
   variety { Email::VARIETIES.sample }
 end
 
