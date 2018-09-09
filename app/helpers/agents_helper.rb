@@ -1,5 +1,5 @@
 module AgentsHelper
-  def agent_registration_path agent
+  def agent_new_registration_path agent
     link_to 'Register Client', begin_registration_path(:agent_id => agent)
   end
   
