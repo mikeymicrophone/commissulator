@@ -14,8 +14,8 @@
   <tbody>
     <% @niches.each do |niche| %>
       <tr>
-        <td><%= link_to_name niche.employer %></td>
-        <td><%= link_to_name niche.industry %></td>
+        <td><%= link_to_name_with_icon niche.employer %></td>
+        <td><%= link_to_name_with_icon niche.industry %></td>
         <td><%= link_to 'Show', niche %></td>
         <td><%= link_to 'Edit', edit_niche_path(niche) %></td>
         <td><%= link_to 'Destroy', niche, method: :delete, data: { confirm: 'Are you sure?' } %></td>

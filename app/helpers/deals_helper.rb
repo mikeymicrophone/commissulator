@@ -26,9 +26,9 @@ module DealsHelper
   
   def deal_row_for deal
     columns = [
-      content_tag(:td, link_to_name(deal, :reference)),
+      content_tag(:td, link_to_name_with_icon(deal, :reference)),
       content_tag(:td, number_to_currency(deal.commission&.total_commission)),
-      content_tag(:td, link_to_name(deal.agent)),
+      content_tag(:td, link_to_name_with_icon(deal.agent)),
       content_tag(:td, deal.address),
       content_tag(:td, deal.unit_number),
       content_tag(:td, status_clicker_for(deal)),

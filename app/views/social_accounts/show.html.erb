@@ -17,12 +17,12 @@
 
 <p>
   <strong>Client:</strong>
-  <%= link_to_name @social_account.client %>
+  <%= link_to_name_with_icon @social_account.client %>
 </p>
 
 <p>
   <strong>Employer:</strong>
-  <%= link_to_name @social_account.employer %>
+  <%= link_to_name_with_icon @social_account.employer %>
 </p>
 
 <%= link_to 'Edit', edit_social_account_path(@social_account) %> |

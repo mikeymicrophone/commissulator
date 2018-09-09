@@ -18,8 +18,8 @@
       <tr>
         <td><%= phone.variety %></td>
         <td><%= phone.number %></td>
-        <td><%= link_to_name phone.client %></td>
-        <td><%= link_to_name phone.employer %></td>
+        <td><%= link_to_name_with_icon phone.client %></td>
+        <td><%= link_to_name_with_icon phone.employer %></td>
         <td><%= link_to 'Show', phone %></td>
         <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
         <td><%= link_to 'Destroy', phone, method: :delete, data: { confirm: 'Are you sure?' } %></td>

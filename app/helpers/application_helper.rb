@@ -1,6 +1,17 @@
 module ApplicationHelper
-  def link_to_name object, attribute = :name
-    link_to object.send(attribute), object if object
+  def link_to_name object, attribute = :name, arguments = nil
+    link_to object.send(attribute, arguments), object if object
+  end
+  
+  def link_to_name_with_icon object, arguments = nil
+    link_to_name object, :anchor, arguments
+  end
+  
+  def icon_for_class object
+    case object
+    when Client
+      :address_card
+    end
   end
   
   def agent_nav

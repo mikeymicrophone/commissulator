@@ -2,12 +2,12 @@
 
 <p>
   <strong>Employer:</strong>
-  <%= link_to_name @niche.employer %>
+  <%= link_to_name_with_icon @niche.employer %>
 </p>
 
 <p>
   <strong>Industry:</strong>
-  <%= link_to_name @niche.industry %>
+  <%= link_to_name_with_icon @niche.industry %>
 </p>
 
 <%= link_to 'Edit', edit_niche_path(@niche) %> |

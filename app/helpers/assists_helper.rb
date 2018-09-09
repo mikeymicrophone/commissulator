@@ -5,7 +5,7 @@ module AssistsHelper
       link_to(fa_icon(:backspace), assist, :method => :delete, :remote => true, :title => 'Delete')
     ]
     icon = 
-    "#{link_to icon_for(assist.role), assist} by #{link_to_name assist.assistant}. #{admin_tools.join if current_agent.admin?}".html_safe
+    "#{link_to icon_for(assist.role), assist} by #{link_to_name_with_icon assist.assistant}. #{admin_tools.join if current_agent.admin?}".html_safe
   end
   
   def icon_for role

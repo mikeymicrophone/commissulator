@@ -19,8 +19,8 @@
   <tbody>
     <% @assists.each do |assist| %>
       <tr>
-        <td><%= link_to_name assist.deal, :reference %></td>
-        <td><%= link_to_name assist.assistant %></td>
+        <td><%= link_to_name_with_icon assist.deal, :reference %></td>
+        <td><%= link_to_name_with_icon assist.assistant %></td>
         <% if current_agent.admin? %>
           <td><%= number_to_currency assist.payout %></td>
         <% end %>

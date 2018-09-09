@@ -20,8 +20,8 @@
         <td><%= employment.position %></td>
         <td><%= number_to_currency employment.income %></td>
         <td><%= employment.start_date %></td>
-        <td><%= link_to_name employment.client %></td>
-        <td><%= link_to_name employment.employer %></td>
+        <td><%= link_to_name_with_icon employment.client %></td>
+        <td><%= link_to_name_with_icon employment.employer %></td>
         <td><%= link_to 'Show', employment %></td>
         <td><%= link_to 'Edit', edit_employment_path(employment) %></td>
         <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

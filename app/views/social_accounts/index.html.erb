@@ -20,8 +20,8 @@
         <td><%= social_account.variety %></td>
         <td><%= social_account.url %></td>
         <td><%= social_account.moniker %></td>
-        <td><%= link_to_name social_account.client %></td>
-        <td><%= link_to_name social_account.employer %></td>
+        <td><%= link_to_name_with_icon social_account.client %></td>
+        <td><%= link_to_name_with_icon social_account.employer %></td>
         <td><%= link_to 'Show', social_account %></td>
         <td><%= link_to 'Edit', edit_social_account_path(social_account) %></td>
         <td><%= link_to 'Destroy', social_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>

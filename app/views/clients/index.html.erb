@@ -22,7 +22,7 @@
         <td><%= client.first_name %></td>
         <td><%= client.last_name %></td>
         <td><%= client.date_of_birth&.strftime "%-m/%-d/%Y" %></td>
-        <td><%= link_to_name client.registrations.last %></td>
+        <td><%= link_to_name_with_icon client.registrations.last %></td>
         <td><%= link_to_associated client, :emails %></td>
         <td><%= link_to_associated client, :phones %></td>
         <td><%= link_to_associated client, :social_accounts %></td>

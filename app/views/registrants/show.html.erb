@@ -7,12 +7,12 @@
 
 <p>
   <strong>Client:</strong>
-  <%= link_to_name @registrant.client %>
+  <%= link_to_name_with_icon @registrant.client %>
 </p>
 
 <p>
   <strong>Registration:</strong>
-  <%= link_to_name @registrant.registration %>
+  <%= link_to_name_with_icon @registrant.registration %>
 </p>
 
 <%= link_to 'Edit', edit_registrant_path(@registrant) %> |

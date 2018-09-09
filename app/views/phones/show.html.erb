@@ -12,12 +12,12 @@
 
 <p>
   <strong>Client:</strong>
-  <%= link_to_name @phone.client %>
+  <%= link_to_name_with_icon @phone.client %>
 </p>
 
 <p>
   <strong>Employer:</strong>
-  <%= link_to_name @phone.employer %>
+  <%= link_to_name_with_icon @phone.employer %>
 </p>
 
 <%= link_to 'Edit', edit_phone_path(@phone) %> |

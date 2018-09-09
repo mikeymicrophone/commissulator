@@ -17,12 +17,12 @@
 
 <p>
   <strong>Client:</strong>
-  <%= link_to_name @employment.client %>
+  <%= link_to_name_with_icon @employment.client %>
 </p>
 
 <p>
   <strong>Employer:</strong>
-  <%= link_to_name @employment.employer %>
+  <%= link_to_name_with_icon @employment.employer %>
 </p>
 
 <%= link_to 'Edit', edit_employment_path(@employment) %> |

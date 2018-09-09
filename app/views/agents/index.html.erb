@@ -1,6 +1,6 @@
 <% @agents.each do |agent| %>
   <%= div_for agent, :class => :agent_list do %>
-    <%= link_to_name agent %>
+    <%= link_to_name_with_icon agent %>
     <%= deals_by agent %>
     <%= weekly_deals_by agent %>
     <%= commissions_for agent %>

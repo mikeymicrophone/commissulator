@@ -23,9 +23,9 @@
         <td><%= lease.street_number %></td>
         <td><%= lease.street_name %></td>
         <td><%= lease.zip_code %></td>
-        <td><%= link_to_name lease.landlord %></td>
-        <td><%= link_to_name lease.client %></td>
-        <td><%= link_to_name lease.registration %></td>
+        <td><%= link_to_name_with_icon lease.landlord %></td>
+        <td><%= link_to_name_with_icon lease.client %></td>
+        <td><%= link_to_name_with_icon lease.registration %></td>
         <td><%= link_to 'Show', lease %></td>
         <td><%= link_to 'Edit', edit_lease_path(lease) %></td>
         <td><%= link_to 'Destroy', lease, method: :delete, data: { confirm: 'Are you sure?' } %></td>

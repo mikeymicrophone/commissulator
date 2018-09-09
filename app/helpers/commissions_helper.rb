@@ -17,7 +17,7 @@ module CommissionsHelper
       content_tag(:td, commission.tenant_name.join(', ')),
       content_tag(:td, number_to_currency(commission.leased_monthly_rent)),
       content_tag(:td, link_to(number_to_currency(commission.total_commission), commission)),
-      content_tag(:td, link_to_name(commission.landlord)),
+      content_tag(:td, link_to_name_with_icon(commission.landlord)),
       # content_tag(:td, commission.zip_code),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, commission.submitted_on&.to_s(:descriptive)),
