@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Date of birth</th>
+      <th><%= link_to 'First Name', filter_params.merge(:sort => 'first_name') %></th>
+      <th><%= link_to 'Last Name', filter_params.merge(:sort => 'last_name') %></th>
+      <th><%= link_to 'Date of birth', filter_params.merge(:sort => 'date_of_birth') %></th>
       <th>Registration</th>
       <th>Emails</th>
       <th>Phones</th>
