@@ -6,5 +6,5 @@ class Industry < ApplicationRecord
   has_many :emails, :through => :employers
   has_many :phones, :through => :employers
   has_many :social_accounts, :through => :employers
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
 end

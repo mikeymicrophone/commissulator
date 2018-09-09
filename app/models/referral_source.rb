@@ -4,4 +4,5 @@ class ReferralSource < ApplicationRecord
   has_many :landlords, :through => :registrations
   has_many :leases, :through => :registrations
   has_many :industries, :through => :clients
+  validates :name, :uniqueness => true, :presence => true
 end
