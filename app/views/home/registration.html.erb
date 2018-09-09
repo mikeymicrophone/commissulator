@@ -200,5 +200,6 @@
       </div>
     </div>
     <%= submit_tag 'Submit & Go to Next Page' %>
+    <%= hidden_field :registration, :agent_id, :value => params[:agent_id] %>
   <% end %>
 </div>

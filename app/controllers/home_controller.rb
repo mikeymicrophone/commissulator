@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   def submit
     @registration = Registration.create registration_params
     
-    params[:client][:date_of_birth] = Date.strptime client_params[:date_of_birth], '%m/%d/%Y'
+    params[:client][:date_of_birth] = Date.strptime client_params[:date_of_birth], '%m/%d/%Y' rescue nil
     @client = Client.create client_params
     @registrant = Registrant.create registrant_params.merge(:registration => @registration, :client => @client)
     @landlord = Landlord.create landlord_params
@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     @office_fax = Phone.create office_fax_params.merge(:client => @client, :employer => @employer, :variety => 'fax')
 
     if first_roommate_filled_out?
-      params[:roommate_1_client][:date_of_birth] = Date.strptime roommate_client_params[:date_of_birth], '%m/%d/%Y'
+      params[:roommate_1_client][:date_of_birth] = Date.strptime roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
       @roommate = Client.create roommate_client_params
       Registrant.create roommate_registrant_params.merge(:registration => @registration, :client => @roommate)
       @roommate_employer = Employer.find_or_create_by(roommate_employer_params)
@@ -38,7 +38,7 @@ class HomeController < ApplicationController
       @roommate_cell_phone = Phone.create roommate_cell_phone_params.merge(:client => @roommate, :variety => 'cell')
     end
     if second_roommate_filled_out?
-      params[:roommate_2_client][:date_of_birth] = Date.strptime second_roommate_client_params[:date_of_birth], '%m/%d/%Y'
+      params[:roommate_2_client][:date_of_birth] = Date.strptime second_roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
       @second_roommate = Client.create second_roommate_client_params
       Registrant.create second_roommate_registrant_params.merge(:registration => @registration, :client => @second_roommate)
       @second_roommate_employer = Employer.find_or_create_by(second_roommate_employer_params)
@@ -46,7 +46,7 @@ class HomeController < ApplicationController
       @second_roommate_cell_phone = Phone.create second_roommate_cell_phone_params.merge(:client => @second_roommate, :variety => 'cell')
     end
     if third_roommate_filled_out?
-      params[:roommate_3_client][:date_of_birth] = Date.strptime third_roommate_client_params[:date_of_birth], '%m/%d/%Y'
+      params[:roommate_3_client][:date_of_birth] = Date.strptime third_roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
       @third_roommate = Client.create third_roommate_client_params
       Registrant.create third_roommate_registrant_params.merge(:registration => @registration, :client => @third_roommate)
       @third_roommate_employer = Employer.find_or_create_by(third_roommate_employer_params)
