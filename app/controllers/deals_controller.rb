@@ -26,6 +26,7 @@ class DealsController < ApplicationController
   end
 
   def show
+    @title = @deal.reference
   end
 
   def new
