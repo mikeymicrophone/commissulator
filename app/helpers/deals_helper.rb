@@ -53,7 +53,7 @@ module DealsHelper
     end
     
     if current_avatar.admin?
-      columns << content_tag(:td, link_to(fa_icon(:joint, :class => 'deletion', :size => '2x'), deal, :title => 'Delete Deal and its Assists', :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}), :class => 'deal_removal')
+      columns << content_tag(:td, link_to(fa_icon(:backspace, :class => 'deletion', :size => '2x'), deal, :title => 'Delete Deal and its Assists', :method => :delete, :remote => true, :data => {:confirm => 'Are you sure?'}), :class => 'deal_removal')
     end
     
     content_tag :tr, columns.join.html_safe, :id => dom_id(deal)

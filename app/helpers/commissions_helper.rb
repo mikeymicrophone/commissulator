@@ -28,7 +28,7 @@ module CommissionsHelper
       # content_tag(:td, commission.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{commission.documents.count})", :size => '2x'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal), :title => pluralize(commission.documents.count, 'Uploaded Document')) : '', :class => 'document_list'),
       # content_tag(:td, link_to(fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
       content_tag(:td, commission.documented? ? link_to(fa_icon(:paper_plane, :size => '2x'), submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for), :title => 'Submit to Senior Agent via Email') : ''),
-      content_tag(:td, link_to(fa_icon(:joint, :size => '2x'), commission, :method => :delete, :remote => true, :title => 'Delete Commission Entry', :data => {:confirm => 'Are you sure?'}), :class => 'commission_removal')
+      content_tag(:td, link_to(fa_icon(:backspace, :size => '2x'), commission, :method => :delete, :remote => true, :title => 'Delete Commission Entry', :data => {:confirm => 'Are you sure?'}), :class => 'commission_removal')
     ]
     
     if commission.follow_up == 'unsubmitted'

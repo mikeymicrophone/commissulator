@@ -28,7 +28,7 @@
         <td><%= link_to_name_with_icon lease.registration %></td>
         <td><%= link_to 'Show', lease %></td>
         <td><%= link_to fa_icon(:highlighter), edit_lease_path(lease), :title => 'Edit' %></td>
-        <td><%= link_to 'Destroy', lease, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon(:backspace), lease, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
       </tr>
     <% end %>
   </tbody>

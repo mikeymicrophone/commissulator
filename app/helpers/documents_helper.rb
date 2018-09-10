@@ -9,7 +9,7 @@ module DocumentsHelper
       content_tag(:td, (link_to(fa_icon(:cloud_download_alt, :size => '2x'), rails_blob_path(document.capture, disposition: 'attachment'), :title => 'Download') rescue nil)),
       content_tag(:td, link_to(fa_icon(:envelope_open, :size => '2x'), document, :title => 'Details')),
       content_tag(:td, link_to(fa_icon(:edit, :size => '2x'), edit_document_path(document), :title => 'Edit Metadata')),
-      content_tag(:td, link_to(fa_icon(:joint, :size => '2x'), document, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete'))
+      content_tag(:td, link_to(fa_icon(:backspace, :size => '2x'), document, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete'))
     ]
     
     content_tag :tr, columns.join.html_safe

@@ -22,7 +22,7 @@
         <td><%= link_to_name_with_icon phone.employer %></td>
         <td><%= link_to 'Show', phone %></td>
         <td><%= link_to fa_icon(:highlighter), edit_phone_path(phone), :title => 'Edit' %></td>
-        <td><%= link_to 'Destroy', phone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon(:backspace), phone, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
       </tr>
     <% end %>
   </tbody>

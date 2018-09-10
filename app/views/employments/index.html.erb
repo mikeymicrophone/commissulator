@@ -24,7 +24,7 @@
         <td><%= link_to_name_with_icon employment.employer %></td>
         <td><%= link_to 'Show', employment %></td>
         <td><%= link_to fa_icon(:highlighter), edit_employment_path(employment), :title => 'Edit' %></td>
-        <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon(:backspace), employment, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
       </tr>
     <% end %>
   </tbody>

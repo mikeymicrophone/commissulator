@@ -6,7 +6,7 @@
   <%= link_to(fa_icon(:crosshairs, :size => '2x'), @document.capture, :title => 'Quick View') rescue nil %>
   <%= link_to(fa_icon(:cloud_download_alt, :size => '2x'), rails_blob_path(@document.capture, disposition: 'attachment'), :title => 'Download') rescue nil %>
   <%= link_to(fa_icon(:edit, :size => '2x'), edit_document_path(@document), :title => 'Edit Metadata') %>
-  <%= link_to(fa_icon(:joint, :size => '2x'), @document, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete') %>
+  <%= link_to(fa_icon(:backspace, :size => '2x'), @document, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete') %>
 </div>
 
 <div>

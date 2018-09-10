@@ -40,7 +40,7 @@
         <td><%= link_to_name_with_icon registration.agent %></td>
         <td><%= link_to 'Show', registration %></td>
         <td><%= link_to fa_icon(:highlighter), edit_registration_path(registration), :title => 'Edit' %></td>
-        <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon(:backspace), registration, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -28,7 +28,7 @@
         <td><%= referral_source.active %></td>
         <td><%= link_to 'Show', referral_source %></td>
         <td><%= link_to fa_icon(:highlighter), edit_referral_source_path(referral_source), :title => 'Edit' %></td>
-        <td><%= link_to 'Destroy', referral_source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon(:backspace), referral_source, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
       </tr>
     <% end %>
   </tbody>

@@ -22,7 +22,7 @@
         <td><%= link_to_name_with_icon email.employer %></td>
         <td><%= link_to 'Show', email %></td>
         <td><%= link_to fa_icon(:highlighter), edit_email_path(email), :title => 'Edit' %></td>
-        <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon(:backspace), email, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
       </tr>
     <% end %>
   </tbody>
