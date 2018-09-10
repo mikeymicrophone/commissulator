@@ -17,8 +17,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :assistant_id %>
-    <%= form.select :assistant_id, options_from_collection_for_select(Assistant.all, :id, :name, assist.assistant_id), :include_blank => true %>
+    <%= form.label :agent_id %>
+    <%= form.select :agent_id, options_from_collection_for_select(Agent.all, :id, :name, assist.agent_id), :include_blank => true %>
   </div>
 
   <div class="field">

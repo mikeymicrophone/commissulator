@@ -1,6 +1,6 @@
 Fabricator :assist do
   deal { find_or_fabricate :deal }
-  assistant { find_or_fabricate :assistant }
+  agent { find_or_fabricate :agent }
   role { Assist.roles.keys.sample }
   status :active
 end

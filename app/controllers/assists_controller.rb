@@ -12,8 +12,8 @@ class AssistsController < ApplicationController
       @assists.order 'updated_at desc'
     when 'deal_id'
       @assists.order 'deal_id desc'
-    when 'assistant_id'
-      @assists.order 'assistant_id desc'
+    when 'agent_id'
+      @assists.order 'agent_id desc'
     when 'payout'
       Kaminari.paginate_array(@assists.sort_by { |assist| assist.payout.to_d }.reverse )
     else
@@ -73,6 +73,6 @@ class AssistsController < ApplicationController
     end
 
     def assist_params
-      params.require(:assist).permit :deal_id, :assistant_id, :role, :status, :rate, :adjustment, :expense
+      params.require(:assist).permit :deal_id, :agent_id, :role, :status, :rate, :adjustment, :expense
     end
 end

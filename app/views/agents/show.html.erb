@@ -1,32 +1,32 @@
-<%= link_to '[edit]', edit_assistant_path(@assistant) %>
+<%= link_to '[edit]', edit_agent_path(@agent) %>
 
 <p>
   <strong>First name:</strong>
-  <%= @assistant.first_name %>
+  <%= @agent.first_name %>
 </p>
 
 <p>
   <strong>Last name:</strong>
-  <%= @assistant.last_name %>
+  <%= @agent.last_name %>
 </p>
 
 <p>
   <strong>Phone number:</strong>
-  <%= @assistant.phone_number %>
+  <%= @agent.phone_number %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @assistant.email %>
+  <%= @agent.email %>
 </p>
 
 <p>
   <strong>Status:</strong>
-  <%= @assistant.status %>
+  <%= @agent.status %>
 </p>
 
 <table>
-  <% @assistant.assists.each do |assist| %>
+  <% @agent.assists.each do |assist| %>
     <tr>
       <td><%= link_to_name_with_icon assist %></td>
       <td><%= link_to_name_with_icon assist.deal, :reference %></td>

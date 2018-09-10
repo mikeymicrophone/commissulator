@@ -53,7 +53,7 @@ module ApplicationHelper
     # link_to(fa_icon(:user_tie, :text => 'Avatars'), avatars_path) +
     link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path) +
     if current_avatar.admin?
-      link_to(fa_icon(:users, :text => 'Assistants'), assistants_path)
+      link_to(fa_icon(:users, :text => 'Agents'), agents_path)
     end
   end
   

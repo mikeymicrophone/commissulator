@@ -1,10 +1,10 @@
-<%= form_with(model: assistant, local: true) do |form| %>
-  <% if assistant.errors.any? %>
+<%= form_with(model: agent, local: true) do |form| %>
+  <% if agent.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(assistant.errors.count, "error") %> prohibited this assistant from being saved:</h2>
+      <h2><%= pluralize(agent.errors.count, "error") %> prohibited this agent from being saved:</h2>
 
       <ul>
-      <% assistant.errors.full_messages.each do |message| %>
+      <% agent.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -48,7 +48,7 @@
   
   <div class="field">
     <%= form.label :avatar_id %>
-    <%= form.select :avatar_id, options_from_collection_for_select(Avatar.all, :id, :email, @assistant.avatar_id), :include_blank => true %>
+    <%= form.select :avatar_id, options_from_collection_for_select(Avatar.all, :id, :email, @agent.avatar_id), :include_blank => true %>
   </div>
 
   <div class="actions">

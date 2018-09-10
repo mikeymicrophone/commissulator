@@ -15,7 +15,7 @@ module AvatarsHelper
     link_to pluralize(avatar.commissions.count, 'Commission'), commissions_path(:filtered_attribute => :avatar_id, :filter_value => avatar)
   end
   
-  def assistants_of avatar
-    link_to pluralize(avatar.assistants.count, 'Assistant'), assistants_path(:filtered_attribute => :avatar_id, :filter_value => avatar)
+  def agents_of avatar
+    link_to pluralize(avatar.agents.count, 'Agent'), agents_path(:filtered_attribute => :avatar_id, :filter_value => avatar)
   end
 end

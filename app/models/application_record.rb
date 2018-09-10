@@ -39,7 +39,7 @@ class ApplicationRecord < ActiveRecord::Base
       :bed #:archway
     when Deal
       :balance_scale
-    when Assistant
+    when Agent
       :users
     when Avatar
       :user_tie

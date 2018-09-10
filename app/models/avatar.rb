@@ -3,9 +3,9 @@ class Avatar < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :deals
-  has_many :assistants, -> { distinct }, :through => :deals
+  has_many :agents, -> { distinct }, :through => :deals
   has_many :commissions
-  has_one :assistant
+  has_one :agent
   
   scope :alpha, lambda { order :first_name }
   

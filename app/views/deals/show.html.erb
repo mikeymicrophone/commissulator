@@ -125,7 +125,7 @@
   <% @deal.assists.chrono.each do |assist| %>
     <%= div_for assist do %>
       <%= content_tag :div, linked_name(assist), :class => 'deal_portion_description' %>
-      <% if current_avatar.admin? || assist.assistant.avatar == current_avatar %>
+      <% if current_avatar.admin? || assist.agent.avatar == current_avatar %>
         <%= content_tag :div, :class => 'deal_portion' do %>
           <%= rounded @deal.distributable_commission assist.rate %> * <%= assist.role_rate %>
           <%= '+ ' if assist.adjustment.to_d > 0 %>

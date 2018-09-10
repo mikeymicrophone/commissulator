@@ -1,6 +1,6 @@
 class Assist < ApplicationRecord
   belongs_to :deal
-  belongs_to :assistant
+  belongs_to :agent
   has_one :commission, :through => :deal
   enum :role => [:lead, :interview, :show, :close, :custom]
   enum :status => [:preliminary, :active, :removed]
@@ -15,7 +15,7 @@ class Assist < ApplicationRecord
   scope :chrono, lambda { order :role }
   
   def name
-    "#{role} by #{assistant.name}"
+    "#{role} by #{agent.name}"
   end
   
   def payout
@@ -27,6 +27,6 @@ class Assist < ApplicationRecord
   end
   
   def infer_rate
-    self.rate = assistant.rate if assistant.rate.present?
+    self.rate = agent.rate if agent.rate.present?
   end
 end

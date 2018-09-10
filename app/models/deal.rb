@@ -1,7 +1,7 @@
 class Deal < ApplicationRecord
   belongs_to :agent
   has_many :assists, :dependent => :destroy
-  has_many :assistants, :through => :assists
+  has_many :agents, :through => :assists
   has_one :commission
   has_many :documents
   delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
@@ -22,7 +22,7 @@ class Deal < ApplicationRecord
   def subcommissions
     package = Hash.new 0
     assists.each do |assist|
-      package[assist.assistant.payable_name] += assist.payout
+      package[assist.agent.payable_name] += assist.payout
     end
     
     package[agent.name] += agent_commission
@@ -74,16 +74,16 @@ class Deal < ApplicationRecord
   end
   
   def special_efforts
-    assists.group_by(&:assistant_id).select do |assistant_id, assists|
+    assists.group_by(&:agent_id).select do |agent_id, assists|
       assists.reject(&:new_record?).inject(0) { |sum, assist| sum + assist.role_rate } > 0.45
     end
   end
   
   def special_payments
-    special_efforts.map do |assistant_id, assists|
-      assistant = Assistant.find assistant_id
-      if assistants.map(&:name).append(agent.name).include? assistant.distinct_payable_name
-        "Override payment from #{assistant.payable_name} to #{assistant.name}: #{number_to_currency 10.percent_of remaining_commission}"
+    special_efforts.map do |agent_id, assists|
+      agent = Agent.find agent_id
+      if agents.map(&:name).append(agent.name).include? agent.distinct_payable_name
+        "Override payment from #{agent.payable_name} to #{agent.name}: #{number_to_currency 10.percent_of remaining_commission}"
       end
     end
   end

@@ -2,7 +2,7 @@ module DealsHelper
   def assist_adder deal
     form_with :model => deal.assists.new, :id => 'assist_adder' do |form|
       form.select(:role, Assist.roles.keys) +
-      form.select(:assistant_id, options_from_collection_for_select(Assistant.recent.active, :id, :name) + (add_name_option)) +
+      form.select(:agent_id, options_from_collection_for_select(Agent.recent.active, :id, :name) + (add_name_option)) +
       form.submit(:add) +
       form.hidden_field(:deal_id)
     end

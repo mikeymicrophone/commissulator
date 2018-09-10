@@ -1,0 +1,38 @@
+<h1>Agents</h1>
+<header>These are the people who work on deals.  To be credited, a person must be listed here (even if they are also a senior agent).</header>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= link_to 'First name', filter_params.merge(:sort => 'first_name') %></th>
+      <th><%= link_to 'Last name', filter_params.merge(:sort => 'last_name') %></th>
+      <th>Phone number</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agents.each do |agent| %>
+      <tr>
+        <td><%= agent.first_name %></td>
+        <td><%= agent.last_name %></td>
+        <td><%= agent.phone_number %></td>
+        <td><%= agent.email %></td>
+        <td><%= agent.status %></td>
+        <td><%= link_to pluralize(agent.assists.count, 'assist'), assists_path(:filtered_attribute => :agent_id, :filter_value => agent.id) %></td>
+        <td><%= link_to 'Show', agent %></td>
+        <td><%= link_to 'Edit', edit_agent_path(agent) %></td>
+        <td><%= activation_of agent %></td>
+        <td><%= link_to 'Delete', agent, :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @agents %>
+<br>
+<div class="tools">
+  <%= link_to 'New Agent', new_agent_path %>
+</div>

@@ -1,4 +1,4 @@
-class Assistant < ApplicationRecord
+class Agent < ApplicationRecord
   has_many :assists, :dependent => :nullify
   belongs_to :avatar, :optional => true
   enum :status => [:active, :inactive]

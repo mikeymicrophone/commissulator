@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_09_230125) do
+ActiveRecord::Schema.define(version: 2018_09_10_000415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 2018_09_09_230125) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "agents", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "rate"
+    t.string "payable_first_name"
+    t.string "payable_last_name"
+    t.integer "avatar_id"
+  end
+
   create_table "apartments", force: :cascade do |t|
     t.string "unit_number"
     t.string "street_number"
@@ -50,23 +64,9 @@ ActiveRecord::Schema.define(version: 2018_09_09_230125) do
     t.index ["registration_id"], name: "index_apartments_on_registration_id"
   end
 
-  create_table "assistants", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.string "email"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "rate"
-    t.string "payable_first_name"
-    t.string "payable_last_name"
-    t.integer "avatar_id"
-  end
-
   create_table "assists", force: :cascade do |t|
     t.bigint "deal_id"
-    t.bigint "assistant_id"
+    t.bigint "agent_id"
     t.integer "role"
     t.integer "status"
     t.datetime "created_at", null: false
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2018_09_09_230125) do
     t.decimal "rate"
     t.decimal "adjustment"
     t.decimal "expense"
-    t.index ["assistant_id"], name: "index_assists_on_assistant_id"
+    t.index ["agent_id"], name: "index_assists_on_agent_id"
     t.index ["deal_id"], name: "index_assists_on_deal_id"
   end
 
@@ -347,7 +347,7 @@ ActiveRecord::Schema.define(version: 2018_09_09_230125) do
   end
 
   add_foreign_key "apartments", "registrations"
-  add_foreign_key "assists", "assistants"
+  add_foreign_key "assists", "agents"
   add_foreign_key "assists", "deals"
   add_foreign_key "emails", "clients"
   add_foreign_key "emails", "employers"

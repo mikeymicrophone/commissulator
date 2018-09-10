@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th><%= link_to 'Deal', :sort => 'deal_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
-      <th><%= link_to 'Assistant', :sort => 'assistant_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
+      <th><%= link_to 'Agent', :sort => 'agent_id', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
       <% if current_avatar.admin? %>
         <th><%= link_to 'Payout', :sort => 'payout', :filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value] %></th>
       <% end %>
@@ -20,7 +20,7 @@
     <% @assists.each do |assist| %>
       <tr>
         <td><%= link_to_name_with_icon assist.deal, :reference %></td>
-        <td><%= link_to_name_with_icon assist.assistant %></td>
+        <td><%= link_to_name_with_icon assist.agent %></td>
         <% if current_avatar.admin? %>
           <td><%= number_to_currency assist.payout %></td>
         <% end %>

@@ -19,8 +19,8 @@ Fabricator :commission do
   lease_term { |attrs| [12, 12, 12, 16, 18, 24].sample.to_s + ' months' }
   square_footage { 300 + rand(2000) }
   listed_monthly_rent { |attrs| attrs[:square_footage] * 3 + rand(1300) }
-  landlord_source { find_or_fabricate(:assistant).name }
-  tenant_source { find_or_fabricate(:assistant).name }
+  landlord_source { find_or_fabricate(:agent).name }
+  tenant_source { find_or_fabricate(:agent).name }
 
   copy_of_lease { true }
   property_address { Faker::Address.street_address }

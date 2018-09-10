@@ -132,8 +132,8 @@ $(document).on 'turbolinks:load', ->
     referral(this)
     update_inbound()
   
-  $('#commission_participation_registration').on 'change', '#assist_assistant_id', ->
-    if $('#assist_assistant_id').val() == 'Add Name'
-      $('#assistant_adder').slideDown(700)
+  $('#commission_participation_registration').on 'change', '#assist_agent_id', ->
+    if $('#assist_agent_id').val() == 'Add Name'
+      $('#agent_adder').slideDown(700)
     else
-      $('#assistant_adder').slideUp(1300)
+      $('#agent_adder').slideUp(1300)
