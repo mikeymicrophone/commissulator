@@ -31,7 +31,7 @@ class CommissionsController < ApplicationController
     if @deal
       @commission = Commission.new :deal => @deal, :property_address => @deal.address, :apartment_number => @deal.unit_number
     else
-      @agent = Agent.where(:first_name => 'Desmond').take
+      @agent = Agent.where(:first_name => ENV['SENIOR_AGENT_FIRST_NAME']).take
       @deal = Deal.create(:agent => @agent)
       @commission = Commission.new :deal => @deal, :agent => @agent
     end
@@ -103,7 +103,7 @@ class CommissionsController < ApplicationController
 
   def fabricate
     fabricator = params[:fabricator] || :commission
-    @commission = Fabricate fabricator.to_sym, :agent => current_avatar
+    @commission = Fabricate fabricator.to_sym, :agent => Agent.where(:first_name => ENV['SENIOR_AGENT_FIRST_NAME']).take
   end
 
   private

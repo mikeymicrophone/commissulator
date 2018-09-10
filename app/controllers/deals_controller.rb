@@ -30,7 +30,7 @@ class DealsController < ApplicationController
   end
 
   def new
-    @deal = Deal.new :agent => current_avatar
+    @deal = Deal.new :agent => Agent.where(:first_name => ENV['SENIOR_AGENT_FIRST_NAME']).take
   end
 
   def edit
@@ -41,7 +41,7 @@ class DealsController < ApplicationController
 
   def create
     @deal = Deal.new deal_params
-    @deal.agent = current_avatar
+    @deal.agent = Agent.where(:first_name => ENV['SENIOR_AGENT_FIRST_NAME']).take
 
     respond_to do |format|
       if @deal.save
@@ -77,7 +77,7 @@ class DealsController < ApplicationController
   end
   
   def fabricate
-    @agent = Agent.where(:id => params[:deal][:agent_id]).take || current_avatar
+    @agent = Agent.where(:id => params[:deal][:agent_id]).take || Agent.where(:first_name => ENV['SENIOR_AGENT_FIRST_NAME']).take
     @deal = case params[:deal][:status]
     when 'underway'
       Fabricate :underway_deal, :agent => @agent
