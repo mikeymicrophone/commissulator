@@ -23,7 +23,7 @@
         <td><%= agent.status %></td>
         <td><%= link_to pluralize(agent.assists.count, 'assist'), assists_path(:filtered_attribute => :agent_id, :filter_value => agent.id) %></td>
         <td><%= link_to 'Show', agent %></td>
-        <td><%= link_to 'Edit', edit_agent_path(agent) %></td>
+        <td><%= link_to fa_icon(:highlighter), edit_agent_path(agent), :title => 'Edit' %></td>
         <td><%= activation_of agent %></td>
         <td><%= link_to 'Delete', agent, :method => :delete %></td>
       </tr>

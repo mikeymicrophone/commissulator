@@ -25,5 +25,5 @@
   <%= link_to_name_with_icon @social_account.employer %>
 </p>
 
-<%= link_to 'Edit', edit_social_account_path(@social_account) %> |
+<%= link_to fa_icon(:highlighter), edit_social_account_path(@social_account), :title => 'Edit' %> |
 <%= link_to 'Back', social_accounts_path %>

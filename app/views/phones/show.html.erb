@@ -20,5 +20,5 @@
   <%= link_to_name_with_icon @phone.employer %>
 </p>
 
-<%= link_to 'Edit', edit_phone_path(@phone) %> |
+<%= link_to fa_icon(:highlighter), edit_phone_path(@phone), :title => 'Edit' %> |
 <%= link_to 'Back', phones_path %>

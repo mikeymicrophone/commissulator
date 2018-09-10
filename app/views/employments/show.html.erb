@@ -25,5 +25,5 @@
   <%= link_to_name_with_icon @employment.employer %>
 </p>
 
-<%= link_to 'Edit', edit_employment_path(@employment) %> |
+<%= link_to fa_icon(:highlighter), edit_employment_path(@employment), :title => 'Edit' %> |
 <%= link_to 'Back', employments_path %>

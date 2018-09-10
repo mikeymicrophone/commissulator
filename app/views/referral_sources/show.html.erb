@@ -10,5 +10,5 @@
   <%= @referral_source.active %>
 </p>
 
-<%= link_to 'Edit', edit_referral_source_path(@referral_source) %> |
+<%= link_to fa_icon(:highlighter), edit_referral_source_path(@referral_source), :title => 'Edit' %> |
 <%= link_to 'Back', referral_sources_path %>

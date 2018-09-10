@@ -35,5 +35,5 @@
   <%= link_to_name_with_icon @lease.registration %>
 </p>
 
-<%= link_to 'Edit', edit_lease_path(@lease) %> |
+<%= link_to fa_icon(:highlighter), edit_lease_path(@lease), :title => 'Edit' %> |
 <%= link_to 'Back', leases_path %>

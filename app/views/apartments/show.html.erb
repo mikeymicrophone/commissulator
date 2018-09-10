@@ -40,5 +40,5 @@
   <%= link_to_name_with_icon @apartment.registration %>
 </p>
 
-<%= link_to 'Edit', edit_apartment_path(@apartment) %> |
+<%= link_to fa_icon(:highlighter), edit_apartment_path(@apartment), :title => 'Edit' %> |
 <%= link_to 'Back', apartments_path %>

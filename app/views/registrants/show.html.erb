@@ -15,5 +15,5 @@
   <%= link_to_name_with_icon @registrant.registration %>
 </p>
 
-<%= link_to 'Edit', edit_registrant_path(@registrant) %> |
+<%= link_to fa_icon(:highlighter), edit_registrant_path(@registrant), :title => 'Edit' %> |
 <%= link_to 'Back', registrants_path %>

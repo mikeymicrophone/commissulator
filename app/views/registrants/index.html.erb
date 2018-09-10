@@ -19,7 +19,7 @@
         <td><%= link_to_name_with_icon registrant.client %></td>
         <td><%= link_to_name_with_icon registrant.registration %></td>
         <td><%= link_to 'Show', registrant %></td>
-        <td><%= link_to 'Edit', edit_registrant_path(registrant) %></td>
+        <td><%= link_to fa_icon(:highlighter), edit_registrant_path(registrant), :title => 'Edit' %></td>
         <td><%= link_to 'Destroy', registrant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

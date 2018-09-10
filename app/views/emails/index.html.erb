@@ -21,7 +21,7 @@
         <td><%= link_to_name_with_icon email.client %></td>
         <td><%= link_to_name_with_icon email.employer %></td>
         <td><%= link_to 'Show', email %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
+        <td><%= link_to fa_icon(:highlighter), edit_email_path(email), :title => 'Edit' %></td>
         <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -21,7 +21,7 @@
         <td><%= link_to_associated industry, :phones %></td>
         <td><%= link_to_associated industry, :social_accounts %></td>
         <td><%= link_to 'Show', industry %></td>
-        <td><%= link_to 'Edit', edit_industry_path(industry) %></td>
+        <td><%= link_to fa_icon(:highlighter), edit_industry_path(industry), :title => 'Edit' %></td>
         <td><%= link_to 'Destroy', industry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

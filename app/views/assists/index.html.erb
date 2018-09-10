@@ -28,7 +28,7 @@
         <td><%= assist.status %></td>
         <td><%= assist.updated_at.to_s :descriptive %></td>
         <td><%= link_to 'Show', assist %></td>
-        <td><%= link_to 'Edit', edit_assist_path(assist) %></td>
+        <td><%= link_to fa_icon(:highlighter), edit_assist_path(assist), :title => 'Edit' %></td>
       </tr>
     <% end %>
   </tbody>

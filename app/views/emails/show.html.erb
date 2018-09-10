@@ -20,5 +20,5 @@
   <%= link_to_name_with_icon @email.employer %>
 </p>
 
-<%= link_to 'Edit', edit_email_path(@email) %> |
+<%= link_to fa_icon(:highlighter), edit_email_path(@email), :title => 'Edit' %> |
 <%= link_to 'Back', emails_path %>

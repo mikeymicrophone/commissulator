@@ -23,7 +23,7 @@
         <td><%= link_to_name_with_icon employment.client %></td>
         <td><%= link_to_name_with_icon employment.employer %></td>
         <td><%= link_to 'Show', employment %></td>
-        <td><%= link_to 'Edit', edit_employment_path(employment) %></td>
+        <td><%= link_to fa_icon(:highlighter), edit_employment_path(employment), :title => 'Edit' %></td>
         <td><%= link_to 'Destroy', employment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
