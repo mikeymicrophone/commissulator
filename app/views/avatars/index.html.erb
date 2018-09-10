@@ -1,10 +1,5 @@
 <% @avatars.each do |avatar| %>
   <%= div_for avatar, :class => :avatar_list do %>
     <%= link_to_name_with_icon avatar %>
-    <%= deals_by avatar %>
-    <%= weekly_deals_by avatar %>
-    <%= commissions_for avatar %>
-    <%= agents_of avatar %>
-    <%= avatar_new_registration_path avatar %>
   <% end %>
 <% end %>

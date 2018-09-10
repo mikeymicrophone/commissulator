@@ -2,10 +2,11 @@ class Avatar < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :deals
-  has_many :agents, -> { distinct }, :through => :deals
-  has_many :commissions
   has_one :agent
+  has_many :deals, :through => :agent
+  has_many :assists, :through => :deals
+  has_many :agents, -> { distinct }, :through => :assists
+  has_many :commissions, :through => :agent
   
   scope :alpha, lambda { order :first_name }
   

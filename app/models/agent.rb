@@ -1,6 +1,10 @@
 class Agent < ApplicationRecord
   has_many :assists, :dependent => :nullify
   belongs_to :avatar, :optional => true
+  has_many :deals
+  has_many :commissions
+  has_many :registrations
+  
   enum :status => [:active, :inactive]
   attr_default :status, 'active'
   
