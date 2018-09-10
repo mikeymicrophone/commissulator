@@ -1,8 +1,6 @@
 class LeasesController < ApplicationController
   before_action :set_lease, only: [:show, :edit, :update, :destroy]
 
-  # GET /leases
-  # GET /leases.json
   def index
     @leases = case params[:filtered_attribute]
     when 'referral_source_id'
@@ -14,22 +12,16 @@ class LeasesController < ApplicationController
     end.page params[:page]
   end
 
-  # GET /leases/1
-  # GET /leases/1.json
   def show
   end
 
-  # GET /leases/new
   def new
     @lease = Lease.new
   end
 
-  # GET /leases/1/edit
   def edit
   end
 
-  # POST /leases
-  # POST /leases.json
   def create
     @lease = Lease.new(lease_params)
 
@@ -44,8 +36,6 @@ class LeasesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /leases/1
-  # PATCH/PUT /leases/1.json
   def update
     respond_to do |format|
       if @lease.update(lease_params)
@@ -58,8 +48,6 @@ class LeasesController < ApplicationController
     end
   end
 
-  # DELETE /leases/1
-  # DELETE /leases/1.json
   def destroy
     @lease.destroy
     respond_to do |format|
@@ -69,12 +57,10 @@ class LeasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_lease
       @lease = Lease.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def lease_params
       params.require(:lease).permit(:apartment_number, :street_number, :street_name, :zip_code, :landlord_id, :client_id, :registration_id)
     end

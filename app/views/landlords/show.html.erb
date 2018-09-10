@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @landlord.name %>
@@ -27,5 +25,4 @@
   <% end %>
 <% end %>
 
-<%= link_to fa_icon(:highlighter), edit_landlord_path(@landlord), :title => 'Edit' %> |
-<%= link_to 'Back', landlords_path %>
+<%= link_to fa_icon(:highlighter), edit_landlord_path(@landlord), :title => 'Edit' %>

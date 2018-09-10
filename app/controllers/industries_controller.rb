@@ -1,8 +1,6 @@
 class IndustriesController < ApplicationController
   before_action :set_industry, only: [:show, :edit, :update, :destroy]
 
-  # GET /industries
-  # GET /industries.json
   def index
     @industries = case params[:filtered_attribute]
     when 'referral_source_id'
@@ -16,22 +14,16 @@ class IndustriesController < ApplicationController
     end.page params[:page]
   end
 
-  # GET /industries/1
-  # GET /industries/1.json
   def show
   end
 
-  # GET /industries/new
   def new
     @industry = Industry.new
   end
 
-  # GET /industries/1/edit
   def edit
   end
 
-  # POST /industries
-  # POST /industries.json
   def create
     @industry = Industry.new(industry_params)
 
@@ -46,8 +38,6 @@ class IndustriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /industries/1
-  # PATCH/PUT /industries/1.json
   def update
     respond_to do |format|
       if @industry.update(industry_params)
@@ -60,8 +50,6 @@ class IndustriesController < ApplicationController
     end
   end
 
-  # DELETE /industries/1
-  # DELETE /industries/1.json
   def destroy
     @industry.destroy
     respond_to do |format|
@@ -71,12 +59,10 @@ class IndustriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_industry
       @industry = Industry.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def industry_params
       params.require(:industry).permit(:name)
     end

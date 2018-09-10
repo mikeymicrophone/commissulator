@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Minimum price:</strong>
   <%= number_to_round_currency @registration.minimum_price %>
@@ -127,5 +125,4 @@
   <% end %>
 <% end %>
 
-<%= link_to fa_icon(:highlighter), edit_registration_path(@registration), :title => 'Edit' %> |
-<%= link_to 'Back', registrations_path %>
+<%= link_to fa_icon(:highlighter), edit_registration_path(@registration), :title => 'Edit' %>

@@ -1,8 +1,6 @@
 class EmployersController < ApplicationController
   before_action :set_employer, only: [:show, :edit, :update, :destroy]
 
-  # GET /employers
-  # GET /employers.json
   def index
     @employers = case params[:filtered_attribute]
     when 'industry_id'
@@ -14,22 +12,16 @@ class EmployersController < ApplicationController
     end.page params[:page]
   end
 
-  # GET /employers/1
-  # GET /employers/1.json
   def show
   end
 
-  # GET /employers/new
   def new
     @employer = Employer.new
   end
 
-  # GET /employers/1/edit
   def edit
   end
 
-  # POST /employers
-  # POST /employers.json
   def create
     @employer = Employer.new(employer_params)
 
@@ -44,8 +36,6 @@ class EmployersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /employers/1
-  # PATCH/PUT /employers/1.json
   def update
     respond_to do |format|
       if @employer.update(employer_params)
@@ -58,8 +48,6 @@ class EmployersController < ApplicationController
     end
   end
 
-  # DELETE /employers/1
-  # DELETE /employers/1.json
   def destroy
     @employer.destroy
     respond_to do |format|
@@ -69,12 +57,10 @@ class EmployersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_employer
       @employer = Employer.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def employer_params
       params.require(:employer).permit(:name, :address, :url)
     end

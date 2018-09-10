@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Other fund sources:</strong>
   <%= @registrant.other_fund_sources %>
@@ -15,5 +13,4 @@
   <%= link_to_name_with_icon @registrant.registration %>
 </p>
 
-<%= link_to fa_icon(:highlighter), edit_registrant_path(@registrant), :title => 'Edit' %> |
-<%= link_to 'Back', registrants_path %>
+<%= link_to fa_icon(:highlighter), edit_registrant_path(@registrant), :title => 'Edit' %>

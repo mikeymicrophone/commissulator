@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Variety:</strong>
   <%= @email.variety %>
@@ -20,5 +18,4 @@
   <%= link_to_name_with_icon @email.employer %>
 </p>
 
-<%= link_to fa_icon(:highlighter), edit_email_path(@email), :title => 'Edit' %> |
-<%= link_to 'Back', emails_path %>
+<%= link_to fa_icon(:highlighter), edit_email_path(@email), :title => 'Edit' %>

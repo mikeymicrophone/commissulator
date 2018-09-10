@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Employer:</strong>
   <%= link_to_name_with_icon @niche.employer %>
@@ -10,5 +8,4 @@
   <%= link_to_name_with_icon @niche.industry %>
 </p>
 
-<%= link_to fa_icon(:highlighter), edit_niche_path(@niche), :title => 'Edit' %> |
-<%= link_to 'Back', niches_path %>
+<%= link_to fa_icon(:highlighter), edit_niche_path(@niche), :title => 'Edit' %>

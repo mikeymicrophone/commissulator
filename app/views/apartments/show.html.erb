@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Unit number:</strong>
   <%= @apartment.unit_number %>
@@ -40,5 +38,4 @@
   <%= link_to_name_with_icon @apartment.registration %>
 </p>
 
-<%= link_to fa_icon(:highlighter), edit_apartment_path(@apartment), :title => 'Edit' %> |
-<%= link_to 'Back', apartments_path %>
+<%= link_to fa_icon(:highlighter), edit_apartment_path(@apartment), :title => 'Edit' %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Variety:</strong>
   <%= @phone.variety %>
@@ -20,5 +18,4 @@
   <%= link_to_name_with_icon @phone.employer %>
 </p>
 
-<%= link_to fa_icon(:highlighter), edit_phone_path(@phone), :title => 'Edit' %> |
-<%= link_to 'Back', phones_path %>
+<%= link_to fa_icon(:highlighter), edit_phone_path(@phone), :title => 'Edit' %>

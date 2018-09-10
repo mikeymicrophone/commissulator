@@ -1,5 +1,3 @@
 <h1>New Document <%= "for #{@document.deal.reference}" if @document.deal.present? %></h1>
 
 <%= render 'form', document: @document %>
-
-<%= link_to 'Back', documents_path %>

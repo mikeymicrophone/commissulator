@@ -1,8 +1,6 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
 
-  # GET /apartments
-  # GET /apartments.json
   def index
     @apartments = if params[:filtered_attribute]
       Apartment.where params[:filtered_attribute] => params[:filter_value]
@@ -11,22 +9,16 @@ class ApartmentsController < ApplicationController
     end.page params[:page]
   end
 
-  # GET /apartments/1
-  # GET /apartments/1.json
   def show
   end
 
-  # GET /apartments/new
   def new
     @apartment = Apartment.new
   end
 
-  # GET /apartments/1/edit
   def edit
   end
 
-  # POST /apartments
-  # POST /apartments.json
   def create
     @apartment = Apartment.new(apartment_params)
 
@@ -41,8 +33,6 @@ class ApartmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /apartments/1
-  # PATCH/PUT /apartments/1.json
   def update
     respond_to do |format|
       if @apartment.update(apartment_params)
@@ -55,8 +45,6 @@ class ApartmentsController < ApplicationController
     end
   end
 
-  # DELETE /apartments/1
-  # DELETE /apartments/1.json
   def destroy
     @apartment.destroy
     respond_to do |format|
@@ -66,12 +54,10 @@ class ApartmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_apartment
       @apartment = Apartment.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
       params.require(:apartment).permit(:unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment, :registration_id)
     end

@@ -1,8 +1,6 @@
 class PhonesController < ApplicationController
   before_action :set_phone, only: [:show, :edit, :update, :destroy]
 
-  # GET /phones
-  # GET /phones.json
   def index
     @phones = case params[:filtered_attribute]
     when 'industry_id'
@@ -14,22 +12,16 @@ class PhonesController < ApplicationController
     end.page params[:page]
   end
 
-  # GET /phones/1
-  # GET /phones/1.json
   def show
   end
 
-  # GET /phones/new
   def new
     @phone = Phone.new
   end
 
-  # GET /phones/1/edit
   def edit
   end
 
-  # POST /phones
-  # POST /phones.json
   def create
     @phone = Phone.new(phone_params)
 
@@ -44,8 +36,6 @@ class PhonesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /phones/1
-  # PATCH/PUT /phones/1.json
   def update
     respond_to do |format|
       if @phone.update(phone_params)
@@ -58,8 +48,6 @@ class PhonesController < ApplicationController
     end
   end
 
-  # DELETE /phones/1
-  # DELETE /phones/1.json
   def destroy
     @phone.destroy
     respond_to do |format|
@@ -69,12 +57,10 @@ class PhonesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_phone
       @phone = Phone.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def phone_params
       params.require(:phone).permit(:variety, :number, :client_id, :employer_id)
     end
