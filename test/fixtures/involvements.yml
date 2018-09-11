@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  package: one
+  role: one
+  rate: 9.99
+  description: MyText
+
+two:
+  package: two
+  role: two
+  rate: 9.99
+  description: MyText

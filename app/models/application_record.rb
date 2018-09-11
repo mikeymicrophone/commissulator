@@ -49,6 +49,10 @@ class ApplicationRecord < ActiveRecord::Base
       :basketball_ball
     when Commission
       :chart_pie
+    when Package
+      :parachute_box
+    when Role
+      :suitcase_rolling
     end
   end
   

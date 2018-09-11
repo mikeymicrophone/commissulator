@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Package:</strong>
+  <%= link_to_name_with_icon @involvement.package %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= link_to_name_with_icon @involvement.role %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @involvement.rate %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @involvement.description %>
+</p>
+
+<%= link_to 'Edit', edit_involvement_path(@involvement) %> |
+<%= link_to 'Back', involvements_path %>

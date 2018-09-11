@@ -22,14 +22,18 @@ module ApplicationHelper
         resource_path(Employer),
         resource_path(Industry),
         resource_path(ReferralSource),
+        tag.br,
         resource_path(Apartment, :class => :secondary),
         resource_path(Lease, :class => :secondary),
         resource_path(Phone, :class => :secondary),
         resource_path(Email, :class => :secondary),
         resource_path(SocialAccount, :class => :secondary),
+        tag.br,
         resource_path(Registrant, :class => :join),
         resource_path(Employment, :class => :join),
-        resource_path(Niche, :class => :join)
+        resource_path(Niche, :class => :join),
+        resource_path(Package, :class => :join),
+        resource_path(Role, :class => :join)
       ].join(' ').html_safe
     end if current_avatar&.admin?
   end
@@ -49,7 +53,7 @@ module ApplicationHelper
     link_to(fa_icon(:chart_pie, :text => 'Commissions'), commissions_path, :id => 'commissions_link') +
     # link_to(fa_icon(:clipboard_list, :text => 'Documents'), documents_path) +
     # link_to(fa_icon(:balance_scale, :text => 'Deals'), deals_path) +
-    # link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
+    link_to(fa_icon(:basketball_ball, :text => 'Assists', :animation => 'spin'), assists_path) +
     # link_to(fa_icon(:user_tie, :text => 'Avatars'), avatars_path) +
     link_to(fa_icon(:warehouse, :text => 'Landlords'), landlords_path) +
     if current_avatar.admin?

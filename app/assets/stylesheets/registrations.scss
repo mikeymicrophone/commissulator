@@ -69,11 +69,13 @@
 }
 
 nav#registration_navigation {
-  margin: 4px;
+  margin: 14px;
+  margin-left: 65px;
+  font-family: 'Fjalla One';
   
   a {
     padding: 4px;
-    font-style: italic;
+//    font-style: italic;
     
     &.secondary {
       font-size: 0.88em;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_10_003343) do
+ActiveRecord::Schema.define(version: 2018_09_11_011320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,13 +67,13 @@ ActiveRecord::Schema.define(version: 2018_09_10_003343) do
   create_table "assists", force: :cascade do |t|
     t.bigint "deal_id"
     t.bigint "agent_id"
-    t.integer "role"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "rate"
     t.decimal "adjustment"
     t.decimal "expense"
+    t.integer "role_id"
     t.index ["agent_id"], name: "index_assists_on_agent_id"
     t.index ["deal_id"], name: "index_assists_on_deal_id"
   end
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 2018_09_10_003343) do
     t.bigint "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "package_id"
     t.index ["agent_id"], name: "index_deals_on_agent_id"
   end
 
@@ -258,6 +259,17 @@ ActiveRecord::Schema.define(version: 2018_09_10_003343) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "involvements", force: :cascade do |t|
+    t.bigint "package_id"
+    t.bigint "role_id"
+    t.decimal "rate"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_involvements_on_package_id"
+    t.index ["role_id"], name: "index_involvements_on_role_id"
+  end
+
   create_table "landlords", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -288,6 +300,15 @@ ActiveRecord::Schema.define(version: 2018_09_10_003343) do
     t.datetime "updated_at", null: false
     t.index ["employer_id"], name: "index_niches_on_employer_id"
     t.index ["industry_id"], name: "index_niches_on_industry_id"
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string "name"
+    t.json "splits"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "phones", force: :cascade do |t|
@@ -334,6 +355,14 @@ ActiveRecord::Schema.define(version: 2018_09_10_003343) do
     t.index ["referral_source_id"], name: "index_registrations_on_referral_source_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.decimal "rate"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "social_accounts", force: :cascade do |t|
     t.string "variety"
     t.string "url"
@@ -353,6 +382,8 @@ ActiveRecord::Schema.define(version: 2018_09_10_003343) do
   add_foreign_key "emails", "employers"
   add_foreign_key "employments", "clients"
   add_foreign_key "employments", "employers"
+  add_foreign_key "involvements", "packages"
+  add_foreign_key "involvements", "roles"
   add_foreign_key "leases", "clients"
   add_foreign_key "leases", "landlords"
   add_foreign_key "leases", "registrations"

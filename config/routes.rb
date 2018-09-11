@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :involvements
+  resources :roles
+  resources :packages
   resources :documents
   resources :landlords do
     collection do
