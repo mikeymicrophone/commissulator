@@ -10,4 +10,8 @@ module RegistrationsHelper
   def fabricate_registration_link
     link_to 'Fabricate Registration', fabricate_registrations_path, :method => :post unless Rails.env.production?
   end
+  
+  def begin_registration_link
+    link_to fa_icon(:arrow_circle_right, :text => 'Begin Registration'), begin_registration_path
+  end
 end

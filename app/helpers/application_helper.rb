@@ -16,18 +16,21 @@ module ApplicationHelper
   
   def avatar_nav
     content_tag :nav, :id => 'registration_navigation' do
-      registration_access_nav +
-      if current_avatar.admin?
-        tag.br +
-        registration_data_nav +
-        tag.br +
-        registration_join_nav
+      if current_avatar
+        registration_access_nav +
+        if current_avatar.admin?
+          tag.br +
+          registration_data_nav +
+          tag.br +
+          registration_join_nav
+        end
       end
     end
   end
   
   def registration_access_nav
     [
+      begin_registration_link,
       resource_path(Client),
       resource_path(Registration),
       resource_path(Employer),

@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
   
   def registration
-    
+    render :layout => 'empty'
   end
   
   def submit
@@ -64,6 +64,7 @@ class HomeController < ApplicationController
   end
   
   def thanks
+    render :layout => 'empty'
   end
   
   def toggle_navigation
