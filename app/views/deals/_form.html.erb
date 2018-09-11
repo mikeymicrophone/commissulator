@@ -32,6 +32,11 @@
   </div>
   
   <div class="field">
+    <%= form.label :package %><br>
+    <%= form.select :package_id, options_from_collection_for_select(Package.all, :id, :name, deal.package_id) %>
+  </div>
+  
+  <div class="field">
     <%= form.label :status %><br>
     <%= form.select :status, Deal.statuses.keys, :include_blank => true %>
   </div>

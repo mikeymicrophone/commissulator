@@ -73,6 +73,6 @@ class AssistsController < ApplicationController
     end
 
     def assist_params
-      params.require(:assist).permit :deal_id, :agent_id, :role, :status, :rate, :adjustment, :expense
+      params.require(:assist).permit :deal_id, :agent_id, :role_id, :status, :rate, :adjustment, :expense
     end
 end

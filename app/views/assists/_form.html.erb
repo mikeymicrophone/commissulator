@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :deal_id %>
-    <%= form.select :deal_id, options_from_collection_for_select(Deal.all, :id, :name, assist.deal_id), :include_blank => true %>
+    <%= form.select :deal_id, options_from_collection_for_select(Deal.all, :id, :reference, assist.deal_id), :include_blank => true %>
   </div>
 
   <div class="field">
@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :role %>
-    <%= form.select :role, Assist.roles.keys %>
+    <%= form.select :role, options_from_collection_for_select(Role.all, :id, :name, assist.role_id) %>
   </div>
 
   <div class="field">

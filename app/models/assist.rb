@@ -1,18 +1,19 @@
 class Assist < ApplicationRecord
   belongs_to :deal
   belongs_to :agent
+  belongs_to :role
   has_one :commission, :through => :deal
-  enum :role => [:lead, :interview, :show, :close, :custom]
+  # enum :role => [:lead, :interview, :show, :close, :custom]
   enum :status => [:preliminary, :active, :removed]
   attr_default :rate, 50
   
   before_create :infer_rate
   
-  scope :leading, lambda { where :role => :lead }
-  scope :interviewing, lambda { where :role => :interview }
-  scope :showing, lambda { where :role => :show }
-  scope :closing, lambda { where :role => :close }
-  scope :chrono, lambda { order :role }
+  scope :leading, lambda { where :role_id => Role.where(:name => 'lead').take }
+  scope :interviewing, lambda { where :role_id => Role.where(:name => 'interview').take }
+  scope :showing, lambda { where :role_id => Role.where(:name => 'show').take }
+  scope :closing, lambda { where :role_id => Role.where(:name => 'close').take }
+  scope :chrono, lambda { order :role_id }
   
   def name
     "#{role} by #{agent.name}"
@@ -23,7 +24,7 @@ class Assist < ApplicationRecord
   end
   
   def role_rate
-    deal.rate_for role
+    role.rate.percent * 2
   end
   
   def infer_rate

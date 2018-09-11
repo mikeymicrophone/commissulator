@@ -9,6 +9,7 @@ class Agent < ApplicationRecord
   attr_default :status, 'active'
   
   scope :active, lambda { where :status => 'active' }
+  scope :alpha, lambda { order :first_name }
   
   def name
     "#{first_name} #{last_name}"

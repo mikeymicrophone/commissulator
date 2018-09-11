@@ -9,7 +9,7 @@ module AssistsHelper
   end
   
   def icon_for role
-    icon = case role
+    icon = case role.name
     when 'lead'
       :hand_paper #:list
     when 'interview'
@@ -21,7 +21,7 @@ module AssistsHelper
     when 'custom'
       :bolt
     end
-    fa_icon(icon, :text => role.capitalize)
+    fa_icon(icon, :text => role.name.capitalize)
   end
   
   def participation_in role
