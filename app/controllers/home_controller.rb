@@ -60,6 +60,10 @@ class HomeController < ApplicationController
     if second_apartment_filled_out?
       @second_apartment = Apartment.create second_apartment_params.merge(:registration => @registration)
     end
+    redirect_to :action => :thanks
+  end
+  
+  def thanks
   end
   
   def toggle_navigation
