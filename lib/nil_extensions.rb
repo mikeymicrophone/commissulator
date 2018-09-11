@@ -15,6 +15,10 @@ class NilClass
     false
   end
   
+  def admin?
+    false
+  end
+  
   def > n
     0 > n
   end
