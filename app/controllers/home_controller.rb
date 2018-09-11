@@ -62,6 +62,9 @@ class HomeController < ApplicationController
     end
   end
   
+  def toggle_navigation
+  end
+  
   private
   def first_roommate_filled_out?
     params[:roommate_1_client][:first_name].present?

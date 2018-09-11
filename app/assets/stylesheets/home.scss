@@ -1,4 +1,4 @@
-#sign_out_link, #profile_link {
+#sign_out_link, #profile_link, #nav_toggler {
   float: right;
   padding-right: 10px;
 }
@@ -96,4 +96,8 @@ a {
       color: #EE9344;
     }
   }
+}
+
+a.secondary, a.join, a.hiding {
+  display: none;
 }
