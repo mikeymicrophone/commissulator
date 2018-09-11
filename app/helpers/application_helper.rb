@@ -112,6 +112,6 @@ module ApplicationHelper
   end
   
   def selected_fonts
-    ['Arvo', 'Bitter', 'Cinzel', 'Fjalla One', 'Jua', 'M PLUS Rounded 1c', 'Nunito']
+    ['Alegreya', 'Arvo', 'Bitter', 'Cinzel', 'Cormorant Infant', 'Fjalla One', 'Joana Correia', 'Jua', 'M PLUS Rounded 1c', 'Nunito', 'Quattrocento']
   end
 end
