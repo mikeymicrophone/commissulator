@@ -53,6 +53,8 @@ class ApplicationRecord < ActiveRecord::Base
       :parachute_box
     when Role
       :suitcase_rolling
+    when Involvement
+      :clipboard_check
     end
   end
   

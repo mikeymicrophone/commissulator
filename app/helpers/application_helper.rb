@@ -55,7 +55,8 @@ module ApplicationHelper
       resource_path(Employment, :class => :join),
       resource_path(Niche, :class => :join),
       resource_path(Package, :class => :join),
-      resource_path(Role, :class => :join)
+      resource_path(Role, :class => :join),
+      resource_path(Involvement, :class => :join)
     ].join(' ').html_safe
   end
   
