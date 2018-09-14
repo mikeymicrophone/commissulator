@@ -58,9 +58,29 @@ owner_side = ->
     else
       0
 
+listing_fee = ->
+  unless calculation_suspended()
+    if listing_fee_owed()
+      listing_fee_percentage = parseFloat $('#commission_listing_fee_percentage').val()
+      listing_fee_per = listing_fee_percentage / 100
+      total() * listing_fee_per
+    else
+      0
+
+referral = ->
+  unless calculation_suspended()
+    if referral_owed()
+      parseFloat $('#commission_referral_payment').val()
+    else
+      0
+
+origination_fee = ->
+  unless calculation_suspended()
+    listing_fee() + referral()
+
 commission = ->
   unless calculation_suspended()
-    total()
+    total() - origination_fee()
 
 co_broke_commission = ->
   unless calculation_suspended()
@@ -108,8 +128,6 @@ update_inbound = ->
     $('#commission_co_broke_commission').val co_broke_commission().toFixed 2
     base = commission() - co_broke_commission()
     final = base
-    if referral_owed()
-      final = final - $('#commission_referral_payment').val()
     $('#commission_citi_commission').val final.toFixed 2
 
 @referral = (field)->
