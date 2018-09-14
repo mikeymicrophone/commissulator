@@ -67,7 +67,7 @@ class Deal < ApplicationRecord
   end
   
   def listing_fee
-    (commission.listing_fee_percentage / BigDecimal(100)) * inbound_commission if commission&.listing_fee?
+    (commission.listing_fee_percentage / BigDecimal(100)) * total_commission if commission&.listing_fee?
   end
   
   def staffed?
