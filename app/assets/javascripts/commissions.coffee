@@ -80,7 +80,7 @@ origination_fee = ->
 
 commission = ->
   unless calculation_suspended()
-    total() - origination_fee()
+    total()
 
 co_broke_commission = ->
   unless calculation_suspended()
@@ -127,7 +127,7 @@ update_inbound = ->
         $('#commission_tenant_side_commission').val listing_side_commission().toFixed 2
     $('#commission_co_broke_commission').val co_broke_commission().toFixed 2
     base = commission() - co_broke_commission()
-    final = base
+    final = base - origination_fee()
     $('#commission_citi_commission').val final.toFixed 2
 
 @referral = (field)->

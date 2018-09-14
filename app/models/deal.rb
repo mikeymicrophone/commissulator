@@ -35,7 +35,7 @@ class Deal < ApplicationRecord
   end
   
   def remaining_commission
-    inbound_commission - referral_payment
+    inbound_commission
   end
   
   def closeout
