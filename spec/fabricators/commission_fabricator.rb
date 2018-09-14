@@ -83,6 +83,8 @@ Fabricator :referral_commission, :from => :commission do
   citi_habitats_referral_agent_office { Faker::Address.street_name }
   citi_habitats_referral_agent_amount { (3..8).to_a.sample * 100 }
   referral_payment { |attrs| attrs[:citi_habitats_referral_agent_amount] }
+  
+  citi_commission { |attrs| attrs[:co_broke] ? attrs[:total_commission].to_d * 0.5 - attrs[:referral_payment].to_d : attrs[:total_commission].to_d - attrs[:referral_payment].to_d }
 end
 
 def add_tenants_to commission
