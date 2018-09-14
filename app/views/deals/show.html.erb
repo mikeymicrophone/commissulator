@@ -104,6 +104,11 @@
     <%= content_tag :div, rounded(@deal.inbound_commission), :class => 'deal_portion' %>
   </div>
   
+  <div>
+    <%= content_tag :div, 'Remaining Commission', :class => 'deal_portion_description' %>
+    <%= content_tag :div, rounded(@deal.remaining_commission), :class => 'deal_portion' %>
+  </div>
+  
   <% if current_avatar.admin? %>
     <div>
       <%= content_tag :div, 'Citi Habitats Cut', :class => 'deal_portion_description' %>

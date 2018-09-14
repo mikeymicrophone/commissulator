@@ -15,17 +15,17 @@ Fabricator :completed_deal, :from => :deal do
 end
 
 def partial_participation_in deal
-  Fabricate :assist, :deal => deal, :role => :lead
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'lead')
   if die_roll(2)
-    Fabricate :assist, :deal => deal, :role => :interview
-    Fabricate :assist, :deal => deal, :role => :interview if die_roll(10)
+    Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'interview')
+    Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'interview') if die_roll(10)
     
     if die_roll(3)
-      Fabricate :assist, :deal => deal, :role => :show
-      Fabricate :assist, :deal => deal, :role => :show if die_roll(4)
+      Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'show')
+      Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'show') if die_roll(4)
       
       if die_roll
-        Fabricate :assist, :deal => deal, :role => :close
+        Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'close')
         deal.update_attribute :status, :submitted
       end
     end
@@ -33,10 +33,10 @@ def partial_participation_in deal
 end
 
 def full_participation_in deal
-  Fabricate :assist, :deal => deal, :role => :lead
-  Fabricate :assist, :deal => deal, :role => :interview
-  Fabricate :assist, :deal => deal, :role => :interview if die_roll(10)
-  Fabricate :assist, :deal => deal, :role => :show
-  Fabricate :assist, :deal => deal, :role => :show if die_roll(4)
-  Fabricate :assist, :deal => deal, :role => :close
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'lead')
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'interview')
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'interview') if die_roll(10)
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'show')
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'show') if die_roll(4)
+  Fabricate :assist, :deal => deal, :role => Role.find_or_create_by(:name => 'close')
 end
