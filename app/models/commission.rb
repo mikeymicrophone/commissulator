@@ -73,7 +73,7 @@ class Commission < ApplicationRecord
     tenants.each do |tenant|
       first_name = tenant.name.split.first
       last_name = tenant.name.split[1..-1].join ' '
-      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :emails => [{:value => tenant.email}], :phones => [{:value => tenant.phone}]
+      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :emails => [{:value => tenant.email}], :phones => [{:value => tenant.phone}], :stage => 'Closed'
       people << person
     end
     people
