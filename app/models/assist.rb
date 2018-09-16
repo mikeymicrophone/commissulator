@@ -1,10 +1,9 @@
 class Assist < ApplicationRecord
   belongs_to :deal
   belongs_to :agent
-  # belongs_to :role
+  belongs_to :role
   has_one :commission, :through => :deal
   has_one :package, :through => :deal
-  enum :role => [:lead, :interview, :show, :close, :custom]
   enum :status => [:preliminary, :active, :removed]
   attr_default :rate, 50
   
