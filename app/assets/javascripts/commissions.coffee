@@ -67,6 +67,13 @@ listing_fee = ->
     else
       0
 
+citi_referral = ->
+  unless calculation_suspended()
+    if citi_referral_owed()
+      parseFloat $('#commission_citi_habitats_referral_agent_amount').val()
+    else
+      0
+
 referral = ->
   unless calculation_suspended()
     if referral_owed()
@@ -76,7 +83,17 @@ referral = ->
 
 origination_fee = ->
   unless calculation_suspended()
-    listing_fee() + referral()
+    referral()
+
+external_origination_fee = ->
+  unless calculation_suspended()
+    Number($('#commission_corcoran_referral_agent_amount').val()) +
+    Number($('#commission_outside_agency_amount').val()) +
+    Number($('#commission_relocation_referral_amount').val())
+
+internal_origination_fee = ->
+  unless calculation_suspended()
+    listing_fee() + citi_referral()
 
 commission = ->
   unless calculation_suspended()
@@ -108,6 +125,10 @@ listing_fee_owed = ->
   unless calculation_suspended()
     $('input:checkbox.listing_fee:checked').exists()
 
+citi_referral_owed = ->
+  unless calculation_suspended()
+    $('input:checkbox#commission_citi_habitats_referral_agent:checked').exists()
+
 referral_owed = ->
   unless calculation_suspended()
     $('input:checkbox.referral:checked').exists()
@@ -127,7 +148,7 @@ update_inbound = ->
         $('#commission_tenant_side_commission').val listing_side_commission().toFixed 2
     $('#commission_co_broke_commission').val co_broke_commission().toFixed 2
     base = commission() - co_broke_commission()
-    final = base - origination_fee()
+    final = base - external_origination_fee()
     $('#commission_citi_commission').val final.toFixed 2
 
 @referral = (field)->

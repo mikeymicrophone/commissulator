@@ -5,7 +5,7 @@ class Deal < ApplicationRecord
   belongs_to :package
   has_one :commission
   has_many :documents
-  delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :to => :commission, :allow_nil => true
+  delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
   attr_default :status, :preliminary
@@ -35,7 +35,7 @@ class Deal < ApplicationRecord
   end
   
   def remaining_commission
-    inbound_commission
+    inbound_commission - internal_referral
   end
   
   def closeout
@@ -63,7 +63,15 @@ class Deal < ApplicationRecord
   end
   
   def referral_payment
-    listing_fee.to_d + commission&.citi_habitats_referral_agent_amount.to_d + commission&.corcoran_referral_agent_amount.to_d + commission&.outside_agency_amount.to_d + commission&.relocation_referral_amount.to_d
+    listing_fee.to_d + citi_habitats_referral_agent_amount.to_d + corcoran_referral_agent_amount.to_d + outside_agency_amount.to_d + relocation_referral_amount.to_d
+  end
+  
+  def external_referral
+    corcoran_referral_agent_amount.to_d + outside_agency_amount.to_d + relocation_referral_amount.to_d
+  end
+  
+  def internal_referral
+    listing_fee.to_d + citi_habitats_referral_agent_amount.to_d
   end
   
   def listing_fee
