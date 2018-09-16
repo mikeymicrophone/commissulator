@@ -1,6 +1,6 @@
 module ApplicationHelper
   def link_to_name object, attribute = :name, arguments = nil
-    link_to object.send(attribute, arguments), object if object
+    link_to object.send(attribute, *arguments), object if object
   end
   
   def link_to_name_with_icon object, arguments = nil

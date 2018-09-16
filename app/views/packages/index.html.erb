@@ -18,6 +18,14 @@
         <td><%= package.name %></td>
         <td><%= package.splits %></td>
         <td><%= package.active %></td>
+        <td><%= link_to_associated package, :deals %></td>
+        <td>
+          <% package.involvements.each do |involvement| %>
+            <%= div_for involvement do %>
+              <%= link_to_name involvement.role %>@<%= involvement.rate %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', package %></td>
         <td><%= link_to 'Edit', edit_package_path(package) %></td>
         <td><%= link_to 'Destroy', package, method: :delete, data: { confirm: 'Are you sure?' } %></td>

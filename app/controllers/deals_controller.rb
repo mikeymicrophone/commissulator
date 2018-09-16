@@ -2,10 +2,13 @@ class DealsController < ApplicationController
   before_action :set_deal, only: [:show, :edit, :pick_status_of, :update, :destroy]
 
   def index
-    @deals = if params[:filtered_attribute]
+    @deals = case params[:filtered_attribute]
+    when 'agent_id'
       Deal.where :agent_id => params[:filter_value]
-    else
+    when nil
       Deal.all
+    else
+      Deal.where params[:filtered_attribute] => params[:filter_value]
     end
     @deals = case params[:sort]
     when 'commission'

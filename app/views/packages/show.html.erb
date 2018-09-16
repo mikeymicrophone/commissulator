@@ -15,5 +15,12 @@
   <%= @package.active %>
 </p>
 
+<% @package.involvements.each do |involvement| %>
+  <%= div_for involvement do %>
+    <%= link_to_name involvement.role %>
+    <%= involvement.rate %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Edit', edit_package_path(@package) %> |
 <%= link_to 'Back', packages_path %>
