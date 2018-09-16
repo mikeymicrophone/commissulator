@@ -2,7 +2,7 @@ class Deal < ApplicationRecord
   belongs_to :agent
   has_many :assists, :dependent => :destroy
   has_many :agents, :through => :assists
-  belongs_to :package
+  belongs_to :package, :optional => true
   has_one :commission
   has_many :documents
   delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :to => :commission, :allow_nil => true
