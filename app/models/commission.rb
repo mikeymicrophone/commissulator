@@ -73,7 +73,9 @@ class Commission < ApplicationRecord
     tenants.each do |tenant|
       first_name = tenant.name.split.first
       last_name = tenant.name.split[1..-1].join ' '
-      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :emails => [{:value => tenant.email}], :phones => [{:value => tenant.phone}], :stage => 'Closed'
+      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :stage => 'Closed'
+      person.emails = [{:value => tenant.email}] if tenant.email.present?
+      person.phones = [{:value => tenant.phone}] if tenant.phone.present?
       people << person
     end
     people
@@ -82,6 +84,7 @@ class Commission < ApplicationRecord
   def follow_up!
     fub_people.each do |person|
       begin
+        FubClient::Person.collection_path '/v1/people?deduplicate=true'
         person.save
       rescue NoMethodError => error
         Rails.logger.debug error.inspect
