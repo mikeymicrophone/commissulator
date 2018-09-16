@@ -94,6 +94,7 @@ module ApplicationHelper
         end
       else
         link_to('Log In', new_avatar_session_path) +
+        link_to('Sign in with Contactually', avatar_contactually_omniauth_authorize_path) +
         link_to('Register', new_avatar_registration_path)
       end
     end

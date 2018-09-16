@@ -1,6 +1,6 @@
 class Avatar < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:contactually]
 
   has_one :agent
   has_many :deals, :through => :agent
@@ -9,6 +9,14 @@ class Avatar < ApplicationRecord
   has_many :commissions, :through => :agent
   
   scope :alpha, lambda { order :first_name }
+  
+  def self.from_omniauth auth
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |avatar|
+      avatar.email = auth.info.email
+      avatar.password = Devise.friendly_token[0,20]
+      avatar.skip_confirmation!
+    end
+  end
   
   def name
     "#{first_name} #{last_name}"
