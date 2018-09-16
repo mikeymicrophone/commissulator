@@ -93,7 +93,7 @@
       <% end %>
     
       <%= div_for client, :contacts_for do %>
-        <% div_for client, :emails_for do %>
+        <%= div_for client, :emails_for do %>
           <% client.emails.each do |email| %>
             <%= div_for email do %>
               <%= link_to_name_with_icon email, :address %>

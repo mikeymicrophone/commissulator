@@ -63,6 +63,7 @@ class RegistrationsController < ApplicationController
   
   def fabricate
     @registration = Fabricate :complete_registration
+    @registration.follow_up!
     redirect_to @registration
   end
 

@@ -20,7 +20,7 @@ class Registration < ApplicationRecord
     clients.each do |client|
       person = FubClient::Person.new :firstName => client.first_name, :lastName => client.last_name, :stage => 'Registered'
       person.phones = client.phones.map { |phone| {:value => phone.number, :type => phone.variety} } if client.phones.present?
-      person.emails = client.emails.map { |email| {:value => email.address, :type => email.variety} } if client.emails.present?
+      person.emails = client.emails.map { |email| {:value => email.address} } if client.emails.present?
       people << person
     end
     people
