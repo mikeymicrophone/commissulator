@@ -3,6 +3,7 @@ class Assist < ApplicationRecord
   belongs_to :agent
   belongs_to :role
   has_one :commission, :through => :deal
+  has_one :package, :through => :deal
   # enum :role => [:lead, :interview, :show, :close, :custom]
   enum :status => [:preliminary, :active, :removed]
   attr_default :rate, 50
@@ -19,12 +20,16 @@ class Assist < ApplicationRecord
     "#{role} by #{agent.name}"
   end
   
+  def involvement
+    package.involvements.where(:role_id => role_id).take
+  end
+  
   def payout
     role_rate * deal.distributable_commission(rate) / deal.assists.where(:role => role).count + adjustment.to_d + expense.to_d if deal.commission
   end
   
   def role_rate
-    role.rate.percent * 2
+    involvement.rate.percent * 2 rescue 0
   end
   
   def infer_rate

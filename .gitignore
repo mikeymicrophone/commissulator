@@ -31,3 +31,5 @@
 /config/master.key
 
 /config/initializers/aalpha_dev_constants.rb
+
+*.dump
