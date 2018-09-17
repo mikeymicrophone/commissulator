@@ -16,6 +16,7 @@ class Avatar < ApplicationRecord
       avatar.provider = auth.provider
       avatar.uid = auth.uid
       avatar.save
+      avatar
     else
       where(provider: auth.provider, uid: auth.uid).first_or_create do |avatar|
         avatar.email = auth.info.email
