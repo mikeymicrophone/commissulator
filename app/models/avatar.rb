@@ -11,10 +11,17 @@ class Avatar < ApplicationRecord
   scope :alpha, lambda { order :first_name }
   
   def self.from_omniauth auth
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |avatar|
-      avatar.email = auth.info.email
-      avatar.password = Devise.friendly_token[0,20]
-      avatar.skip_confirmation!
+    avatar = Avatar.where(:email => auth.info.email).take
+    if avatar
+      avatar.provider = auth.provider
+      avatar.uid = auth.uid
+      avatar.save
+    else
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |avatar|
+        avatar.email = auth.info.email
+        avatar.password = Devise.friendly_token[0,20]
+        avatar.skip_confirmation!
+      end
     end
   end
   

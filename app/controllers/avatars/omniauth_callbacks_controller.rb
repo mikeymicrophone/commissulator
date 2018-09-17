@@ -1,5 +1,6 @@
 class Avatars::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def contactually
+    Rails.logger.info request.env['omniauth.auth']
     @avatar = Avatar.from_omniauth request.env["omniauth.auth"]
 
     if @avatar.persisted?
