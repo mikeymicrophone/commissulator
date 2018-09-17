@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_16_160532) do
+ActiveRecord::Schema.define(version: 2018_09_16_231053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,9 +99,13 @@ ActiveRecord::Schema.define(version: 2018_09_16_160532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin"
+    t.string "provider"
+    t.string "uid"
     t.index ["confirmation_token"], name: "index_avatars_on_confirmation_token"
     t.index ["email"], name: "index_avatars_on_email"
+    t.index ["provider"], name: "index_avatars_on_provider"
     t.index ["reset_password_token"], name: "index_avatars_on_reset_password_token"
+    t.index ["uid"], name: "index_avatars_on_uid"
   end
 
   create_table "clients", force: :cascade do |t|

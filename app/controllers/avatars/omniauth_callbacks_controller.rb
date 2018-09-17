@@ -1,4 +1,4 @@
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class Avatars::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def contactually
     @avatar = Avatar.from_omniauth request.env["omniauth.auth"]
 
