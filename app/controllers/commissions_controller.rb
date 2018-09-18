@@ -42,6 +42,7 @@ class CommissionsController < ApplicationController
   
   def follow_up
     @commission.follow_up!
+    @commission.contactually_up!
     @commission.update_attribute :follow_up, :submitted
   end
 

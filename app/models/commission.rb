@@ -107,6 +107,7 @@ class Commission < ApplicationRecord
         emails << {:label => 'home', :address => tenant.email} #Contactually::Models::EmailAddress.new(:address => tenant.email)
       end
       payload = {:first_name => first_name, :last_name => last_name}
+      payload[:bucket_ids] = [ENV['CONTACTUALLY_CLOSED_BUCKET_ID']]
       payload[:email_addresses] = emails if emails.present?
       payload[:phone_numbers] = phone_numbers if phone_numbers.present?
       ctly_people << payload
