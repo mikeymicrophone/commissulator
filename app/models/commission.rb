@@ -1,5 +1,6 @@
 include ActionView::Helpers::NumberHelper
 Tenant = Struct.new :name, :email, :phone
+require 'contactually'
 
 class Commission < ApplicationRecord
   belongs_to :deal, :optional => true
@@ -90,6 +91,35 @@ class Commission < ApplicationRecord
         Rails.logger.debug error.inspect
       end
     end
+  end
+  
+  def contactually_people
+    ctly_people = []
+    tenants.each do |tenant|
+      first_name = tenant.name.split.first
+      last_name = tenant.name.split[1..-1].join ' '
+      phone_numbers = []
+      emails = []
+      if tenant.phone.present?
+        phone_numbers << {:label => 'cell', :number => tenant.phone} #Contactually::Models::PhoneNumber.new(:number => tenant.phone)
+      end
+      if tenant.email.present?
+        emails << {:label => 'home', :address => tenant.email} #Contactually::Models::EmailAddress.new(:address => tenant.email)
+      end
+      payload = {:first_name => first_name, :last_name => last_name}
+      payload[:email_addresses] = emails if emails.present?
+      payload[:phone_numbers] = phone_numbers if phone_numbers.present?
+      ctly_people << payload
+    end
+    ctly_people
+  end
+  
+  def contactually_up!
+    responses = []
+    contactually_people.each do |payload|
+      responses << contactually_client.contacts.create(:data => payload)
+    end
+    responses
   end
   
   def boolean_display attribute

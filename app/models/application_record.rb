@@ -7,6 +7,10 @@ class ApplicationRecord < ActiveRecord::Base
     self.class.name.underscore + '_id'
   end
   
+  def contactually_client
+    @contactually_client ||= Contactually::Client.new :auth_token => Rails.application.credentials.contactually[:staging_token]
+  end
+  
   def icon
     case self
     when Client
