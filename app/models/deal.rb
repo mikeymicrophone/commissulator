@@ -90,9 +90,9 @@ class Deal < ApplicationRecord
   
   def special_payments
     special_efforts.map do |agent_id, assists|
-      agent = Agent.find agent_id
-      if agents.map(&:name).append(agent.name).include? agent.distinct_payable_name
-        "Override payment from #{agent.payable_name} to #{agent.name}: #{number_to_currency 10.percent_of remaining_commission}"
+      assisting_agent = Agent.find agent_id
+      if agents.map(&:name).append(agent.name).include? assisting_agent.distinct_payable_name
+        "Override payment from #{assisting_agent.payable_name} to #{assisting_agent.name}: #{number_to_currency 10.percent_of remaining_commission}"
       end
     end
   end
