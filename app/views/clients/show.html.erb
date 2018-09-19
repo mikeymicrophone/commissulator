@@ -20,4 +20,10 @@
   <% end %>
 <% end %>
 
+<% @client.apartments.each do |apartment| %>
+  <%= div_for apartment do %>
+    <%= apartment.name %>
+  <% end %>
+<% end %>
+
 <%= link_to fa_icon(:highlighter), edit_client_path(@client), :title => 'Edit' %>

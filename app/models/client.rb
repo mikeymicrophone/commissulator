@@ -1,6 +1,7 @@
 class Client < ApplicationRecord
   has_many :registrants, :dependent => :destroy
   has_many :registrations, :through => :registrants
+  has_many :apartments, :through => :registrations
   has_many :landlords, :through => :registrations
   has_many :emails
   has_many :phones
