@@ -1,3 +1,49 @@
+.registration {
+  
+  .landlords_of_registration {
+    
+    .landlord {
+      
+    }
+    
+  }
+  
+  .leases_of_registration {
+    
+    .lease {
+      
+    }
+  }
+  
+  .apartments_of_registration {
+    
+    .apartment {
+      
+    }
+  }
+  
+  .client {
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 4px;
+    padding: 10px;
+    .registrant_for_client {
+      
+    }
+    
+    .employment_of_client {
+      
+      .employment {
+        
+        .industry {
+          float: right;
+        }
+      }
+    }
+    
+  }
+}
+
 #registration_interface {
   
   .reg_form_quadrant {

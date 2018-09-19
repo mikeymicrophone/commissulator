@@ -25,6 +25,6 @@ module AssistsHelper
   end
   
   def participation_in role
-    link_to icon_for(role), assists_path(:filtered_attribute => :role, :filter_value => role)
+    link_to icon_for(role), assists_path(:filtered_attribute => :role_id, :filter_value => role)
   end
 end
