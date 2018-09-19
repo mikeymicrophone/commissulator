@@ -13,16 +13,36 @@
   <%= @client.date_of_birth %>
 </p>
 
-<% @client.employments.each do |employment| %>
-  <%= div_for employment do %>
-    <%= employment.name %>
-    <%= link_to_name employment.employer %>
+<%= div_for @client do %>
+  <% @client.employments.each do |employment| %>
+    <%= div_for employment do %>
+      <%= employment.name %>
+      <%= link_to_name employment.employer %>
+    <% end %>
   <% end %>
-<% end %>
 
-<% @client.apartments.each do |apartment| %>
-  <%= div_for apartment do %>
-    <%= apartment.name %>
+  <% @client.apartments.each do |apartment| %>
+    <%= div_for apartment do %>
+      <%= apartment.name %>
+    <% end %>
+  <% end %>
+
+  <% @client.emails.each do |email| %>
+    <%= div_for email do %>
+      <%= link_to_name email, :address %>
+    <% end %>
+  <% end %>
+  
+  <% @client.phones.each do |phone| %>
+    <%= div_for phone do %>
+      <%= link_to_name phone, :number %>
+    <% end %>
+  <% end %>
+  
+  <% @client.social_accounts.each do |social_account| %>
+    <%= div_for social_account do %>
+      <%= link_to_name social_account, :moniker %>
+    <% end %>
   <% end %>
 <% end %>
 
