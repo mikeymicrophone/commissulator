@@ -7,6 +7,7 @@ class Commission < ApplicationRecord
   belongs_to :agent, :optional => true
   belongs_to :landlord, :optional => true
   has_many :documents, :through => :deal
+  has_many :agents, :through => :deal, :source => :agents
   serialize :tenant_name
   serialize :tenant_email
   serialize :tenant_phone_number
@@ -29,6 +30,9 @@ class Commission < ApplicationRecord
   
   enum :follow_up => [:unsubmitted, :submitted]
   attr_default :follow_up, :unsubmitted
+  
+  scope :visible_to, lambda { |avatar| avatar.admin? ? all : assisted_by(avatar.agent) }
+  scope :assisted_by, lambda { |agent| joins(:agents).where 'assists.agent_id' => agent }
   
   acts_as_paranoid
   

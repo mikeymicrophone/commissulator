@@ -1,11 +1,12 @@
 class CommissionsController < ApplicationController
-  before_action :set_commission, only: [:show, :edit, :update, :submit, :follow_up, :destroy]
+  load_and_authorize_resource :except => [:index, :fabricate]
+  # before_action :set_commission, only: [:show, :edit, :update, :submit, :follow_up, :destroy]
 
   def index
     @commissions = if params[:filtered_attribute]
       Commission.where params[:filtered_attribute] => params[:filter_value]
     else
-      Commission.all
+      Commission.visible_to current_avatar
     end
     @commissions = case params[:sort]
     when 'updated_at'
@@ -108,9 +109,9 @@ class CommissionsController < ApplicationController
   end
 
   private
-    def set_commission
-      @commission = Commission.find params[:id]
-    end
+    # def set_commission
+    #   @commission = Commission.find params[:id]
+    # end
 
     def commission_params
       params.require(:commission).permit(:agent_id, :branch_name, {:tenant_name => []}, {:tenant_email => []}, {:tenant_phone_number => []}, :landlord_name, :landlord_email, :landlord_phone_number,
