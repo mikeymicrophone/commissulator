@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   alias :current_user :current_avatar
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message.concat(" #{exception.action} of #{exception.subject.class.name.downcase} #{exception.subject.id}")
+    redirect_to root_url, :alert => exception.message.concat(" #{exception.action} of #{exception.subject.class.name.downcase} #{exception.subject.id rescue nil}")
   end
 
   protected
