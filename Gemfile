@@ -20,6 +20,7 @@ gem 'font_awesome5_rails'
 gem 'fabrication'
 gem 'faker'
 gem 'google-webfonts-rails', :github => 'masarakki/google-webfonts-rails', :branch => 'for-rails5'
+gem 'rollbar'
 
 gem 'rails', '~> 5.2.1'
 gem 'pg'
