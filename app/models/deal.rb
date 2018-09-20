@@ -7,7 +7,7 @@ class Deal < ApplicationRecord
   has_many :documents
   delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :to => :commission, :allow_nil => true
   
-  enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed]
+  enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed, :commission_requested, :commission_processed]
   attr_default :status, :preliminary
   
   scope :this_week, -> { where Deal.arel_table[:created_at].gt 1.week.ago }
