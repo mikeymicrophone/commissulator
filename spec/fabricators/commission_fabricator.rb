@@ -31,7 +31,9 @@ Fabricator :commission do
   transient :fee
   fee { |attrs| attrs[:annualized_rent] * 0.15 }
   
-  owner_pay_commission { |attrs| die_roll(5) ? attrs[:leased_monthly_rent] : 0 }
+  transient :owner_pay
+  owner_pay { die_roll 5 }
+  owner_pay_commission { |attrs| attrs[:owner_pay] ? attrs[:leased_monthly_rent] : 0 }
   listing_side_commission { |attrs| die_roll(10) ? attrs[:fee] / 2.0 : 0 }
   tenant_side_commission { |attrs| attrs[:fee] - attrs[:listing_side_commission] }
   
