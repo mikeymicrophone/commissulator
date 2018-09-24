@@ -4,9 +4,10 @@ class Ability
   def initialize avatar
     if avatar
       can :manage, :all
-      cannot :manage, Commission do |commission|
-        !commission.agents.include? avatar.agent
-      end
+      # this needs to allow creation of new commissions, and probably editing as well
+      # cannot :manage, Commission do |commission|
+      #   !commission.agents.include? avatar.agent
+      # end
     end
     
     if avatar.admin?
