@@ -27,7 +27,7 @@ class HomeController < ApplicationController
     @employment = Employment.create employment_params.merge(:client => @client, :employer => @employer)
     
     @office_phone = Phone.create office_phone_params.merge(:client => @client, :employer => @employer, :variety => 'office')
-    @office_fax = Phone.create office_fax_params.merge(:client => @client, :employer => @employer, :variety => 'fax')
+    @office_hiring = Phone.create office_hiring_params.merge(:employer => @employer, :variety => 'hiring')
 
     if first_roommate_filled_out?
       params[:roommate_1_client][:date_of_birth] = Date.strptime roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
@@ -141,8 +141,8 @@ class HomeController < ApplicationController
     params.require(:office_phone).permit :number
   end
   
-  def office_fax_params
-    params.require(:office_fax).permit :number
+  def office_hiring_params
+    params.require(:office_hiring).permit :number
   end
 
   def roommate_client_params

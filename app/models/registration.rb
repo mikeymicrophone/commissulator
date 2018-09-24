@@ -7,6 +7,7 @@ class Registration < ApplicationRecord
   has_many :leases, :dependent => :destroy
   has_many :landlords, :through => :leases
   has_many :employments, :through => :clients
+  has_many :employers, :through => :employments
   
   def name
     "Reg #{id} on #{created_at.strftime "%-m/%-d"}"
@@ -26,11 +27,30 @@ class Registration < ApplicationRecord
     people
   end
   
+  def fub_employers
+    employer_people = []
+    employers.each do |employer|
+      employer_person = FubClient::Person.new :lastName => employer.name, :tags => ['Employer']
+      employer_person.addresses = [employer.address] if employer.address.present?
+      employer_person.phones = employer.phones.where(:client_id => nil).map { |phone| {:value => phone.number, :type => phone.variety} } if employer.phones.present?
+      employer_person.emails = employer.emails.where(:client_id => nil).map { |email| {:value => email.address} } if employer.emails.present?
+      employer_people << employer_person
+    end
+    employer_people
+  end
+  
   def follow_up!
+    FubClient::Person.collection_path '/v1/people?deduplicate=true'
     fub_people.each do |person|
       begin
-        FubClient::Person.collection_path '/v1/people?deduplicate=true'
         person.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
+    end
+    fub_employers.each do |employer|
+      begin
+        employer.save
       rescue NoMethodError => error
         Rails.logger.debug error.inspect
       end
