@@ -1,4 +1,4 @@
-jQuery ->
+$(document).on 'turbolinks:load', ->
   $('.datepicker').datepicker({
       changeMonth: true,
       changeYear: true,
