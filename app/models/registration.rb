@@ -39,6 +39,19 @@ class Registration < ApplicationRecord
     employer_people
   end
   
+  def fub_landlords
+    landlord_people = []
+    landlords.each do |landlord|
+      first_name = landlord.name.split.first
+      last_name = landlord.name.split[1..-1].join ' '
+      landlord_person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :tags => ['Landlord']
+      landlord_person.phones = [{:value => landlord.phone_number, :type => 'work'}] if landlord.phone_number.present?
+      landlord_person.emails = [{:value => landlord.email}] if landlord.email.present?
+      landlord_people << landlord_person
+    end
+    landlord_people
+  end
+  
   def follow_up!
     fub_people.each do |person|
       begin
@@ -52,6 +65,13 @@ class Registration < ApplicationRecord
     fub_employers.each do |employer|
       begin
         employer.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
+    end
+    fub_landlords.each do |landlord|
+      begin
+        landlord.save
       rescue NoMethodError => error
         Rails.logger.debug error.inspect
       end
