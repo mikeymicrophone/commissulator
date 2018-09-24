@@ -25,6 +25,10 @@ class ClientsController < ApplicationController
 
   def new
     @client = Client.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit

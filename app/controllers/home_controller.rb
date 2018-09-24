@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   end
   
   def submit
+    params[:registration][:move_by] = Date.strptime registration_params[:move_by], '%m/%d/%Y' rescue nil
     @registration = Registration.create registration_params
     
     params[:client][:date_of_birth] = Date.strptime client_params[:date_of_birth], '%m/%d/%Y' rescue nil

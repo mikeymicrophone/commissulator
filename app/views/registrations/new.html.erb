@@ -1,3 +1,46 @@
-<h1>New Registration</h1>
+<div id="registration_interface">
+  <%= form_tag :url => registrations_path do %>
+    <div class="reg_form_quadrant" id="registration_top_line">
+      <div class="bordered inline">
+        <%= label :registration, :minimum_price, 'Price Range:' %><br>
+        <%= select :registration, :minimum_price, price_range_options, :include_blank => 'Minimum' %>
+        <%= select :registration, :maximum_price, price_range_options, :include_blank => 'Maximum' %>
+      </div>
+      <div class="bordered inline">
+        <%= label :registration, :size, 'Size:' %><br>
+        <%= select :registration, :size, size_options, :include_blank => '[Minimum]' %>
+      </div>
+      <div class="bordered inline">
+        <div>
+          <%= select :registration, :referral_source_id, referral_source_options, :include_blank => 'How did you hear about us?' %>
+        </div>
+      </div>
+      <div class="bordered inline">
+        <div>
+          <%= label :registration, :move_by, 'I must move by:' %>
+          <%= text_field :registration, :move_by, :placeholder => 'Moving Date', :class => 'datepicker birthdate' %>
+        </div>
+      </div>
+    </div>
 
-<%= render 'form', registration: @registration %>
+    <div class="reg_form_quadrant">
+      <div class="bordered">
+        <div class="inline">
+          <%= text_area :registration, :reason_for_moving, :placeholder => 'Reason For Moving' %>
+        </div>
+        <div class="inline">
+          <div>
+            <%= text_field :registration, :occupants, :placeholder => 'Number of Occupants' %>
+          </div>
+          <div>
+            <%= text_field :registration, :pets, :placeholder => 'Type and Size of Any Pets' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    <%= hidden_field :registration, :agent_id, :value => params[:agent_id] %>
+    <%= submit_tag 'Submit & Go to Next Page' %>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+$('<%=j render 'lease_add' %>').appendTo($('#main_registrant_data .bordered .inline')).hide().fadeIn(2200);
+setTimeout(function() {
+  $('<%=j render 'landlords/landlord_add' %>').appendTo($('#main_registrant_data .bordered .inline')).hide().fadeIn(1000);
+}, 1200)
+

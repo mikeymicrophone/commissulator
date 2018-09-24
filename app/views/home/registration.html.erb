@@ -18,7 +18,7 @@
       <div class="bordered inline">
         <div>
           <%= label :registration, :move_by, 'I must move by:' %>
-          <%= date_select :registration, :move_by, :order => [:month, :day, :year] %>
+          <%= text_field :registration, :move_by, :placeholder => 'Moving Date', :class => 'datepicker birthdate' %>
         </div>
       </div>
     </div>

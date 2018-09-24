@@ -1,0 +1,7 @@
+$('#registration_top_line').after('<div class="reg_form_quadrant" id="main_registrant_data"></div>');
+$('#main_registrant_data').append('<%=j render 'client_add' %>').hide().fadeIn(2200);
+$('.datepicker').datepicker({
+  changeMonth: true,
+  changeYear: true,
+  yearRange: "1940:2010"
+});

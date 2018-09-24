@@ -17,6 +17,10 @@ class LeasesController < ApplicationController
 
   def new
     @lease = Lease.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit

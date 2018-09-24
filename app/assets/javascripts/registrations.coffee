@@ -4,3 +4,18 @@ $(document).on 'turbolinks:load', ->
       changeYear: true,
       yearRange: "1940:2010"
     });
+
+  $('#registration_interface').on 'change', '#registration_maximum_price', ->
+    $.ajax
+      url: '/clients/new'
+      dataType: 'script'
+
+  $('#registration_interface').on 'change', '#client_first_name', ->
+    $.ajax
+      url: '/leases/new'
+      dataType: 'script'
+
+  $('#registration_interface').on 'change', '#client_date_of_birth', ->
+    $.ajax
+      url: '/emails/new'
+      dataType: 'script'

@@ -22,6 +22,7 @@ class RegistrationsController < ApplicationController
 
   def new
     @registration = Registration.new
+    render :layout => 'empty'
   end
 
   def edit

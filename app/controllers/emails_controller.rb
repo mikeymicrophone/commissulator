@@ -17,6 +17,10 @@ class EmailsController < ApplicationController
 
   def new
     @email = Email.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
