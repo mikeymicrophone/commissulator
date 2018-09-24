@@ -64,6 +64,10 @@ class Commission < ApplicationRecord
     deal.save
   end
   
+  def lease_end_date
+    Timespan.new(:from => lease_start_date, :duration => lease_term).end_date
+  end
+  
   def tenants
     group = []
     tenant_name.each_with_index do |name, index|
@@ -78,9 +82,10 @@ class Commission < ApplicationRecord
     tenants.each do |tenant|
       first_name = tenant.name.split.first
       last_name = tenant.name.split[1..-1].join ' '
-      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :stage => 'Closed'
+      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :stage => 'Closed', :customCommission => total_commission, :customCloseDate => lease_sign_date, :customLeaseEndDate => lease_end_date
       person.emails = [{:value => tenant.email}] if tenant.email.present?
       person.phones = [{:value => tenant.phone}] if tenant.phone.present?
+      person.price = leased_monthly_rent
       people << person
     end
     people
@@ -89,8 +94,19 @@ class Commission < ApplicationRecord
   def follow_up!
     fub_people.each do |person|
       begin
-        FubClient::Person.collection_path '/v1/people?deduplicate=true'
-        person.save
+        similar_people = FubClient::Person.where(:firstName => person.firstName, :lastName => person.lastName).fetch
+        fub_person = similar_people.first if similar_people.present?
+        if fub_person
+          url = URI "https://api.followupboss.com/v1/people/#{fub_person.id}"
+          http = Net::HTTP.new url.host, url.port
+          http.use_ssl = true
+          request = Net::HTTP::Put.new url
+          request.basic_auth FubClient::Client.instance.api_key, ''
+          request.body = person.attributes.to_query
+          response = http.request request
+        else
+          person.save
+        end
       rescue NoMethodError => error
         Rails.logger.debug error.inspect
       end

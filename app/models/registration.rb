@@ -19,7 +19,7 @@ class Registration < ApplicationRecord
   def fub_people
     people = []
     clients.each do |client|
-      person = FubClient::Person.new :firstName => client.first_name, :lastName => client.last_name, :stage => 'Registered'
+      person = FubClient::Person.new :firstName => client.first_name, :lastName => client.last_name, :stage => 'Registered', :customBirthday => client.date_of_birth
       person.phones = client.phones.map { |phone| {:value => phone.number, :type => phone.variety} } if client.phones.present?
       person.emails = client.emails.map { |email| {:value => email.address} } if client.emails.present?
       people << person
@@ -40,10 +40,11 @@ class Registration < ApplicationRecord
   end
   
   def follow_up!
-    FubClient::Person.collection_path '/v1/people?deduplicate=true'
     fub_people.each do |person|
       begin
-        person.save
+        event = FubClient::Event.new :type => 'Registration'
+        event.person = person
+        event.save
       rescue NoMethodError => error
         Rails.logger.debug error.inspect
       end
