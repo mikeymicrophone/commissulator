@@ -364,7 +364,6 @@ DEPENDENCIES
   cancancan
   capybara (>= 2.15)
   chromedriver-helper
-  chronic_duration
   coffee-rails (~> 4.2)
   contactually-rb
   crack
