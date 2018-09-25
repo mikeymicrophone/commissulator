@@ -1,5 +1,5 @@
 include ActionView::Helpers::NumberHelper
-Tenant = Struct.new :name, :email, :phone
+# Tenant = Struct.new :name, :email, :phone
 require 'contactually'
 
 class Commission < ApplicationRecord
@@ -71,7 +71,7 @@ class Commission < ApplicationRecord
   def tenants
     group = []
     tenant_name.each_with_index do |name, index|
-      tenant = Tenant.new name, tenant_email[index], tenant_phone_number[index]
+      # tenant = Tenant.new name, tenant_email[index], tenant_phone_number[index]
       group << tenant
     end
     group
@@ -98,6 +98,11 @@ class Commission < ApplicationRecord
     landlord_person.emails = [{:value => landlord.email}] if landlord.email.present?
     landlord_person.phones = [{:value => landlord.phone_number}] if landlord.phone_number.present?
     landlord_person
+  end
+  
+  def fub_deal
+    
+    FubClient::Deal.new :name => "#{property_address} ##{unit_number}", :price => leased_monthly_rent, :close_date => lease_sign_date, :commission => total_commission, :peopleIds => []
   end
   
   def follow_up!

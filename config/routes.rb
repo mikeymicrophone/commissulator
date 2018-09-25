@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tenants
   resources :involvements
   resources :roles
   resources :packages

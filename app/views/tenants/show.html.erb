@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client:</strong>
+  <%= link_to_name @tenant.client %>
+</p>
+
+<p>
+  <strong>Lease:</strong>
+  <%= link_to_name @tenant.lease %>
+</p>
+
+<%= link_to 'Edit', edit_tenant_path(@tenant) %> |
+<%= link_to 'Back', tenants_path %>

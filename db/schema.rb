@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_180822) do
+ActiveRecord::Schema.define(version: 2018_09_25_191059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -289,11 +289,9 @@ ActiveRecord::Schema.define(version: 2018_09_25_180822) do
     t.string "street_name"
     t.string "zip_code"
     t.bigint "landlord_id"
-    t.bigint "client_id"
     t.bigint "registration_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["client_id"], name: "index_leases_on_client_id"
     t.index ["landlord_id"], name: "index_leases_on_landlord_id"
     t.index ["registration_id"], name: "index_leases_on_registration_id"
   end
@@ -381,6 +379,15 @@ ActiveRecord::Schema.define(version: 2018_09_25_180822) do
     t.index ["employer_id"], name: "index_social_accounts_on_employer_id"
   end
 
+  create_table "tenants", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "lease_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_tenants_on_client_id"
+    t.index ["lease_id"], name: "index_tenants_on_lease_id"
+  end
+
   add_foreign_key "apartments", "registrations"
   add_foreign_key "assists", "agents"
   add_foreign_key "assists", "deals"
@@ -390,7 +397,6 @@ ActiveRecord::Schema.define(version: 2018_09_25_180822) do
   add_foreign_key "employments", "employers"
   add_foreign_key "involvements", "packages"
   add_foreign_key "involvements", "roles"
-  add_foreign_key "leases", "clients"
   add_foreign_key "leases", "landlords"
   add_foreign_key "leases", "registrations"
   add_foreign_key "niches", "employers"
@@ -402,4 +408,6 @@ ActiveRecord::Schema.define(version: 2018_09_25_180822) do
   add_foreign_key "registrations", "referral_sources"
   add_foreign_key "social_accounts", "clients"
   add_foreign_key "social_accounts", "employers"
+  add_foreign_key "tenants", "clients"
+  add_foreign_key "tenants", "leases"
 end

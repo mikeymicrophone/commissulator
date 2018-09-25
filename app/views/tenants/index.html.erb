@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tenants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Lease</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tenants.each do |tenant| %>
+      <tr>
+        <td><%= link_to_name tenant.client %></td>
+        <td><%= link_to_name tenant.lease %></td>
+        <td><%= link_to 'Show', tenant %></td>
+        <td><%= link_to 'Edit', edit_tenant_path(tenant) %></td>
+        <td><%= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tenants %>
+<br>
+
+<%= link_to 'New Tenant', new_tenant_path %>
