@@ -91,8 +91,17 @@ class Commission < ApplicationRecord
     people
   end
   
+  def fub_landlord
+    first_name = landlord.name.split.first
+    last_name = landlord.name.split[1..-1].join ' '
+    landlord_person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :tags => ['Landlord']
+    landlord_person.emails = [{:value => landlord.email}] if landlord.email.present?
+    landlord_person.phones = [{:value => landlord.phone_number}] if landlord.phone_number.present?
+    landlord_person
+  end
+  
   def follow_up!
-    fub_people.each do |person|
+    fub_people.append(fub_landlord).each do |person|
       begin
         similar_people = FubClient::Person.where(:firstName => person.firstName, :lastName => person.lastName).fetch
         fub_person = similar_people.first if similar_people.present?
