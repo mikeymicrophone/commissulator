@@ -16,7 +16,8 @@ class HomeController < ApplicationController
     @client = Client.create client_params
     @registrant = Registrant.create registrant_params.merge(:registration => @registration, :client => @client)
     @landlord = Landlord.create landlord_params
-    @lease = Lease.create lease_params.merge(:landlord => @landlord, :client => @client, :registration => @registration)
+    @lease = Lease.create lease_params.merge(:landlord => @landlord, :registration => @registration)
+    @tenant = Tenant.create :lease => @lease, :client => @client
 
     @home_phone = Phone.create home_phone_params.merge(:client => @client, :variety => 'home')
     @cell_phone = Phone.create cell_phone_params.merge(:client => @client, :variety => 'cell')
