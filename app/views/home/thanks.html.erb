@@ -8,5 +8,13 @@
   <%= mark_up t('legal')[:commission_agreement][:owner_pays] %>
   <%= mark_up t('legal')[:commission_agreement][:signature] %>
   
-  <%= text_field :digital, :signature, :placeholder => 'Your Name Here' %>
+  <%= form_with :model => @registration do |registration_form| %>
+    <%= registration_form.text_field :signature, :placeholder => 'Your Name Here' %>
+    <%= button_tag 'I agree.', :id => 'commission_agreement_acceptance' %>
+  <% end %>
+</section>
+
+<section id="commission_agreement_thanks">
+  Thank you.<br>
+  Let's begin.
 </section>

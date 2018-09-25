@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_16_231053) do
+ActiveRecord::Schema.define(version: 2018_09_25_180822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2018_09_16_231053) do
     t.decimal "adjustment"
     t.decimal "expense"
     t.integer "role_id"
+    t.integer "parent_id"
     t.index ["agent_id"], name: "index_assists_on_agent_id"
     t.index ["deal_id"], name: "index_assists_on_deal_id"
   end
@@ -355,6 +356,7 @@ ActiveRecord::Schema.define(version: 2018_09_16_231053) do
     t.bigint "agent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "signature"
     t.index ["agent_id"], name: "index_registrations_on_agent_id"
     t.index ["referral_source_id"], name: "index_registrations_on_referral_source_id"
   end

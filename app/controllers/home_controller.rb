@@ -63,10 +63,11 @@ class HomeController < ApplicationController
     end
     
     @registration.reload.follow_up!
-    redirect_to :action => :thanks
+    redirect_to :action => :thanks, :registration_id => @registration.id
   end
   
   def thanks
+    @registration = Registration.find params[:registration_id]
     render :layout => 'empty'
   end
   

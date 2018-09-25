@@ -45,6 +45,7 @@ class RegistrationsController < ApplicationController
   def update
     respond_to do |format|
       if @registration.update(registration_params)
+        format.js
         format.html { redirect_to @registration, notice: 'Registration was successfully updated.' }
         format.json { render :show, status: :ok, location: @registration }
       else
@@ -74,6 +75,6 @@ class RegistrationsController < ApplicationController
     end
 
     def registration_params
-      params.require(:registration).permit(:minimum_price, :maximum_price, :size, :move_by, :reason_for_moving, :occupants, :pets, :referral_source_id, :agent_id)
+      params.require(:registration).permit(:minimum_price, :maximum_price, :size, :move_by, :reason_for_moving, :occupants, :pets, :referral_source_id, :agent_id, :signature)
     end
 end
