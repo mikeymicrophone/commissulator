@@ -104,6 +104,15 @@ module ApplicationHelper
     record ? {:filtered_attribute => record.foreign_key_name, :filter_value => record.id} : {:filtered_attribute => params[:filtered_attribute], :filter_value => params[:filter_value]}
   end
   
+  def markdown
+    @renderer ||= Redcarpet::Render::HTML.new
+    @markdown ||= Redcarpet::Markdown.new @renderer
+  end
+  
+  def mark_up content
+    markdown.render(content.to_s).html_safe
+  end
+  
   def title
     @title || 'Citi Pads'
   end

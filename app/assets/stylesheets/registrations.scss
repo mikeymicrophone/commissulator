@@ -135,7 +135,11 @@ nav#registration_navigation {
   }
 }
 
-p.thanks {
+header.document_title {
+  float: right;
+}
+
+section.commission_agreement p {
   font-family: 'Quattrocento';
   font-size: 1.4em;
   line-height: 1.7em;

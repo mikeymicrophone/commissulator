@@ -1,13 +1,12 @@
-<%= content_tag :p, :class => 'thanks' do %>
-  Thank you for completing that.  The information will help us find you the best apartments that are available in your search.
-<% end %>
-
-<%= content_tag :p, :class => 'thanks' do %>
-  If you'd like us to work together in this search, please complete a digital signature to indicate your agreement to these terms.
-<% end %>
-
-<%= content_tag :p, :class => 'thanks' do %>
-  Terms: I agree that my CitiPads agent is to be paid a 15% commission fee for any apartment that I access through this search.
-<% end %>
-
-<%= text_field :digital, :signature, :placeholder => 'Your Name Here' %>
+<%= image_tag 'chLogox1.jpg' %>
+<header class="document_title">Commission Agreement</header>
+<section class="commission_agreement">
+  <%= mark_up t('legal')[:commission_agreement][:explanation] %>
+  <%= mark_up t('legal')[:commission_agreement][:short_term] %>
+  <%= mark_up t('legal')[:commission_agreement][:exclusion_list] %>
+  <%= mark_up t('legal')[:commission_agreement][:legal_fees] %>
+  <%= mark_up t('legal')[:commission_agreement][:owner_pays] %>
+  <%= mark_up t('legal')[:commission_agreement][:signature] %>
+  
+  <%= text_field :digital, :signature, :placeholder => 'Your Name Here' %>
+</section>

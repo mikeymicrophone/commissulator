@@ -31,3 +31,16 @@
 
 en:
   hello: "Hello world"
+  
+  legal:
+    commission_agreement:
+      explanation: Welcome to Citi Habitats. Thank you for providing us with the opportunity to find your new home. There is no fee for viewing apartments with us, but should you lease an apartment that we have shown to you, the commission of fifteen percent (15%) of the annual rent is due payable to Citi Habitats. Citi Habitats is entitled to this commission if you decide to rent an apartment in a building or complex; or rent the specific unit in a condo or co-op shown to you by Citi Habitats within 120 days of such showing.
+      short_term: |
+        In the event that you rent an apartment for one (1) to six (6) months, Citi Habitats commission will be as shown below.  
+        Term: 1 - 3 Months = Fee: 1 month's rent  
+        Term: 4 - 6 Months = Fee: 1.5 month's rent
+      exclusion_list: "A Citi Habitats salesperson will, if requested, list the apartments that have been shown to you by Citi Habitats after such showing, in the chart below. You and Citi Habitats agree that Citi Habitats will be entitled to the entire commission upon the earlier of: (1) your execution of a lease for an apartment in a building or complex that Citi Habitats has shown you, or (2) your occupancy of an apartment in a building or complex that Citi Habitats has shown you. You understand that in the event that you rent an apartment in a building or complex shown to you by Citi Habitats through the services of a broker other than Citi Habitats or through the landlord directly, you will still be responsible for paying the entire commission to Citi Habitats."
+      legal_fees: In the event of your default under this Client Registration/Fee Agreement, you shall be liable to pay the full commission as stated above based on the length of the lease you entered into as well as all legal fees incurred by Citi Habitats to enforce the terms of this Agreement.
+      owner_pays: It is hereby acknowledged that in certain instances Citi Habitats may receive additional compensation from the owner/landlord of the property and such compensation does not forgo or offset the brokerage commission that you have agreed to pay Citi Habitats pursuant to the terms of this Client Registration/Commission Agreement.
+      signature: By signing below you understand that you have authorized Citi Habitats to work with you for the procurement of an apartment in accordance with the NY State Disclosure Form for Landlord and Tenant.
+      
