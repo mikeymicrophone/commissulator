@@ -39,6 +39,8 @@ class ApplicationRecord < ActiveRecord::Base
       :brain
     when Lease
       :building
+    when Tenant
+      :hot_tub
     when Apartment
       :bed #:archway
     when Deal

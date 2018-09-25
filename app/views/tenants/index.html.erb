@@ -14,8 +14,8 @@
   <tbody>
     <% @tenants.each do |tenant| %>
       <tr>
-        <td><%= link_to_name tenant.client %></td>
-        <td><%= link_to_name tenant.lease %></td>
+        <td><%= link_to_name_with_icon tenant.client %></td>
+        <td><%= link_to_name_with_icon tenant.lease %></td>
         <td><%= link_to 'Show', tenant %></td>
         <td><%= link_to 'Edit', edit_tenant_path(tenant) %></td>
         <td><%= link_to 'Destroy', tenant, method: :delete, data: { confirm: 'Are you sure?' } %></td>

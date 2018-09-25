@@ -1,6 +1,7 @@
 class Lease < ApplicationRecord
   belongs_to :landlord, :optional => true
-  belongs_to :client
+  has_many :tenants
+  has_many :clients, :through => :tenants
   belongs_to :registration
   validates :street_number, :presence => true
   validates :street_name, :presence => true

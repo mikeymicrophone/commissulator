@@ -37,11 +37,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :client_id %>
-    <%= form.select :client_id, options_from_collection_for_select(Client.all, :id, :name, lease.client_id), :include_blank => true %>
-  </div>
-
-  <div class="field">
     <%= form.label :registration_id %>
     <%= form.select :registration_id, options_from_collection_for_select(Registration.all, :id, :name, lease.registration_id), :include_blank => true %>
   </div>

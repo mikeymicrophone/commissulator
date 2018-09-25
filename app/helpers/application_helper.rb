@@ -52,6 +52,7 @@ module ApplicationHelper
   def registration_join_nav
     [
       resource_path(Registrant, :class => :join),
+      resource_path(Tenant, :class => :join),
       resource_path(Employment, :class => :join),
       resource_path(Niche, :class => :join),
       resource_path(Package, :class => :join),
