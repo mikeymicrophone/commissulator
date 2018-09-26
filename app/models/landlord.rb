@@ -7,13 +7,13 @@ class Landlord < ApplicationRecord
   end
   
   def fub_create
-    first_name = landlord.name.split.first
-    last_name = landlord.name.split[1..-1].join ' '
+    first_name = name.split.first
+    last_name = name.split[1..-1]&.join ' '
     similar_people = FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
     person = similar_people.first if similar_people.present?
     person ||= FubClient::Person.new :firstName => first_name, :lastName => last_name
     person.emails = [{:value => email}] if email.present?
-    person.phones = [{:value => phone.number, :type => phone.variety}] if phone_number.present?
+    person.phones = [{:value => phone_number, :type => 'work'}] if phone_number.present?
     begin
       person.save
     rescue NoMethodError => error

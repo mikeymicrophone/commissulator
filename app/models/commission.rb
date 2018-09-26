@@ -110,6 +110,7 @@ class Commission < ApplicationRecord
   end
   
   def follow_up!
+    fub_people
     fub_landlord # will attach deal when ready
     tenant_clients.each { |client| client.detail_deal deal }
   end
