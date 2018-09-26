@@ -51,6 +51,31 @@ class Client < ApplicationRecord
     end
   end
   
+  def fub_lease_closing deal
+    fub_sync fub_bio.merge(fub_contacts).merge(fub_financials deal)
+  end
+  
+  def fub_bio
+    {:firstName => first_name, :lastName => last_name}
+  end
+  
+  def fub_contacts
+    contacts = {}
+    contacts[:emails] = emails.map { |email| {:value => email.address} } if emails.any?
+    contacts[:phones] = phones.map { |phone| {:value => phone.number, :type => phone.variety} } if phones.any?
+    contacts
+  end
+  
+  def fub_financials deal
+    {
+      :stage => 'Closed',
+      :customCommission => deal.total_commission,
+      :customCloseDate => deal.lease_sign_date,
+      :customLeaseEndDate => deal.lease_end_date,
+      :price => deal.leased_monthly_rent
+    }
+  end
+  
   def fub_person
     @fub_person ||= FubClient::Person.find(follow_up_boss_id) || fub_create
   end

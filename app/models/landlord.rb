@@ -14,6 +14,7 @@ class Landlord < ApplicationRecord
     person ||= FubClient::Person.new :firstName => first_name, :lastName => last_name
     person.emails = [{:value => email}] if email.present?
     person.phones = [{:value => phone_number, :type => 'work'}] if phone_number.present?
+    person.tags = ['Landlord']
     begin
       person.save
     rescue NoMethodError => error

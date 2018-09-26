@@ -101,8 +101,12 @@ class Commission < ApplicationRecord
     tenant_clients.map &:fub_person
   end
   
+  def fub_people_update
+    tenant_clients.each { |client| client.fub_lease_closing deal }
+  end
+  
   def fub_landlord
-    landlord.fub_person
+    landlord.fub_person # doesn't currently append new contact info
   end
   
   def fub_deal
@@ -110,9 +114,8 @@ class Commission < ApplicationRecord
   end
   
   def follow_up!
-    fub_people
+    fub_people_update
     fub_landlord # will attach deal when ready
-    tenant_clients.each { |client| client.detail_deal deal }
   end
   
   def contactually_people

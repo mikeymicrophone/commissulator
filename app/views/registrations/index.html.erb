@@ -25,7 +25,10 @@
   <tbody>
     <% @registrations.each do |registration| %>
       <tr>
-        <td><%= link_to_associated registration, :clients %></td>
+        <td>
+          <%= registration.clients.map(&:name).to_sentence %>
+          <%= link_to_associated registration, :clients %>
+        </td>
         <td><%= link_to_associated registration, :employments %></td>
         <td><%= link_to_associated registration, :apartments %></td>
         <td><%= link_to_associated registration, :leases %></td>
