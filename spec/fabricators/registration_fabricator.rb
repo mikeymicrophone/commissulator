@@ -34,7 +34,8 @@ def qualify_and_locate registration
   employment = Fabricate :employment, :client => client, :employer => employer
   niche = find_or_fabricate :niche, :employer => employer
   landlord = find_or_fabricate :landlord
-  lease = Fabricate :lease, :client => client, :registration => registration, :landlord => landlord
+  lease = Fabricate :lease, :registration => registration, :landlord => landlord
+  tenant = Fabricate :tenant, :client => client, :lease => lease
   home_phone = Fabricate :phone, :client => client
   cell_phone = Fabricate :phone, :client => client, :variety => 'cell'
   email = Fabricate :email, :client => client

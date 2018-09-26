@@ -5,7 +5,7 @@ class Deal < ApplicationRecord
   belongs_to :package, :optional => true
   has_one :commission
   has_many :documents
-  delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :to => :commission, :allow_nil => true
+  delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :lease_end_date, :lease_sign_date, :leased_monthly_rent, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed, :commission_requested, :commission_processed]
   attr_default :status, :preliminary
@@ -80,6 +80,10 @@ class Deal < ApplicationRecord
   
   def staffed?
     assists.leading.present? && assists.interviewing.present? && assists.showing.present? && assists.closing.present?
+  end
+  
+  def fub_deal
+    @fub_deal ||= FubClient::Deal.find follow_up_boss_id
   end
   
   def special_efforts

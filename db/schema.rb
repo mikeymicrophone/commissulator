@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_191059) do
+ActiveRecord::Schema.define(version: 2018_09_26_012439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_191059) do
     t.datetime "date_of_birth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "follow_up_boss_id"
   end
 
   create_table "commissions", force: :cascade do |t|
@@ -198,6 +199,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_191059) do
     t.datetime "deleted_at"
     t.integer "follow_up"
     t.datetime "submitted_on"
+    t.integer "lease_id"
     t.index ["agent_id"], name: "index_commissions_on_agent_id"
     t.index ["deal_id"], name: "index_commissions_on_deal_id"
     t.index ["deleted_at"], name: "index_commissions_on_deleted_at"
@@ -213,6 +215,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_191059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "package_id"
+    t.integer "follow_up_boss_id"
     t.index ["agent_id"], name: "index_deals_on_agent_id"
   end
 
@@ -281,6 +284,7 @@ ActiveRecord::Schema.define(version: 2018_09_25_191059) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "follow_up_boss_id"
   end
 
   create_table "leases", force: :cascade do |t|

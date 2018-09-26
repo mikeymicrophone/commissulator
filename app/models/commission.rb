@@ -8,6 +8,9 @@ class Commission < ApplicationRecord
   belongs_to :landlord, :optional => true
   has_many :documents, :through => :deal
   has_many :agents, :through => :deal, :source => :agents
+  belongs_to :lease, :optional => true
+  has_many :tenants, :through => :lease
+  has_many :clients, :through => :tenants
   serialize :tenant_name
   serialize :tenant_email
   serialize :tenant_phone_number
@@ -26,7 +29,7 @@ class Commission < ApplicationRecord
   
   before_save :trim_tenants
   before_create :meet_landlord, :name_agent
-  after_save :address_deal
+  after_save :address_deal, :assign_lease
   
   enum :follow_up => [:unsubmitted, :submitted]
   attr_default :follow_up, :unsubmitted
@@ -64,67 +67,51 @@ class Commission < ApplicationRecord
     deal.save
   end
   
+  def assign_lease
+    lease = Lease.new
+    lease.apartment_number = apartment_number
+    address_pattern = /^(\d+)\s+(.*)/
+    matched_data = address_pattern.match property_address
+    lease.street_number = matched_data[1]
+    lease.street_name = matched_data[2]
+    lease.zip_code = zip_code
+    lease.landlord_id = landlord_id
+    lease.save
+    update_column :lease_id, lease.id
+  end
+  
   def lease_end_date
     Timespan.new(:from => lease_start_date, :duration => lease_term).end_date
   end
   
-  def tenants
+  def tenant_clients
     group = []
     tenant_name.each_with_index do |name, index|
-      # tenant = Tenant.new name, tenant_email[index], tenant_phone_number[index]
-      group << tenant
+      first_name = name.split.first
+      last_name = name.split[1..-1].join ' '
+      client = Client.find_or_create_by :first_name => first_name, :last_name => last_name
+      email = Email.find_or_create_by :client => client, :address => tenant_email[index]
+      phone = Phone.find_or_create_by :client => client, :number => tenant_phone_number[index]
+      group << client
     end
     group
   end
   
   def fub_people
-    people = []
-    tenants.each do |tenant|
-      first_name = tenant.name.split.first
-      last_name = tenant.name.split[1..-1].join ' '
-      person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :stage => 'Closed', :customCommission => total_commission, :customCloseDate => lease_sign_date, :customLeaseEndDate => lease_end_date
-      person.emails = [{:value => tenant.email}] if tenant.email.present?
-      person.phones = [{:value => tenant.phone}] if tenant.phone.present?
-      person.price = leased_monthly_rent
-      people << person
-    end
-    people
+    tenant_clients.map &:fub_person
   end
   
   def fub_landlord
-    first_name = landlord.name.split.first
-    last_name = landlord.name.split[1..-1].join ' '
-    landlord_person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :tags => ['Landlord']
-    landlord_person.emails = [{:value => landlord.email}] if landlord.email.present?
-    landlord_person.phones = [{:value => landlord.phone_number}] if landlord.phone_number.present?
-    landlord_person
+    landlord.fub_person
   end
   
   def fub_deal
-    
-    FubClient::Deal.new :name => "#{property_address} ##{unit_number}", :price => leased_monthly_rent, :close_date => lease_sign_date, :commission => total_commission, :peopleIds => []
+    @fub_deal ||= FubClient::Deal.find(deal.follow_up_boss_id) || FubClient::Deal.create(:name => "#{property_address} ##{apartment_number}", :price => leased_monthly_rent, :close_date => lease_sign_date, :commission => total_commission, :peopleIds => fub_people.map(&:id))
   end
   
   def follow_up!
-    fub_people.append(fub_landlord).each do |person|
-      begin
-        similar_people = FubClient::Person.where(:firstName => person.firstName, :lastName => person.lastName).fetch
-        fub_person = similar_people.first if similar_people.present?
-        if fub_person
-          url = URI "https://api.followupboss.com/v1/people/#{fub_person.id}"
-          http = Net::HTTP.new url.host, url.port
-          http.use_ssl = true
-          request = Net::HTTP::Put.new url
-          request.basic_auth FubClient::Client.instance.api_key, ''
-          request.body = person.attributes.to_query
-          response = http.request request
-        else
-          person.save
-        end
-      rescue NoMethodError => error
-        Rails.logger.debug error.inspect
-      end
-    end
+    fub_landlord # will attach deal when ready
+    tenant_clients.each { |client| client.detail_deal deal }
   end
   
   def contactually_people

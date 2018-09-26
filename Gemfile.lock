@@ -1,18 +1,18 @@
 GIT
-  remote: https://github.com/brokermint/fub_client.git
-  revision: d2cabb60ec73ee0f272961b6dea897a352efc710
-  specs:
-    fub_client (0.1.11)
-      faraday (>= 0.8, <= 0.9.2)
-      her (~> 0.8.1)
-
-GIT
   remote: https://github.com/masarakki/google-webfonts-rails.git
   revision: 5fe4e93437b141d7cc0c5dcb6055ce8e75820b35
   branch: for-rails5
   specs:
     google-webfonts-rails (0.0.4)
       activesupport (> 3.2.0, < 6.0)
+
+GIT
+  remote: https://github.com/mikeymicrophone/fub_client.git
+  revision: c5cb2f448a3e7b4f3988c2320fdbfd6b378ff6f2
+  specs:
+    fub_client (0.1.1)
+      faraday (>= 0.8, <= 0.9.2)
+      her
 
 GIT
   remote: https://github.com/mikeymicrophone/percentage.git
@@ -144,9 +144,8 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.5.7)
-    her (0.8.6)
-      activemodel (>= 3.0.0, <= 6.0.0)
-      activesupport (>= 3.0.0, <= 6.0.0)
+    her (1.0.2)
+      activemodel (>= 4.2.1)
       faraday (>= 0.8, < 1.0)
       multi_json (~> 1.7)
     i18n (1.1.0)
