@@ -110,7 +110,7 @@ class Commission < ApplicationRecord
   end
   
   def fub_deal
-    @fub_deal ||= FubClient::Deal.find(deal.follow_up_boss_id) || FubClient::Deal.create(:name => "#{property_address} ##{apartment_number}", :price => leased_monthly_rent, :close_date => lease_sign_date, :commission => total_commission, :peopleIds => fub_people.map(&:id))
+    @fub_deal ||= deal.fub_deal
   end
   
   def follow_up!

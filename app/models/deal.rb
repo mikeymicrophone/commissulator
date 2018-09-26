@@ -5,7 +5,9 @@ class Deal < ApplicationRecord
   belongs_to :package, :optional => true
   has_one :commission
   has_many :documents
-  delegate :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission, :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :lease_end_date, :lease_sign_date, :leased_monthly_rent, :to => :commission, :allow_nil => true
+  delegate :fub_people, :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission,
+           :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :lease_end_date,
+           :lease_sign_date, :leased_monthly_rent, :property_address, :apartment_number, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed, :commission_requested, :commission_processed]
   attr_default :status, :preliminary
@@ -83,7 +85,18 @@ class Deal < ApplicationRecord
   end
   
   def fub_deal
-    @fub_deal ||= FubClient::Deal.find follow_up_boss_id
+    @fub_deal ||= FubClient::Deal.find(follow_up_boss_id) || fub_create
+  end
+  
+  def fub_create
+    fub_object = FubClient::Deal.new(:name => "#{property_address} ##{apartment_number}", :stageId => ENV['FOLLOW_UP_BOSS_STAGE_ID_CLOSED'], :price => leased_monthly_rent, :projectedCloseDate => lease_sign_date, :peopleIds => fub_people.map(&:id))
+    begin
+      fub_object.save
+    rescue NoMethodError => error
+      Rails.logger.debug error.inspect
+    end
+    update_attribute :follow_up_boss_id, fub_object.id
+    fub_object
   end
   
   def special_efforts
