@@ -28,6 +28,7 @@
 <table>
   <% @agent.assists.each do |assist| %>
     <tr>
+      <td><%= participation_in assist.role %></td>
       <td><%= link_to_name_with_icon assist %></td>
       <td><%= link_to_name_with_icon assist.deal, :reference %></td>
       <td><%= link_to fa_icon(:clipboard_list), assist.commission, :title => 'Review' if assist.commission %>

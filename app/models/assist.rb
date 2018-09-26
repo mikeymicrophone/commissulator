@@ -16,7 +16,7 @@ class Assist < ApplicationRecord
   scope :chrono, lambda { order :role_id }
   
   def name
-    "#{role} by #{agent.name}"
+    "#{role.name} by #{agent.name}"
   end
   
   def involvement
