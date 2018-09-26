@@ -1,5 +1,4 @@
 include ActionView::Helpers::NumberHelper
-# Tenant = Struct.new :name, :email, :phone
 require 'contactually'
 
 class Commission < ApplicationRecord
@@ -90,6 +89,7 @@ class Commission < ApplicationRecord
       first_name = name.split.first
       last_name = name.split[1..-1].join ' '
       client = Client.find_or_create_by :first_name => first_name, :last_name => last_name
+      tenant = Tenant.find_or_create_by :client => client, :lease => lease
       email = Email.find_or_create_by :client => client, :address => tenant_email[index]
       phone = Phone.find_or_create_by :client => client, :number => tenant_phone_number[index]
       group << client
@@ -116,26 +116,17 @@ class Commission < ApplicationRecord
   def follow_up!
     fub_people_update
     fub_landlord # will attach deal when ready
+    fub_deal
   end
   
   def contactually_people
     ctly_people = []
-    tenants.each do |tenant|
-      first_name = tenant.name.split.first
-      last_name = tenant.name.split[1..-1].join ' '
-      phone_numbers = []
-      emails = []
-      if tenant.phone.present?
-        phone_numbers << {:label => 'cell', :number => tenant.phone} #Contactually::Models::PhoneNumber.new(:number => tenant.phone)
-      end
-      if tenant.email.present?
-        emails << {:label => 'home', :address => tenant.email} #Contactually::Models::EmailAddress.new(:address => tenant.email)
-      end
-      payload = {:first_name => first_name, :last_name => last_name}
+    clients.each do |client|
+      payload = {:first_name => client.first_name, :last_name => client.last_name}
       payload[:addresses] = [{:label => 'current', :street_1 => property_address, :street_2 => apartment_number, :city => 'New York', :state => 'NY', :zip => zip_code, :country => 'United States'}]
       payload[:bucket_ids] = [ENV['CONTACTUALLY_CLOSED_BUCKET_ID']]
-      payload[:email_addresses] = emails if emails.present?
-      payload[:phone_numbers] = phone_numbers if phone_numbers.present?
+      payload[:email_addresses] = client.emails.map { |email| {:address => email.address, :label => email.variety} } if client.emails.any?
+      payload[:phone_numbers] = client.phones.map { |phone| {:number => phone.number, :label => phone.variety} } if client.phones.any?
       ctly_people << payload
     end
     ctly_people

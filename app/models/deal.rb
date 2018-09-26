@@ -1,15 +1,17 @@
+include CommissionsHelper
 class Deal < ApplicationRecord
   belongs_to :agent
   has_many :assists, :dependent => :destroy
   has_many :agents, :through => :assists
   belongs_to :package, :optional => true
   has_one :commission
+  has_one :landlord, :through => :commission
   has_one :lease, :through => :commission
   has_many :clients, :through => :lease
   has_many :documents
   delegate :fub_people, :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission,
            :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :lease_end_date,
-           :lease_sign_date, :leased_monthly_rent, :property_address, :apartment_number, :to => :commission, :allow_nil => true
+           :lease_sign_date, :lease_start_date, :lease_term, :leased_monthly_rent, :property_address, :apartment_number, :to => :commission, :allow_nil => true
   
   enum :status => [:preliminary, :underway, :submitted, :approved, :accepted, :rejected, :withdrawn, :cancelled, :closed, :commission_requested, :commission_processed]
   attr_default :status, :preliminary
@@ -86,14 +88,23 @@ class Deal < ApplicationRecord
     assists.leading.present? && assists.interviewing.present? && assists.showing.present? && assists.closing.present?
   end
   
+  def unit_type
+    case commission.bedrooms
+    when 0
+      'Studio'
+    else
+      "#{rounded commission.bedrooms} Bedroom"
+    end
+  end
+  
   def fub_deal
     @fub_deal ||= FubClient::Deal.find(follow_up_boss_id) || fub_create
   end
   
   def fub_create
     fub_object = FubClient::Deal.new(:name => "#{property_address} ##{apartment_number}", :stageId => ENV['FOLLOW_UP_BOSS_STAGE_ID_CLOSED'],
-      :price => leased_monthly_rent, :projectedCloseDate => lease_sign_date,
-      :peopleIds => fub_people.map(&:id), :userIds => agents.map(&:follow_up_boss_id))
+      :price => leased_monthly_rent, :projectedCloseDate => lease_sign_date, :description => fub_description,
+      :peopleIds => fub_people.map(&:id).append(landlord.follow_up_boss_id), :userIds => agents.map(&:follow_up_boss_id))
     begin
       fub_object.save
     rescue NoMethodError => error
@@ -101,6 +112,19 @@ class Deal < ApplicationRecord
     end
     update_attribute :follow_up_boss_id, fub_object.id
     fub_object
+  end
+  
+  def fub_description
+    <<~DESCRIBE
+    #{clients.map(&:name).to_sentence}
+    Address: #{address} ##{unit_number}
+    Apt Type: #{unit_type}
+    Lease Start: #{lease_start_date.strftime("%b ") + lease_start_date.day.ordinalize + ", " + lease_start_date.year.to_s}
+    Lease Term: #{lease_term}
+    Rent: #{rounded leased_monthly_rent}
+    Commission: #{rounded total_commission}#{owner_pay_commission.present? ? "\nOwner Pay Commission: " + rounded(owner_pay_commission) : ''}
+    Landlord: #{landlord.name}
+    DESCRIBE
   end
   
   def special_efforts
