@@ -4,6 +4,8 @@ class Deal < ApplicationRecord
   has_many :agents, :through => :assists
   belongs_to :package, :optional => true
   has_one :commission
+  has_one :lease, :through => :commission
+  has_many :clients, :through => :lease
   has_many :documents
   delegate :fub_people, :annualized_rent, :agent_split_percentage, :citi_commission, :owner_pay_commission, :tenant_side_commission, :listing_side_commission, :total_commission,
            :co_broke_commission, :citi_habitats_referral_agent_amount, :corcoran_referral_agent_amount, :outside_agency_amount, :relocation_referral_amount, :lease_end_date,
@@ -89,7 +91,9 @@ class Deal < ApplicationRecord
   end
   
   def fub_create
-    fub_object = FubClient::Deal.new(:name => "#{property_address} ##{apartment_number}", :stageId => ENV['FOLLOW_UP_BOSS_STAGE_ID_CLOSED'], :price => leased_monthly_rent, :projectedCloseDate => lease_sign_date, :peopleIds => fub_people.map(&:id))
+    fub_object = FubClient::Deal.new(:name => "#{property_address} ##{apartment_number}", :stageId => ENV['FOLLOW_UP_BOSS_STAGE_ID_CLOSED'],
+      :price => leased_monthly_rent, :projectedCloseDate => lease_sign_date,
+      :peopleIds => fub_people.map(&:id), :userIds => agents.map(&:follow_up_boss_id))
     begin
       fub_object.save
     rescue NoMethodError => error
