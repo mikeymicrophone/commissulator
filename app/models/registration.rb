@@ -43,7 +43,7 @@ class Registration < ApplicationRecord
     landlord_people = []
     landlords.each do |landlord|
       first_name = landlord.name.split.first
-      last_name = landlord.name.split[1..-1].join ' '
+      last_name = landlord.name.split[1..-1]&.join ' '
       landlord_person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :tags => ['Landlord']
       landlord_person.phones = [{:value => landlord.phone_number, :type => 'work'}] if landlord.phone_number.present?
       landlord_person.emails = [{:value => landlord.email}] if landlord.email.present?

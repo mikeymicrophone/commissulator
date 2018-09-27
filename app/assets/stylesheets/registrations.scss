@@ -130,11 +130,15 @@
     border-radius: 6px;
     padding: 8px;
     box-shadow: 4px 4px 5px;
-    display: inline-flex;
+  }
+  
+  .flexy {
+//    display: inline-flex;
   }
   
   .label {
     font-weight: bold;
+    display: inline-block;
   }
   
   .shaded {
@@ -181,4 +185,31 @@ section.commission_agreement p {
   font-size: 2em;
   font-style: italic;
   line-height: 3em;
+}
+
+@media print {
+  body {
+    margin: none;
+  }
+  
+  .bordered {
+    font-size: 0.75em;
+  }
+  
+  .sectioned {
+    max-width: 60%;
+  }
+  
+  .flexy {
+    display: block;
+  }
+  
+  nav {
+    display: none;
+  }
+  
+  img {
+//    display: none;
+    height: 20px;
+  }
 }

@@ -21,7 +21,10 @@ class RegistrationsController < ApplicationController
   end
   
   def display
-    @first_client = @registration.clients.first
+    @registrant = @registration.registrants.first
+    @first_client = @registrant.client
+    @title = "#{@first_client.name} Registration Card"
+    @additional_registrants = @registration.registrants - [@registrant]
   end
 
   def new
