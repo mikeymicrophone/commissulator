@@ -145,6 +145,13 @@
     padding: 3px;
     background-color: #dfdfdf;
   }
+  
+  #registration_card_print_link {
+   float: right;
+   font-weight: bold;
+   font-family: 'Cinzel';
+   margin-top: -35px;
+  }
 }
 
 nav#registration_navigation {
@@ -211,5 +218,9 @@ section.commission_agreement p {
   img {
 //    display: none;
     height: 20px;
+  }
+  
+  #registration_card_print_link {
+    display: none;
   }
 }

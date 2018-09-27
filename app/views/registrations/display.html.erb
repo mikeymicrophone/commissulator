@@ -3,6 +3,7 @@
 <%= content_tag :header, 'Client Registration', :class => 'document_title' %>
 
 <%= content_tag :div, :id => 'registration_display' do %>
+  <%= link_to 'Print', 'javascript: print();', :id => 'registration_card_print_link' %>
   <%= content_tag :div, :class => 'bordered flexy' do %>
     <%= content_tag :div, :class => 'inline sectioned' do %>
       <%= content_tag :div, 'Price Range:', :class => 'label' %>
@@ -84,8 +85,10 @@
       <%= content_tag :div, 'Number of Occupants:', :class => 'label' %>
       <%= content_tag :div, @registration.occupants, :class => 'inline shaded' %>
       <br>
-      <%= content_tag :div, 'Pets:', :class => 'label' %>
-      <%= content_tag :div, @registration.pets, :class => 'inline shaded' %>
+      <% if @registration.pets.present? %>
+        <%= content_tag :div, 'Pets:', :class => 'label' %>
+        <%= content_tag :div, @registration.pets, :class => 'inline shaded' %>
+      <% end %>
     <% end %>
     <%= content_tag :div, :class => 'inline' do %>
       <%= content_tag :div, 'Heard about us from:', :class => 'label' %>
@@ -95,15 +98,17 @@
       <%= content_tag :div, @registration.move_by.strftime("%B %d"), :class => 'inline shaded' %>
     <% end %>
   <% end %>
-  <%= content_tag :div, :class => 'bordered flexy' do %>
-    <% @additional_registrants.each do |registrant| %>
-      <% client = registrant.client %>
-      <%= content_tag :div, :class => 'inline' do %>
-        <%= content_tag :div, client.name, :class => 'shaded' %>
-        <%= content_tag :div, client.phones.cell.first&.number, :class => 'shaded' %>
-        <%= content_tag :div, client.employers.map(&:name).join(', '), :class => 'shaded' %>
-        <%= content_tag :div, client.employments.map { |employment| number_to_round_currency employment.income }.join(" + "), :class => 'shaded' %>
-        <%= content_tag :div, registrant.other_fund_sources, :class => 'shaded' %>
+  <% if @additional_registrants.present? %>
+    <%= content_tag :div, :class => 'bordered flexy' do %>
+      <% @additional_registrants.each do |registrant| %>
+        <% client = registrant.client %>
+        <%= content_tag :div, :class => 'inline' do %>
+          <%= content_tag :div, client.name, :class => 'shaded' %>
+          <%= content_tag :div, client.phones.cell.first&.number, :class => 'shaded' %>
+          <%= content_tag :div, client.employers.map(&:name).join(', '), :class => 'shaded' %>
+          <%= content_tag :div, client.employments.map { |employment| number_to_round_currency employment.income }.join(" + "), :class => 'shaded' %>
+          <%= content_tag :div, registrant.other_fund_sources, :class => 'shaded' %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
