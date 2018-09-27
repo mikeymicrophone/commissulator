@@ -1,3 +1,7 @@
+<header>
+  <%= link_to 'Display', display_registration_path(@registration) %>
+</header>
+
 <p>
   <strong>Minimum price:</strong>
   <%= number_to_round_currency @registration.minimum_price %>

@@ -1,0 +1,83 @@
+<%= image_tag 'chLogox1.jpg' %>
+
+<%= content_tag :header, 'Client Registration', :class => 'document_title' %>
+
+<%= content_tag :div, :id => 'registration_display' do %>
+  <%= content_tag :div, :class => 'bordered' do %>
+    <%= content_tag :div, :class => 'inline sectioned' do %>
+      <%= content_tag :div, 'Price Range:', :class => 'label' %>
+      <%= content_tag :div, number_to_round_currency(@registration.minimum_price), :class => 'inline shaded' %>
+      -
+      <%= content_tag :div, number_to_round_currency(@registration.maximum_price), :class => 'inline shaded' %>
+    <% end %>
+    <%= content_tag :div, :class => 'inline sectioned' do %>
+      <%= content_tag :div, 'Size:', :class => 'label' %>
+      <%= content_tag :div, @registration.size, :class => 'inline shaded' %>
+    <% end %>
+    <%= content_tag :div, :class => 'inline sectioned' do %>
+      <%= content_tag :div, 'Agent:', :class => 'label' %>
+      <%= content_tag :div, @registration.agent&.name, :class => 'inline shaded' %>
+    <% end %>
+    <%= content_tag :div, :class => 'inline' do %>
+      <%= content_tag :div, 'Date:', :class => 'label' %>
+      <%= content_tag :div, @registration.created_at.strftime("%b %d, %Y"), :class => 'inline shaded' %>
+    <% end %>
+  <% end %>
+  <br>
+  <%= content_tag :div, :class => 'bordered' do %>
+    <%= content_tag :div, :class => 'inline sectioned' do %>
+      <%= content_tag :div, 'Name:', :class => 'label' %>
+      <%= content_tag :div, @first_client.name, :class => 'inline shaded' %>
+    
+      <%= content_tag :div, 'Address:', :class => 'label' %>
+      <%= content_tag :div, @registration.leases.first&.address, :class => 'inline shaded' %>
+    
+      <%= content_tag :div, 'Apt:', :class => 'label' %>
+      <%= content_tag :div, @registration.leases.first&.apartment_number, :class => 'inline shaded' %>
+    
+      <%= content_tag :div, 'Landlord:', :class => 'label' %>
+      <%= content_tag :div, @registration.leases.first&.landlord&.name, :class => 'inline shaded' %>
+    <% end %>
+    <%= content_tag :div, :class => 'inline' do %>
+      <%= content_tag :div, 'Home Phone #:', :class => 'label' %>
+      <%= content_tag :div, @first_client.phones.home.first&.number, :class => 'inline shaded' %>
+      
+      <%= content_tag :div, 'Cell Phone #:', :class => 'label' %>
+      <%= content_tag :div, @first_client.phones.cell.first&.number, :class => 'inline shaded' %>
+      
+      <%= content_tag :div, 'Email:', :class => 'label' %>
+      <%= content_tag :div, @first_client.emails.first&.address, :class => 'inline shaded' %>
+    <% end %>
+  <% end %>
+  <br>
+  <%= content_tag :div, :class => 'bordered' do %>
+    <%= content_tag :div, :class => 'inline sectioned' do %>
+      <%= content_tag :div, 'Employer:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employers.map(&:name).join(', '), :class => 'inline shaded' %>
+    
+      <%= content_tag :div, 'Industry:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employers.flat_map(&:industries)&.map(&:name).join(', '), :class => 'inline shaded' %>
+    
+      <%= content_tag :div, 'Address:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employers.first&.address, :class => 'inline shaded' %>
+    
+      <%= content_tag :div, 'Position:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employments.map(&:position).join(', '), :class => 'inline shaded' %>
+    <% end %>
+    <%= content_tag :div, :class => 'inline' do %>
+      <%= content_tag :div, 'Office Phone #:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employers.first&.phones.office.first&.number, :class => 'inline shaded' %>
+      
+      <%= content_tag :div, 'Office Hiring #:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employers.first&.phones.hiring.first&.number, :class => 'inline shaded' %>
+      
+      <%= content_tag :div, 'Annual Income:', :class => 'label' %>
+      <%= content_tag :div, @first_client.employments.map { |employment| number_to_round_currency employment.income }.join(" + "), :class => 'inline shaded' %>
+      
+      <%= content_tag :div, 'Other Funds/Source:', :class => 'label' %>
+      <%= content_tag :div, @first_client.registrants.first&.other_fund_sources, :class => 'inline shaded' %>
+    <% end %>
+  <% end %>
+
+
+<% end %>

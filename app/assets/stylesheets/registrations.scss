@@ -114,6 +114,35 @@
   }
 }
 
+#registration_display {
+  .inline {
+    display: inline-block;
+    padding: 5px 5px;
+  }
+  
+  .sectioned {
+    border-right: 1px solid black;
+  }
+
+  .bordered {
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 8px;
+    box-shadow: 4px 4px 5px;
+    display: inline-flex;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  .shaded {
+    padding: 3px;
+    background-color: #dfdfdf;
+  }
+}
+
 nav#registration_navigation {
   margin: 14px;
   margin-left: 65px;

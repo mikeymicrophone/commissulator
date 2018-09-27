@@ -47,6 +47,9 @@ Rails.application.routes.draw do
   resources :clients
   resources :referral_sources
   resources :registrations do
+    member do
+      get :display
+    end
     collection do
       post :fabricate
     end

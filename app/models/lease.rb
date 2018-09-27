@@ -8,6 +8,10 @@ class Lease < ApplicationRecord
   # validates :street_name, :presence => true
   
   def name
-    "#{street_number} #{street_name} with #{landlord.name}"
+    "#{address} with #{landlord.name}"
+  end
+  
+  def address
+    "#{street_number} #{street_name}"
   end
 end

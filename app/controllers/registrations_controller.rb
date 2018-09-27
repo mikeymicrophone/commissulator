@@ -1,5 +1,5 @@
 class RegistrationsController < ApplicationController
-  before_action :set_registration, only: [:show, :edit, :update, :destroy]
+  before_action :set_registration, only: [:show, :display, :edit, :update, :destroy]
 
   def index
     @registrations = case params[:filtered_attribute]
@@ -18,6 +18,10 @@ class RegistrationsController < ApplicationController
   end
 
   def show
+  end
+  
+  def display
+    @first_client = @registration.clients.first
   end
 
   def new
