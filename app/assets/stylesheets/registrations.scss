@@ -1,3 +1,27 @@
+#begin_registration_tool {
+  
+  
+  #registration_agent_picker {
+  
+    display: none;
+  
+    .agent {
+      display: inline-block;
+      border: 1px solid blue;
+      border-radius: 3px;
+      padding: 6px;
+      width: 220px;
+    }
+  }
+  
+  &:hover {
+    #registration_agent_picker {
+      display: block;
+    }
+  }
+}
+
+
 .registration {
   
   .landlords_of_registration {
