@@ -6,10 +6,13 @@
     display: none;
   
     .agent {
+      font-size: 0.9em;
+      line-height: 1.1em;
       display: inline-block;
       border: 1px solid blue;
-      border-radius: 3px;
-      padding: 6px;
+      border-radius: 5px;
+      padding: 8px;
+      margin: 2px;
       width: 220px;
     }
   }

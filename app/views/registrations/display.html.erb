@@ -65,10 +65,10 @@
     <% end %>
     <%= content_tag :div, :class => 'inline' do %>
       <%= content_tag :div, 'Office Phone #:', :class => 'label' %>
-      <%= content_tag :div, @first_client.employers.first&.phones.office.first&.number, :class => 'inline shaded' %>
+      <%= content_tag :div, @first_client.employers.first&.phones&.office&.first&.number, :class => 'inline shaded' %>
       <br>
       <%= content_tag :div, 'Office Hiring #:', :class => 'label' %>
-      <%= content_tag :div, @first_client.employers.first&.phones.hiring.first&.number, :class => 'inline shaded' %>
+      <%= content_tag :div, @first_client.employers.first&.phones&.hiring&.first&.number, :class => 'inline shaded' %>
       <br>
       <%= content_tag :div, 'Annual Income:', :class => 'label' %>
       <%= content_tag :div, @first_client.employments.map { |employment| number_to_round_currency employment.income }.join(" + "), :class => 'inline shaded' %>

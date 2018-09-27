@@ -19,7 +19,11 @@ module RegistrationsHelper
   end
   
   def begin_registration_link
-    link_to fa_icon(:arrow_circle_right, :text => 'Begin Registration'), begin_registration_path
+    link_to fa_icon(:arrow_circle_right, :text => 'Begin Registration'), '#'
+  end
+  
+  def begin_registration_agent_link
+    link_to fa_icon(:arrow_circle_right, :text => 'Begin Registration'), begin_registration_path(:agent_id => current_avatar.agent&.id)
   end
   
   def registration_agent_picker

@@ -30,7 +30,7 @@ module ApplicationHelper
   
   def registration_access_nav
     [
-      begin_registration_link,
+      begin_registration_agent_link,
       resource_path(Client),
       resource_path(Registration),
       resource_path(Employer),
