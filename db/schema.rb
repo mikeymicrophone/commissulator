@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_205310) do
+ActiveRecord::Schema.define(version: 2018_09_28_225645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -361,6 +361,8 @@ ActiveRecord::Schema.define(version: 2018_09_27_205310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "signature"
+    t.datetime "move_by_latest"
+    t.text "what_if_we_fail"
     t.index ["agent_id"], name: "index_registrations_on_agent_id"
     t.index ["referral_source_id"], name: "index_registrations_on_referral_source_id"
   end

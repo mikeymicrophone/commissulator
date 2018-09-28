@@ -68,7 +68,7 @@ class HomeController < ApplicationController
   end
   
   def registration_params
-    params.require("registration").permit :minimum_price, :maximum_price, :size, :move_by, :reason_for_moving, :occupants, :pets, :referral_source_id, :agent_id
+    params.require("registration").permit :minimum_price, :maximum_price, :size, :move_by, :move_by_latest, :reason_for_moving, :what_if_we_fail, :occupants, :pets, :referral_source_id, :agent_id
   end
   
   def client_params roommate_number

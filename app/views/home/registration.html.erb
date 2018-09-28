@@ -18,8 +18,10 @@
       </div>
       <div class="bordered inline">
         <div>
-          <%= label :registration, :move_by, 'I must move by:' %>
-          <%= text_field :registration, :move_by, :placeholder => 'Moving Date', :class => 'datepicker birthdate' %>
+          <%= label :registration, :move_by, 'I want move between:' %><br>
+          <%= text_field :registration, :move_by, :placeholder => 'Date', :class => 'datepicker_moving birthdate' %>
+          and
+          <%= text_field :registration, :move_by_latest, :placeholder => 'End Date', :class => 'datepicker_moving birthdate' %>
         </div>
       </div>
     </div>
@@ -40,11 +42,15 @@
             <%= text_field :registration, :pets, :placeholder => 'Type and Size of Any Pets' %>
           </div>
         </div>
+        <div>
+          <%= text_area :registration, :what_if_we_fail, :placeholder => "What are you going to do if you don't find an apartment?" %>
+        </div>
       </div>
     </div>
   
     <p>
-      What apartments have you seen prior to visiting us?  Are there any apartments you are currently considering?  (These fields are not required)
+      What apartments have you seen prior to visiting us?  Are there any apartments you are currently considering?<br>
+      These fields are not required, but please fill out as many as you can.
     </p>
     <div class="reg_form_quadrant">
       <div class="bordered">

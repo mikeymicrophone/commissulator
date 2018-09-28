@@ -5,6 +5,8 @@ $(document).on 'turbolinks:load', ->
       yearRange: "1940:2010"
     });
 
+  $('.datepicker_moving').datepicker();
+
   $('#registration_interface').on 'change', '#registration_maximum_price', ->
     $.ajax
       url: '/clients/new'
