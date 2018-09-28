@@ -115,8 +115,9 @@ class Commission < ApplicationRecord
   
   def follow_up!
     fub_people_update
-    fub_landlord # will attach deal when ready
+    fub_landlord
     fub_deal
+    deal.fub_annotate_people
   end
   
   def contactually_people

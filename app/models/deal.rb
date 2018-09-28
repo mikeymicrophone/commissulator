@@ -114,6 +114,17 @@ class Deal < ApplicationRecord
     fub_object
   end
   
+  def fub_annotate_people
+    clients.each do |client|
+      fub_note = FubClient::Note.new :subject => 'Closing', :body => 'We rented them an apartment.', :personId => client.follow_up_boss_id
+      begin
+        fub_note.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
+    end
+  end
+  
   def fub_description
     <<~DESCRIBE
     #{clients.map(&:name).to_sentence}
