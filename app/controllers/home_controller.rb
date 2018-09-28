@@ -11,49 +11,28 @@ class HomeController < ApplicationController
   def submit
     params[:registration][:move_by] = Date.strptime registration_params[:move_by], '%m/%d/%Y' rescue nil
     @registration = Registration.create registration_params
-    
-    params[:client][:date_of_birth] = Date.strptime client_params[:date_of_birth], '%m/%d/%Y' rescue nil
-    @client = Client.create client_params
-    @registrant = Registrant.create registrant_params.merge(:registration => @registration, :client => @client)
-    @landlord = Landlord.create landlord_params if landlord_params[:name].present?
-    @lease = Lease.create lease_params.merge(:landlord => @landlord, :registration => @registration)
-    @tenant = Tenant.create :lease => @lease, :client => @client
 
-    @home_phone = Phone.create home_phone_params.merge(:client => @client, :variety => 'home')
-    @cell_phone = Phone.create cell_phone_params.merge(:client => @client, :variety => 'cell')
-    @email = Email.create email_params.merge(:client => @client, :variety => 'primary')
-    
-    @employer = Employer.find_or_create_by employer_params
-    @industry = Industry.find_or_create_by industry_params
-    @niche = Niche.find_or_create_by :employer => @employer, :industry => @industry
-    @employment = Employment.create employment_params.merge(:client => @client, :employer => @employer)
-    
-    @office_phone = Phone.create office_phone_params.merge(:client => @client, :employer => @employer, :variety => 'office')
-    @office_hiring = Phone.create office_hiring_params.merge(:employer => @employer, :variety => 'hiring')
+    5.times do |roommate_number|
+      if roommate_filled_out?(roommate_number)
+        params["client_#{roommate_number}"][:date_of_birth] = Date.strptime client_params(roommate_number)[:date_of_birth], '%m/%d/%Y' rescue nil
+        @client = Client.create client_params(roommate_number)
+        @registrant = Registrant.create registrant_params(roommate_number).merge(:registration => @registration, :client => @client)
+        @landlord = Landlord.create landlord_params(roommate_number) if landlord_params(roommate_number)[:name].present?
+        @lease = Lease.create lease_params(roommate_number).merge(:landlord => @landlord, :registration => @registration)
+        @tenant = Tenant.create :lease => @lease, :client => @client
 
-    if first_roommate_filled_out?
-      params[:roommate_1_client][:date_of_birth] = Date.strptime roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
-      @roommate = Client.create roommate_client_params
-      Registrant.create roommate_registrant_params.merge(:registration => @registration, :client => @roommate)
-      @roommate_employer = Employer.find_or_create_by(roommate_employer_params)
-      @roommate_employment = Employment.create roommate_employment_params.merge(:client => @roommate, :employer => @roommate_employer)
-      @roommate_cell_phone = Phone.create roommate_cell_phone_params.merge(:client => @roommate, :variety => 'cell')
-    end
-    if second_roommate_filled_out?
-      params[:roommate_2_client][:date_of_birth] = Date.strptime second_roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
-      @second_roommate = Client.create second_roommate_client_params
-      Registrant.create second_roommate_registrant_params.merge(:registration => @registration, :client => @second_roommate)
-      @second_roommate_employer = Employer.find_or_create_by(second_roommate_employer_params)
-      @second_roommate_employment = Employment.create second_roommate_employment_params.merge(:client => @second_roommate, :employer => @second_roommate_employer)
-      @second_roommate_cell_phone = Phone.create second_roommate_cell_phone_params.merge(:client => @second_roommate, :variety => 'cell')
-    end
-    if third_roommate_filled_out?
-      params[:roommate_3_client][:date_of_birth] = Date.strptime third_roommate_client_params[:date_of_birth], '%m/%d/%Y' rescue nil
-      @third_roommate = Client.create third_roommate_client_params
-      Registrant.create third_roommate_registrant_params.merge(:registration => @registration, :client => @third_roommate)
-      @third_roommate_employer = Employer.find_or_create_by(third_roommate_employer_params)
-      @third_roommate_employment = Employment.create third_roommate_employment_params.merge(:client => @third_roommate, :employer => @third_roommate_employer)
-      @third_roommate_cell_phone = Phone.create third_roommate_cell_phone_params.merge(:client => @third_roommate, :variety => 'cell')
+        @home_phone = Phone.create home_phone_params(roommate_number).merge(:client => @client, :variety => 'home')
+        @cell_phone = Phone.create cell_phone_params(roommate_number).merge(:client => @client, :variety => 'cell')
+        @email = Email.create email_params(roommate_number).merge(:client => @client, :variety => 'primary')
+    
+        @employer = Employer.find_or_create_by employer_params(roommate_number)
+        @industry = Industry.find_or_create_by industry_params(roommate_number)
+        @niche = Niche.find_or_create_by :employer => @employer, :industry => @industry
+        @employment = Employment.create employment_params(roommate_number).merge(:client => @client, :employer => @employer)
+    
+        @office_phone = Phone.create office_phone_params(roommate_number).merge(:client => @client, :employer => @employer, :variety => 'office')
+        @office_hiring = Phone.create office_hiring_params(roommate_number).merge(:employer => @employer, :variety => 'hiring')
+      end
     end
     
     if first_apartment_filled_out?
@@ -76,16 +55,8 @@ class HomeController < ApplicationController
   end
   
   private
-  def first_roommate_filled_out?
-    params[:roommate_1_client][:first_name].present?
-  end
-  
-  def second_roommate_filled_out?
-    params[:roommate_2_client][:first_name].present?
-  end
-  
-  def third_roommate_filled_out?
-    params[:roommate_3_client][:first_name].present?
+  def roommate_filled_out? number
+    params["client_#{number}"] && params["client_#{number}"][:first_name].present?
   end
   
   def first_apartment_filled_out?
@@ -97,122 +68,62 @@ class HomeController < ApplicationController
   end
   
   def registration_params
-    params.require(:registration).permit :minimum_price, :maximum_price, :size, :move_by, :reason_for_moving, :occupants, :pets, :referral_source_id, :agent_id
+    params.require("registration").permit :minimum_price, :maximum_price, :size, :move_by, :reason_for_moving, :occupants, :pets, :referral_source_id, :agent_id
   end
   
-  def client_params
-    params.require(:client).permit :first_name, :last_name, :date_of_birth
+  def client_params roommate_number
+    params.require("client_#{roommate_number}").permit :first_name, :last_name, :date_of_birth
   end
   
-  def registrant_params
-    params.require(:registrant).permit :other_funding_sources
+  def registrant_params roommate_number
+    params.require("registrant_#{roommate_number}").permit :other_funding_sources
   end
   
-  def landlord_params
-    params.require(:landlord).permit :name
+  def landlord_params roommate_number
+    params.require("landlord_#{roommate_number}").permit :name
   end
   
-  def lease_params
-    params.require(:lease).permit :apartment_number, :street_number, :street_name, :zip_code
+  def lease_params roommate_number
+    params.require("lease_#{roommate_number}").permit :apartment_number, :street_number, :street_name, :zip_code
   end
   
-  def home_phone_params
-    params.require(:home_phone).permit :number
+  def home_phone_params roommate_number
+    params.require("home_phone_#{roommate_number}").permit :number
   end
 
-  def cell_phone_params
-    params.require(:cell_phone).permit :number
+  def cell_phone_params roommate_number
+    params.require("cell_phone_#{roommate_number}").permit :number
   end
   
-  def email_params
-    params.require(:email).permit :address
+  def email_params roommate_number
+    params.require("email_#{roommate_number}").permit :address
   end
   
-  def employer_params
-    params.require(:employer).permit :name, :address, :url
+  def employer_params roommate_number
+    params.require("employer_#{roommate_number}").permit :name, :address, :url
   end
   
-  def industry_params
-    params.require(:industry).permit :name
+  def industry_params roommate_number
+    params.require("industry_#{roommate_number}").permit :name
   end
   
-  def employment_params
-    params.require(:employment).permit :position, :income, :start_date
+  def employment_params roommate_number
+    params.require("employment_#{roommate_number}").permit :position, :income, :start_date
   end
   
-  def office_phone_params
-    params.require(:office_phone).permit :number
+  def office_phone_params roommate_number
+    params.require("office_phone_#{roommate_number}").permit :number
   end
   
-  def office_hiring_params
-    params.require(:office_hiring).permit :number
-  end
-
-  def roommate_client_params
-    params.require(:roommate_1_client).permit :first_name, :last_name, :date_of_birth
-  end
-  
-  def roommate_registrant_params
-    params.require(:roommate_1_registrant).permit :other_fund_sources
-  end
-  
-  def roommate_employer_params
-    params.require(:roommate_1_employer).permit :name, :address
-  end
-  
-  def roommate_employment_params
-    params.require(:roommate_1_employment).permit :income, :position, :start_date
-  end
-  
-  def roommate_cell_phone_params
-    params.require(:roommate_1_cell_phone).permit :number
-  end
-
-  def second_roommate_client_params
-    params.require(:roommate_2_client).permit :first_name, :last_name, :date_of_birth
-  end
-  
-  def second_roommate_registrant_params
-    params.require(:roommate_2_registrant).permit :other_fund_sources
-  end
-  
-  def second_roommate_employer_params
-    params.require(:roommate_2_employer).permit :name, :address
-  end
-  
-  def second_roommate_employment_params
-    params.require(:roommate_2_employment).permit :income, :position, :start_date
-  end
-  
-  def second_roommate_cell_phone_params
-    params.require(:roommate_2_cell_phone).permit :number
-  end
-
-  def third_roommate_client_params
-    params.require(:roommate_3_client).permit :first_name, :last_name, :date_of_birth
-  end
-  
-  def third_roommate_registrant_params
-    params.require(:roommate_3_registrant).permit :other_fund_sources
-  end
-  
-  def third_roommate_employer_params
-    params.require(:roommate_3_employer).permit :name, :address
-  end
-  
-  def third_roommate_employment_params
-    params.require(:roommate_3_employment).permit :income, :position, :start_date
-  end
-  
-  def third_roommate_cell_phone_params
-    params.require(:roommate_3_cell_phone).permit :number
+  def office_hiring_params roommate_number
+    params.require("office_hiring_#{roommate_number}").permit :number
   end
   
   def apartment_params
-    params.require(:apartment_1).permit :unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment
+    params.require("apartment_1").permit :unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment
   end
 
   def second_apartment_params
-    params.require(:apartment_2).permit :unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment
+    params.require("apartment_2").permit :unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment
   end
 end

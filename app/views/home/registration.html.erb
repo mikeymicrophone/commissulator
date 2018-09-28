@@ -23,67 +23,7 @@
       </div>
     </div>
   
-    <div class="reg_form_quadrant">
-      <div class="bordered">
-        <div class="inline">
-          <div>
-            <%= text_field :client, :first_name, :placeholder => 'First Name', :class => 'name_part' %>
-            <%= text_field :client, :last_name, :placeholder => 'Last Name', :class => 'name_part' %>
-            <%= text_field :client, :date_of_birth, :placeholder => 'Birthdate', :class => 'datepicker birthdate' %>
-          </div>
-          <div>
-            <%= text_field :lease, :apartment_number, :placeholder => 'Apt', :class => 'address_part', :title => 'Apartment Number' %>
-            <%= text_field :lease, :street_number, :placeholder => 'Bldg', :class => 'address_part', :title => 'Street Address (number)' %>
-            <%= text_field :lease, :street_name, :placeholder => 'Street', :class => 'street' %>
-            <%= text_field :lease, :zip_code, :placeholder => 'Zip', :class => 'zip' %>
-          </div>
-          <div>
-            <%= text_field :landlord, :name, :placeholder => 'Landlord' %>
-          </div>
-        </div>
-        <div class="inline">
-          <div>
-            <%= text_field :home_phone, :number, :placeholder => 'Home Phone' %>
-          </div>
-          <div>
-            <%= text_field :cell_phone, :number, :placeholder => 'Cell Phone' %>
-          </div>
-          <div>
-            <%= text_field :email, :address, :placeholder => 'Email' %>
-          </div>
-        </div>
-      </div>
-
-      <div class="bordered">
-        <div class="inline">
-          <div>
-            <%= text_field :employer, :name, :placeholder => 'Employer' %>
-          </div>
-          <div>
-            <%= text_field :industry, :name, :placeholder => 'Industry' %>
-          </div>
-          <div>
-            <%= text_field :employer, :address, :placeholder => 'Address' %>
-          </div>
-          <div>
-            <%= text_field :employment, :position, :placeholder => 'Position' %>
-          </div>
-        </div>
-        <div class="inline">
-          <div>
-            <%= text_field :office_phone, :number, :placeholder => 'Office Phone' %>
-          </div>
-          <div>
-            <%= text_field :office_hiring, :number, :placeholder => 'Hiring Manager Phone' %>
-          </div>
-          <div>
-            <%= text_field :employment, :income, :placeholder => 'Annual Income' %>
-          </div>
-          <div>
-            <%= text_field :registrant, :other_fund_sources, :placeholder => 'Other Funds/Source' %>
-          </div>
-        </div>
-      </div>
+    <%= render :partial => 'registrant', :locals => {:roommate_number => 1} %>
       <div class="bordered">
         <div class="inline">
           <%= text_area :registration, :reason_for_moving, :placeholder => 'Reason For Moving' %>
@@ -99,66 +39,7 @@
       </div>
     </div>
 
-    <p>Roommates:</p>
-    <div class="reg_form_quadrant">
-      <div class="bordered inline">
-        <div>
-          <%= text_field :roommate_1_client, :first_name, :placeholder => 'First Name', :class => 'name_part' %>
-          <%= text_field :roommate_1_client, :last_name, :placeholder => 'Last Name', :class => 'name_part' %>
-          <%= text_field :roommate_1_client, :date_of_birth, :placeholder => 'Birthdate', :class => 'datepicker birthdate' %>
-        </div>
-        <div>
-          <%= text_field :roommate_1_cell_phone, :number, :placeholder => 'Cell Phone Number' %>
-        </div>
-        <div>
-          <%= text_field :roommate_1_employer, :name, :placeholder => 'Employer' %>
-        </div>
-        <div>
-          <%= text_field :roommate_1_employment, :income, :placeholder => 'Approximate Annual Income' %>
-        </div>
-        <div>
-          <%= text_field :roommate_1_registrant, :other_fund_sources, :placeholder => 'Other Funds/Source' %>
-        </div>
-      </div>
-      <div class="bordered inline">
-        <div>
-          <%= text_field :roommate_2_client, :first_name, :placeholder => 'First Name', :class => 'name_part' %>
-          <%= text_field :roommate_2_client, :last_name, :placeholder => 'Last Name', :class => 'name_part' %>
-          <%= text_field :roommate_2_client, :date_of_birth, :placeholder => 'Birthdate', :class => 'datepicker birthdate' %>
-        </div>
-        <div>
-          <%= text_field :roommate_2_cell_phone, :number, :placeholder => 'Cell Phone Number' %>
-        </div>
-        <div>
-          <%= text_field :roommate_2_employer, :name, :placeholder => 'Employer' %>
-        </div>
-        <div>
-          <%= text_field :roommate_2_employment, :income, :placeholder => 'Approximate Annual Income' %>
-        </div>
-        <div>
-          <%= text_field :roommate_2_registrant, :other_fund_sources, :placeholder => 'Other Funds/Source' %>
-        </div>
-      </div>
-      <div class="bordered inline">
-        <div>
-          <%= text_field :roommate_3_client, :first_name, :placeholder => 'First Name', :class => 'name_part' %>
-          <%= text_field :roommate_3_client, :last_name, :placeholder => 'Last Name', :class => 'name_part' %>
-          <%= text_field :roommate_3_client, :date_of_birth, :placeholder => 'Birthdate', :class => 'datepicker birthdate' %>
-        </div>
-        <div>
-          <%= text_field :roommate_3_cell_phone, :number, :placeholder => 'Cell Phone Number' %>
-        </div>
-        <div>
-          <%= text_field :roommate_3_employer, :name, :placeholder => 'Employer' %>
-        </div>
-        <div>
-          <%= text_field :roommate_3_employment, :income, :placeholder => 'Approximate Annual Income' %>
-        </div>
-        <div>
-          <%= text_field :roommate_3_registrant, :other_fund_sources, :placeholder => 'Other Funds/Source' %>
-        </div>
-      </div>
-    </div>
+    <%= render :partial => 'registrant', :locals => {:roommate_number => 2} %></div>
   
     <p>
       What apartments have you seen prior to visiting us?  Are there any apartments you are currently considering?

@@ -1,0 +1,62 @@
+<div class="reg_form_quadrant">
+  <div class="bordered">
+    <div class="inline">
+      <div>
+        <%= text_field "client_#{roommate_number}", :first_name, :placeholder => 'First Name', :class => 'name_part' %>
+        <%= text_field "client_#{roommate_number}", :last_name, :placeholder => 'Last Name', :class => 'name_part' %>
+        <%= text_field "client_#{roommate_number}", :date_of_birth, :placeholder => 'Birthdate', :class => 'datepicker birthdate' %>
+      </div>
+      <div>
+        <%= text_field "lease_#{roommate_number}", :apartment_number, :placeholder => 'Apt', :class => 'address_part', :title => 'Apartment Number' %>
+        <%= text_field "lease_#{roommate_number}", :street_number, :placeholder => 'Bldg', :class => 'address_part', :title => 'Street Address (number)' %>
+        <%= text_field "lease_#{roommate_number}", :street_name, :placeholder => 'Street', :class => 'street' %>
+        <%= text_field "lease_#{roommate_number}", :zip_code, :placeholder => 'Zip', :class => 'zip' %>
+      </div>
+      <div>
+        <%= text_field "landlord_#{roommate_number}", :name, :placeholder => 'Landlord' %>
+      </div>
+    </div>
+    <div class="inline">
+      <div>
+        <%= text_field "home_phone_#{roommate_number}", :number, :placeholder => 'Home Phone' %>
+      </div>
+      <div>
+        <%= text_field "cell_phone_#{roommate_number}", :number, :placeholder => 'Cell Phone' %>
+      </div>
+      <div>
+        <%= text_field "email_#{roommate_number}", :address, :placeholder => 'Email' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="bordered">
+    <div class="inline">
+      <div>
+        <%= text_field "employer_#{roommate_number}", :name, :placeholder => 'Employer' %>
+      </div>
+      <div>
+        <%= text_field "industry_#{roommate_number}", :name, :placeholder => 'Industry' %>
+      </div>
+      <div>
+        <%= text_field "employer_#{roommate_number}", :address, :placeholder => 'Address' %>
+      </div>
+      <div>
+        <%= text_field "employment_#{roommate_number}", :position, :placeholder => 'Position' %>
+      </div>
+    </div>
+    <div class="inline">
+      <div>
+        <%= text_field "office_phone_#{roommate_number}", :number, :placeholder => 'Office Phone' %>
+      </div>
+      <div>
+        <%= text_field "office_hiring_#{roommate_number}", :number, :placeholder => 'Hiring Manager Phone' %>
+      </div>
+      <div>
+        <%= text_field "employment_#{roommate_number}", :income, :placeholder => 'Annual Income' %>
+      </div>
+      <div>
+        <%= text_field "registrant_#{roommate_number}", :other_fund_sources, :placeholder => 'Other Funds/Source' %>
+      </div>
+    </div>
+  </div>
+
