@@ -17,39 +17,15 @@ class Registration < ApplicationRecord
   APARTMENT_SIZES = ['Alcove Studio', 'Junior-1', 'Studio', 'One Bedroom', 'Junior-4', 'Convertible-2', 'Two Bedroom', 'Convertible-3', 'Classic-6', 'Three Bedroom', 'Classic-7', 'Convertible-4', 'Four Bedroom', 'Five Bedroom+']
   
   def fub_people
-    people = []
-    clients.each do |client|
-      person = FubClient::Person.new :firstName => client.first_name, :lastName => client.last_name, :stage => 'Registered', :customBirthday => client.date_of_birth
-      person.phones = client.phones.map { |phone| {:value => phone.number, :type => phone.variety} } if client.phones.present?
-      person.emails = client.emails.map { |email| {:value => email.address} } if client.emails.present?
-      people << person
-    end
-    people
+    clients.map &:fub_person
   end
   
   def fub_employers
-    employer_people = []
-    employers.each do |employer|
-      employer_person = FubClient::Person.new :lastName => employer.name, :tags => ['Employer']
-      employer_person.addresses = [employer.address] if employer.address.present?
-      employer_person.phones = employer.phones.where(:client_id => nil).map { |phone| {:value => phone.number, :type => phone.variety} } if employer.phones.present?
-      employer_person.emails = employer.emails.where(:client_id => nil).map { |email| {:value => email.address} } if employer.emails.present?
-      employer_people << employer_person
-    end
-    employer_people
+    employers.map &:fub_person
   end
   
   def fub_landlords
-    landlord_people = []
-    landlords.each do |landlord|
-      first_name = landlord.name.split.first
-      last_name = landlord.name.split[1..-1]&.join ' '
-      landlord_person = FubClient::Person.new :firstName => first_name, :lastName => last_name, :tags => ['Landlord']
-      landlord_person.phones = [{:value => landlord.phone_number, :type => 'work'}] if landlord.phone_number.present?
-      landlord_person.emails = [{:value => landlord.email}] if landlord.email.present?
-      landlord_people << landlord_person
-    end
-    landlord_people
+    landlords.map &:fub_person
   end
   
   def follow_up!
@@ -62,19 +38,7 @@ class Registration < ApplicationRecord
         Rails.logger.debug error.inspect
       end
     end
-    fub_employers.each do |employer|
-      begin
-        employer.save
-      rescue NoMethodError => error
-        Rails.logger.debug error.inspect
-      end
-    end
-    fub_landlords.each do |landlord|
-      begin
-        landlord.save
-      rescue NoMethodError => error
-        Rails.logger.debug error.inspect
-      end
-    end
+    fub_employers
+    fub_landlords
   end
 end

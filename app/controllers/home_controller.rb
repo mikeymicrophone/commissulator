@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     params[:client][:date_of_birth] = Date.strptime client_params[:date_of_birth], '%m/%d/%Y' rescue nil
     @client = Client.create client_params
     @registrant = Registrant.create registrant_params.merge(:registration => @registration, :client => @client)
-    @landlord = Landlord.create landlord_params
+    @landlord = Landlord.create landlord_params if landlord_params[:name].present?
     @lease = Lease.create lease_params.merge(:landlord => @landlord, :registration => @registration)
     @tenant = Tenant.create :lease => @lease, :client => @client
 

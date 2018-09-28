@@ -15,6 +15,7 @@ class Landlord < ApplicationRecord
     person.emails = [{:value => email}] if email.present?
     person.phones = [{:value => phone_number, :type => 'work'}] if phone_number.present?
     person.tags = ['Landlord']
+    person.stage = ENV['FOLLOW_UP_BOSS_STAGE_ID_LANDLORD']
     begin
       person.save
     rescue NoMethodError => error
