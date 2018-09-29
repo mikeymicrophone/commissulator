@@ -32,22 +32,22 @@ prawn_document do |pdf|
         pdf.font 'Oswald', :size => 16 do
           pdf.text "CLIENT #{index + 1}"
         end
-        pdf.text "<u>#{client.name}</u>", :inline_format => true
-        pdf.text "<u>#{client.leases.first&.address}</u>", :inline_format => true
+        pdf.text "<u>#{pad client.name}</u>", :inline_format => true
+        pdf.text "<u>#{pad client.leases.first&.address}</u>", :inline_format => true if client.leases.present?
         client.phones.each do |phone|
-          pdf.text "<u>#{phone.number} (#{phone.variety})</u>", :inline_format => true
+          pdf.text "<u>#{pad phone.number} (#{phone.variety})</u>", :inline_format => true
         end
         client.emails.each do |email|
           pdf.text "<u>#{email.address}</u>", :inline_format => true
         end
         client.employers.each do |employer|
-          pdf.text "Employer: <u>#{employer.name}</u>", :inline_format => true
-          pdf.text "Address: <u>#{employer.address}</u>", :inline_format => true
-          pdf.text "Position: <u>#{employer.employment_of(client)&.position}</u>", :inline_format => true
-          pdf.text "Annual Income: <u>#{number_to_round_currency employer.employment_of(client)&.income}</u>", :inline_format => true
+          pdf.text "Employer: <u>#{pad employer.name}</u>", :inline_format => true
+          pdf.text "Address: <u>#{pad employer.address}</u>", :inline_format => true
+          pdf.text "Position: <u>#{pad employer.employment_of(client)&.position}</u>", :inline_format => true
+          pdf.text "Annual Income: <u>#{pad number_to_round_currency employer.employment_of(client)&.income}</u>", :inline_format => true
         end
         client.leases.each do |lease|
-          pdf.text "Current Landlord: <u>#{lease.landlord&.name}</u>", :inline_format => true
+          pdf.text "Current Landlord: <u>#{pad lease.landlord&.name}</u>", :inline_format => true
         end
       end
     end
@@ -60,11 +60,12 @@ prawn_document do |pdf|
   
   pdf.bounding_box [0, pdf.cursor], :width => 510 do
     pdf.bounding_box [gap, pdf.cursor - gap], :width => 500 do
-      pdf.text "Move date: <u>#{@registration.move_by&.strftime("%-m/%-d")}</u>    At the latest: <u>#{@registration.move_by_latest&.strftime("%-m/%-d")}</u>    Number of people: <u>#{@registration.occupants}</u>", :inline_format => true
+      pdf.text "Move date: <u>#{pad @registration.move_by&.strftime("%B %-d")}</u>    At the latest: <u>#{@registration.move_by_latest&.strftime("%B %-d")}</u>    Number of people: <u>#{@registration.occupants}</u>", :inline_format => true
+      pdf.text "Apartments seen:"
       @registration.apartments.each do |apartment|
-        pdf.text "<u>#{apartment.name}</u>", :inline_format => true
+        pdf.text "<u>#{apartment.name}</u>    #{apartment.comment}", :inline_format => true
       end
-      pdf.text "How did you hear about us? <u>#{@registration.referral_source&.name}</u>    Do you have any pets? <u>#{@registration.pets}</u>", :inline_format => true
+      pdf.text "How did you hear about us? <u>#{pad @registration.referral_source&.name}</u>    Do you have any pets? <u>#{pad @registration.pets}</u>", :inline_format => true
     end
   end
   
