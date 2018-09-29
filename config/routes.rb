@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     end
   end
   get '/register' => 'home#registration', :as => 'begin_registration'
+  get '/registrant_add' => 'home#registrant_add', :as => 'registrant_add'
   post '/register' => 'home#submit', :as => 'submit_registration'
   get '/toggle_navigation' => 'home#toggle_navigation', :as => 'toggle_navigation'
   get '/thanks' => 'home#thanks', :as => 'thanks'

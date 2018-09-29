@@ -8,6 +8,10 @@ class HomeController < ApplicationController
     render :layout => 'empty'
   end
   
+  def registrant_add
+    @roommates_to_add = params[:number_of_roommates].to_i - 2
+  end
+  
   def submit
     params[:registration][:move_by] = Date.strptime registration_params[:move_by], '%m/%d/%Y' rescue nil
     @registration = Registration.create registration_params
@@ -24,8 +28,9 @@ class HomeController < ApplicationController
         @home_phone = Phone.create home_phone_params(roommate_number).merge(:client => @client, :variety => 'home')
         @cell_phone = Phone.create cell_phone_params(roommate_number).merge(:client => @client, :variety => 'cell')
         @email = Email.create email_params(roommate_number).merge(:client => @client, :variety => 'primary')
-    
+
         @employer = Employer.find_or_create_by employer_params(roommate_number)
+        @employer = Employer.unspecified unless @employer.valid?
         @industry = Industry.find_or_create_by industry_params(roommate_number)
         @niche = Niche.find_or_create_by :employer => @employer, :industry => @industry
         @employment = Employment.create employment_params(roommate_number).merge(:client => @client, :employer => @employer)

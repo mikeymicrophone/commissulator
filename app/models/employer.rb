@@ -28,4 +28,8 @@ class Employer < ApplicationRecord
   def fub_person
     FubClient::Person.find(follow_up_boss_id) || fub_create
   end
+  
+  def self.unspecified
+    find_or_create_by :name => 'Unspecified'
+  end
 end
