@@ -30,8 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  
+  hello:
+    registration_card: "Welcome to Citi Habitats.  Thank you for providing us with the opportunity to find your new home.  We look forward to working with you.  Completing the information below will ensure that your apartment search goes as smoothly as possible."
   legal:
     commission_agreement:
       explanation: Welcome to Citi Habitats. Thank you for providing us with the opportunity to find your new home. There is no fee for viewing apartments with us, but should you lease an apartment that we have shown to you, the commission of fifteen percent (15%) of the annual rent is due payable to Citi Habitats. Citi Habitats is entitled to this commission if you decide to rent an apartment in a building or complex; or rent the specific unit in a condo or co-op shown to you by Citi Habitats within 120 days of such showing.
