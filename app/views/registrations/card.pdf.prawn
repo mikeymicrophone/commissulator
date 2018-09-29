@@ -86,8 +86,8 @@ prawn_document do |pdf|
   pdf.text t('legal')[:registration_card][:short_term_fees], :indent_paragraphs => 10
   
   pdf.undash
-  pdf.stroke { pdf.line [0, 10], [520, 10] }
+  pdf.stroke { pdf.line [0, 35], [520, 35] }
   pdf.font 'Oswald' do
-    pdf.draw_text 'CITIHABITATS.COM', :at => [460, 0]
+    pdf.draw_text 'CITIHABITATS.COM', :at => [460, 25]
   end
 end
