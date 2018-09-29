@@ -55,7 +55,7 @@ prawn_document do |pdf|
   
   pdf.dash 1
   pdf.stroke { pdf.line [253, 653], [253, pdf.cursor + 4] }
-  pdf.stroke { pdf.line [10, pdf.cursor], [500, pdf.cursor]}
+  pdf.stroke { pdf.line [0, pdf.cursor], [520, pdf.cursor]}
   pdf.undash
   
   pdf.bounding_box [0, pdf.cursor], :width => 510 do
@@ -68,8 +68,8 @@ prawn_document do |pdf|
     end
   end
   
-  # pdf.dash 1
-  pdf.stroke { pdf.line [10, pdf.cursor], [500, pdf.cursor]}
+  pdf.dash 1
+  pdf.stroke { pdf.line [0, pdf.cursor], [520, pdf.cursor]}
   
   pdf.move_down 10
   pdf.font "Times-Roman", :size => 8
@@ -81,4 +81,13 @@ prawn_document do |pdf|
   pdf.move_down 8
   pdf.text t('legal')[:registration_card][:condo_fee]
   pdf.move_down 8
+  pdf.text t('legal')[:registration_card][:short_term]
+  pdf.move_down 8
+  pdf.text t('legal')[:registration_card][:short_term_fees], :indent_paragraphs => 10
+  
+  pdf.undash
+  pdf.stroke { pdf.line [0, 10], [520, 10] }
+  pdf.font 'Oswald' do
+    pdf.draw_text 'CITIHABITATS.COM', :at => [460, 0]
+  end
 end

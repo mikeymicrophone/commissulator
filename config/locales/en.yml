@@ -47,3 +47,9 @@ en:
       implication: "By signing below, you agree that you are seeking the rental of an apartment in New York City and that you are retaining the services of CITI HABITATS for that purpose.  You understand the commission charge by CITI HABITATS for the aforesaid services is as follows:"
       rental_fee: "Fifteen percent (15%) of the first year's rent (hereinafter \"commission\"), payable to CITI HABITATS only if you rent an apartment in a building or complex shown to you by CITI HABITATS within 120 days of such showing."
       condo_fee: "Fifteen percent (15%) of the first year's rent (hereinafter \"commission\"), payable to CITI HABITATS only if you rent the specific unit in a condo or co-op building shown to you by CITI HABITATS within 120 days of such showing."
+      short_term: |
+        In the event that you rent an apartment for less than a one-year term (based upon initial term stated in lease), CITI HABITATS' commission will be as shown below.  
+      short_term_fees: |
+        Term: 1 day - 3 months = Fee: 1 month's rent  
+        Term: 4 months - 6 months = Fee: 1.5 month's rent
+        Term: 6+ months = Fee: 15% of the first year's rent based on a 12-month lease term regardless if the actual lease term is less than 12 months
