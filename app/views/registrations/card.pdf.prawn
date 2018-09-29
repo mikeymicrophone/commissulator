@@ -18,7 +18,6 @@ prawn_document do |pdf|
   pdf.text "Welcome to Citi Habitats.  Thank you for providing us with the opportunity to find your new home.  We look forward to working with you.  Completing the informatino below will ensure that your apartment search goes as smoothly as possible."
   pdf.default_leading 7
   
-  
   gap = 5
   
   @registration.clients.each_with_index do |client, index|
@@ -66,4 +65,14 @@ prawn_document do |pdf|
   pdf.dash 1
   pdf.stroke { pdf.line [10, pdf.cursor], [500, pdf.cursor]}
   
+  pdf.move_down 10
+  pdf.font "Times-Roman", :size => 8
+  pdf.default_leading 1
+  
+  pdf.text t('legal')[:registration_card][:implication]
+  pdf.move_down 8
+  pdf.text t('legal')[:registration_card][:rental_fee]
+  pdf.move_down 8
+  pdf.text t('legal')[:registration_card][:condo_fee]
+  pdf.move_down 8
 end
