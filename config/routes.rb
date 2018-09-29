@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   resources :registrations do
     member do
       get :display
+      get :card
     end
     collection do
       post :fabricate

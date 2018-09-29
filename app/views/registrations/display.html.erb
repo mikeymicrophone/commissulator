@@ -95,10 +95,11 @@
     <% end %>
     <%= content_tag :div, :class => 'inline' do %>
       <%= content_tag :div, 'Heard about us from:', :class => 'label' %>
-      <%= content_tag :div, @registration.referral_source.name, :class => 'inline shaded' %>
+      <%= content_tag :div, @registration.referral_source&.name, :class => 'inline shaded' %>
       <br>
-      <%= content_tag :div, 'Must move by:', :class => 'label' %>
-      <%= content_tag :div, @registration.move_by.strftime("%B %d"), :class => 'inline shaded' %>
+      <%= content_tag :div, 'Must move between:', :class => 'label' %>
+      <%= content_tag :div, @registration.move_by&.strftime("%B %d"), :class => 'inline shaded' %>
+      <%= content_tag :div, @registration.move_by_latest&.strftime("%B %d"), :class => 'inline shaded' %>
     <% end %>
   <% end %>
   <%= content_tag :div, :class => 'bordered flexy' do %>

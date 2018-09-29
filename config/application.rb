@@ -16,5 +16,7 @@ module Commissulator
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.time_zone = 'Eastern Time (US & Canada)'
+    
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   end
 end
