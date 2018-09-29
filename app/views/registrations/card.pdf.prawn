@@ -32,7 +32,7 @@ prawn_document do |pdf|
         pdf.font 'Oswald', :size => 16 do
           pdf.text "CLIENT #{index + 1}"
         end
-        pdf.text "<u>client.name</u>", :inline_format => true
+        pdf.text "<u>#{client.name}</u>", :inline_format => true
         pdf.text "<u>#{client.leases.first&.address}</u>", :inline_format => true
         client.phones.each do |phone|
           pdf.text "<u>#{phone.number} (#{phone.variety})</u>", :inline_format => true
