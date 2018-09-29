@@ -1,19 +1,28 @@
 prawn_document do |pdf|
+  # pdf.stroke_axis
   pdf.font_families.update 'Oswald' => {:normal => "#{Rails.root}/app/assets/fonts/Oswald-Medium.ttf"}
   pdf.font "Times-Roman", :size => 10
   pdf.image "#{Rails.root}/app/assets/images/chLogox1.jpg", :width => 240
   pdf.font 'Oswald' do
-    pdf.draw_text "CLIENT REGISTRATION / FEE AGREEMENT", :size => 15, :at => [280, 750]
+    pdf.draw_text "CLIENT REGISTRATION / FEE AGREEMENT", :size => 15, :at => [250, 755]
   end
+  
+  pdf.bounding_box [250, 750], :width => 250 do
+    pdf.text "Date: #{@registration.created_at.strftime("%-m/%-d/%Y")}"
+    pdf.text "Budget: #{number_to_round_currency @registration.minimum_price}-#{number_to_round_currency @registration.maximum_price}"
+    pdf.text "Apartment Size: #{@registration.size}"
+    pdf.draw_text "Agent: #{@registration.agent&.name}", :at => [120, 25]
+  end
+  
+  pdf.move_down 10
   pdf.text "Welcome to Citi Habitats.  Thank you for providing us with the opportunity to find your new home.  We look forward to working with you.  Completing the informatino below will ensure that your apartment search goes as smoothly as possible."
-  pdf.move_down 50
   pdf.default_leading 7
   
   
   gap = 5
   
   @registration.clients.each_with_index do |client, index|
-    height = 689 - (((index) / 2)) * 260
+    height = 679 - (((index) / 2)) * 260
     positioning = index.odd? ? [255, height] : [0, height]
     pdf.bounding_box positioning, :width => 250 do
       pdf.bounding_box [gap, pdf.cursor - gap], :width => 240 do
@@ -53,5 +62,8 @@ prawn_document do |pdf|
       pdf.text "How did you hear about us? #{@registration.referral_source&.name}    Do you have any pets? #{@registration.pets}"
     end
   end
+  
+  pdf.dash 1
+  pdf.stroke { pdf.line [10, pdf.cursor], [500, pdf.cursor]}
   
 end
