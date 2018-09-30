@@ -17,8 +17,12 @@ class Client < ApplicationRecord
     "#{first_name} #{last_name}"
   end
   
+  def fub_similar
+    FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
+  end
+  
   def fub_create
-    similar_people = FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
+    similar_people = fub_similar
     person = similar_people.first if similar_people.present?
     person ||= FubClient::Person.new :firstName => first_name, :lastName => last_name
     person.emails = emails.map { |email| {:value => email.address} } if emails.any?
