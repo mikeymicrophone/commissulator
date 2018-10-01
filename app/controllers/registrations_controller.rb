@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  skip_before_action :authenticate_avatar!, :only => :update
   before_action :set_registration, only: [:show, :display, :card, :edit, :update, :destroy]
 
   def index
