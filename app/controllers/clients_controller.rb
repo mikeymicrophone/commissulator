@@ -7,6 +7,8 @@ class ClientsController < ApplicationController
       ReferralSource.find(params[:filter_value]).clients
     when 'registration_id'
       Registration.find(params[:filter_value]).clients
+    when 'lease_id'
+      Lease.find(params[:filter_value]).clients
     when nil
       Client.all
     else
