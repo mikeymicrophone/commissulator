@@ -28,7 +28,7 @@ class Commission < ApplicationRecord
   
   before_save :trim_tenants
   before_create :meet_landlord, :name_agent
-  after_save :address_deal, :assign_lease
+  after_save :address_deal, :populate_lease
   
   enum :follow_up => [:unsubmitted, :submitted]
   attr_default :follow_up, :unsubmitted
