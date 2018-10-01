@@ -66,17 +66,31 @@ class Commission < ApplicationRecord
     deal.save
   end
   
+  def street_number
+    address_pattern = /^([\d\-]+)\s+(.*)/
+    matched_data = address_pattern.match property_address
+    matched_data[1]
+  end
+  
+  def street_name
+    address_pattern = /^([\d\-]+)\s+(.*)/
+    matched_data = address_pattern.match property_address
+    matched_data[2]
+  end
+  
   def assign_lease
     lease = Lease.new
     lease.apartment_number = apartment_number
-    address_pattern = /^(\d+)\s+(.*)/
-    matched_data = address_pattern.match property_address
-    lease.street_number = matched_data[1]
-    lease.street_name = matched_data[2]
+    lease.street_number = street_number
+    lease.street_name = street_name
     lease.zip_code = zip_code
     lease.landlord_id = landlord_id
     lease.save
     update_column :lease_id, lease.id
+  end
+  
+  def populate_lease
+    assign_lease unless lease
   end
   
   def lease_end_date
