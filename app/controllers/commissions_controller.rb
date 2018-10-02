@@ -26,7 +26,7 @@ class CommissionsController < ApplicationController
   end
 
   def show
-    @sensitive = !current_avatar.admin
+    @sensitive = true
     @filename = "Rental Request for Commission.pdf"
   end
 
