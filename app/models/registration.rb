@@ -1,3 +1,6 @@
+include ActionView::Helpers::NumberHelper
+include ActionView::Helpers::TextHelper
+include CommissionsHelper
 class Registration < ApplicationRecord
   belongs_to :referral_source, :optional => true
   belongs_to :agent, :optional => true
@@ -28,11 +31,35 @@ class Registration < ApplicationRecord
     landlords.map &:fub_person
   end
   
+  def search_parameters
+    "Seeking #{size} for #{minimum_price.present? ? "between #{number_to_round_currency minimum_price} and " : ''}#{number_to_round_currency maximum_price}." if size.present? || minimum_price.present? || maximum_price.present?
+  end
+  
+  def move_moment
+    (move_by.present? && move_by_latest.present?) ? "between #{move_by.strftime("%B %-d")} and #{move_by_latest.strftime("%B %-d")}" : "#{move_by&.strftime("%B %-d")}#{move_by_latest&.strftime("%B %-d")}"
+  end
+  
+  def rationale
+    "Wants to move #{move_moment}#{reason_for_moving.present? ? " because of #{reason_for_moving}" : ''}." if reason_for_moving.present? || move_by.present? || move_by_latest.present?
+  end
+  
+  def fub_description
+    <<~DESCRIBE
+    #{search_parameters}
+    #{rationale}
+    Looking on behalf of #{pluralize occupants, 'occupant'}#{pets.present? ? ", #{pets}" : ''}.
+    DESCRIBE
+  end
+  
   def follow_up!
     fub_people.each do |person|
       begin
+        person.source = 'in-person registration'
+        # person.collaborators = [{:id => 2, :name => 'Uriah Coldtown', :assigned => true}] #agent&.fub_user&.id}]
         event = FubClient::Event.new :type => 'Registration'
         event.person = person
+        event.message = fub_description
+        event.source = 'in-person registration'
         event.save
       rescue NoMethodError => error
         Rails.logger.debug error.inspect

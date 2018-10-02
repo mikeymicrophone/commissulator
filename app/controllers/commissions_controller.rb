@@ -3,10 +3,13 @@ class CommissionsController < ApplicationController
   # before_action :set_commission, only: [:show, :edit, :update, :submit, :follow_up, :destroy]
 
   def index
-    @commissions = if params[:filtered_attribute]
-      Commission.where params[:filtered_attribute] => params[:filter_value]
-    else
+    @commissions = case params[:filtered_attribute]
+    when 'client_id'
+      Client.find(params[:filter_value]).commissions
+    when nil
       Commission.visible_to current_avatar
+    else
+      Commission.where params[:filtered_attribute] => params[:filter_value]
     end
     @commissions = case params[:sort]
     when 'updated_at'

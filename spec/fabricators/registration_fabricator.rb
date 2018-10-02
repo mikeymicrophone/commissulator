@@ -11,14 +11,14 @@ Fabricator :registration do
 end
 
 def pet_text
-  text = ''
+  animals = []
   [1, 1, 1, 2, 2, 3].sample.times do
     species = die_roll(2) ? :dog : :cat
     breed = (species == :dog) ? Faker::Dog.breed : Faker::Cat.breed
     weight = (species == :dog) ? (5..130).to_a.sample : (4..28).to_a.sample
-    text += "#{weight} lb #{breed} #{species} "
+    animals.append "#{weight} lb #{breed} #{species}"
   end
-  text.chomp
+  text.to_sentence
 end
 
 Fabricator :complete_registration, :from => :registration do

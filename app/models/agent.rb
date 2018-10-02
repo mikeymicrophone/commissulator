@@ -26,4 +26,8 @@ class Agent < ApplicationRecord
   def distinct_payable_name
     "#{payable_first_name} #{payable_last_name}"
   end
+  
+  def fub_user
+    FubClient::User.find follow_up_boss_id
+  end
 end

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Clients</th>
       <th>Employments</th>
       <th>Apartments</th>
@@ -26,6 +27,9 @@
     <% @registrations.each do |registration| %>
       <tr>
         <td>
+          <%= mark_up registration.fub_description %>
+        </td>
+        <td>
           <%= registration.clients.map(&:name).to_sentence %>
           <%= link_to_associated registration, :clients %>
         </td>
@@ -35,7 +39,7 @@
         <td><%= number_to_round_currency registration.minimum_price %></td>
         <td><%= number_to_round_currency registration.maximum_price %></td>
         <td><%= registration.size %></td>
-        <td><%= registration.move_by %></td>
+        <td><%= registration.move_by&.strftime "%b %-d" %><%= '-' if registration.move_by.present? && registration.move_by_latest.present? %><%= registration.move_by_latest&.strftime "%b %-d" %></td>
         <td><%= registration.reason_for_moving %></td>
         <td><%= registration.occupants %></td>
         <td><%= registration.pets %></td>
