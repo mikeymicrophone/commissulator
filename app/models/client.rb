@@ -28,6 +28,7 @@ class Client < ApplicationRecord
     person.emails = emails.map { |email| {:value => email.address} } if emails.any?
     person.phones = phones.map { |phone| {:value => phone.number, :type => phone.variety} } if phones.any?
     begin
+      person.source = 'Commissulator'
       person.save
     rescue NoMethodError => error
       Rails.logger.debug error.inspect
