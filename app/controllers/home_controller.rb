@@ -48,7 +48,9 @@ class HomeController < ApplicationController
       @second_apartment = Apartment.create second_apartment_params.merge(:registration => @registration)
     end
     
-    @registration.reload.follow_up!
+    @registration.follow_up!
+    @registration.fully_annotate_fub!
+    
     redirect_to :action => :thanks, :registration_id => @registration.id
   end
   

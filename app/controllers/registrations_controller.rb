@@ -77,6 +77,7 @@ class RegistrationsController < ApplicationController
   def fabricate
     @registration = Fabricate :complete_registration
     @registration.follow_up!
+    @registration.fully_annotate_fub!
     redirect_to @registration
   end
 

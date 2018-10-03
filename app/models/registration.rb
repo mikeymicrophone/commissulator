@@ -43,12 +43,32 @@ class Registration < ApplicationRecord
     "Wants to move #{move_moment}#{reason_for_moving.present? ? " because of #{reason_for_moving}" : ''}." if reason_for_moving.present? || move_by.present? || move_by_latest.present?
   end
   
+  def funding_sources
+    "Funding sources: #{registrants.map(&:other_fund_sources).select(&:present?).to_sentence}" if registrants.map(&:other_fund_sources).any?(&:present?)
+  end
+  
   def fub_description
     <<~DESCRIBE
     #{search_parameters}
     #{rationale}
     Looking on behalf of #{pluralize occupants, 'occupant'}#{pets.present? ? ", #{pets}" : ''}.
+    #{funding_sources}
     DESCRIBE
+  end
+  
+  def annotate_fub
+    fub_people.each do |person|
+      note = FubClient::Note.new
+      note.subject = 'Registration parameters'
+      note.body = fub_description
+      note.isHtml = true
+      note.personId = person.id
+      begin
+        note.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
+    end
   end
   
   def follow_up!
@@ -58,8 +78,7 @@ class Registration < ApplicationRecord
         # person.collaborators = [{:id => 2, :name => 'Uriah Coldtown', :assigned => true}] #agent&.fub_user&.id}]
         event = FubClient::Event.new :type => 'Registration'
         event.person = person
-        event.message = fub_description
-        event.source = 'in-person registration'
+        event.source = 'Commissulator'
         event.save
       rescue NoMethodError => error
         Rails.logger.debug error.inspect
@@ -67,5 +86,11 @@ class Registration < ApplicationRecord
     end
     fub_employers
     fub_landlords
+  end
+  
+  def fully_annotate_fub!
+    annotate_fub
+    employments.each &:annotate_fub
+    leases.each &:annotate_fub
   end
 end

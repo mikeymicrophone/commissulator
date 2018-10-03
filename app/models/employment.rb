@@ -27,4 +27,35 @@ class Employment < ApplicationRecord
     info += " since #{start_date.to_s}" if start_date.present?
     info
   end
+  
+  def fub_description
+    description = "#{client.name} is "
+    description += "employed at #{employer.name} " unless employer == Employer.unspecified
+    description += "making #{number_to_round_currency income} annually " if income.present?
+    description += "since #{start_date.strftime "%B %Y"}" if start_date.present?
+    description.chomp + '.'
+  end
+  
+  def annotate_fub
+    employee_note = FubClient::Note.new
+    employee_note.subject = "Employment parameters"
+    employee_note.body = fub_description
+    employee_note.personId = client.follow_up_boss_id
+    employee_note.isHtml = true
+    begin
+      employee_note.save
+    rescue NoMethodError => error
+      Rails.logger.debug error.inspect
+    end
+    employer_note = FubClient::Note.new
+    employer_note.subject = "Employment parameters"
+    employer_note.body = fub_description
+    employer_note.personId = employer.follow_up_boss_id
+    employer_note.isHtml = true
+    begin
+      employer_note.save
+    rescue NoMethodError => error
+      Rails.logger.debug error.inspect
+    end
+  end
 end
