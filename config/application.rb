@@ -18,5 +18,6 @@ module Commissulator
     config.time_zone = 'Eastern Time (US & Canada)'
     
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('app', 'assets', 'pdfs')
   end
 end

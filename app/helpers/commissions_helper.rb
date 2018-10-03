@@ -45,7 +45,7 @@ module CommissionsHelper
     link_to %Q{Fabricate #{fabricator}}, fabricate_commissions_path(opts.merge :fabricator => fabricator), :method => :post, :remote => true unless Rails.env.production?
   end
   
-  def pad information, width = 15
+  def padded_display information, width = 15
     length = information.to_s.length
     padding = width - length / 2
     padding > 0 ? "#{Prawn::Text::NBSP * padding}#{information}#{Prawn::Text::NBSP * padding}" : information

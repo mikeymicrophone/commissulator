@@ -28,7 +28,28 @@ class RegistrationsController < ApplicationController
   end
   
   def card
+    reg_card_template = File.readlines(Rails.root.join('app', 'views', 'registrations', 'card.pdf.prawn'))[1..-2].join
+    pdf_builder = PrawnRails::Document.new(:page_size => 'A4', :page_layout => :portrait)
+    registration_id = params[:id]
+    view_context_holder = view_context
+    pdf_builder.instance_eval do
+      @registration = Registration.find registration_id
+      @registration_introduction = view_context_holder.t('hello')[:registration_card]
+      eval reg_card_template
+    end
+
+    front_page_filename = Rails.root.join('tmp', 'storage', "registration_#{params[:id]}.pdf")
+    back_page_filename = Rails.root.join('app', 'assets', 'pdfs', 'registration_card-back_page.pdf')
+    File.open(front_page_filename, 'wb') do |f|
+      f.write pdf_builder.render
+    end
+
+    full_reg_card = CombinePDF.load(front_page_filename) << CombinePDF.load(back_page_filename)
     
+    full_reg_card_filename = Rails.root.join('tmp', 'storage', "joined_registration_#{params[:id]}.pdf")
+    full_reg_card.save full_reg_card_filename
+    
+    send_file full_reg_card_filename, :disposition => :inline, :type => 'application/pdf', :filename => "Registration #{params[:id]}.pdf"
   end
 
   def new

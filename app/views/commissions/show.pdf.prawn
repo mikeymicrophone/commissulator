@@ -4,10 +4,10 @@ prawn_document do |pdf|
   pdf.move_down 50
   pdf.default_leading 7
   pdf.font "Helvetica", :style => :bold, :size => 8
-  pdf.text "Branch Name   <u>#{pad @commission.branch_name}</u>   Request Date   <u>#{pad @commission.request_date.strftime("%-m/%-d/%Y"), 22}</u>   Intranet Deal Number <u>#{pad ''}</u>", :inline_format => true
-  pdf.text "Agent Name   <u>#{pad @commission.agent_name, 30}</u>     Agent Split %    <u>#{pad rounded(@sensitive ? nil : @commission.agent_split_percentage), 7}</u>   Copy of Lease   <u>#{pad @commission.boolean_display :copy_of_lease}</u>", :inline_format => true
-  pdf.text "Property Address   <u>#{pad @commission.property_address, 36}</u>   Apt #   <u>#{pad @commission.apartment_number, 7}</u>   Zip Code   <u>#{pad @commission.zip_code, 8}</u>", :inline_format => true
-  pdf.text "Bedrooms   <u>#{pad rounded(@commission.bedrooms), 8}</u>   SQ Footage   <u>#{pad @commission.square_footage}</u>   Property Type   <u>#{pad @commission.property_type}</u>   New Development   <u>#{pad @commission.boolean_display(@commission.new_development), 3}</u>", :inline_format => true
+  pdf.text "Branch Name   <u>#{padded_display @commission.branch_name}</u>   Request Date   <u>#{padded_display @commission.request_date.strftime("%-m/%-d/%Y"), 22}</u>   Intranet Deal Number <u>#{padded_display ''}</u>", :inline_format => true
+  pdf.text "Agent Name   <u>#{padded_display @commission.agent_name, 30}</u>     Agent Split %    <u>#{padded_display rounded(@sensitive ? nil : @commission.agent_split_percentage), 7}</u>   Copy of Lease   <u>#{padded_display @commission.boolean_display :copy_of_lease}</u>", :inline_format => true
+  pdf.text "Property Address   <u>#{padded_display @commission.property_address, 36}</u>   Apt #   <u>#{padded_display @commission.apartment_number, 7}</u>   Zip Code   <u>#{padded_display @commission.zip_code, 8}</u>", :inline_format => true
+  pdf.text "Bedrooms   <u>#{padded_display rounded(@commission.bedrooms), 8}</u>   SQ Footage   <u>#{padded_display @commission.square_footage}</u>   Property Type   <u>#{padded_display @commission.property_type}</u>   New Development   <u>#{padded_display @commission.boolean_display(@commission.new_development), 3}</u>", :inline_format => true
   
   pdf.draw_text "Tenant Name(s)", :at => [0, 615]
   pdf.draw_text "Tenant Email(s)", :at => [170, 615]
@@ -30,10 +30,10 @@ prawn_document do |pdf|
   pdf.draw_text @commission.landlord_email, :at => [235, y_position], :size => 7
   pdf.draw_text @commission.landlord_phone_number, :at => [428, y_position]
   
-  pdf.text "Lease Sign Date   <u>#{pad @commission.lease_sign_date.strftime("%-m/%-d/%Y"), 8}</u>   Lease Start Date   <u>#{pad @commission.lease_start_date.strftime("%-m/%-d/%Y"), 8}</u>   Lease Term Date   <u>#{pad @commission.lease_term, 8}</u>   Approval Date   <u>#{pad @commission.approval_date.strftime("%-m/%-d/%Y"), 8}</u>", :inline_format => true
-  pdf.text "Listed Monthly Rent   <u>#{pad number_to_round_currency @commission.listed_monthly_rent}</u>   Leased Monthly Rent   <u>#{pad number_to_round_currency @commission.leased_monthly_rent}</u>   Annualized Rent   <u>#{pad number_to_round_currency @commission.annualized_rent}</u>", :inline_format => true
-  pdf.text "Commission Fee %   <u>#{pad rounded(@commission.commission_fee_percentage), 4}</u>   Total Commission   <u>#{pad number_to_round_currency(@commission.total_commission), 6}</u>   Citi Commission   <u>#{pad number_to_round_currency(@commission.citi_commission), 6}</u>   Co-Broke Commission   <u>#{pad number_to_round_currency(@commission.co_broke_commission), 6}</u>", :inline_format => true
-  pdf.text "OP Commission   <u>#{pad number_to_round_currency(@commission.owner_pay_commission), 8}</u>   Listing Side Commission   <u>#{pad number_to_round_currency(@commission.listing_side_commission), 14}</u>   Tenant Side Commission   <u>#{pad number_to_round_currency(@commission.tenant_side_commission), 14}</u>", :inline_format => true
+  pdf.text "Lease Sign Date   <u>#{padded_display @commission.lease_sign_date.strftime("%-m/%-d/%Y"), 8}</u>   Lease Start Date   <u>#{padded_display @commission.lease_start_date.strftime("%-m/%-d/%Y"), 8}</u>   Lease Term Date   <u>#{padded_display @commission.lease_term, 8}</u>   Approval Date   <u>#{padded_display @commission.approval_date.strftime("%-m/%-d/%Y"), 8}</u>", :inline_format => true
+  pdf.text "Listed Monthly Rent   <u>#{padded_display number_to_round_currency @commission.listed_monthly_rent}</u>   Leased Monthly Rent   <u>#{padded_display number_to_round_currency @commission.leased_monthly_rent}</u>   Annualized Rent   <u>#{padded_display number_to_round_currency @commission.annualized_rent}</u>", :inline_format => true
+  pdf.text "Commission Fee %   <u>#{padded_display rounded(@commission.commission_fee_percentage), 4}</u>   Total Commission   <u>#{padded_display number_to_round_currency(@commission.total_commission), 6}</u>   Citi Commission   <u>#{padded_display number_to_round_currency(@commission.citi_commission), 6}</u>   Co-Broke Commission   <u>#{padded_display number_to_round_currency(@commission.co_broke_commission), 6}</u>", :inline_format => true
+  pdf.text "OP Commission   <u>#{padded_display number_to_round_currency(@commission.owner_pay_commission), 8}</u>   Listing Side Commission   <u>#{padded_display number_to_round_currency(@commission.listing_side_commission), 14}</u>   Tenant Side Commission   <u>#{padded_display number_to_round_currency(@commission.tenant_side_commission), 14}</u>", :inline_format => true
   
   pdf.text "Reason for fee reduction:", :size => 12
   
@@ -43,7 +43,7 @@ prawn_document do |pdf|
   end
   
   pdf.move_down 20
-  pdf.text "Landlord Source:   <u>#{pad @commission.landlord_source}</u>     Tenant Source:   <u>#{pad @commission.tenant_source}</u>", :inline_format => true, :size => 12
+  pdf.text "Landlord Source:   <u>#{padded_display @commission.landlord_source}</u>     Tenant Source:   <u>#{padded_display @commission.tenant_source}</u>", :inline_format => true, :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 200, 210, 230, 300, 390, 400, 425, 500]
@@ -102,7 +102,7 @@ prawn_document do |pdf|
     pdf.draw_text @commission.corcoran_agent_office, :at => [column_positions[9] + indent, row_positions[1] + clearance] # if @commission.exclusive_agency
   end
   
-  pdf.text "Referral Payment:   <u>#{pad rounded(@commission.referral_payment), 17} </u>", :inline_format => true, :size => 12
+  pdf.text "Referral Payment:   <u>#{padded_display rounded(@commission.referral_payment), 17} </u>", :inline_format => true, :size => 12
   
   pdf.bounding_box [0, pdf.cursor], :width => 510, :height => 100 do
     column_positions = [0, 15, 100, 240, 255, 290, 370, 380, 450, 500]
