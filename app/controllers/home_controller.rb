@@ -33,6 +33,7 @@ class HomeController < ApplicationController
         @employer = Employer.unspecified unless @employer.valid?
         @industry = Industry.find_or_create_by industry_params(roommate_number)
         @niche = Niche.find_or_create_by :employer => @employer, :industry => @industry
+        params["employment_#{roommate_number}"][:income] = employment_params(roommate_number)[:income].delete(',')
         @employment = Employment.create employment_params(roommate_number).merge(:client => @client, :employer => @employer)
     
         @office_phone = Phone.create office_phone_params(roommate_number).merge(:client => @client, :employer => @employer, :variety => 'office')
