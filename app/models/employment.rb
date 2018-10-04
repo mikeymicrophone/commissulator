@@ -31,6 +31,7 @@ class Employment < ApplicationRecord
   def fub_description
     description = "#{client.name} is "
     description += "employed at #{employer.name} " unless employer == Employer.unspecified
+    description += "as a #{position} " if position.present?
     description += "making #{number_to_round_currency income} annually " if income.present?
     description += "since #{start_date.strftime "%B %Y"}" if start_date.present?
     description.chomp + '.'
