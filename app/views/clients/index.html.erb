@@ -28,7 +28,7 @@
         <td><%= link_to_associated client, :emails %></td>
         <td><%= link_to_associated client, :phones %></td>
         <td><%= link_to_associated client, :social_accounts %></td>
-        <td><%= link_to 'FUB', client.fub_url if client.fub_url%></td>
+        <td><%= link_to 'FUB', client.fub_url, :target => '_blank' if client.fub_url%></td>
         <td><%= link_to 'Show', client %></td>
         <td><%= link_to fa_icon(:highlighter), edit_client_path(client), :title => 'Edit' %></td>
         <td><%= link_to fa_icon(:backspace), client, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
