@@ -16,7 +16,7 @@ class Registration < ApplicationRecord
     "Reg #{id} on #{created_at.strftime "%-m/%-d"}"
   end
   
-  APARTMENT_SIZES = ['Alcove Studio', 'Junior-1', 'Studio', 'One Bedroom', 'Junior-4', 'Convertible-2', 'Two Bedroom', 'Convertible-3', 'Classic-6', 'Three Bedroom', 'Classic-7', 'Convertible-4', 'Four Bedroom', 'Five Bedroom+']
+  APARTMENT_SIZES = ['Studio', 'One Bedroom', 'Two Bedroom', 'Three Bedroom', 'Four Bedroom']
   
   def fub_people
     clients.map &:fub_person
