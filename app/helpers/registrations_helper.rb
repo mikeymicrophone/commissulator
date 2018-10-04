@@ -1,6 +1,11 @@
 module RegistrationsHelper
   def price_range_options
-    options_for_select Registration::PRICES
+    prices = Registration.rent_budget_prices
+    prices.map! { |price| [price.to_i.to_s, price.to_i] }
+    max_level = prices.last
+    max_level = [max_level.first + '+', max_level.last]
+    prices[-1] = max_level
+    options_for_select prices
   end
   
   def size_options

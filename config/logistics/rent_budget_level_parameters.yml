@@ -1,0 +1,12 @@
+budgets:
+  start_price: '1800'
+  end_price: '8000'
+  step_groups:
+    fine_grained:
+      start_price: '1800'
+      end_price: '4999'
+      step_size: '100'
+    coarse_grained:
+      start_price: '5000'
+      end_price: '8000'
+      step_size: '250'

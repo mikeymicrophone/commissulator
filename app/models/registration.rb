@@ -16,7 +16,6 @@ class Registration < ApplicationRecord
     "Reg #{id} on #{created_at.strftime "%-m/%-d"}"
   end
   
-  PRICES = (2..30).to_a.map { |num| num * 500 }.append(1250, 1750, 2250).sort
   APARTMENT_SIZES = ['Alcove Studio', 'Junior-1', 'Studio', 'One Bedroom', 'Junior-4', 'Convertible-2', 'Two Bedroom', 'Convertible-3', 'Classic-6', 'Three Bedroom', 'Classic-7', 'Convertible-4', 'Four Bedroom', 'Five Bedroom+']
   
   def fub_people
@@ -92,5 +91,31 @@ class Registration < ApplicationRecord
     annotate_fub
     employments.each &:annotate_fub
     leases.each &:annotate_fub
+  end
+  
+  def Registration.rent_budget_prices
+    pricing_parameters = HashWithIndifferentAccess.new YAML.load File.open(Rails.root.join('config', 'logistics', 'rent_budget_level_parameters.yml'))
+    prices = []
+    price_ranges = pricing_parameters[:budgets][:step_groups]
+    price_ranges.each do |price_range, parameters|
+      parameters.each do |label, value|
+        parameters[label] = value.to_d
+      end
+    end
+    
+    current_price = pricing_parameters[:budgets][:start_price].to_d
+    while current_price <= pricing_parameters[:budgets][:end_price].to_d
+      prices << current_price
+      stepped = false
+      
+      price_ranges.each do |label, price_range|
+        if !stepped && current_price >= price_range[:start_price] && current_price <= price_range[:end_price]
+          current_price += price_range[:step_size]
+          stepped = true
+        end
+      end
+    end
+    
+    prices
   end
 end
