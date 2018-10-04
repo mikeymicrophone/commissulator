@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
   
   def registrant_add
-    @roommates_to_add = params[:number_of_roommates].to_i - 2
+    @roommates_to_add = params[:number_of_roommates].to_i - params[:number_of_roommates_shown].to_i
   end
   
   def submit

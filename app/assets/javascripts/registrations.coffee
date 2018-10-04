@@ -12,6 +12,22 @@ $(document).on 'turbolinks:load', ->
       url: '/registrant_add'
       data: 
         number_of_roommates: $('#registration_occupants').val()
+        number_of_roommates_shown: $('.registrant').length
+      dataType: 'script'
+  
+  $('#registration_interface').on 'change', '#registration_size', ->
+    occupation = 
+      'Studio': 1
+      'One Bedroom': 1
+      'Two Bedroom': 2
+      'Three Bedroom': 3
+      'Four Bedroom': 4
+    
+    $.ajax
+      url: '/registrant_add'
+      data: 
+        number_of_roommates: occupation[$('#registration_size').val()]
+        number_of_roommates_shown: $('.registrant').length
       dataType: 'script'
 
   $('#registration_interface').on 'change', '#registration_maximum_price', ->

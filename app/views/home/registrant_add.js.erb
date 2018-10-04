@@ -1,3 +1,3 @@
 <% @roommates_to_add.times do |roommate_number| %>
-  $('<%=j render :partial => 'registrant', :locals => {:roommate_number => roommate_number + 3} %>').appendTo($('#roommate_zone')).hide().slideDown(2680);
+  $('<%=j render :partial => 'registrant', :locals => {:roommate_number => roommate_number + params[:number_of_roommates_shown].to_i + 1} %>').appendTo($('#roommate_zone')).hide().slideDown(2680);
 <% end %>
