@@ -1,5 +1,4 @@
 prawn_document do
-  stroke_axis
   font_families.update 'Oswald' => {:normal => "#{Rails.root}/app/assets/fonts/Oswald-Medium.ttf"}
   font 'Times-Roman', :size => 10
   gap = 5
@@ -70,7 +69,6 @@ prawn_document do
     draw_text @registration.pets, :at => [355, 10]
     
     stroke
-    stroke_axis
   end
   
   dash 1
@@ -88,7 +86,6 @@ prawn_document do
     text @registration_short_term
     move_down 8
     text @registration_short_term_fees, :indent_paragraphs => 10
-    stroke_bounds
   end
   
   undash

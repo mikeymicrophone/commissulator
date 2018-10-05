@@ -1,6 +1,6 @@
 Fabricator :registration do
-  minimum_price { Registration::PRICES.sample }
-  maximum_price { |attrs| Registration::PRICES.select { |price| price > attrs[:minimum_price]}.sample }
+  minimum_price { Registration.rent_budget_prices.sample }
+  maximum_price { |attrs| Registration::rent_budget_prices.select { |price| price > attrs[:minimum_price]}.sample }
   size { Registration::APARTMENT_SIZES.sample }
   move_by { (1..100).to_a.sample.days.from_now }
   reason_for_moving { ['space', 'location', 'renovation', 'roommates'].sample }
