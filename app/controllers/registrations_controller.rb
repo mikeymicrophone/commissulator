@@ -46,11 +46,12 @@ class RegistrationsController < ApplicationController
 
     front_page_filename = Rails.root.join('tmp', "registration_#{params[:id]}.pdf")
     back_page_filename = Rails.root.join('app', 'assets', 'pdfs', 'registration_card-back_page.pdf')
+    disclosure_filename = Rails.root.join('app', 'assets', 'pdfs', 'LandlordTenant_Disclosure.pdf')
     File.open(front_page_filename, 'wb') do |f|
       f.write pdf_builder.render
     end
 
-    full_reg_card = CombinePDF.load(front_page_filename) << CombinePDF.load(back_page_filename)
+    full_reg_card = CombinePDF.load(front_page_filename) << CombinePDF.load(back_page_filename) << CombinePDF.load(disclosure_filename)
 
     full_reg_card_filename = Rails.root.join('tmp', "joined_registration_#{params[:id]}.pdf")
     full_reg_card.save full_reg_card_filename
