@@ -33,7 +33,7 @@ prawn_document do
   stroke { line [0, 660], [520, 660] }
   undash
   
-  @view_context_holder.client_box(self, [0, 655], 1)
+  @view_context_holder.client_box(self, [0, 655], 1, @registration.clients.first)
   @view_context_holder.client_box(self, [272, 655], 2)
   
   # @registration.clients.each_with_index do |client, index|
