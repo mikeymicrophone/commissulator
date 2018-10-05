@@ -74,20 +74,6 @@ prawn_document do
   dash 1
   stroke { line [0, 395], [520, 395]}
   
-  bounding_box [0, 385], :width => 520, :height => 140 do
-    font 'Times-Roman', :size => 8
-  
-    text @registration_implication
-    move_down 8
-    text @registration_rental_fee
-    move_down 8
-    text @registration_condo_fee
-    move_down 8
-    text @registration_short_term
-    move_down 8
-    text @registration_short_term_fees, :indent_paragraphs => 10
-  end
-  
   undash
   stroke { line [0, 35], [520, 35] }
   font 'Oswald' do

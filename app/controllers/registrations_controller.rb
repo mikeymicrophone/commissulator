@@ -35,17 +35,12 @@ class RegistrationsController < ApplicationController
     pdf_builder.instance_eval do
       @registration = Registration.find registration_id
       @registration_introduction = view_context_holder.t('hello')[:registration_card]
-      @registration_implication = view_context_holder.t('legal')[:registration_card][:implication]
-      @registration_rental_fee = view_context_holder.t('legal')[:registration_card][:rental_fee]
-      @registration_condo_fee = view_context_holder.t('legal')[:registration_card][:condo_fee]
-      @registration_short_term = view_context_holder.t('legal')[:registration_card][:short_term]
-      @registration_short_term_fees = view_context_holder.t('legal')[:registration_card][:short_term_fees]
       @view_context_holder = view_context_holder
       eval reg_card_template
     end
 
     front_page_filename = Rails.root.join('tmp', "registration_#{params[:id]}.pdf")
-    back_page_filename = Rails.root.join('app', 'assets', 'pdfs', 'registration_card-back_page.pdf')
+    back_page_filename = Rails.root.join('app', 'assets', 'pdfs', 'registration_agreement.pdf')
     disclosure_filename = Rails.root.join('app', 'assets', 'pdfs', 'LandlordTenant_Disclosure.pdf')
     File.open(front_page_filename, 'wb') do |f|
       f.write pdf_builder.render
