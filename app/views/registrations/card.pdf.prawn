@@ -1,5 +1,5 @@
 prawn_document do
-  stroke_axis
+  # stroke_axis
   font_families.update 'Oswald' => {:normal => "#{Rails.root}/app/assets/fonts/Oswald-Medium.ttf"}
   font 'Times-Roman', :size => 10
   gap = 5
@@ -25,45 +25,49 @@ prawn_document do
     stroke
   end
   
-  bounding_box [1, 690], :width => 525, :height => 25 do
+  bounding_box [0, 685], :width => 525, :height => 25 do
     text @registration_introduction
   end
   
   dash 1
-  stroke { line [0, cursor], [520, cursor]}
+  stroke { line [0, 660], [520, 660] }
   undash
   
-  @registration.clients.each_with_index do |client, index|
-    height = 653 - (((index) / 2)) * 260
-    positioning = index.odd? ? [255, height] : [0, height]
-    bounding_box positioning, :width => 250 do
-      bounding_box [gap, cursor - gap], :width => 240 do
-        font 'Oswald', :size => 16 do
-          text "CLIENT #{index + 1}"
-        end
-        text "<u>#{padded_display client.name}</u>", :inline_format => true
-        text "<u>#{padded_display client.leases.first&.address}</u>", :inline_format => true if client.leases.present?
-        client.phones.each do |phone|
-          text "<u>#{padded_display phone.number} (#{phone.variety})</u>", :inline_format => true
-        end
-        client.emails.last do |email|
-          text "<u>#{email.address}</u>", :inline_format => true
-        end
-        client.employers.last do |employer|
-          text "Employer: <u>#{padded_display employer.name}</u>", :inline_format => true
-          text "Address: <u>#{padded_display employer.address}</u>", :inline_format => true
-          text "Position: <u>#{padded_display employer.employment_of(client)&.position}</u>", :inline_format => true
-          text "Annual Income: <u>#{padded_display number_to_round_currency employer.employment_of(client)&.income}</u>", :inline_format => true
-        end
-        client.leases.last do |lease|
-          text "Current Landlord: <u>#{padded_display lease.landlord&.name}</u>", :inline_format => true
-        end
-      end
-    end
-  end
+  @view_context_holder.client_box(self, [0, 655], 1)
+  @view_context_holder.client_box(self, [272, 655], 2)
+  
+  
+  # @registration.clients.each_with_index do |client, index|
+  #   height = 653 - (((index) / 2)) * 260
+  #   positioning = index.odd? ? [255, height] : [0, height]
+  #   bounding_box positioning, :width => 250 do
+  #     bounding_box [gap, cursor - gap], :width => 240 do
+  #       font 'Oswald', :size => 16 do
+  #         text "CLIENT #{index + 1}"
+  #       end
+  #       text "<u>#{padded_display client.name}</u>", :inline_format => true
+  #       text "<u>#{padded_display client.leases.first&.address}</u>", :inline_format => true if client.leases.present?
+  #       client.phones.each do |phone|
+  #         text "<u>#{padded_display phone.number} (#{phone.variety})</u>", :inline_format => true
+  #       end
+  #       client.emails.last do |email|
+  #         text "<u>#{email.address}</u>", :inline_format => true
+  #       end
+  #       client.employers.last do |employer|
+  #         text "Employer: <u>#{padded_display employer.name}</u>", :inline_format => true
+  #         text "Address: <u>#{padded_display employer.address}</u>", :inline_format => true
+  #         text "Position: <u>#{padded_display employer.employment_of(client)&.position}</u>", :inline_format => true
+  #         text "Annual Income: <u>#{padded_display number_to_round_currency employer.employment_of(client)&.income}</u>", :inline_format => true
+  #       end
+  #       client.leases.last do |lease|
+  #         text "Current Landlord: <u>#{padded_display lease.landlord&.name}</u>", :inline_format => true
+  #       end
+  #     end
+  #   end
+  # end
   
   dash 1
-  stroke { line [253, 653], [253, cursor + 4] }
+  stroke { line [259, 653], [259, cursor + 4] }
   stroke { line [0, cursor], [520, cursor]}
   undash
   

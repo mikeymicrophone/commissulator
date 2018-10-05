@@ -40,6 +40,7 @@ class RegistrationsController < ApplicationController
       @registration_condo_fee = view_context_holder.t('legal')[:registration_card][:condo_fee]
       @registration_short_term = view_context_holder.t('legal')[:registration_card][:short_term]
       @registration_short_term_fees = view_context_holder.t('legal')[:registration_card][:short_term_fees]
+      @view_context_holder = view_context_holder
       eval reg_card_template
     end
 
