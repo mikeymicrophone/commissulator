@@ -1,5 +1,5 @@
 prawn_document do
-  # stroke_axis
+  stroke_axis
   font_families.update 'Oswald' => {:normal => "#{Rails.root}/app/assets/fonts/Oswald-Medium.ttf"}
   font 'Times-Roman', :size => 10
   gap = 5
@@ -36,7 +36,6 @@ prawn_document do
   @view_context_holder.client_box(self, [0, 655], 1)
   @view_context_holder.client_box(self, [272, 655], 2)
   
-  
   # @registration.clients.each_with_index do |client, index|
   #   height = 653 - (((index) / 2)) * 260
   #   positioning = index.odd? ? [255, height] : [0, height]
@@ -67,19 +66,39 @@ prawn_document do
   # end
   
   dash 1
-  stroke { line [259, 653], [259, cursor + 4] }
-  stroke { line [0, cursor], [520, cursor]}
+  stroke { line [259, 653], [259, 454] }
+  stroke { line [0, 450], [520, 450]}
   undash
   
-  bounding_box [0, cursor], :width => 510 do
-    bounding_box [gap, cursor - gap], :width => 500 do
-      text "Move date: <u>#{padded_display @registration.move_by&.strftime("%B %-d")}</u>    At the latest: <u>#{@registration.move_by_latest&.strftime("%B %-d")}</u>    Number of people: <u>#{@registration.occupants}</u>", :inline_format => true
-      text "Apartments seen:"
-      @registration.apartments.each do |apartment|
-        text "<u>#{apartment.name}</u>    #{apartment.comment}", :inline_format => true
-      end
-      text "How did you hear about us? <u>#{padded_display @registration.referral_source&.name}</u>    Do you have any pets? <u>#{padded_display @registration.pets}</u>", :inline_format => true
-    end
+  bounding_box [0, 444], :width => 510, :height => 50 do
+    draw_text 'Move-in date:', :at => [0, 40]
+    line [60, 38], [155, 38]
+    
+    draw_text 'Lease expiration date:', :at => [160, 40]
+    line [250, 38], [355, 38]
+    
+    # draw_text @registration.move_by&.strftime("%B %-d")
+    draw_text 'Number of people:', :at => [360, 40]
+    line [440, 38], [520, 38]
+    
+    # draw_text @registration.occupants
+    draw_text 'Apartments seen:', :at => [0, 25]
+    line [73, 23], [520, 23]
+    
+    apartments_seen = @registration.apartments.map do |apartment|
+      "#{apartment.name} #{apartment.comment}"
+    end.join ' '
+    # draw_text apartments_seen
+    draw_text 'How did you hear about us?', :at => [0, 10]
+    line [115, 8], [245, 8]
+    
+    # draw_text @registration.referral_source&.name
+    draw_text 'Do you have any pets?', :at => [250, 10]
+    line [345, 8], [520, 8]
+    
+    # draw_text @registration.pets
+    stroke
+    stroke_axis
   end
   
   dash 1
