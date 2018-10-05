@@ -17,4 +17,6 @@
 //= require turbolinks
 //= require font_awesome5
 //= require jquery.easy-autocomplete
+//= require spin
+//= require jquery.spin
 //= require_tree .

@@ -1,6 +1,7 @@
 class FubCollaborator
   def add_collaborator agent, client
-    browser = Watir::Browser.start 'https://login.followupboss.com/login'
+    browser = Watir::Browser.new :chrome, :headless => true
+    browser.goto 'https://login.followupboss.com/login'
     if Rails.env.production?
       browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:login_identity]
       browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:login_password]

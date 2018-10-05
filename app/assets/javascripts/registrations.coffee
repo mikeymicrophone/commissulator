@@ -7,6 +7,9 @@ $(document).on 'turbolinks:load', ->
 
   $('.datepicker_moving').datepicker();
   
+  $('#registration_interface').on 'submit', 'form', ->
+    $(this).spin()
+  
   $('#registration_interface').on 'change', '#registration_occupants', ->
     $.ajax
       url: '/registrant_add'
