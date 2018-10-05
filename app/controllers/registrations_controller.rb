@@ -35,6 +35,11 @@ class RegistrationsController < ApplicationController
     pdf_builder.instance_eval do
       @registration = Registration.find registration_id
       @registration_introduction = view_context_holder.t('hello')[:registration_card]
+      @registration_implication = view_context_holder.t('legal')[:registration_card][:implication]
+      @registration_rental_fee = view_context_holder.t('legal')[:registration_card][:rental_fee]
+      @registration_condo_fee = view_context_holder.t('legal')[:registration_card][:condo_fee]
+      @registration_short_term = view_context_holder.t('legal')[:registration_card][:short_term]
+      @registration_short_term_fees = view_context_holder.t('legal')[:registration_card][:short_term_fees]
       eval reg_card_template
     end
 
@@ -45,10 +50,10 @@ class RegistrationsController < ApplicationController
     end
 
     full_reg_card = CombinePDF.load(front_page_filename) << CombinePDF.load(back_page_filename)
-    
+
     full_reg_card_filename = Rails.root.join('tmp', "joined_registration_#{params[:id]}.pdf")
     full_reg_card.save full_reg_card_filename
-    
+
     send_file full_reg_card_filename, :disposition => :inline, :type => 'application/pdf', :filename => "Registration #{params[:id]}.pdf"
   end
 

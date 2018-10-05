@@ -1,7 +1,7 @@
 prawn_document do
-  # stroke_axis
+  stroke_axis
   font_families.update 'Oswald' => {:normal => "#{Rails.root}/app/assets/fonts/Oswald-Medium.ttf"}
-  font "Times-Roman", :size => 10
+  font 'Times-Roman', :size => 10
   default_leading 7
   gap = 5
   
@@ -10,10 +10,20 @@ prawn_document do
     draw_text "CLIENT REGISTRATION / FEE AGREEMENT", :size => 15, :at => [250, 755]
   end
   
-  bounding_box [250, 750], :width => 250 do
-    text "Date: <u>#{padded_display @registration.created_at.strftime("%-m/%-d/%Y"), 10}</u>    Agent: <u>#{padded_display @registration.agent&.name, 10}</u>", :inline_format => true
-    text "Budget: <u>#{padded_display number_to_round_currency(@registration.minimum_price), 6}-#{padded_display number_to_round_currency(@registration.maximum_price), 6}</u>", :inline_format => true
-    text "Apartment Size: <u>#{padded_display @registration.size, 10}</u>", :inline_format => true
+  bounding_box [250, 750], :width => 250, :height => 50 do
+    draw_text "Date:", :at => [5, 40]
+    line [30, 38], [135, 38]
+    draw_text @registration.created_at.strftime("%-m/%-d/%Y"), :at => [60, 40]
+    draw_text "Agent:", :at => [140, 40]
+    line [170, 38], [240, 38]
+    draw_text @registration.agent&.name, :at => [180, 40]
+    draw_text "Budget:", :at => [5, 25]
+    line [40, 23], [135, 23]
+    draw_text number_to_round_currency(@registration.maximum_price), :at => [75, 25]
+    draw_text "Apartment Size:", :at => [5, 10]
+    line [72, 8], [135, 8]
+    draw_text @registration.size, :at => [72, 10]
+    stroke
   end
   
   move_down 12
@@ -37,16 +47,16 @@ prawn_document do
         client.phones.each do |phone|
           text "<u>#{padded_display phone.number} (#{phone.variety})</u>", :inline_format => true
         end
-        client.emails.each do |email|
+        client.emails.last do |email|
           text "<u>#{email.address}</u>", :inline_format => true
         end
-        client.employers.each do |employer|
+        client.employers.last do |employer|
           text "Employer: <u>#{padded_display employer.name}</u>", :inline_format => true
           text "Address: <u>#{padded_display employer.address}</u>", :inline_format => true
           text "Position: <u>#{padded_display employer.employment_of(client)&.position}</u>", :inline_format => true
           text "Annual Income: <u>#{padded_display number_to_round_currency employer.employment_of(client)&.income}</u>", :inline_format => true
         end
-        client.leases.each do |lease|
+        client.leases.last do |lease|
           text "Current Landlord: <u>#{padded_display lease.landlord&.name}</u>", :inline_format => true
         end
       end
@@ -76,15 +86,15 @@ prawn_document do
   font "Times-Roman", :size => 8
   default_leading 1
   
-  # text t('legal')[:registration_card][:implication]
-  # move_down 8
-  # text t('legal')[:registration_card][:rental_fee]
-  # move_down 8
-  # text t('legal')[:registration_card][:condo_fee]
-  # move_down 8
-  # text t('legal')[:registration_card][:short_term]
-  # move_down 8
-  # text t('legal')[:registration_card][:short_term_fees], :indent_paragraphs => 10
+  text @registration_implication
+  move_down 8
+  text @registration_rental_fee
+  move_down 8
+  text @registration_condo_fee
+  move_down 8
+  text @registration_short_term
+  move_down 8
+  text @registration_short_term_fees, :indent_paragraphs => 10
   
   undash
   stroke { line [0, 35], [520, 35] }
