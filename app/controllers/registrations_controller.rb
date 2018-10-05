@@ -53,6 +53,25 @@ class RegistrationsController < ApplicationController
 
     full_reg_card = CombinePDF.load(front_page_filename) << CombinePDF.load(back_page_filename) << CombinePDF.load(disclosure_filename)
 
+    if @registration.clients.count > 2
+      additional_pdf_builder = PrawnRails::Document.new(:page_size => 'A4', :page_layout => :portrait)
+      additional_reg_template = File.open(Rails.root.join('app', 'views', 'registrations', 'additional_card.pdf.prawn')).read
+      registration = @registration
+      
+      additional_pdf_builder.instance_eval do
+        @view_context_holder = view_context_holder
+        @additional_clients = registration.clients[2..-1]
+        eval additional_reg_template
+      end
+      
+      additional_page_filename = Rails.root.join('tmp', "registration_addendum_#{params[:id]}.pdf")
+      File.open(additional_page_filename, 'wb') do |f|
+        f.write additional_pdf_builder.render
+      end
+      
+      full_reg_card << CombinePDF.load(additional_page_filename)
+    end
+
     full_reg_card_filename = Rails.root.join('tmp', "joined_registration_#{params[:id]}.pdf")
     full_reg_card.save full_reg_card_filename
 
