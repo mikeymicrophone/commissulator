@@ -36,35 +36,6 @@ prawn_document do
   @view_context_holder.client_box(self, [0, 655], 1, @registration.clients.first)
   @view_context_holder.client_box(self, [272, 655], 2)
   
-  # @registration.clients.each_with_index do |client, index|
-  #   height = 653 - (((index) / 2)) * 260
-  #   positioning = index.odd? ? [255, height] : [0, height]
-  #   bounding_box positioning, :width => 250 do
-  #     bounding_box [gap, cursor - gap], :width => 240 do
-  #       font 'Oswald', :size => 16 do
-  #         text "CLIENT #{index + 1}"
-  #       end
-  #       text "<u>#{padded_display client.name}</u>", :inline_format => true
-  #       text "<u>#{padded_display client.leases.first&.address}</u>", :inline_format => true if client.leases.present?
-  #       client.phones.each do |phone|
-  #         text "<u>#{padded_display phone.number} (#{phone.variety})</u>", :inline_format => true
-  #       end
-  #       client.emails.last do |email|
-  #         text "<u>#{email.address}</u>", :inline_format => true
-  #       end
-  #       client.employers.last do |employer|
-  #         text "Employer: <u>#{padded_display employer.name}</u>", :inline_format => true
-  #         text "Address: <u>#{padded_display employer.address}</u>", :inline_format => true
-  #         text "Position: <u>#{padded_display employer.employment_of(client)&.position}</u>", :inline_format => true
-  #         text "Annual Income: <u>#{padded_display number_to_round_currency employer.employment_of(client)&.income}</u>", :inline_format => true
-  #       end
-  #       client.leases.last do |lease|
-  #         text "Current Landlord: <u>#{padded_display lease.landlord&.name}</u>", :inline_format => true
-  #       end
-  #     end
-  #   end
-  # end
-  
   dash 1
   stroke { line [259, 653], [259, 454] }
   stroke { line [0, 450], [520, 450]}
@@ -73,30 +44,31 @@ prawn_document do
   bounding_box [0, 444], :width => 510, :height => 50 do
     draw_text 'Move-in date:', :at => [0, 40]
     line [60, 38], [155, 38]
+    draw_text @registration.move_by&.strftime("%B %-d"), :at => [70, 40]
     
     draw_text 'Lease expiration date:', :at => [160, 40]
     line [250, 38], [355, 38]
     
-    # draw_text @registration.move_by&.strftime("%B %-d")
     draw_text 'Number of people:', :at => [360, 40]
     line [440, 38], [520, 38]
+    draw_text @registration.occupants, :at => [450, 40]
     
-    # draw_text @registration.occupants
     draw_text 'Apartments seen:', :at => [0, 25]
     line [73, 23], [520, 23]
     
     apartments_seen = @registration.apartments.map do |apartment|
       "#{apartment.name} #{apartment.comment}"
     end.join ' '
-    # draw_text apartments_seen
+    draw_text apartments_seen, :at => [83, 25]
+    
     draw_text 'How did you hear about us?', :at => [0, 10]
     line [115, 8], [245, 8]
+    draw_text @registration.referral_source&.name, :at => [125, 10]
     
-    # draw_text @registration.referral_source&.name
     draw_text 'Do you have any pets?', :at => [250, 10]
     line [345, 8], [520, 8]
+    draw_text @registration.pets, :at => [355, 10]
     
-    # draw_text @registration.pets
     stroke
     stroke_axis
   end
