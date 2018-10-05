@@ -2,7 +2,6 @@ prawn_document do
   stroke_axis
   font_families.update 'Oswald' => {:normal => "#{Rails.root}/app/assets/fonts/Oswald-Medium.ttf"}
   font 'Times-Roman', :size => 10
-  default_leading 7
   gap = 5
   
   image "#{Rails.root}/app/assets/images/citi_habitats_logo_tagline.jpg", :width => 240
@@ -26,9 +25,9 @@ prawn_document do
     stroke
   end
   
-  move_down 12
-  text @registration_introduction, :leading => 1
-  move_down 3
+  bounding_box [1, 690], :width => 525, :height => 25 do
+    text @registration_introduction
+  end
   
   dash 1
   stroke { line [0, cursor], [520, cursor]}
