@@ -2,8 +2,7 @@
   <%= form_tag :url => submit_registration_path do %>
     <div class="reg_form_quadrant">
       <div class="bordered inline">
-        <%= label :registration, :minimum_price, 'Price Range:' %><br>
-        <%= select :registration, :minimum_price, price_range_options, :include_blank => 'Minimum' %>
+        <%= label :registration, :minimum_price, 'Budget:' %><br>
         <%= select :registration, :maximum_price, price_range_options, :include_blank => 'Maximum' %>
       </div>
       <div class="bordered inline">
