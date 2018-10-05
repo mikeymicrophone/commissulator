@@ -93,6 +93,13 @@ class Registration < ApplicationRecord
     leases.each &:annotate_fub
   end
   
+  def fub_add_collaborator
+    driver = FubCollaborator.new
+    clients.each do |client|
+      driver.add_collaborator agent, client
+    end
+  end
+  
   def Registration.rent_budget_prices
     pricing_parameters = HashWithIndifferentAccess.new YAML.load File.open(Rails.root.join('config', 'logistics', 'rent_budget_level_parameters.yml'))
     prices = []
