@@ -102,21 +102,22 @@ prawn_document do
   end
   
   dash 1
-  stroke { line [0, cursor], [520, cursor]}
+  stroke { line [0, 395], [520, 395]}
   
-  move_down 10
-  font "Times-Roman", :size => 8
-  default_leading 1
+  bounding_box [0, 385], :width => 520, :height => 140 do
+    font 'Times-Roman', :size => 8
   
-  text @registration_implication
-  move_down 8
-  text @registration_rental_fee
-  move_down 8
-  text @registration_condo_fee
-  move_down 8
-  text @registration_short_term
-  move_down 8
-  text @registration_short_term_fees, :indent_paragraphs => 10
+    text @registration_implication
+    move_down 8
+    text @registration_rental_fee
+    move_down 8
+    text @registration_condo_fee
+    move_down 8
+    text @registration_short_term
+    move_down 8
+    text @registration_short_term_fees, :indent_paragraphs => 10
+    stroke_bounds
+  end
   
   undash
   stroke { line [0, 35], [520, 35] }
