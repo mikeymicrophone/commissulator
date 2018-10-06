@@ -9,6 +9,12 @@ class EmployersController < ApplicationController
       Employer.all
     else
       Employer.where params[:filtered_attribute] => params[:filter_value]
+    end
+    @employers = case params[:sort]
+    when 'name'
+      @employers.order :name
+    else
+      @employers
     end.page params[:page]
   end
 
