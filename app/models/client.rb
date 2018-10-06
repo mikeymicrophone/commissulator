@@ -12,6 +12,7 @@ class Client < ApplicationRecord
   has_many :tenants
   has_many :leases, :through => :tenants
   has_many :commissions, :through => :leases
+  has_many :registering_agents, :through => :registrations, :source => :agent
   
   def name
     "#{first_name} #{last_name}"
@@ -27,6 +28,7 @@ class Client < ApplicationRecord
     person ||= FubClient::Person.new :firstName => first_name, :lastName => last_name
     person.emails = emails.map { |email| {:value => email.address} } if emails.any?
     person.phones = phones.map { |phone| {:value => phone.number, :type => phone.variety} } if phones.any?
+    person.assignedUserId = registering_agents.last&.follow_up_boss_id
     begin
       person.source = 'Commissulator'
       person.save
