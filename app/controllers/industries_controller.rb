@@ -11,6 +11,12 @@ class IndustriesController < ApplicationController
       Industry.all
     else
       Industry.where params[:filtered_attribute] => params[:filter_value]
+    end
+    @industries = case params[:sort]
+    when 'name'
+      @industries.order :name
+    else
+      @industries
     end.page params[:page]
   end
 

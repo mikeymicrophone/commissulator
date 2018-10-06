@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th><%= link_to 'Name', filter_params.merge(:sort => 'name') %></th>
       <th>Employers</th>
       <th colspan="6"></th>
     </tr>
