@@ -95,6 +95,7 @@ class Registration < ApplicationRecord
   
   def fub_add_collaborator
     driver = FubCollaborator.new
+    driver.load_cookie
     clients.each do |client|
       driver.add_collaborator agent, client
     end
