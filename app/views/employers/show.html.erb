@@ -13,6 +13,30 @@
   <%= @employer.url %>
 </p>
 
+<%= div_for @employer, :emails_for do %>
+  <% @employer.emails.each do |email| %>
+    <%= div_for email do %>
+      <%= email.variety %>: <%= mail_to email.address %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= div_for @employer, :phones_for do %>
+  <% @employer.phones.each do |phone| %>
+    <%= div_for phone do %>
+      <%= phone.variety %>: <%= phone.number %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= div_for @employer, :social_accounts_for do %>
+  <% @employer.social_accounts.each do |social_account| %>
+    <%= div_for social_account do %>
+      <%= social_account.variety %>: <%= social_account.url %> <%= social_account.moniker %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <% @employer.employments.each do |employment| %>
   <%= div_for employment do %>
     <%= link_to_name_with_icon employment %>

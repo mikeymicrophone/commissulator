@@ -18,7 +18,7 @@
   <tbody>
     <% @employers.each do |employer| %>
       <tr>
-        <td><%= employer.name %></td>
+        <td><%= link_to_name_with_icon employer %></td>
         <td><%= employer.industries.map(&:name).to_sentence %><%= link_to_associated employer, :industries %></td>
         <td><%= link_to_associated employer, :employments %></td>
         <td><%= link_to_associated employer, :emails %></td>

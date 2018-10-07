@@ -14,7 +14,7 @@
   <tbody>
     <% @industries.each do |industry| %>
       <tr>
-        <td><%= industry.name %></td>
+        <td><%= link_to_name_with_icon industry %></td>
         <td><%= link_to_associated industry, :employers %></td>
         <td><%= link_to_associated industry, :employments %></td>
         <td><%= link_to_associated industry, :emails %></td>
