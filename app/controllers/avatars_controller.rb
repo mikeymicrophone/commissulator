@@ -17,6 +17,18 @@ class AvatarsController < ApplicationController
     redirect_to deals_path
   end
   
+  def activate
+    @avatar = Avatar.find params[:id] if current_avatar.admin?
+    @avatar.activated = true
+    @avatar.save
+  end
+  
+  def deactivate
+    @avatar = Avatar.find params[:id] if current_avatar.admin?
+    @avatar.activated = false
+    @avatar.save
+  end
+  
   private
   def set_avatar
     @avatar = current_avatar

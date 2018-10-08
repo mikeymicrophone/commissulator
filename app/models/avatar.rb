@@ -37,4 +37,8 @@ class Avatar < ApplicationRecord
       email
     end
   end
+  
+  def active_for_authentication? 
+    super && activated? 
+  end 
 end

@@ -33,7 +33,12 @@ Rails.application.routes.draw do
   end
   root :to => 'home#landing'
   devise_for :avatars, :controllers => { :omniauth_callbacks => 'avatars/omniauth_callbacks' }
-  resources :avatars, :only => [:index, :show, :edit, :update]
+  resources :avatars, :only => [:index, :show, :edit, :update] do
+    member do
+      put :activate
+      put :deactivate
+    end
+  end
   resources :apartments
   resources :social_accounts
   resources :emails

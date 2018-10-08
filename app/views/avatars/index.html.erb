@@ -1,5 +1,14 @@
 <% @avatars.each do |avatar| %>
   <%= div_for avatar, :class => :avatar_list do %>
     <%= link_to_name_with_icon avatar %>
+    <% if can? :activate, avatar %>
+      <%= div_for avatar, :activation_of do %>
+        <% if avatar.activated? %>
+          <%= link_to '[deactivate]', deactivate_avatar_path(avatar), :method => :put, :remote => true %>
+        <% else %>
+          <%= link_to '[activate]', activate_avatar_path(avatar), :method => :put, :remote => true %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

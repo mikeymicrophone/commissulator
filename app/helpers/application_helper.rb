@@ -86,6 +86,7 @@ module ApplicationHelper
   
   def penthouse_nav
     content_tag :nav, :id => 'top_floor_penthouse_navigation' do
+      link_to('Home', root_url) +
       if current_avatar
         main_nav +
         link_to('Sign Out', destroy_avatar_session_path, :method => :delete, :id => 'sign_out_link') +
@@ -95,8 +96,7 @@ module ApplicationHelper
         end
       else
         link_to('Log In', new_avatar_session_path) +
-        link_to('Sign in with Contactually', avatar_contactually_omniauth_authorize_path) +
-        link_to('Register', new_avatar_registration_path)
+        link_to('Request an Account', new_avatar_registration_path)
       end
     end
   end
