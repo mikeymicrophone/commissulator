@@ -22,6 +22,7 @@ class AvatarsController < ApplicationController
     @avatar.activated = true
     @avatar.save
     PersonnelMailer.with(:avatar => @avatar).activation_grant.deliver
+    PersonnelMailer.with(:avatar => @avatar).activation_notify.deliver
   end
   
   def deactivate

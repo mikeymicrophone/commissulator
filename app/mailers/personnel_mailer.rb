@@ -19,4 +19,11 @@ class PersonnelMailer < ApplicationMailer
     @subject = "Access revoked for: #{@avatar.reference}"
     mail :to => @recipients, :subject => @subject
   end
+  
+  def activation_notify
+    @avatar = params[:avatar]
+    @recipients = @avatar.email
+    @subject = 'You have access to Citi Pads Commissulator'
+    mail :to => @recipients, :subject => @subject
+  end
 end
