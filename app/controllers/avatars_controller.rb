@@ -21,12 +21,14 @@ class AvatarsController < ApplicationController
     @avatar = Avatar.find params[:id] if current_avatar.admin?
     @avatar.activated = true
     @avatar.save
+    PersonnelMailer.with(:avatar => @avatar).activation_grant.deliver
   end
   
   def deactivate
     @avatar = Avatar.find params[:id] if current_avatar.admin?
     @avatar.activated = false
     @avatar.save
+    PersonnelMailer.with(:avatar => @avatar).activation_revoke.deliver
   end
   
   private

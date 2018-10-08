@@ -8,7 +8,10 @@ class Avatar < ApplicationRecord
   has_many :agents, -> { distinct }, :through => :assists
   has_many :commissions, :through => :agent
   
+  after_create :introduce_to_admin
+  
   scope :alpha, lambda { order :first_name }
+  scope :admin, lambda { where :admin => true }
   
   def self.from_omniauth auth
     avatar = Avatar.where(:email => auth.info.email).take
@@ -38,7 +41,11 @@ class Avatar < ApplicationRecord
     end
   end
   
-  def active_for_authentication? 
-    super && activated? 
-  end 
+  def active_for_authentication?
+    super && activated?
+  end
+  
+  def introduce_to_admin
+    PersonnelMailer.with(:avatar => self).activation_request.deliver
+  end
 end
