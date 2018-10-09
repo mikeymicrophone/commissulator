@@ -1,6 +1,19 @@
 class FubCalendarEvent < FubAuthenticated
+  def access_calendar_page
+    browser.goto calendar_domain
+  end
+  
+  def events
+    browser.divs :class => 'MonthAppointment'
+  end
+  
+  def access_event_edit_form event
+    event.click
+    popover = browser.div :class => 'MonthAppointment-popover'
+    popover.link(:text => 'Edit Appointment').click
+  end
+  
   def access_event_input_form
-    browser.goto 'https://mike-schwab.followupboss.com/2/calendar'
     event_adder = browser.div :class => 'FUBCalendar-addEvent'
     event_adder.button(:class => 'u-button').click
   end
@@ -22,7 +35,7 @@ class FubCalendarEvent < FubAuthenticated
   end
   
   def submit_form
-    browser.div(:class => 'Modal-footer').button(:text => 'Create Appointment').click
+    browser.div(:class => 'Modal-footer').button(:text => 'Create Appointment').click # the class 'u-bigBlueButton' would hit the edit/save button as well as the create/submit one; however I may not need to edit events, just using the edit form to scrape them
   end
   
   def invitee_group_area
@@ -51,5 +64,13 @@ class FubCalendarEvent < FubAuthenticated
   
   def appointment_form
     browser.form :class => 'AppointmentModal-form'
+  end
+  
+  def calendar_domain
+    if Rails.env.production?
+      "#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/calendar"
+    else
+      "#{Rails.application.credentials.follow_up_boss[:staging_subdomain]}.followupboss.com/2/calendar"
+    end
   end
 end
