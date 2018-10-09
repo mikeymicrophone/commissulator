@@ -21,7 +21,7 @@ class FubCollaborator
     browser
   end
   
-  def store_cookie
+  def login_submit
     browser.goto 'https://login.followupboss.com/login'
     if Rails.env.production?
       browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:login_identity]
@@ -31,7 +31,9 @@ class FubCollaborator
       browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:staging_login_password]
     end
     browser.form(:id => 'form').submit
-    
+  end
+  
+  def store_cookie
     sleep 2
     
     browser.goto domain
