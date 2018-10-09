@@ -4,7 +4,7 @@ class FubCollaborator
   AGENT_SELECTOR_CLASSNAME = '.sc-bkypNX.esyrIP'
   
   def browser
-    Watir::Browser.new :chrome#, :headless => true
+    Watir::Browser.new :chrome, :headless => true
   end
   memoize :browser
   
