@@ -5,6 +5,8 @@ class Agent < ApplicationRecord
   has_many :commissions
   has_many :registrations
   
+  has_many_attached :cookies
+  
   enum :status => [:active, :inactive]
   attr_default :status, 'active'
   
