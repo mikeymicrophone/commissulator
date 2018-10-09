@@ -258,8 +258,10 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   if Rails.env.production?
+    config.omniauth :google_oauth2, Rails.application.credentials.google[:client_id], Rails.application.credentials.google[:client_secret], {}
     config.omniauth :contactually, Rails.application.credentials.contactually[:application_id], Rails.application.credentials.contactually[:secret], :scope => "all:manage"
   else
+    config.omniauth :google_oauth2, Rails.application.credentials.google[:staging_client_id], Rails.application.credentials.google[:staging_client_secret], {}
     config.omniauth :contactually, Rails.application.credentials.contactually[:staging_application_id], Rails.application.credentials.contactually[:staging_secret], :scope => "all:manage"
   end
 

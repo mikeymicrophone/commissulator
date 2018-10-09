@@ -38,6 +38,6 @@ class AvatarsController < ApplicationController
   end
   
   def avatar_params
-    params.require(:avatar).permit(:first_name, :last_name, :phone_number)
+    params.require(:avatar).permit(:first_name, :last_name, :phone_number, :google_email)
   end
 end

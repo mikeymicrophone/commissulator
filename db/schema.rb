@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_203859) do
+ActiveRecord::Schema.define(version: 2018_10_09_192933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2018_10_07_203859) do
     t.string "provider"
     t.string "uid"
     t.boolean "activated", default: false, null: false
+    t.string "google_email"
     t.index ["activated"], name: "index_avatars_on_activated"
     t.index ["confirmation_token"], name: "index_avatars_on_confirmation_token"
     t.index ["email"], name: "index_avatars_on_email"

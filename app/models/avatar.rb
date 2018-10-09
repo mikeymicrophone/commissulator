@@ -1,6 +1,6 @@
 class Avatar < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:contactually]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:contactually, :google_oauth2]
 
   has_one :agent
   has_many :deals, :through => :agent
@@ -14,7 +14,9 @@ class Avatar < ApplicationRecord
   scope :admin, lambda { where :admin => true }
   
   def self.from_omniauth auth
-    avatar = Avatar.where(:email => auth.info.email).take
+    avatar = Avatar.where(:google_email => auth.info.email).take
+    
+    avatar ||= Avatar.where(:email => auth.info.email).take
     if avatar
       avatar.provider = auth.provider
       avatar.uid = auth.uid
