@@ -33,7 +33,7 @@ prawn_document do
   undash
   
   @view_context_holder.client_box(self, [0, 655], 1, @registration.clients.first)
-  @view_context_holder.client_box(self, [272, 655], 2)
+  @view_context_holder.client_box(self, [272, 655], 2, @registration.clients.second)
   
   dash 1
   stroke { line [259, 653], [259, 454] }
