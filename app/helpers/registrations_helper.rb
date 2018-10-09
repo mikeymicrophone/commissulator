@@ -94,8 +94,12 @@ module RegistrationsHelper
       bind.draw_text client&.employers&.last&.address, :at => [48, 42]
       
       bind.draw_text 'Position:', :at => [0, 26]
-      bind.line [38, 24], [245, 24]
+      bind.line [38, 24], [115, 24]
       bind.draw_text client&.employments&.last&.position, :at => [48, 26]
+      
+      bind.draw_text 'Annual Income:', :at => [120, 26]
+      bind.line [187, 24], [245, 24]
+      bind.draw_text number_to_round_currency(client&.employments&.last&.income), :at => [197, 26]
       
       bind.draw_text 'Current Landlord:', :at => [0, 10]
       bind.line [75, 8], [245, 8]
