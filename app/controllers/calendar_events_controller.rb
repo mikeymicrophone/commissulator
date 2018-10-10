@@ -69,6 +69,6 @@ class CalendarEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def calendar_event_params
-      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time, :invitees, :follow_up_boss_id, :google_id, :calendly_id, :agent_id, :confirmed_at)
+      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time, :invitees, :location, :follow_up_boss_id, :google_id, :calendly_id, :agent_id, :confirmed_at)
     end
 end

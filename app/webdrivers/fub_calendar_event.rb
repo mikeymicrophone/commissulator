@@ -26,13 +26,15 @@ class FubCalendarEvent < FubAuthenticated
     event_adder.button(:class => 'u-button').click
   end
   
-  def add_event appointment_name, description, appointment_time, duration, guests # guests should respond to #name
-    title_field.set appointment_name
-    description_field.set description
-    date_field.set appointment_time.strftime '%m/%d/%Y'
-    time_field.set appointment_time.strftime '%I:%M %p'
-    # default time is 1 hour, no duration implemented yet
-    guests.each { |guest| add_guest guest.name }
+  def add_event calendar_event
+    title_field.set calendar_event.title
+    description_field.set calendar_event.description
+    date_field.set calendar_event.start_time.strftime '%m/%d/%Y'
+    time_field.set calendar_event.start_time.strftime '%I:%M %p'
+    end_date_field.set calendar_event.end_time.strftime '%m/%d/%Y'
+    end_time_field.set calendar_event.end_time.strftime '%I:%M %p'
+    location_field.set calendar_event.location
+    guests.each { |guest| add_guest guest }
     submit_form
   end
   
@@ -40,16 +42,15 @@ class FubCalendarEvent < FubAuthenticated
     calendar_event = CalendarEvent.new
     calendar_event.title = title_field.value
     calendar_event.description = description_field.value
-    date = date_field.value
-    time = time_field.value
-    calendar_event.start_time = Chronic.parse date + ' ' + time # account for time zone?
-    calendar_event.end_time = calendar_event.start_time + 30.minutes # assumption for now
+    calendar_event.location = location_field.value
+    calendar_event.start_time = Chronic.parse date_field.value + ' ' + time_field.value
+    calendar_event.end_time = Chronic.parse end_date_field.value + ' ' + end_time_field.value
     calendar_event.invitees = guest_list
     calendar_event.save
   end
   
   def guest_list
-    invitees = browser.lis(:class => 'AppointmentModal-InviteeChip')
+    invitees = browser.lis :class => 'AppointmentModal-InviteeChip'
     invitees.map do |invitee|
       invitee.div(:class => 'Avatar').title
     end
@@ -69,8 +70,24 @@ class FubCalendarEvent < FubAuthenticated
     appointment_form.div :class => 'AppointmentModal-Invitees'
   end
   
+  def location_field
+    if appointment_form.div(:class => 'AppointmentModal-Location').exists?
+      appointment_form.div(:class => 'AppointmentModal-Location').text_field
+    else
+      appointment_form.div(:class => 'AppointmentModal-Location-withLink').text_field
+    end
+  end
+  
+  def end_time_field
+    date_parameters.div(:class => 'AppointmentModal-endTime').text_field
+  end
+  
   def time_field
     date_parameters.div(:class => 'AppointmentModal-startTime').text_field
+  end
+  
+  def end_date_field
+    date_parameters.divs(:class => 'AppointmentModal-DatePicker').last.text_field(:class => 'form-control')
   end
   
   def date_field
