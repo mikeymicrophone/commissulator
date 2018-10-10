@@ -42,14 +42,17 @@ class FubCalendarEvent < FubAuthenticated
     calendar_event.description = description_field.value
     date = date_field.value
     time = time_field.value
-    calendar_event.start_time = DateTime.parse date + ' ' + time # account for time zone?
+    calendar_event.start_time = Chronic.parse date + ' ' + time # account for time zone?
     calendar_event.end_time = calendar_event.start_time + 30.minutes # assumption for now
-    
+    calendar_event.invitees = guest_list
+    calendar_event.save
   end
   
   def guest_list
-    invitees = browser.divs :class => 'AppointmentModal-InviteeChip'
-    
+    invitees = browser.lis(:class => 'AppointmentModal-InviteeChip')
+    invitees.map do |invitee|
+      invitee.div(:class => 'Avatar').title
+    end
   end
   
   def add_guest name
