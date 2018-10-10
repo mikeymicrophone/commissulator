@@ -1,6 +1,6 @@
 class Avatar < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:contactually, :google_oauth2]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:contactually, :google_oauth2, :microsoft_office365]
 
   has_one :agent
   has_many :deals, :through => :agent

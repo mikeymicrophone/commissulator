@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @calendar_event.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @calendar_event.description %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @calendar_event.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @calendar_event.end_time %>
+</p>
+
+<p>
+  <strong>Invitees:</strong>
+  <%= @calendar_event.invitees %>
+</p>
+
+<p>
+  <strong>Follow up boss:</strong>
+  <%= @calendar_event.follow_up_boss_id %>
+</p>
+
+<p>
+  <strong>Google:</strong>
+  <%= @calendar_event.google_id %>
+</p>
+
+<p>
+  <strong>Calendly:</strong>
+  <%= @calendar_event.calendly_id %>
+</p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= link_to_name_with_icon @calendar_event.agent %>
+</p>
+
+<p>
+  <strong>Confirmed at:</strong>
+  <%= @calendar_event.confirmed_at %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_event_path(@calendar_event) %> |
+<%= link_to 'Back', calendar_events_path %>

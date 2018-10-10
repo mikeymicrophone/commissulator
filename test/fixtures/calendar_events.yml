@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  start_time: 2018-10-09 14:57:48
+  end_time: 2018-10-09 14:57:48
+  invitees: 
+  follow_up_boss_id: 1
+  google_id: 1
+  calendly_id: 1
+  agent_id: 1
+  confirmed_at: 2018-10-09 14:57:48
+
+two:
+  title: MyString
+  description: MyText
+  start_time: 2018-10-09 14:57:48
+  end_time: 2018-10-09 14:57:48
+  invitees: 
+  follow_up_boss_id: 1
+  google_id: 1
+  calendly_id: 1
+  agent_id: 1
+  confirmed_at: 2018-10-09 14:57:48

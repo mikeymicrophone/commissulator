@@ -97,6 +97,7 @@ module ApplicationHelper
       else
         link_to('Log In', new_avatar_session_path) +
         link_to('Connect to Google', avatar_google_oauth2_omniauth_authorize_path) +
+        link_to('Connect to Microsoft', avatar_microsoft_office365_omniauth_authorize_path) +
         link_to('Request an Account', new_avatar_registration_path)
       end
     end

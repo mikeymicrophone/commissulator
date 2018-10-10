@@ -1,0 +1,67 @@
+<%= form_with(model: calendar_event, local: true) do |form| %>
+  <% if calendar_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(calendar_event.errors.count, "error") %> prohibited this calendar_event from being saved:</h2>
+
+      <ul>
+      <% calendar_event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :invitees %>
+    <%= form.text_area :invitees %>
+  </div>
+
+  <div class="field">
+    <%= form.label :follow_up_boss_id %>
+    <%= form.number_field :follow_up_boss_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :google_id %>
+    <%= form.number_field :google_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :calendly_id %>
+    <%= form.number_field :calendly_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.select :agent_id, options_from_collection_for_select(Agent.active.alpha, :id, :name, calendar_event.agent_id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :confirmed_at %>
+    <%= form.datetime_select :confirmed_at, :include_blank => true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

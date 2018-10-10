@@ -3,6 +3,10 @@ class FubCalendarEvent < FubAuthenticated
     browser.goto calendar_domain
   end
   
+  def advance_to_next_month
+    
+  end
+  
   def events
     browser.divs :class => 'MonthAppointment'
   end
@@ -11,6 +15,10 @@ class FubCalendarEvent < FubAuthenticated
     event.click
     popover = browser.div :class => 'MonthAppointment-popover'
     popover.link(:text => 'Edit Appointment').click
+  end
+  
+  def close_event_edit_form
+    # escape key would probably work
   end
   
   def access_event_input_form
@@ -26,6 +34,22 @@ class FubCalendarEvent < FubAuthenticated
     # default time is 1 hour, no duration implemented yet
     guests.each { |guest| add_guest guest.name }
     submit_form
+  end
+  
+  def scrape_event
+    calendar_event = CalendarEvent.new
+    calendar_event.title = title_field.value
+    calendar_event.description = description_field.value
+    date = date_field.value
+    time = time_field.value
+    calendar_event.start_time = DateTime.parse date + ' ' + time # account for time zone?
+    calendar_event.end_time = calendar_event.start_time + 30.minutes # assumption for now
+    
+  end
+  
+  def guest_list
+    invitees = browser.divs :class => 'AppointmentModal-InviteeChip'
+    
   end
   
   def add_guest name
