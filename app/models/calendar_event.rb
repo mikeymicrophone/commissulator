@@ -15,17 +15,26 @@ class CalendarEvent < ApplicationRecord
   end
   
   def google_calendar
+    google_connection.calendar.get ENV['GOOGLE_CALENDAR_ID']
+  end
+  
+  def google_connection
     if Rails.env.production?
-      Google::Calendar.get(:client_id => Rails.application.credentials.google[:client_id],
+      Google::Connection.factory(
+        :client_id => Rails.application.credentials.google[:client_id],
         :client_secret => Rails.application.credentials.google[:client_secret],
         :calendar      => ENV['GOOGLE_CALENDAR_ID'],
-        :redirect_url  => "urn:ietf:wg:oauth:2.0:oob") # this is what Google uses for 'applications'
+        :redirect_url  => 'url helpers in the model'
+      )
     else
-      Google::Calendar.get(:client_id => Rails.application.credentials.google[:staging_client_id],
+      Google::Connection.factory(
+        :client_id => Rails.application.credentials.google[:staging_client_id],
         :client_secret => Rails.application.credentials.google[:staging_client_secret],
-        :calendar      => ENV['GOOGLE_CALENDAR_ID'],
-        :redirect_url  => "urn:ietf:wg:oauth:2.0:oob") # this is what Google uses for 'applications'
+        :refresh_token => ENV['GOOGLE_CALENDAR_REFRESH_TOKEN'],
+        :redirect_url  => 'http://localhost:3000/calendar_events/token'
+      )
     end
   end
-  memoize :google_calendar
+
+  memoize :google_calendar, :google_connection
 end

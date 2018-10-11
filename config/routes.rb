@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :calendar_events
+  resources :calendar_events do
+    collection do
+      get :token
+    end
+  end
   resources :tenants
   resources :involvements
   resources :roles

@@ -16,7 +16,7 @@ class CalendarEventsController < ApplicationController
   end
 
   def create
-    @calendar_event = CalendarEvent.new(calendar_event_params)
+    @calendar_event = CalendarEvent.new calendar_event_params
 
     respond_to do |format|
       if @calendar_event.save
@@ -31,7 +31,7 @@ class CalendarEventsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @calendar_event.update(calendar_event_params)
+      if @calendar_event.update calendar_event_params
         format.html { redirect_to @calendar_event, notice: 'Calendar event was successfully updated.' }
         format.json { render :show, status: :ok, location: @calendar_event }
       else
@@ -48,13 +48,18 @@ class CalendarEventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def token
+    Rails.logger.info "Google Calendar Code:"
+    Rails.logger.info params[:code]
+  end
 
   private
     def set_calendar_event
-      @calendar_event = CalendarEvent.find(params[:id])
+      @calendar_event = CalendarEvent.find params[:id]
     end
 
     def calendar_event_params
-      params.require(:calendar_event).permit(:title, :description, :start_time, :end_time, :invitees, :location, :follow_up_boss_id, :google_id, :calendly_id, :agent_id, :confirmed_at)
+      params.require(:calendar_event).permit :title, :description, :start_time, :end_time, :invitees, :location, :follow_up_boss_id, :google_id, :calendly_id, :agent_id, :confirmed_at
     end
 end
