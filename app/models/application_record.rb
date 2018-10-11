@@ -68,4 +68,12 @@ class ApplicationRecord < ActiveRecord::Base
     attribute ||= :name
     "#{ApplicationController.helpers.fa_icon icon} #{send attribute}".html_safe
   end
+  
+  def self.url_helpers
+    Rails.application.routes.url_helpers
+  end
+  
+  def url_helpers
+    self.class.url_helpers
+  end
 end

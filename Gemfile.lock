@@ -130,6 +130,8 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
+    declarative (0.0.10)
+    declarative-option (0.1.0)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -152,9 +154,25 @@ GEM
       railties (>= 4.2, < 5.3)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    google-api-client (0.24.3)
+      addressable (~> 2.5, >= 2.5.1)
+      googleauth (>= 0.5, < 0.7.0)
+      httpclient (>= 2.8.1, < 3.0)
+      mime-types (~> 3.0)
+      representable (~> 3.0)
+      retriable (>= 2.0, < 4.0)
+      signet (~> 0.10)
     google_calendar (0.6.4)
       TimezoneParser (~> 0.3.0)
       json (>= 1.8.3)
+      signet (~> 0.7)
+    googleauth (0.5.1)
+      faraday (~> 0.9)
+      jwt (~> 1.4)
+      logging (~> 2.0)
+      memoist (~> 0.12)
+      multi_json (~> 1.11)
+      os (~> 0.9)
       signet (~> 0.7)
     hashie (3.5.7)
     her (1.0.2)
@@ -162,6 +180,7 @@ GEM
       faraday (>= 0.8, < 1.0)
       multi_json (~> 1.7)
     highline (1.7.10)
+    httpclient (2.8.3)
     i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     insensitive_hash (0.3.3)
@@ -194,6 +213,10 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    little-plugger (1.1.4)
+    logging (2.2.2)
+      little-plugger (~> 1.1)
+      multi_json (~> 1.10)
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -209,6 +232,9 @@ GEM
       mimemagic (~> 0.3.2)
     memoist (0.16.0)
     method_source (0.9.0)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2018.0812)
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -247,6 +273,7 @@ GEM
     origin-selectable_ext (0.1.1)
       origin
     orm_adapter (0.5.0)
+    os (0.9.6)
     paranoia (2.4.1)
       activerecord (>= 4.0, < 5.3)
     pdf-core (0.7.0)
@@ -296,9 +323,14 @@ GEM
     record_tag_helper (1.0.0)
       actionview (~> 5.x)
     redcarpet (3.4.0)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    retriable (3.1.2)
     rollbar (2.17.0)
       multi_json
     rspec-core (3.8.0)
@@ -320,6 +352,9 @@ GEM
     rspec-support (3.8.0)
     ruby-rc4 (0.1.5)
     ruby_dep (1.5.0)
+    ruby_outlook (0.3.0)
+      faraday
+      uuidtools
     rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.5.7)
@@ -380,8 +415,10 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     uglifier (4.1.18)
       execjs (>= 0.3.0, < 3)
+    uuidtools (2.1.5)
     warden (1.2.7)
       rack (>= 1.0)
     watir (6.14.0)
@@ -425,6 +462,7 @@ DEPENDENCIES
   faker
   font_awesome5_rails
   fub_client!
+  google-api-client
   google-webfonts-rails!
   google_calendar
   jbuilder (~> 2.5)
@@ -433,6 +471,7 @@ DEPENDENCIES
   kaminari
   listen (>= 3.0.5, < 3.2)
   memoist
+  oauth2
   omniauth-contactually
   omniauth-google-oauth2
   omniauth-microsoft-office365
@@ -446,6 +485,7 @@ DEPENDENCIES
   redcarpet
   rollbar
   rspec-rails
+  ruby_outlook
   sass-rails (~> 5.0)
   sekrets
   selenium-webdriver
