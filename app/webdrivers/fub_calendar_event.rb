@@ -11,6 +11,24 @@ class FubCalendarEvent < FubAuthenticated
     browser.divs :class => 'MonthAppointment'
   end
   
+  def event_name event
+    event_text = /[\d\w\,]+\s\-\s([\w\s]+)/
+    matches = event_text.match event.text
+    matches[1]
+  end
+  
+  def event_date event
+    event.parent.parent.div(:class => 'MonthDay-date').text
+  end
+  
+  def month
+    browser.div(:class => 'FUBCalendar-menu').h4.text
+  end
+  
+  def event_code event
+    "#{month} #{event_date} #{event_name}"
+  end
+  
   def access_event_edit_form event
     event.click
     popover = browser.div :class => 'MonthAppointment-popover'
@@ -38,7 +56,8 @@ class FubCalendarEvent < FubAuthenticated
     submit_form
   end
   
-  def scrape_event
+  def scrape_event event
+    access_event_edit_form event
     calendar_event = CalendarEvent.new
     calendar_event.title = title_field.value
     calendar_event.description = description_field.value
@@ -46,6 +65,7 @@ class FubCalendarEvent < FubAuthenticated
     calendar_event.start_time = Chronic.parse date_field.value + ' ' + time_field.value
     calendar_event.end_time = Chronic.parse end_date_field.value + ' ' + end_time_field.value
     calendar_event.invitees = guest_list
+    calendar_event.follow_up_boss_id = event_code event
     calendar_event.save
   end
   

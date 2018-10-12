@@ -36,7 +36,7 @@ class FubAuthenticated
   
   def load_cookie
     File.open cookie_filename, 'w+' do |file|
-      file.write agent.cookies.last.download
+      file.write agent.cookies.select { |cookie| cookie.filename.to_s == "fub_#{agent.id}_#{agent.name.underscore.gsub(/\s/, '_')}.yml" }.last.download
     end
     browser.goto domain
     browser.cookies.load cookie_filename

@@ -21,9 +21,14 @@ class CalendarEvent < ApplicationRecord
     calendar_event.location = event.location
     calendar_event.start_time = DateTime.parse event.start_time
     calendar_event.end_time = DateTime.parse event.end_time
-    calendar_event.invitees = event.attendees.map { |attendee| attendee['email'] }.inspect
+    calendar_event.invitees = event.attendees&.map { |attendee| attendee['email'] }&.inspect
     calendar_event.google_id = event.id
     calendar_event.save
+    calendar_event
+  end
+  
+  def CalendarEvent.find_or_create_from_google event
+    create_from_google event unless CalendarEvent.where(:google_id => event.id).present?
   end
   
   def push_to_follow_up_boss
@@ -37,11 +42,11 @@ class CalendarEvent < ApplicationRecord
     fub_calendar_event.add_event self, guests
   end
   
-  def google_calendar agent
+  def CalendarEvent.google_calendar agent
     Google::Calendar.new({:calendar => agent.google_calendar_id}, google_connection(agent.google_tokens['refresh_token']))
   end
   
-  def google_connection token
+  def CalendarEvent.google_connection token
     if Rails.env.production?
       Google::Connection.factory(
         :client_id => Rails.application.credentials.google[:client_id],
@@ -66,6 +71,4 @@ class CalendarEvent < ApplicationRecord
   def microsoft_connection
     RubyOutlook::Client.new
   end
-
-  memoize :google_calendar, :google_connection, :microsoft_calendar, :microsoft_connection
 end
