@@ -12,19 +12,17 @@ class FubAuthenticated
   def login_submit
     browser.goto 'https://login.followupboss.com/login'
     if Rails.env.production?
-      browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:login_identity]
-      browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:login_password]
+      browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:login_identity][agent.last_name.to_sym]
+      browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:login_password][agent.last_name.to_sym]
     else
-      browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:staging_login_identity]
-      browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:staging_login_password]
+      browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:staging_login_identity][agent.last_name.to_sym]
+      browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:staging_login_password][agent.last_name.to_sym]
     end
     browser.form(:id => 'form').submit
     browser.form(:action => '/login/index').wait_while &:exists?
   end
   
   def store_cookie
-    sleep 2
-    
     browser.goto domain
     browser.cookies.to_a.each do |cookie_hash|
       browser.cookies.delete(cookie_hash[:name]) unless cookie_hash[:name] == AUTH_COOKIE_CODE
