@@ -35,8 +35,29 @@ class Agent < ApplicationRecord
     FubClient::User.find follow_up_boss_id
   end
   
+  def Agent.google_client_id_filename
+    Rails.env.production? ? 'google_client_id.json' : 'staging_google_client_id.json'
+  end
+  
+  def Agent.encrypted_google_client_id_filename
+    Rails.env.production? ? 'google_client_id.json.enc' : 'staging_google_client_id.json.enc'
+  end
+  
+  def Agent.encrypt_google_client_id
+    @encrypted_file = ActiveSupport::EncryptedFile.new content_path: Rails.root.join('config', 'cookies', encrypted_google_client_id_filename), env_key: 'COOKIE_ENCRYPTION_KEY', key_path: Rails.root, raise_if_missing_key: false
+    @encrypted_file.write File.open(Rails.root.join('tmp', google_client_id_filename)).read
+  end
+  
+  def Agent.decrypt_google_client_id
+    @encrypted_file = ActiveSupport::EncryptedFile.new content_path: Rails.root.join('config', 'cookies', encrypted_google_client_id_filename), env_key: 'COOKIE_ENCRYPTION_KEY', key_path: Rails.root, raise_if_missing_key: false
+    File.open(Rails.root.join('tmp', google_client_id_filename), 'w+') do |file|
+      file.write @encrypted_file.read
+    end
+  end
+  
   def Agent.google_auth_client
-    client_secrets = Google::APIClient::ClientSecrets.load Rails.root.join('config', 'cookies', 'staging_google_client_id.json')
+    decrypt_google_client_id
+    client_secrets = Google::APIClient::ClientSecrets.load Rails.root.join('config', 'cookies', google_client_id_filename)
     auth_client = client_secrets.to_authorization
     auth_client.update!(
       :scope => 'https://www.googleapis.com/auth/calendar.events',
