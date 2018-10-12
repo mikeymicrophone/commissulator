@@ -34,7 +34,7 @@ class Commission < ApplicationRecord
   attr_default :follow_up, :unsubmitted
   
   scope :visible_to, lambda { |avatar| avatar.admin? ? all : assisted_by(avatar.agent) }
-  scope :assisted_by, lambda { |agent| joins(:agents).where 'assists.agent_id' => agent }
+  scope :assisted_by, lambda { |agent| joins(:agents).where('assists.agent_id' => agent).distinct }
   
   acts_as_paranoid
   
