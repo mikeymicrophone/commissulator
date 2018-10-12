@@ -26,7 +26,7 @@ class FubCalendarEvent < FubAuthenticated
   end
   
   def event_code event
-    "#{month} #{event_date} #{event_name}"
+    "#{month} #{event_date event} #{event_name event}"
   end
   
   def access_event_edit_form event
@@ -36,7 +36,7 @@ class FubCalendarEvent < FubAuthenticated
   end
   
   def close_event_edit_form
-    # escape key would probably work
+    browser.link(:class => 'Modal-headerClose').click
   end
   
   def access_event_input_form
@@ -65,8 +65,11 @@ class FubCalendarEvent < FubAuthenticated
     calendar_event.start_time = Chronic.parse date_field.value + ' ' + time_field.value
     calendar_event.end_time = Chronic.parse end_date_field.value + ' ' + end_time_field.value
     calendar_event.invitees = guest_list
-    calendar_event.follow_up_boss_id = event_code event
+    calendar_event.follow_up_boss_id = "#{calendar_event.start_time.strftime("%B %Y %-d")} #{calendar_event.title}"
+    calendar_event.agent = agent
     calendar_event.save
+    close_event_edit_form
+    calendar_event
   end
   
   def guest_list

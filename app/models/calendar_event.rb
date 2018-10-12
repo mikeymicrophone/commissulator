@@ -4,14 +4,22 @@ class CalendarEvent < ApplicationRecord
   belongs_to :agent, :optional => true
   
   def push_to_google
-    google_calendar.create_event do |e|
-      e.attendees = invitees.map { |invitee| {:name => invitee} }
+    CalendarEvent.google_calendar(agent).create_event do |e|
+      e.attendees = invitee_emails.map { |invitee| {:email => invitee} }
       e.title = title
       e.description = description
       e.location = location
       e.start_time = start_time
       e.end_time = end_time
     end
+  end
+  
+  def invitee_emails
+    emails = invitees.map do |invitee|
+      FubClient::Person.where(:first_name => invitee.split.first, :last_name => invitee.split.last).fetch.first&.emails&.first
+    end
+    emails << agent.email
+    emails.compact
   end
   
   def CalendarEvent.create_from_google event
