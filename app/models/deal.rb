@@ -133,7 +133,7 @@ class Deal < ApplicationRecord
     Lease Start: #{lease_start_date.strftime("%b ") + lease_start_date.day.ordinalize + ", " + lease_start_date.year.to_s}
     Lease Term: #{lease_term}
     Rent: #{rounded leased_monthly_rent}
-    Commission: #{rounded total_commission}#{owner_pay_commission.present? ? "\nOwner Pay Commission: " + rounded(owner_pay_commission) : ''}
+    Commission: #{rounded total_commission}#{owner_pay_commission.present? ? "\nOwner Pay Commission: #{rounded owner_pay_commission}" : ''}
     Landlord: #{landlord.name}
     DESCRIBE
   end
