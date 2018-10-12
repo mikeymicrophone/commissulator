@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_012523) do
+ActiveRecord::Schema.define(version: 2018_10_12_030831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2018_10_12_012523) do
     t.datetime "end_time"
     t.json "invitees"
     t.integer "follow_up_boss_id"
-    t.integer "google_id"
+    t.string "google_id"
     t.integer "calendly_id"
     t.integer "agent_id"
     t.datetime "confirmed_at"

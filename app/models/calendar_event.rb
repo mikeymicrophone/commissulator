@@ -14,6 +14,18 @@ class CalendarEvent < ApplicationRecord
     end
   end
   
+  def CalendarEvent.create_from_google event
+    calendar_event = new
+    calendar_event.title = event.title
+    calendar_event.description = event.description
+    calendar_event.location = event.location
+    calendar_event.start_time = DateTime.parse event.start_time
+    calendar_event.end_time = DateTime.parse event.end_time
+    calendar_event.invitees = event.attendees.map { |attendee| attendee['email'] }.inspect
+    calendar_event.google_id = event.id
+    calendar_event.save
+  end
+  
   def google_calendar agent
     Google::Calendar.new({:calendar => agent.google_calendar_id}, google_connection(agent.google_tokens['refresh_token']))
   end

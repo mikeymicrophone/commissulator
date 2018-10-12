@@ -48,7 +48,7 @@
 
   <div class="field">
     <%= form.label :google_id %>
-    <%= form.number_field :google_id %>
+    <%= form.text_field :google_id %>
   </div>
 
   <div class="field">
@@ -58,7 +58,7 @@
 
   <div class="field">
     <%= form.label :agent_id %>
-    <%= form.select :agent_id, options_from_collection_for_select(Agent.active.alpha, :id, :name, calendar_event.agent_id) %>
+    <%= form.select :agent_id, options_from_collection_for_select(Agent.active.alpha, :id, :name, calendar_event.agent_id), :include_blank => true %>
   </div>
 
   <div class="field">
