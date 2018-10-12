@@ -26,7 +26,7 @@ class FubCalendarEvent < FubAuthenticated
     event_adder.button(:class => 'u-button').click
   end
   
-  def add_event calendar_event
+  def add_event calendar_event, guests
     title_field.set calendar_event.title
     description_field.set calendar_event.description
     date_field.set calendar_event.start_time.strftime '%m/%d/%Y'

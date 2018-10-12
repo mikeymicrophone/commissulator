@@ -19,6 +19,7 @@ class FubAuthenticated
       browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:staging_login_password]
     end
     browser.form(:id => 'form').submit
+    browser.form(:action => '/login/index').wait_while &:exists?
   end
   
   def store_cookie

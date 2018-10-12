@@ -26,6 +26,17 @@ class CalendarEvent < ApplicationRecord
     calendar_event.save
   end
   
+  def push_to_follow_up_boss
+    fub_calendar_event = FubCalendarEvent.new
+    fub_calendar_event.login_submit
+    fub_calendar_event.access_calendar_page
+    fub_calendar_event.access_event_input_form
+    guests = JSON.parse(invitees).map do |invitee|
+      invitee.match(URI::MailTo::EMAIL_REGEXP).present? ? FubClient::Person.where(:email => invitee).fetch.first&.name : invitee
+    end
+    fub_calendar_event.add_event self, guests
+  end
+  
   def google_calendar agent
     Google::Calendar.new({:calendar => agent.google_calendar_id}, google_connection(agent.google_tokens['refresh_token']))
   end
