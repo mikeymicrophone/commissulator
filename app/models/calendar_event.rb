@@ -14,10 +14,9 @@ class CalendarEvent < ApplicationRecord
     end
   end
   
-  def google_calendar
-    google_connection(token).calendar.get ENV['GOOGLE_CALENDAR_ID']
+  def google_calendar agent
+    Google::Calendar.new({:calendar => agent.google_calendar_id}, google_connection(agent.google_tokens['refresh_token']))
   end
-  
   
   def google_connection token
     if Rails.env.production?

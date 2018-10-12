@@ -51,7 +51,7 @@ class Agent < ApplicationRecord
   
   def fetch_google_access_tokens auth_client
     auth_client ||= Agent.google_auth_client
-    auth_client.code = "4/dQD261Wr3mjxIk_LrXM4V3RO96fyWUJhnqzUIbyAvbzDlPAe7VOI7qtkqT3qdr2LYLycr6C4nYUU0DygR3oLDXM"
+    auth_client.code = google_exchangeable_code
     auth_client.fetch_access_token!
   end
   
@@ -75,5 +75,16 @@ class Agent < ApplicationRecord
       :redirect_uri => "http://localhost:3000/avatars/auth/microsoft_office365/callback",
       :resource => 'https://outlook.office365.com'
     )
+  end
+  
+  def google_exchangeable_code
+    file = cookies.select { |cookie| cookie.filename.to_s == "google_#{id}_#{name}.yml" }.last
+    file&.download
+  end
+  
+  def google_tokens
+    file = cookies.select { |cookie| cookie.filename.to_s == 'google_access_tokens.json' }.last
+    data = file&.download
+    JSON.parse data
   end
 end
