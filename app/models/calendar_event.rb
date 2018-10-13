@@ -40,11 +40,13 @@ class CalendarEvent < ApplicationRecord
     create_from_google event, agent unless CalendarEvent.where(:google_id => event.id).present?
   end
   
-  def push_to_follow_up_boss
-    fub_calendar_event = FubCalendarEvent.new
-    fub_calendar_event.agent = agent
-    fub_calendar_event.load_cookie
-    fub_calendar_event.access_calendar_page
+  def push_to_follow_up_boss fub_calendar_event = nil
+    unless fub_calendar_event
+      fub_calendar_event = FubCalendarEvent.new
+      fub_calendar_event.agent = agent
+      fub_calendar_event.load_cookie
+      fub_calendar_event.access_calendar_page
+    end
     fub_calendar_event.access_event_input_form
     guest_names = invitees.map do |invitee|
       FubClient::Person.where(:email => invitee['email']).fetch.first&.name

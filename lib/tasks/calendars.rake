@@ -22,18 +22,7 @@ namespace :calendars do
           calendar_driver.load_cookie
           calendar_driver.access_calendar_page
           
-          local_events.each do |event|
-            if event.invitees.present?
-              guests = JSON.parse(event.invitees).map do |invitee|
-                invitee.match(URI::MailTo::EMAIL_REGEXP).present? ? FubClient::Person.where(:email => invitee).fetch.first&.name : invitee
-              end
-            else
-              guests = []
-            end
-            
-            calendar_driver.access_event_input_form
-            calendar_driver.add_event event, guests
-          end
+          local_events.each &:push_to_follow_up_boss
         end
       end
     end

@@ -53,6 +53,7 @@ class FubCalendarEvent < FubAuthenticated
     end_time_field.set calendar_event.end_time.strftime '%I:%M %p'
     location_field.set calendar_event.location
     guests.each { |guest| add_guest guest }
+    deactivate_update_email
     submit_form
   end
   
@@ -83,6 +84,10 @@ class FubCalendarEvent < FubAuthenticated
     invitee_picker = invitee_group_area.text_field :placeholder => 'Add Invitee'
     invitee_picker.set name
     browser.span(:class => 'SelectBox-item-name', :text => name).click
+  end
+  
+  def deactivate_update_email
+    browser.div(:class => 'Checkbox-content', :text => 'Send invitation email').click
   end
   
   def submit_form
