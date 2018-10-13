@@ -22,32 +22,34 @@ class CalendarEvent < ApplicationRecord
     emails.compact
   end
   
-  def CalendarEvent.create_from_google event
+  def CalendarEvent.create_from_google event, agent
     calendar_event = new
     calendar_event.title = event.title
     calendar_event.description = event.description
     calendar_event.location = event.location
     calendar_event.start_time = DateTime.parse event.start_time
     calendar_event.end_time = DateTime.parse event.end_time
-    calendar_event.invitees = event.attendees&.map { |attendee| attendee['email'] }&.inspect
+    calendar_event.invitees = event.attendees
     calendar_event.google_id = event.id
+    calendar_event.agent = agent
     calendar_event.save
     calendar_event
   end
   
-  def CalendarEvent.find_or_create_from_google event
-    create_from_google event unless CalendarEvent.where(:google_id => event.id).present?
+  def CalendarEvent.find_or_create_from_google event, agent
+    create_from_google event, agent unless CalendarEvent.where(:google_id => event.id).present?
   end
   
   def push_to_follow_up_boss
     fub_calendar_event = FubCalendarEvent.new
-    fub_calendar_event.login_submit
+    fub_calendar_event.agent = agent
+    fub_calendar_event.load_cookie
     fub_calendar_event.access_calendar_page
     fub_calendar_event.access_event_input_form
-    guests = JSON.parse(invitees).map do |invitee|
-      invitee.match(URI::MailTo::EMAIL_REGEXP).present? ? FubClient::Person.where(:email => invitee).fetch.first&.name : invitee
+    guest_names = invitees.map do |invitee|
+      FubClient::Person.where(:email => invitee['email']).fetch.first&.name
     end
-    fub_calendar_event.add_event self, guests
+    fub_calendar_event.add_event self, guest_names
   end
   
   def CalendarEvent.google_calendar agent

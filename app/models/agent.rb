@@ -35,6 +35,10 @@ class Agent < ApplicationRecord
     FubClient::User.find follow_up_boss_id
   end
   
+  def google_calendar
+    CalendarEvent.google_calendar self
+  end
+  
   def Agent.google_client_id_filename
     Rails.env.production? ? 'google_client_id.json' : 'staging_google_client_id.json'
   end

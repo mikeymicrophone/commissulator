@@ -82,7 +82,7 @@ class FubCalendarEvent < FubAuthenticated
   def add_guest name
     invitee_picker = invitee_group_area.text_field :placeholder => 'Add Invitee'
     invitee_picker.set name
-    browser.send_keys :enter
+    browser.span(:class => 'SelectBox-item-name', :text => name).click
   end
   
   def submit_form

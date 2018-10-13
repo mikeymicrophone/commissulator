@@ -11,7 +11,7 @@ namespace :calendars do
           if CalendarEvent.where(:google_id => event.id).present?
             puts "We already have the event #{event.title}."
           else
-            local_event = CalendarEvent.create_from_google(event)
+            local_event = CalendarEvent.create_from_google(event, agent)
             local_event.agent = agent
             local_event.save
             local_events << local_event
