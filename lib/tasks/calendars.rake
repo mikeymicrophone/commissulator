@@ -46,6 +46,20 @@ namespace :calendars do
         end
       end
       
+      calendar_driver.more_events_links.each do |expander|
+        expander.click
+        calendar_driver.expanded_day_area.divs(:class => 'MonthAppointment')[3..-1].each do |event|
+          code = calendar_driver.expanded_event_code event
+          day_number = calendar_driver.expanded_event_date event
+          if CalendarEvent.where(:follow_up_boss_id => code).present?
+            puts "We already have the event #{code}."
+          else
+            local_events << calendar_driver.scrape_event(event)
+            calendar_driver.browser.div(:class => 'MonthDay-date', :text => day_number).click
+          end
+        end
+      end
+      
       local_events.each do |event|
         event.retrieve_invitee_emails
         event.agent_is_invitee

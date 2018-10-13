@@ -11,6 +11,14 @@ class FubCalendarEvent < FubAuthenticated
     browser.divs :class => 'MonthAppointment'
   end
   
+  def more_events_links
+    browser.links :class => 'MonthCalendar-more'
+  end
+  
+  def expanded_day_area
+    browser.div :class => 'MonthDayZoom-content'
+  end
+  
   def event_name event
     event_text = /[\d\w\,]+\s\-\s([\w\s]+)/
     matches = event_text.match event.text
@@ -21,12 +29,23 @@ class FubCalendarEvent < FubAuthenticated
     event.parent.parent.div(:class => 'MonthDay-date').text
   end
   
+  def expanded_event_date event
+    full_date = browser.div(:class => 'MonthDayZoom').h6.text
+    day_number_pattern = /(\d+)/
+    matches = day_number_pattern.match full_date
+    matches[1]
+  end
+  
   def month
     browser.div(:class => 'FUBCalendar-menu').h4.text
   end
   
   def event_code event
     "#{month} #{event_date event} #{event_name event}"
+  end
+  
+  def expanded_event_code event
+    "#{month} #{expanded_event_date event} #{event_name event}"
   end
   
   def access_event_edit_form event
