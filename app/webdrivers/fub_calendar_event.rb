@@ -55,6 +55,7 @@ class FubCalendarEvent < FubAuthenticated
     guests.each { |guest| add_guest guest }
     deactivate_update_email
     submit_form
+    calendar_event.update_attribute :follow_up_boss_id, "#{calendar_event.start_time.strftime("%B %Y %-d")} #{calendar_event.title}"
   end
   
   def scrape_event event
@@ -76,7 +77,7 @@ class FubCalendarEvent < FubAuthenticated
   def guest_list
     invitees = browser.lis :class => 'AppointmentModal-InviteeChip'
     invitees.map do |invitee|
-      invitee.div(:class => 'Avatar').title
+      {:name => invitee.div(:class => 'Avatar').title}
     end
   end
   

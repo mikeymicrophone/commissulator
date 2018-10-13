@@ -31,7 +31,7 @@ namespace :calendars do
   desc 'find newly created events and add them to the corresponding Google calendar'
   task :fub_to_google => :environment do
     calendar_driver = FubCalendarEvent.new
-    Agent.where(:id => 55).find_each do |agent|
+    Agent.where.not(:google_calendar_id => nil).find_each do |agent|
       calendar_driver.agent = agent
       calendar_driver.load_cookie
       calendar_driver.access_calendar_page
@@ -44,6 +44,11 @@ namespace :calendars do
         else
           local_events << calendar_driver.scrape_event(event)
         end
+      end
+      
+      local_events.each do |event|
+        event.retrieve_invitee_emails
+        event.agent_is_invitee
       end
       
       local_events.each &:push_to_google

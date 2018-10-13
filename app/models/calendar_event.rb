@@ -5,7 +5,7 @@ class CalendarEvent < ApplicationRecord
   
   def push_to_google
     CalendarEvent.google_calendar(agent).create_event do |e|
-      e.attendees = invitee_emails.map { |invitee| {:email => invitee} }
+      e.attendees = invitees
       e.title = title
       e.description = description
       e.location = location
@@ -14,12 +14,29 @@ class CalendarEvent < ApplicationRecord
     end
   end
   
-  def invitee_emails
-    emails = invitees.map do |invitee|
-      FubClient::Person.where(:first_name => invitee.split.first, :last_name => invitee.split.last).fetch.first&.emails&.first
+  def retrieve_invitee_emails
+    updated_invitees = invitees.map do |invitee|
+      unless invitee['email'].present?
+        fub_person = FubClient::Person.where(:name => invitee['name']).fetch.first
+        invitee['email'] = fub_person&.emails&.first&.[]('value')
+      end
+      invitee
     end
-    emails << agent.email
-    emails.compact
+    update_attribute :invitees, updated_invitees
+  end
+  
+  def agent_is_invitee
+    updated_invitees = invitees
+    unless invitees.map { |invitee| invitee['name'] }.include? agent.name
+      updated_invitees << {:name => agent.name, :email => agent.email}
+    end
+    unless updated_invitees.select { |invitee| invitee['name'] == agent.name }.first['email'].present?
+      agent_invitee = updated_invitees.select { |invitee| invitee['name'] == agent.name }.first
+      agent_invitee['email'] = agent.email
+      updated_invitees = updated_invitees.reject { |invitee| invitee['name'] == agent.name }
+      updated_invitees << agent_invitee
+    end
+    update_attribute :invitees, updated_invitees
   end
   
   def CalendarEvent.create_from_google event, agent
