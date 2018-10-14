@@ -72,7 +72,7 @@ class CalendarEvent < ApplicationRecord
   end
   
   def CalendarEvent.google_calendar agent
-    Google::Calendar.new({:calendar => agent.google_calendar_id}, google_connection(agent.google_tokens['refresh_token']))
+    Google::Calendar.new({:calendar => agent.google_calendar_id}, google_connection(agent.google_tokens['access_token']))
   end
   
   def CalendarEvent.google_connection token
