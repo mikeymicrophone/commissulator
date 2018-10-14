@@ -20,6 +20,13 @@ GIT
   specs:
     percentage (1.0.0)
 
+GIT
+  remote: https://github.com/watir/watir.git
+  revision: 55b041c4b5c56d293e04abea7a8327543580bfc2
+  specs:
+    watir (6.14.0)
+      selenium-webdriver (~> 3.4, >= 3.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -421,8 +428,6 @@ GEM
     uuidtools (2.1.5)
     warden (1.2.7)
       rack (>= 1.0)
-    watir (6.14.0)
-      selenium-webdriver (~> 3.4, >= 3.4.1)
     web-console (3.6.2)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -496,7 +501,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
-  watir
+  watir!
   web-console (>= 3.3.0)
   webdrivers
 
