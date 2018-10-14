@@ -65,7 +65,7 @@ class Agent < ApplicationRecord
     auth_client = client_secrets.to_authorization
     auth_client.update!(
       :scope => 'https://www.googleapis.com/auth/calendar.events',
-      :redirect_uri => url_helpers.avatar_google_oauth2_omniauth_callback_url
+      :redirect_uri => url_helpers.avatar_google_oauth2_omniauth_callback_url(:protocol => (Rails.env.development? ? 'http' : 'https'))
     )
     auth_client
   end
@@ -97,7 +97,7 @@ class Agent < ApplicationRecord
 
     token = client.auth_code.get_token(
       cookies.last.download,
-      :redirect_uri => url_helpers.avatar_microsoft_office365_omniauth_callback_url,
+      :redirect_uri => url_helpers.avatar_microsoft_office365_omniauth_callback_url(:protocol => (Rails.env.development? ? 'http' : 'https')),
       :resource => 'https://outlook.office365.com'
     )
   end
