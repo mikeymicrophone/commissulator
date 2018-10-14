@@ -2,7 +2,7 @@ namespace :calendars do
   desc 'find newly created events and add them to the corresponding Follow Up Boss calendar'
   task :google_to_fub => :environment do
     calendar_driver = FubCalendarEvent.new
-    Agent.find_each do |agent|
+    Agent.not(:google_calendar_id => nil).find_each do |agent|
       if agent.google_calendar_id.present?
         calendar_driver.agent = agent
         local_events = []
