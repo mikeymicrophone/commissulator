@@ -65,7 +65,7 @@ class Agent < ApplicationRecord
     auth_client = client_secrets.to_authorization
     auth_client.update!(
       :scope => 'https://www.googleapis.com/auth/calendar.events',
-      :redirect_uri => url_helpers.avatar_google_oauth2_omniauth_callback_url(:protocol => (Rails.env.development? ? 'http' : 'https'))
+      :redirect_uri => url_helpers.token_calendar_events_url(:protocol => (Rails.env.development? ? 'http' : 'https'))
     )
     auth_client
   end
@@ -74,10 +74,14 @@ class Agent < ApplicationRecord
     google_auth_client.authorization_uri.to_s
   end
   
-  def fetch_google_access_tokens auth_client
+  def fetch_google_access_tokens auth_client = nil
     auth_client ||= Agent.google_auth_client
     auth_client.code = google_exchangeable_code
-    auth_client.fetch_access_token!
+    tokens = auth_client.fetch_access_token!
+    File.open(Rails.root.join('tmp', 'google_access_tokens.json'), 'w+') do |file|
+      file.write tokens.to_json
+    end
+    cookies.attach :io => File.open(Rails.root.join('tmp', 'google_access_tokens.json')), :filename => 'google_access_tokens.json'
   end
   
   def auth_client_with_access
@@ -103,8 +107,9 @@ class Agent < ApplicationRecord
   end
   
   def google_exchangeable_code
-    file = cookies.select { |cookie| cookie.filename.to_s == "google_#{id}_#{name}.token" }.last
-    file&.download
+    file = cookies.select { |cookie| cookie.filename.to_s == "google_auth_code.json" }.last
+    data = file&.download
+    JSON.parse(data)['code']
   end
   
   def google_tokens

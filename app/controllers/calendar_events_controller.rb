@@ -50,8 +50,16 @@ class CalendarEventsController < ApplicationController
   end
   
   def token
-    Rails.logger.info "Google Calendar Code:"
-    Rails.logger.info params[:code]
+    @agent = current_avatar.agent
+    auth = {'code' => params[:code], 'scope' => params[:scope]}
+    
+    File.open(Rails.root.join('tmp', 'google_auth_code.json'), 'w+') do |file|
+      file.write auth.to_json
+    end
+    
+    @agent.cookies.attach :io => File.open(Rails.root.join('tmp', 'google_auth_code.json')), :filename => 'google_auth_code.json'
+    @agent.fetch_google_access_tokens
+    redirect_to @agent, :notice => 'Token secured.'
   end
 
   private
