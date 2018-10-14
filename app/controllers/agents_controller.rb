@@ -21,6 +21,7 @@ class AgentsController < ApplicationController
   end
 
   def show
+    @google_auth_uri = Agent.google_auth_uri
   end
 
   def new

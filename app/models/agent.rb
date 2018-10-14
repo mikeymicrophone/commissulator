@@ -97,7 +97,7 @@ class Agent < ApplicationRecord
 
     token = client.auth_code.get_token(
       cookies.last.download,
-      :redirect_uri => "http://localhost:3000/avatars/auth/microsoft_office365/callback",
+      :redirect_uri => url_helpers.avatar_microsoft_office365_omniauth_callback_url,
       :resource => 'https://outlook.office365.com'
     )
   end
