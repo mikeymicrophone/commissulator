@@ -61,7 +61,7 @@ class Agent < ApplicationRecord
   
   def Agent.google_auth_client
     decrypt_google_client_id
-    client_secrets = Google::APIClient::ClientSecrets.load Rails.root.join('config', 'cookies', google_client_id_filename)
+    client_secrets = Google::APIClient::ClientSecrets.load Rails.root.join('tmp', google_client_id_filename)
     auth_client = client_secrets.to_authorization
     auth_client.update!(
       :scope => 'https://www.googleapis.com/auth/calendar.events',
@@ -103,7 +103,7 @@ class Agent < ApplicationRecord
   end
   
   def google_exchangeable_code
-    file = cookies.select { |cookie| cookie.filename.to_s == "google_#{id}_#{name}.yml" }.last
+    file = cookies.select { |cookie| cookie.filename.to_s == "google_#{id}_#{name}.token" }.last
     file&.download
   end
   
