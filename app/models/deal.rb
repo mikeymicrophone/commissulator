@@ -56,6 +56,10 @@ class Deal < ApplicationRecord
     remaining_commission * (agent_split_percentage.to_d / BigDecimal(100)) - distributed_commission
   end
   
+  def company_commission
+    20.percent_of(remaining_commission) - special_payments_total
+  end
+  
   def distributable_commission participation_rate
     participation_rate.percent_of(remaining_commission - expenses)
   end
@@ -151,6 +155,10 @@ class Deal < ApplicationRecord
         "Override payment from #{assisting_agent.payable_name} to #{assisting_agent.name}: #{number_to_currency 10.percent_of remaining_commission}"
       end
     end
+  end
+  
+  def special_payments_total
+    special_efforts.count * 10.percent_of(remaining_commission)
   end
   
   def rate_for role

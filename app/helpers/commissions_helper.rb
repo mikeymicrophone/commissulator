@@ -37,6 +37,10 @@ module CommissionsHelper
       columns << content_tag(:td, link_to(fa_icon(:people_carry, :size => '2x'), follow_up_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :follow_up_for)), :class => 'follow_up', :title => 'Sync Tenants to Follow Up Boss')
     end
     
+    if current_avatar.admin?
+      columns.insert 5, content_tag(:td, number_to_round_currency(commission.deal.company_commission))
+    end
+    
     content_tag_for :tr, commission do
       columns.join.html_safe
     end
