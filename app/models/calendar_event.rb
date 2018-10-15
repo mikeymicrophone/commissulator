@@ -15,6 +15,14 @@ class CalendarEvent < ApplicationRecord
     update_attribute :google_id, google_event.id
   end
   
+  def determine_invitees
+    if description =~ /Powered by Calendly/
+      name_pattern = /([\w\s]+)\sand\s([\w\s]+)/
+      matched_names = name_pattern.match title
+      self.invitees ||= matched_names[1..-1].map { |name| {'name' => name} }
+    end
+  end
+  
   def retrieve_invitee_emails
     updated_invitees = invitees.map do |invitee|
       unless invitee['email'].present?
@@ -55,7 +63,9 @@ class CalendarEvent < ApplicationRecord
     calendar_event.invitees = event.attendees
     calendar_event.google_id = event.id
     calendar_event.agent = agent
+    calendar_event.determine_invitees
     calendar_event.save
+    calendar_event.retrieve_invitee_emails
     calendar_event
   end
   
@@ -71,10 +81,7 @@ class CalendarEvent < ApplicationRecord
       fub_calendar_event.access_calendar_page
     end
     fub_calendar_event.access_event_input_form
-    guest_names = invitees.map do |invitee|
-      FubClient::Person.where(:email => invitee['email']).fetch.first&.name
-    end
-    fub_calendar_event.add_event self, guest_names
+    fub_calendar_event.add_event self, invitees.map { |invitee| invitee['name'] }
   end
   
   def CalendarEvent.google_calendar agent
