@@ -83,6 +83,7 @@ class FubCalendarEvent < FubAuthenticated
     calendar_event.title = title_field.value
     calendar_event.description = description_field.value
     calendar_event.location = location_field.value
+    Chronic.time_class = Time.zone
     calendar_event.start_time = Chronic.parse date_field.value + ' ' + time_field.value
     calendar_event.end_time = Chronic.parse end_date_field.value + ' ' + end_time_field.value
     calendar_event.invitees = guest_list
