@@ -79,6 +79,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
   config.action_mailer.default_url_options = { host: 'citipadscommission.com' }
+  Rails.application.routes.default_url_options = { :host => 'citipads.tech' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
