@@ -158,7 +158,7 @@ class Deal < ApplicationRecord
   end
   
   def special_payments_total
-    special_efforts.count * 10.percent_of(remaining_commission)
+    special_payments.compact.count * 10.percent_of(remaining_commission)
   end
   
   def rate_for role
