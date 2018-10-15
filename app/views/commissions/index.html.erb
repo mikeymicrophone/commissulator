@@ -14,6 +14,7 @@
       <th></th>
       <th><%= link_to 'Updated', :sort => :updated_at %></th>
       <th>Submitted</th>
+      <th><%= link_to 'Request Date', :sort => :request_date %></th>
       <th colspan='7'></th>
       <th><%= link_to 'Prune', prune_commissions_path, :remote => true if current_avatar.admin? %></th>
     </tr>

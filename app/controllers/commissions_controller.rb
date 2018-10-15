@@ -18,6 +18,8 @@ class CommissionsController < ApplicationController
       @commissions.order 'leased_monthly_rent desc'
     when 'total_commission'
       @commissions.order 'total_commission desc nulls last'
+    when 'request_date'
+      @commissions.order 'request_date desc nulls last'
     when 'property_address'
       @commissions.order 'property_address'
     else

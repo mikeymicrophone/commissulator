@@ -22,6 +22,7 @@ module CommissionsHelper
       content_tag(:td, status_clicker_for(commission.deal)),
       content_tag(:td, commission.updated_at.to_s(:descriptive)),
       content_tag(:td, commission.submitted_on&.to_s(:descriptive)),
+      content_tag(:td, commission.request_date&.strftime("%b %-d")),
       content_tag(:td, link_to(fa_icon(:stream, :size => '2x'), commission, :title => 'Review Commission Data')),
       content_tag(:td, link_to(fa_icon(:file_invoice_dollar, :size => '2x'), commission.deal, :title => 'Finance Breakdown')),
       content_tag(:td, link_to(fa_icon(:newspaper, :size => '2x'), edit_commission_path(commission), :title => 'Update Paperwork')),
