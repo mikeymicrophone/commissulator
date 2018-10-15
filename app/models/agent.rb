@@ -65,7 +65,8 @@ class Agent < ApplicationRecord
     auth_client = client_secrets.to_authorization
     auth_client.update!(
       :scope => 'https://www.googleapis.com/auth/calendar.events',
-      :redirect_uri => url_helpers.token_calendar_events_url(:protocol => (Rails.env.development? ? 'http' : 'https'))
+      :redirect_uri => url_helpers.token_calendar_events_url(:protocol => (Rails.env.development? ? 'http' : 'https')),
+      :access_type => 'offline'
     )
     auth_client
   end
