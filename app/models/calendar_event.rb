@@ -19,7 +19,12 @@ class CalendarEvent < ApplicationRecord
     updated_invitees = invitees.map do |invitee|
       unless invitee['email'].present?
         fub_person = FubClient::Person.where(:name => invitee['name']).fetch.first
-        invitee['email'] = fub_person&.emails&.first&.[]('value')
+        if fub_person
+          invitee['email'] = fub_person&.emails&.first&.[]('value')
+        else
+          fub_user = FubClient::User.where(:name => invitee['name']).fetch.first
+          invitee['email'] = fub_user&.email
+        end
       end
       invitee
     end
