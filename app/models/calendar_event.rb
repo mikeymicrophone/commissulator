@@ -4,7 +4,7 @@ class CalendarEvent < ApplicationRecord
   belongs_to :agent, :optional => true
   
   def push_to_google
-    CalendarEvent.google_calendar(agent).create_event do |e|
+    google_event = CalendarEvent.google_calendar(agent).create_event do |e|
       e.attendees = invitees
       e.title = title
       e.description = description
@@ -12,6 +12,7 @@ class CalendarEvent < ApplicationRecord
       e.start_time = start_time
       e.end_time = end_time
     end
+    update_attribute :google_id, google_event.id
   end
   
   def retrieve_invitee_emails
