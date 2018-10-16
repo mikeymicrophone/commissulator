@@ -20,7 +20,7 @@ class FubCalendarEvent < FubAuthenticated
   end
   
   def event_name event
-    event_text = /[\d\w\,]+\s\-\s([\w\s]+)/
+    event_text = /[\d\w\,]+\s\-\s(.*)/
     matches = event_text.match event.text
     matches[1]
   end
