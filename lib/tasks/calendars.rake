@@ -46,7 +46,7 @@ namespace :calendars do
         end
       end
       
-      calendar_driver.more_events_links.each do |expander|
+      calendar_driver.more_events_links&.each do |expander|
         expander.click
         calendar_driver.expanded_day_area.divs(:class => 'MonthAppointment')[3..-1].each do |event|
           code = calendar_driver.expanded_event_code event
