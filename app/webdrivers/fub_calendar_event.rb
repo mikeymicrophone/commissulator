@@ -78,19 +78,24 @@ class FubCalendarEvent < FubAuthenticated
   end
   
   def scrape_event event
-    access_event_edit_form event
-    calendar_event = CalendarEvent.new
-    calendar_event.title = title_field.value
-    calendar_event.description = description_field.value
-    calendar_event.location = location_field.value
-    Chronic.time_class = Time.zone
-    calendar_event.start_time = Chronic.parse date_field.value + ' ' + time_field.value
-    calendar_event.end_time = Chronic.parse end_date_field.value + ' ' + end_time_field.value
-    calendar_event.invitees = guest_list
-    calendar_event.follow_up_boss_id = "#{calendar_event.start_time.strftime("%B %Y %-d")} #{calendar_event.title}"
-    calendar_event.agent = agent
-    calendar_event.save
-    close_event_edit_form
+    begin
+      access_event_edit_form event
+      calendar_event = CalendarEvent.new
+      calendar_event.title = title_field.value
+      calendar_event.description = description_field.value
+      calendar_event.location = location_field.value
+      Chronic.time_class = Time.zone
+      calendar_event.start_time = Chronic.parse date_field.value + ' ' + time_field.value
+      calendar_event.end_time = Chronic.parse end_date_field.value + ' ' + end_time_field.value
+      calendar_event.invitees = guest_list
+      calendar_event.follow_up_boss_id = "#{calendar_event.start_time.strftime("%B %Y %-d")} #{calendar_event.title}"
+      calendar_event.agent = agent
+      calendar_event.save
+      close_event_edit_form
+    rescue Selenium::WebDriver::Error::UnknownError => exception
+      browser.screenshot.save Rails.root.join('tmp', 'driver_screenshot.png')
+      agent.screenshots.attach :io => File.open(Rails.root.join('tmp', 'driver_screenshot.png')), :filename => "driver_screenshot #{Time.now.to_s}.png"
+    end
     calendar_event
   end
   
