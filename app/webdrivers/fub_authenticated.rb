@@ -5,7 +5,9 @@ class FubAuthenticated
   attr_accessor :agent
   
   def browser
-    Watir::Browser.new :chrome, :headless => true
+    b = Watir::Browser.new :chrome, :headless => true
+    b.window.resize_to 1600, 1200
+    b
   end
   memoize :browser
   
