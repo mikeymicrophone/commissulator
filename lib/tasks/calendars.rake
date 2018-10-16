@@ -60,6 +60,7 @@ namespace :calendars do
         end
       end
       
+      local_events.compact!
       local_events.each do |event|
         event.retrieve_invitee_emails
         event.agent_is_invitee
