@@ -18,12 +18,21 @@ namespace :calendars do
           end
         end
         if local_events.present?
-          # I wonder if I can just go from cookie to cookie without logging out
           calendar_driver.load_cookie
           calendar_driver.access_calendar_page
           
           local_events.each &:push_to_follow_up_boss
         end
+      end
+    end
+  end
+  
+  task :fub_ingest_push => :environment do
+    Agent.where.not(:google_calendar_id => nil).find_each do |agent|
+      latest_event_id = CalendarEvent.order('id desc').first
+      agent.ingest_fub_appointments
+      CalendarEvent.where(CalendarEvent.arel_table[:id].gt latest_event_id).each do |event|
+        event.push_to_google
       end
     end
   end

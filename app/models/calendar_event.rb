@@ -70,7 +70,26 @@ class CalendarEvent < ApplicationRecord
   end
   
   def CalendarEvent.find_or_create_from_google event, agent
-    create_from_google event, agent unless CalendarEvent.where(:google_id => event.id).present?
+    create_from_google event, agent unless where(:google_id => event.id).present?
+  end
+  
+  def CalendarEvent.create_from_follow_up_boss event
+    calendar_event = new
+    calendar_event.title = event.title
+    calendar_event.description = event.description
+    calendar_event.location = event.location
+    Chronic.time_class = Time.zone
+    calendar_event.start_time = Chronic.parse event.start
+    calendar_event.end_time = Chronic.parse event.end
+    calendar_event.invitees = event.invitees
+    calendar_event.follow_up_boss_id = event.id
+    calendar_event.agent = Agent.where(:follow_up_boss_id => event.created_by_id).take
+    calendar_event.save
+    calendar_event
+  end
+  
+  def CalendarEvent.find_or_create_from_follow_up_boss event
+    create_from_follow_up_boss event unless where(:follow_up_boss_id => event['id']).present?
   end
   
   def push_to_follow_up_boss fub_calendar_event = nil

@@ -9,3 +9,8 @@ module FubClient
   class Task < Resource
   end
 end
+
+module FubClient
+  class Appointment < Resource
+  end
+end

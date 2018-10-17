@@ -36,6 +36,17 @@ class Agent < ApplicationRecord
     FubClient::User.find follow_up_boss_id
   end
   
+  def fub_appointments conditions = {}
+    conditions.merge! :userId => follow_up_boss_id, :sort => :id, :limit => 100
+    FubClient::Appointment.where conditions
+  end
+  
+  def ingest_fub_appointments # this will work if less than 101 appointments are not yet ingested
+    fub_appointments.each do |event|
+      CalendarEvent.find_or_create_from_follow_up_boss event
+    end
+  end
+  
   def google_calendar
     CalendarEvent.google_calendar self
   end
