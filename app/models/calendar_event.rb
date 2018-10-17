@@ -23,16 +23,16 @@ class CalendarEvent < ApplicationRecord
     end
   end
   
-  def retrieve_invitee_emails
+  def retrieve_invitee_details
     updated_invitees = invitees.map do |invitee|
-      unless invitee['email'].present?
-        fub_person = FubClient::Person.where(:name => invitee['name']).fetch.first
-        if fub_person
-          invitee['email'] = fub_person&.emails&.first&.[]('value')
-        else
-          fub_user = FubClient::User.where(:name => invitee['name']).fetch.first
-          invitee['email'] = fub_user&.email
-        end
+      fub_person = FubClient::Person.where(:name => invitee['name']).fetch.first
+      if fub_person
+        invitee['person_id'] = fub_person.id
+        invitee['email'] = fub_person&.emails&.first&.[]('value')
+      else
+        fub_user = FubClient::User.where(:name => invitee['name']).fetch.first
+        invitee['user_id'] = fub_user.id
+        invitee['email'] = fub_user&.email
       end
       invitee
     end
@@ -65,7 +65,7 @@ class CalendarEvent < ApplicationRecord
     calendar_event.agent = agent
     calendar_event.determine_invitees
     calendar_event.save
-    calendar_event.retrieve_invitee_emails
+    calendar_event.retrieve_invitee_details
     calendar_event
   end
   
@@ -90,6 +90,22 @@ class CalendarEvent < ApplicationRecord
   
   def CalendarEvent.find_or_create_from_follow_up_boss event
     create_from_follow_up_boss event unless where(:follow_up_boss_id => event['id']).present?
+  end
+  
+  def to_follow_up_boss
+    appointment = FubClient::Appointment.new
+    appointment.title = title
+    appointment.description = description
+    appointment.location = location
+    appointment.start = start_time
+    appointment.end = end_time
+    appointment.invitees = invitees
+    begin
+      appointment.save
+    rescue NoMethodError => exception
+      Rails.logger.debug exception.inspect
+    end
+    update_attribute :follow_up_boss_id, appointment.id
   end
   
   def push_to_follow_up_boss fub_calendar_event = nil

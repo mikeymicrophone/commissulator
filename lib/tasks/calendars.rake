@@ -21,7 +21,7 @@ namespace :calendars do
           calendar_driver.load_cookie
           calendar_driver.access_calendar_page
           
-          local_events.each &:push_to_follow_up_boss
+          local_events.each &:to_follow_up_boss
         end
       end
     end
