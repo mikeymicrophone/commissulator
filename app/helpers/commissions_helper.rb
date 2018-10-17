@@ -12,6 +12,7 @@ module CommissionsHelper
   
   def commission_row_for commission
     columns = [
+      content_tag(:td, link_to("[#{commission.id}]", commission)),
       content_tag(:td, commission.property_address),
       content_tag(:td, commission.apartment_number),
       content_tag(:td, commission.tenant_name.join(', ')),
@@ -27,6 +28,7 @@ module CommissionsHelper
       content_tag(:td, link_to(fa_icon(:file_invoice_dollar, :size => '2x'), commission.deal, :title => 'Finance Breakdown')),
       content_tag(:td, link_to(fa_icon(:newspaper, :size => '2x'), edit_commission_path(commission), :title => 'Update Paperwork')),
       content_tag(:td, link_to(fa_icon(:file_export, :size => '2x'), commission_path(commission, :format => :pdf), :title => 'Print Preview of Rental Request for Commission')),
+      content_tag(:td, "[#{commission.id}]"),
       # content_tag(:td, commission.documents.present? ? link_to(fa_icon(:hdd, :text => "(#{commission.documents.count})", :size => '2x'), documents_path(:filtered_attribute => :deal_id, :filter_value => commission.deal), :title => pluralize(commission.documents.count, 'Uploaded Document')) : '', :class => 'document_list'),
       # content_tag(:td, link_to(fa_icon(:file_signature, :size => '2x'), new_document_path(:document => {:deal_id => commission.deal}), :title => 'Attach Document')),
       content_tag(:td, commission.documented? ? link_to(fa_icon(:paper_plane, :size => '2x'), submit_commission_path(commission), :method => :put, :remote => true, :id => dom_id(commission, :submission_link_for), :title => 'Submit to Senior Agent via Email') : ''),
@@ -38,7 +40,7 @@ module CommissionsHelper
     end
     
     if current_avatar.admin?
-      columns.insert 5, content_tag(:td, number_to_round_currency(commission.deal.company_commission))
+      columns.insert 6, content_tag(:td, number_to_round_currency(commission.deal.company_commission))
     end
     
     content_tag_for :tr, commission do

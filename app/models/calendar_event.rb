@@ -31,7 +31,7 @@ class CalendarEvent < ApplicationRecord
         invitee['email'] = fub_person&.emails&.first&.[]('value')
       else
         fub_user = FubClient::User.where(:name => invitee['name']).fetch.first
-        invitee['user_id'] = fub_user.id
+        invitee['user_id'] = fub_user&.id
         invitee['email'] = fub_user&.email
       end
       invitee

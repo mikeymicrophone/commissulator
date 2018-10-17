@@ -6,6 +6,7 @@ class Agent < ApplicationRecord
   has_many :deals
   has_many :commissions
   has_many :registrations
+  has_many :calendar_events
   
   has_many_attached :cookies
   has_many_attached :screenshots

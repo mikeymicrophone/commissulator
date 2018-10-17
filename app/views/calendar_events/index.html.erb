@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Title</th>
       <th>Description</th>
       <th>Start time</th>
@@ -13,6 +14,7 @@
       <th>Google</th>
       <th>Calendly</th>
       <th>Agent</th>
+      <th>Created at</th>
       <th>Confirmed at</th>
       <th colspan="3"></th>
     </tr>
@@ -21,6 +23,7 @@
   <tbody>
     <% @calendar_events.each do |calendar_event| %>
       <tr>
+        <td><%= calendar_event.id %></td>
         <td><%= calendar_event.title %></td>
         <td><%= calendar_event.description %></td>
         <td><%= calendar_event.start_time %></td>
@@ -31,6 +34,7 @@
         <td><%= calendar_event.google_id %></td>
         <td><%= calendar_event.calendly_id %></td>
         <td><%= link_to_name_with_icon calendar_event.agent %></td>
+        <td><%= calendar_event.created_at %></td>
         <td><%= calendar_event.confirmed_at %></td>
         <td><%= link_to 'Show', calendar_event %></td>
         <td><%= link_to 'Edit', edit_calendar_event_path(calendar_event) %></td>

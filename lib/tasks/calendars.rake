@@ -6,15 +6,11 @@ namespace :calendars do
       if agent.google_calendar_id.present?
         calendar_driver.agent = agent
         local_events = []
-        google_calendar = CalendarEvent.google_calendar agent
-        google_calendar.events.each do |event|
+        agent.google_calendar.events.each do |event|
           if CalendarEvent.where(:google_id => event.id).present?
             puts "We already have the event #{event.title}."
           else
-            local_event = CalendarEvent.create_from_google(event, agent)
-            local_event.agent = agent
-            local_event.save
-            local_events << local_event
+            local_events << CalendarEvent.create_from_google(event, agent)
           end
         end
         if local_events.present?
@@ -27,18 +23,17 @@ namespace :calendars do
     end
   end
   
-  task :fub_ingest_push => :environment do
+  desc 'find newly created events and add them to the corresponding Google calendar'
+  task :fub_to_google => :environment do
     Agent.where.not(:google_calendar_id => nil).find_each do |agent|
-      latest_event_id = CalendarEvent.order('id desc').first
+      latest_event_id = CalendarEvent.order('id desc').first.id
       agent.ingest_fub_appointments
-      CalendarEvent.where(CalendarEvent.arel_table[:id].gt latest_event_id).each do |event|
-        event.push_to_google
-      end
+      agent.calendar_events.where(CalendarEvent.arel_table[:id].gt latest_event_id).each &:push_to_google
     end
   end
   
-  desc 'find newly created events and add them to the corresponding Google calendar'
-  task :fub_to_google => :environment do
+  desc 'scrape newly created events and add them to the corresponding Google calendar'
+  task :fub_scrape_to_google => :environment do
     calendar_driver = FubCalendarEvent.new
     Agent.where.not(:google_calendar_id => nil).find_each do |agent|
       calendar_driver.agent = agent
