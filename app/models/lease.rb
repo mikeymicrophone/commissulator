@@ -38,15 +38,17 @@ class Lease < ApplicationRecord
         Rails.logger.debug error.inspect
       end
     end
-    landlord_note = FubClient::Note.new
-    landlord_note.subject = "Lease parameters"
-    landlord_note.body = fub_description clients.map(&:name).to_sentence
-    landlord_note.personId = landlord.follow_up_boss_id
-    landlord_note.isHtml = true
-    begin
-      landlord_note.save
-    rescue NoMethodError => error
-      Rails.logger.debug error.inspect
+    if landlord
+      landlord_note = FubClient::Note.new
+      landlord_note.subject = "Lease parameters"
+      landlord_note.body = fub_description clients.map(&:name).to_sentence
+      landlord_note.personId = landlord.follow_up_boss_id
+      landlord_note.isHtml = true
+      begin
+        landlord_note.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
     end
   end
 end
