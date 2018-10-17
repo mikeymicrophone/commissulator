@@ -97,8 +97,8 @@ class CalendarEvent < ApplicationRecord
     appointment.title = title
     appointment.description = description
     appointment.location = location
-    appointment.start = start_time
-    appointment.end = end_time
+    appointment.start = start_time.utc
+    appointment.end = end_time.utc
     appointment.invitees = invitees
     begin
       appointment.save
