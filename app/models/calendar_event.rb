@@ -100,6 +100,8 @@ class CalendarEvent < ApplicationRecord
     appointment.start = start_time.utc
     appointment.end = end_time.utc
     appointment.invitees = invitees
+    # suppress invitation email  /api/v1/appointments?sendInvitation=false      doesn't seem necessary
+    # it's not necessary now, but might be some day
     begin
       appointment.save
     rescue NoMethodError => exception
