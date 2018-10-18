@@ -39,6 +39,10 @@ class CalendarEvent < ApplicationRecord
     update_attribute :invitees, updated_invitees
   end
   
+  def invitee_description
+    "Invited: #{invitees.map { |invitee| invitee['name'] }.reject { |name| name == agent&.name }.to_sentence}\n\n"
+  end
+  
   def agent_is_invitee
     updated_invitees = invitees
     unless invitees.map { |invitee| invitee['name'] }.include? agent.name
@@ -76,14 +80,14 @@ class CalendarEvent < ApplicationRecord
   def CalendarEvent.create_from_follow_up_boss event
     calendar_event = new
     calendar_event.title = event.title
-    calendar_event.description = event.description
+    calendar_event.invitees = event.invitees
+    calendar_event.agent = Agent.where(:follow_up_boss_id => event.created_by_id).take
+    calendar_event.description = calendar_event.invitee_description + event.description
     calendar_event.location = event.location
     Chronic.time_class = Time.zone
     calendar_event.start_time = Chronic.parse event.start
     calendar_event.end_time = Chronic.parse event.end
-    calendar_event.invitees = event.invitees
     calendar_event.follow_up_boss_id = event.id
-    calendar_event.agent = Agent.where(:follow_up_boss_id => event.created_by_id).take
     calendar_event.save
     calendar_event
   end
