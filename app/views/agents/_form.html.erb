@@ -47,6 +47,11 @@
   </div>
   
   <div class="field">
+    <%= form.label :follow_up_boss_id %>
+    <%= form.text_field :follow_up_boss_id %>
+  </div>
+  
+  <div class="field">
     <%= form.label :avatar_id %>
     <%= form.select :avatar_id, options_from_collection_for_select(Avatar.all, :id, :email, @agent.avatar_id), :include_blank => true %>
   </div>
