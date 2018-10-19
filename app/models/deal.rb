@@ -114,9 +114,19 @@ class Deal < ApplicationRecord
   end
   
   def fub_create
+    agents.each do |agent|
+      fub_object = FubClient::Deal.new(:name => "#{property_address} ##{apartment_number}", :stageId => ENV['FOLLOW_UP_BOSS_STAGE_ID_CLOSED'],
+        :price => leased_monthly_rent, :commissionValue => payout_to(agent), :projectedCloseDate => lease_sign_date, :description => fub_description(roles_for(agent)),
+        :peopleIds => fub_people.map(&:id).append(landlord.follow_up_boss_id), :userIds => [agent.follow_up_boss_id])
+      begin
+        fub_object.save
+      rescue NoMethodError => error
+        Rails.logger.debug error.inspect
+      end
+    end
     fub_object = FubClient::Deal.new(:name => "#{property_address} ##{apartment_number}", :stageId => ENV['FOLLOW_UP_BOSS_STAGE_ID_CLOSED'],
       :price => leased_monthly_rent, :commissionValue => total_commission, :projectedCloseDate => lease_sign_date, :description => fub_description,
-      :peopleIds => fub_people.map(&:id).append(landlord.follow_up_boss_id), :userIds => agents.map(&:follow_up_boss_id))
+      :peopleIds => fub_people.map(&:id).append(landlord.follow_up_boss_id), :userIds => [agent.follow_up_boss_id])
     begin
       fub_object.save
     rescue NoMethodError => error
