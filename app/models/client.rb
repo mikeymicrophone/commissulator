@@ -19,7 +19,17 @@ class Client < ApplicationRecord
   end
   
   def fub_similar
-    FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
+    person = nil
+    emails.each do |email|
+      break if person.present?
+      person = FubClient::Person.where(:email => email.address).fetch
+    end
+    phones.each do |phone|
+      break if person.present?
+      person = FubClient::Person.where(:phone => phone.number).fetch
+    end
+    person ||= FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
+    person
   end
   
   def fub_create
