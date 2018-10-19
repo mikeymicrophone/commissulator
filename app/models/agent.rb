@@ -52,6 +52,21 @@ class Agent < ApplicationRecord
     CalendarEvent.google_calendar self
   end
   
+  def microsoft_calendars
+    microsoft_graph.me.calendars
+  end
+  
+  def microsoft_graph
+    authorization_callback = Proc.new { |r| r.headers["Authorization"] = "Bearer #{microsoft_token}" }
+
+    graph = MicrosoftGraph.new(
+      base_url: "https://graph.microsoft.com/v1.0",
+      cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, "metadata_v1.0.xml"),
+      # api_version: '1.6', # Optional
+      &authorization_callback
+    )
+  end
+  
   def Agent.google_client_id_filename
     Rails.env.production? ? 'google_client_id.json' : 'staging_google_client_id.json'
   end
@@ -112,12 +127,33 @@ class Agent < ApplicationRecord
       :authorize_url => "/common/oauth2/authorize",
       :token_url => "/common/oauth2/token"
     )
-
-    token = client.auth_code.get_token(
-      cookies.last.download,
-      :redirect_uri => url_helpers.avatar_microsoft_office365_omniauth_callback_url(:protocol => (Rails.env.development? ? 'http' : 'https')),
+  end
+  
+  def Agent.microsoft_auth_uri
+    microsoft_auth_client.auth_code.authorize_url :redirect_uri => url_helpers.microsoft_token_calendar_events_url(:protocol => (Rails.env.development? ? 'http' : 'https')), :scope => 'Calendars.ReadWrite.Shared Contacts.ReadWrite.Shared offline_access openid profile'
+  end
+  
+  def fetch_microsoft_access_tokens
+    tokens = Agent.microsoft_auth_client.auth_code.get_token(
+      microsoft_exchangeable_code,
+      :redirect_uri => url_helpers.microsoft_token_calendar_events_url(:protocol => (Rails.env.development? ? 'http' : 'https')),
       :resource => 'https://outlook.office365.com'
     )
+    File.open(Rails.root.join('tmp', 'microsoft_access_tokens.json'), 'w+') do |file|
+      file.write tokens.to_json
+    end
+    cookies.attach :io => File.open(Rails.root.join('tmp', 'microsoft_access_tokens.json')), :filename => 'microsoft_access_tokens.json'
+  end
+  
+  def microsoft_token
+    token = OAuth2::AccessToken.from_hash(Agent.microsoft_auth_client, microsoft_tokens)
+
+    if token.expired?
+      new_token = token.refresh!
+      new_token.token
+    else
+      token.token
+    end
   end
   
   def google_exchangeable_code
@@ -126,9 +162,51 @@ class Agent < ApplicationRecord
     JSON.parse(data)['code']
   end
   
+  def microsoft_exchangeable_code
+    file = cookies.select { |cookie| cookie.filename.to_s == "microsoft_auth_code.json" }.last
+    data = file&.download
+    JSON.parse(data)['code']
+  end
+  
   def google_tokens
     file = cookies.select { |cookie| cookie.filename.to_s == 'google_access_tokens.json' }.last
     data = file&.download
     JSON.parse data
+  end
+  
+  def microsoft_tokens
+    file = cookies.select { |cookie| cookie.filename.to_s == 'microsoft_access_tokens.json' }.last
+    data = file&.download
+    JSON.parse data
+  end
+  
+  require 'adal'
+  require 'microsoft_graph'
+
+  def microsoft_me
+    # authenticate using ADAL
+    username      = 'MikeyMicrophone@kajillion.onmicrosoft.com'
+    password      = 'wodBym82##'
+    client_id     = Rails.application.credentials.microsoft[:application_id]
+    client_secret = Rails.application.credentials.microsoft[:password]
+    tenant        = 'kajillion.onmicrosoft.com'
+    user_cred     = ADAL::UserCredential.new(username, password)
+    client_cred   = ADAL::ClientCredential.new(client_id, client_secret)
+    context       = ADAL::AuthenticationContext.new(ADAL::Authority::WORLD_WIDE_AUTHORITY, tenant)
+    resource      = "https://graph.microsoft.com"
+    tokens        = context.acquire_token_for_user(resource, client_cred, user_cred)
+
+    # add the access token to the request header
+    callback = Proc.new { |r| r.headers["Authorization"] = "Bearer #{tokens.access_token}" }
+
+    graph = MicrosoftGraph.new(base_url: "https://graph.microsoft.com/v1.0",
+                               cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, "metadata_v1.0.xml"),
+                               api_version: '1.6', # Optional
+                               &callback
+    )
+
+    me = graph.me # get the current user
+    puts "Hello, I am #{me.display_name}."
+    me
   end
 end

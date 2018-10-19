@@ -61,6 +61,17 @@ class CalendarEventsController < ApplicationController
     @agent.fetch_google_access_tokens
     redirect_to @agent, :notice => 'Token secured.'
   end
+  
+  def microsoft_token
+    @agent = current_avatar.agent
+    auth = {'code' => params[:code], 'state' => params[:state], 'session_state' => params[:session_state]}
+    
+    File.open(Rails.root.join('tmp', 'microsoft_auth_code.json'), 'w+') do |file|
+      file.write auth.to_json
+    end
+    
+    @agent.cookies.attach :io => File.open(Rails.root.join('tmp', 'microsoft_auth_code.json')), :filename => 'microsoft_auth_code.json'
+  end
 
   private
     def set_calendar_event

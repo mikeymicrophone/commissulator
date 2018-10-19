@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :calendar_events do
     collection do
       get :token
+      get :microsoft_token
     end
   end
   resources :tenants
