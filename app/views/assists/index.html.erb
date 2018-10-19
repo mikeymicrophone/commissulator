@@ -22,7 +22,7 @@
         <td><%= link_to_name_with_icon assist.deal, :reference %></td>
         <td><%= link_to_name_with_icon assist.agent %></td>
         <% if current_avatar.admin? %>
-          <td><%= number_to_currency assist.payout %></td>
+          <td><%= number_to_round_currency assist.payout %>/<%= number_to_round_currency assist.deal.payout_to assist.agent %></td>
         <% end %>
         <td><%= participation_in assist.role %></td>
         <td><%= assist.status %></td>

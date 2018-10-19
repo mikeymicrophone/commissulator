@@ -2,7 +2,7 @@ include CommissionsHelper
 class Deal < ApplicationRecord
   belongs_to :agent
   has_many :assists, :dependent => :destroy
-  has_many :agents, :through => :assists
+  has_many :agents, -> { distinct }, :through => :assists
   belongs_to :package, :optional => true
   has_one :commission
   has_one :landlord, :through => :commission
@@ -58,6 +58,14 @@ class Deal < ApplicationRecord
   
   def company_commission
     20.percent_of(remaining_commission) - special_payments_total rescue nil
+  end
+  
+  def payout_to assisting_agent
+    assists.where(:agent => assisting_agent).sum &:payout if commission
+  end
+  
+  def roles_for assisting_agent
+    assists.where(:agent => assisting_agent).map(&:name).to_sentence
   end
   
   def distributable_commission participation_rate
@@ -129,7 +137,7 @@ class Deal < ApplicationRecord
     end
   end
   
-  def fub_description
+  def fub_description with_roles = ''
     <<~DESCRIBE
     #{clients.map(&:name).to_sentence}
     Address: #{address} ##{unit_number}
@@ -139,6 +147,7 @@ class Deal < ApplicationRecord
     Rent: #{rounded leased_monthly_rent}
     Commission: #{rounded total_commission}#{owner_pay_commission.present? ? "\nOwner Pay Commission: #{rounded owner_pay_commission}" : ''}
     Landlord: #{landlord.name}
+    #{with_roles}
     DESCRIBE
   end
   

@@ -11,12 +11,10 @@ class AgentsController < ApplicationController
       Agent.where params[:filtered_attribute] => params[:filter_value]
     end
     @agents = case params[:sort]
-    when 'first_name'
-      @agents.order :first_name
-    when 'last_name'
-      @agents.order :last_name
-    else
+    when nil
       @agents.all
+    else
+      @agents.order params[:sort]
     end.page params[:page]
   end
 

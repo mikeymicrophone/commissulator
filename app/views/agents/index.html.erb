@@ -8,6 +8,7 @@
       <th><%= link_to 'Last name', filter_params.merge(:sort => 'last_name') %></th>
       <th>Phone number</th>
       <th>Email</th>
+      <th><%= link_to 'FUB', filter_params.merge(:sort => 'follow_up_boss_id') %></th>
       <th>Status</th>
       <th colspan="3"></th>
     </tr>
@@ -20,6 +21,7 @@
         <td><%= agent.last_name %></td>
         <td><%= agent.phone_number %></td>
         <td><%= agent.email %></td>
+        <td><%= agent.follow_up_boss_id %></td>
         <td><%= agent.status %></td>
         <td><%= link_to pluralize(agent.assists.count, 'assist'), assists_path(:filtered_attribute => :agent_id, :filter_value => agent.id) %></td>
         <td><%= link_to 'Show', agent %></td>
