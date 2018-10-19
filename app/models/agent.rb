@@ -43,7 +43,7 @@ class Agent < ApplicationRecord
   end
   
   def ingest_fub_appointments # this will work if less than 101 appointments are not yet ingested
-    fub_appointments.each do |event|
+    fub_appointments&.each do |event|
       CalendarEvent.find_or_create_from_follow_up_boss event
     end
   end
