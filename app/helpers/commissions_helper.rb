@@ -40,7 +40,7 @@ module CommissionsHelper
     end
     
     if current_avatar.admin?
-      columns.insert 6, content_tag(:td, number_to_round_currency(commission.deal.company_commission))
+      columns.insert 6, content_tag(:td, number_to_round_currency(commission.deal&.company_commission))
     end
     
     content_tag_for :tr, commission do

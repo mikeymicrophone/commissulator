@@ -57,7 +57,7 @@ class Deal < ApplicationRecord
   end
   
   def company_commission
-    20.percent_of(remaining_commission) - special_payments_total
+    20.percent_of(remaining_commission) - special_payments_total rescue nil
   end
   
   def distributable_commission participation_rate
