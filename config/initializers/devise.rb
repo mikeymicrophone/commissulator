@@ -257,15 +257,10 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  if Rails.env.production?
-    config.omniauth :google_oauth2, Rails.application.credentials.google[:client_id], Rails.application.credentials.google[:client_secret], {}
-    config.omniauth :contactually, Rails.application.credentials.contactually[:application_id], Rails.application.credentials.contactually[:secret], :scope => "all:manage"
-    config.omniauth :microsoft_office365, Rails.application.credentials.microsoft[:application_id], Rails.application.credentials.microsoft[:password]
-  else
-    config.omniauth :google_oauth2, Rails.application.credentials.google[:staging_client_id], Rails.application.credentials.google[:staging_client_secret], {}
-    config.omniauth :contactually, Rails.application.credentials.contactually[:staging_application_id], Rails.application.credentials.contactually[:staging_secret], :scope => "all:manage"
-    config.omniauth :microsoft_office365, Rails.application.credentials.microsoft[:staging_application_id], Rails.application.credentials.microsoft[:staging_password]
-  end
+
+  config.omniauth :google_oauth2, Rails.application.credentials.google[:client_id], Rails.application.credentials.google[:client_secret], {}
+  config.omniauth :contactually, Rails.application.credentials.contactually[:application_id], Rails.application.credentials.contactually[:secret], :scope => "all:manage"
+  config.omniauth :microsoft_office365, Rails.application.credentials.microsoft[:application_id], Rails.application.credentials.microsoft[:password], :scope => "Calendars.ReadWrite.Shared Contacts.ReadWrite.Shared offline_access openid profile"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

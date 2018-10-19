@@ -130,23 +130,13 @@ class CalendarEvent < ApplicationRecord
   end
   
   def CalendarEvent.google_connection tokens
-    if Rails.env.production?
-      Google::Connection.factory(
-        :client_id => Rails.application.credentials.google[:client_id],
-        :client_secret => Rails.application.credentials.google[:client_secret],
-        :refresh_token => tokens['refresh_token'],
-        :access_token => tokens['access_token'],
-        :redirect_url  => url_helpers.avatar_google_oauth2_omniauth_callback_url
-      )
-    else
-      Google::Connection.factory(
-        :client_id => Rails.application.credentials.google[:staging_client_id],
-        :client_secret => Rails.application.credentials.google[:staging_client_secret],
-        :refresh_token => tokens['refresh_token'],
-        :access_token => tokens['access_token'],
-        :redirect_url  => url_helpers.avatar_google_oauth2_omniauth_callback_url
-      )
-    end
+    Google::Connection.factory(
+      :client_id => Rails.application.credentials.google[:client_id],
+      :client_secret => Rails.application.credentials.google[:client_secret],
+      :refresh_token => tokens['refresh_token'],
+      :access_token => tokens['access_token'],
+      :redirect_url  => url_helpers.avatar_google_oauth2_omniauth_callback_url
+    )
   end
   
   def microsoft_calendar

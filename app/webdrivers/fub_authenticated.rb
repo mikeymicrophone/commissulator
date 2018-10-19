@@ -13,13 +13,8 @@ class FubAuthenticated
   
   def login_submit
     browser.goto 'https://login.followupboss.com/login'
-    if Rails.env.production?
-      browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:login_identity][agent.last_name.to_sym]
-      browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:login_password][agent.last_name.to_sym]
-    else
-      browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:staging_login_identity][agent.last_name.to_sym]
-      browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:staging_login_password][agent.last_name.to_sym]
-    end
+    browser.text_field(:id => 'Email').set Rails.application.credentials.follow_up_boss[:login_identity][agent.last_name.to_sym]
+    browser.text_field(:id => 'Password').set Rails.application.credentials.follow_up_boss[:login_password][agent.last_name.to_sym]
     browser.form(:id => 'form').submit
     browser.form(:action => '/login/index').wait_while &:exists?
   end
@@ -52,10 +47,6 @@ class FubAuthenticated
   end
   
   def domain
-    if Rails.env.production?
-      "#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/dashboard"
-    else
-      "#{Rails.application.credentials.follow_up_boss[:staging_subdomain]}.followupboss.com/2/dashboard"
-    end
+    "#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/dashboard"
   end
 end

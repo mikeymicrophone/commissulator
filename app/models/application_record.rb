@@ -8,7 +8,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
   
   def contactually_client
-    @contactually_client ||= Contactually::Client.new :auth_token => Rails.application.credentials.contactually[:staging_token]
+    @contactually_client ||= Contactually::Client.new :auth_token => Rails.application.credentials.contactually[:token]
   end
   
   def icon

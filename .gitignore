@@ -33,3 +33,9 @@
 /config/initializers/aalpha_dev_constants.rb
 
 *.dump
+
+# Ignore master key for decrypting credentials and more.
+/config/master-staging.key
+
+# Ignore master key for decrypting credentials and more.
+/config/master-development.key

@@ -104,10 +104,10 @@ class Agent < ApplicationRecord
     auth_client
   end
   
-  def secure_microsoft_token
-    client = OAuth2::Client.new(
-      Rails.application.credentials.microsoft[:"#{Rails.env.production? ? '' : 'staging_'}application_id"],
-      Rails.application.credentials.microsoft[:"#{Rails.env.production? ? '' : 'staging_'}password"],
+  def Agent.microsoft_auth_client
+    OAuth2::Client.new(
+      Rails.application.credentials.microsoft[:application_id],
+      Rails.application.credentials.microsoft[:password],
       :site => "https://login.microsoftonline.com",
       :authorize_url => "/common/oauth2/authorize",
       :token_url => "/common/oauth2/token"

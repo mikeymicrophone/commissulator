@@ -165,10 +165,6 @@ class FubCalendarEvent < FubAuthenticated
   end
   
   def calendar_domain
-    if Rails.env.production?
-      "#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/calendar"
-    else
-      "#{Rails.application.credentials.follow_up_boss[:staging_subdomain]}.followupboss.com/2/calendar"
-    end
+    "#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/calendar"
   end
 end

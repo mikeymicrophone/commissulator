@@ -50,6 +50,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'crack'
 
 group :development, :test do
+  gem 'rails-env-credentials'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 

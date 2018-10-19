@@ -97,7 +97,6 @@ class Client < ApplicationRecord
   end
   
   def fub_url
-    subdomain = Rails.env.production? ? Rails.application.credentials.follow_up_boss[:subdomain] : Rails.application.credentials.follow_up_boss[:staging_subdomain]
-    "https://#{subdomain}.followupboss.com/2/people/view/#{follow_up_boss_id}" if follow_up_boss_id.present?
+    "https://#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/people/view/#{follow_up_boss_id}" if follow_up_boss_id.present?
   end
 end
