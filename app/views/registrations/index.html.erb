@@ -23,15 +23,15 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class='registration_control'>
     <% @registrations.each do |registration| %>
       <tr>
-        <td>
-          <%= mark_up registration.fub_description %>
+        <td class='registration_printout'><%= link_to 'PDF/Printout', card_registration_path(registration, :format => :pdf) %></td>
+        <td class='registration_clients'>
+          <%= registration.clients.map(&:name).to_sentence %>
         </td>
         <td>
-          <%= registration.clients.map(&:name).to_sentence %>
-          <%= link_to_associated registration, :clients %>
+          <%= mark_up registration.fub_description %>
         </td>
         <td><%= link_to_associated registration, :employments %></td>
         <td><%= link_to_associated registration, :apartments %></td>
