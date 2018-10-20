@@ -185,11 +185,11 @@ class Agent < ApplicationRecord
 
   def microsoft_me
     # authenticate using ADAL
-    username      = 'MikeyMicrophone@kajillion.onmicrosoft.com'
-    password      = 'wodBym82##'
+    username      = ''
+    password      = ''
     client_id     = Rails.application.credentials.microsoft[:application_id]
     client_secret = Rails.application.credentials.microsoft[:password]
-    tenant        = 'kajillion.onmicrosoft.com'
+    tenant        = ''
     user_cred     = ADAL::UserCredential.new(username, password)
     client_cred   = ADAL::ClientCredential.new(client_id, client_secret)
     context       = ADAL::AuthenticationContext.new(ADAL::Authority::WORLD_WIDE_AUTHORITY, tenant)

@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 2018_10_12_200753) do
     t.decimal "adjustment"
     t.decimal "expense"
     t.integer "role_id"
-    t.integer "parent_id"
     t.index ["agent_id"], name: "index_assists_on_agent_id"
     t.index ["deal_id"], name: "index_assists_on_deal_id"
   end
