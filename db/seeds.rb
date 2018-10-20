@@ -1,7 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+classic = Package.find_or_create_by :name => 'Classic'
+
+lead = Role.find_or_create_by :name => 'lead'
+interview = Role.find_or_create_by :name => 'interview'
+show = Role.find_or_create_by :name => 'show'
+close = Role.find_or_create_by :name => 'close'
+
+Involvement.find_or_create_by :role => lead, :package => classic, :rate => 10.0
+Involvement.find_or_create_by :role => interview, :package => classic, :rate => 14.0
+Involvement.find_or_create_by :role => show, :package => classic, :rate => 19.5
+Involvement.find_or_create_by :role => close, :package => classic, :rate => 16.5
+
