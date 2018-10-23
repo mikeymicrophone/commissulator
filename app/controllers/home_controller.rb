@@ -128,10 +128,10 @@ class HomeController < ApplicationController
   end
   
   def apartment_params
-    params.require("apartment_1").permit :unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment
+    params.require("apartment_1").permit :unit_number, :street_number, :street_name, :rent, :comment
   end
 
   def second_apartment_params
-    params.require("apartment_2").permit :unit_number, :street_number, :street_name, :zip_code, :size, :rent, :comment
+    params.require("apartment_2").permit :unit_number, :street_number, :street_name, :rent, :comment
   end
 end
