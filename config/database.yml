@@ -4,6 +4,9 @@ default: &default
 development:
   <<: *default
   database: commissulator_development
+development_ciremoussa:
+  <<: *default
+  database: commissulator_development_ciremoussa
 
 test:
   <<: *default
