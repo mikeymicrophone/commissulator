@@ -135,7 +135,7 @@ class CalendarEvent < ApplicationRecord
       :client_secret => Rails.application.credentials.google[:client_secret],
       :refresh_token => tokens['refresh_token'],
       :access_token => tokens['access_token'],
-      :redirect_url  => url_helpers.avatar_google_oauth2_omniauth_callback_url
+      :redirect_url  => url_helpers.token_calendar_events_url
     )
   end
   
