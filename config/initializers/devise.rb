@@ -258,11 +258,11 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  if Rails.application.credentials.google.present?
-    config.omniauth :google_oauth2, Rails.application.credentials.google[:client_id], Rails.application.credentials.google[:client_secret], {}
-    config.omniauth :contactually, Rails.application.credentials.contactually[:application_id], Rails.application.credentials.contactually[:secret], :scope => "all:manage"
-    config.omniauth :microsoft_office365, Rails.application.credentials.microsoft[:application_id], Rails.application.credentials.microsoft[:password], :scope => "Calendars.ReadWrite.Shared Contacts.ReadWrite.Shared offline_access openid profile"
-  end
+  # if Rails.application.credentials.google.present?
+  #   config.omniauth :google_oauth2, Rails.application.credentials.google[:client_id], Rails.application.credentials.google[:client_secret], {}
+  #   config.omniauth :contactually, Rails.application.credentials.contactually[:application_id], Rails.application.credentials.contactually[:secret], :scope => "all:manage"
+  #   config.omniauth :microsoft_office365, Rails.application.credentials.microsoft[:application_id], Rails.application.credentials.microsoft[:password], :scope => "Calendars.ReadWrite.Shared Contacts.ReadWrite.Shared offline_access openid profile"
+  # end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
