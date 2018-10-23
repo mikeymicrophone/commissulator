@@ -30,7 +30,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-/config/initializers/aalpha_dev_constants.rb
+/config/initializers/aaa_dev_constants.rb
 
 *.dump
 
