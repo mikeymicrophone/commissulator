@@ -10,3 +10,6 @@ Involvement.find_or_create_by :role => interview, :package => classic, :rate => 
 Involvement.find_or_create_by :role => show, :package => classic, :rate => 19.5
 Involvement.find_or_create_by :role => close, :package => classic, :rate => 16.5
 
+ReferralSource.find_or_create_by :name => 'Apartments.com'
+ReferralSource.find_or_create_by :name => 'StreetEasy'
+ReferralSource.find_or_create_by :name => 'Other'

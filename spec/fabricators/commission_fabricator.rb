@@ -25,11 +25,11 @@ Fabricator :commission do
   copy_of_lease { true }
   property_address { Faker::Address.street_address }
   apartment_number { (1..25).to_a.sample.to_s + (?A..?L).to_a.sample }
-  zip_code { '1000' + rand(9).to_s }
+  zip_code { '1000' + rand(280).to_s }
   leased_monthly_rent { |attrs| die_roll(4) ? attrs[:listed_monthly_rent] - rand(10) * 20 : attrs[:listed_monthly_rent] }
   annualized_rent { |attrs| attrs[:leased_monthly_rent] * 12 }
   transient :fee
-  fee { |attrs| attrs[:annualized_rent] * 0.15 }
+  fee { |attrs| (12..25).to_a.sample.percent_of attrs[:annualized_rent] }
   
   transient :owner_pay
   owner_pay { die_roll 5 }

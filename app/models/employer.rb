@@ -9,19 +9,19 @@ class Employer < ApplicationRecord
   validates :name, :presence => true
   
   def fub_create
-    similar_people = FubClient::Person.where(:lastName => name).fetch
-    person = similar_people.first if similar_people.present?
-    person ||= FubClient::Person.new :lastName => name
-    person.emails = emails.map { |email| {:value => email.address} } if emails.any?
-    person.phones = phones.map { |phone| {:value => phone.number, :type => phone.variety} } if phones.any?
-    person.tags = ['Employer']
-    person.stage = ENV['FOLLOW_UP_BOSS_STAGE_ID_EMPLOYER']
     begin
+      similar_people = FubClient::Person.where(:lastName => name).fetch
+      person = similar_people.first if similar_people.present?
+      person ||= FubClient::Person.new :lastName => name
+      person.emails = emails.map { |email| {:value => email.address} } if emails.any?
+      person.phones = phones.map { |phone| {:value => phone.number, :type => phone.variety} } if phones.any?
+      person.tags = ['Employer']
+      person.stage = ENV['FOLLOW_UP_BOSS_STAGE_ID_EMPLOYER']
       person.save
-    rescue NoMethodError => error
-      Rails.logger.debug error.inspect
+      update_attribute :follow_up_boss_id, person.id
+    rescue NoMethodError => exception
+      Rails.logger.debug exception.inspect
     end
-    update_attribute :follow_up_boss_id, person.id
     person
   end
   

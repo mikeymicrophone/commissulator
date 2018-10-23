@@ -20,15 +20,19 @@ class Client < ApplicationRecord
   
   def fub_similar
     person = nil
-    emails.each do |email|
-      break if person.present?
-      person = FubClient::Person.where(:email => email.address).fetch
+    begin
+      emails.each do |email|
+        break if person.present?
+        person = FubClient::Person.where(:email => email.address).fetch
+      end
+      phones.each do |phone|
+        break if person.present?
+        person = FubClient::Person.where(:phone => phone.number).fetch
+      end
+      person ||= FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
+    rescue NoMethodError => exception
+      Rails.logger.debug exception.inspect
     end
-    phones.each do |phone|
-      break if person.present?
-      person = FubClient::Person.where(:phone => phone.number).fetch
-    end
-    person ||= FubClient::Person.where(:firstName => first_name, :lastName => last_name).fetch
     person
   end
   
@@ -42,8 +46,8 @@ class Client < ApplicationRecord
     begin
       person.source = 'Commissulator'
       person.save
-    rescue NoMethodError => error
-      Rails.logger.debug error.inspect
+    rescue NoMethodError => exception
+      Rails.logger.debug exception.inspect
     end
     update_attribute :follow_up_boss_id, person.id
     person
