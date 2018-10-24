@@ -27,8 +27,8 @@
         <td><%= employer.address %></td>
         <td><%= employer.url %></td>
         <td><%= link_to 'Show', employer %></td>
-        <td><%= link_to fa_icon(:highlighter), edit_employer_path(employer), :title => 'Edit' %></td>
-        <td><%= link_to fa_icon(:backspace), employer, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete' %></td>
+        <td><%= edit_employer_link employer %></td>
+        <td><%= delete_employer_link employer %></td>
       </tr>
     <% end %>
   </tbody>
