@@ -8,6 +8,7 @@ module LandlordsHelper
       content_tag(:td, landlord.phone_number),
       content_tag(:td, landlord.recent_commission&.approval_date&.to_s(:descriptive)),
       content_tag(:td, landlord.updated_at.to_s(:descriptive)),
+      content_tag(:td, link_to('FUB', landlord.follow_up_boss_url)),
       content_tag(:td, link_to('Show', landlord)),
       content_tag(:td, link_to(fa_icon(:highlighter), edit_landlord_path(landlord), :title => 'Edit'))
     ]

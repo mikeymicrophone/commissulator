@@ -28,4 +28,8 @@ class Landlord < ApplicationRecord
   def fub_person
     FubClient::Person.find(follow_up_boss_id) || fub_create
   end
+  
+  def follow_up_boss_url
+    "https://#{Rails.application.credentials.follow_up_boss[:subdomain]}.followupboss.com/2/people/view/#{follow_up_boss_id}" if follow_up_boss_id.present?
+  end
 end
