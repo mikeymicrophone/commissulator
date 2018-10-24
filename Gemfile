@@ -38,6 +38,7 @@ gem 'fabrication'
 gem 'faker'
 gem 'google-webfonts-rails', :github => 'masarakki/google-webfonts-rails', :branch => 'for-rails5'
 gem 'rollbar'
+gem 'sqreen'
 
 gem 'rails', '~> 5.2.1'
 gem 'pg'
