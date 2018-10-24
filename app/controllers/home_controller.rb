@@ -48,6 +48,8 @@ class HomeController < ApplicationController
       @second_apartment = Apartment.create second_apartment_params.merge(:registration => @registration)
     end
     
+    @registration.destroy if @registration.registrants.blank?
+    
     @registration.follow_up!
     @registration.fully_annotate_fub!
     
@@ -55,7 +57,7 @@ class HomeController < ApplicationController
   end
   
   def thanks
-    @registration = Registration.find params[:registration_id]
+    @registration = Registration.where(:id => params[:registration_id]).take
     render :layout => 'empty'
   end
   
