@@ -18,17 +18,7 @@
   <tbody>
     <% @employers.each do |employer| %>
       <tr>
-        <td><%= link_to_name_with_icon employer %></td>
-        <td><%= employer.industries.map(&:name).to_sentence %><%= link_to_associated employer, :industries %></td>
-        <td><%= link_to_associated employer, :employments %></td>
-        <td><%= link_to_associated employer, :emails %></td>
-        <td><%= link_to_associated employer, :phones %></td>
-        <td><%= link_to_associated employer, :social_accounts %></td>
-        <td><%= employer.address %></td>
-        <td><%= employer.url %></td>
-        <td><%= link_to 'Show', employer %></td>
-        <td><%= edit_employer_link employer %></td>
-        <td><%= delete_employer_link employer %></td>
+        <%= employer_row_for employer  %>
       </tr>
     <% end %>
   </tbody>
