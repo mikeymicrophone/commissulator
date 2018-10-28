@@ -19,4 +19,5 @@
 //= require jquery.easy-autocomplete
 //= require spin
 //= require jquery.spin
+//= require Chart.min
 //= require_tree .
