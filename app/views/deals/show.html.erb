@@ -127,6 +127,11 @@
   
 </div>
 <div id="commission_assist_adder">
+  <% 
+  newVals = [];
+  newValsColors = [];
+  newValsNames = []; 
+	 %>
   <% @deal.assists.chrono.each do |assist| %>
     <%= div_for assist do %>
       <%= content_tag :div, linked_name(assist), :class => 'deal_portion_description' %>
@@ -141,10 +146,25 @@
             / <%= @deal.assists.where(:role => assist.role).count %>
           <% end %>
           = <%= number_to_currency(assist.payout) %>
+		  <% newVals << assist.payout;
+		  	 newValsNames << assist.name; 
+			 newValsColors << "#%06x" % (rand * 0xffffff);
+			 %>
         <% end %>
       <% end %>
     <% end %>
   <% end %>
+</div>
+
+<div style="width: 400px; height: 400px;">
+<% pieData = { 
+	datasets: [ {
+		data: newVals,
+		backgroundColor: newValsColors
+	}],
+	labels: newValsNames
+};%>
+<%= pie_chart pieData %>
 </div>
 
 <% if current_avatar.admin? %>
