@@ -17,6 +17,7 @@ class Landlord < ApplicationRecord
       person.phones = [{:value => phone_number, :type => 'work'}] if phone_number.present?
       person.tags = ['Landlord']
       person.stage = ENV['FOLLOW_UP_BOSS_STAGE_ID_LANDLORD']
+      person.source = 'Commissulator'
       update_attribute :follow_up_boss_id, person.id
       person.save
     rescue NoMethodError => error

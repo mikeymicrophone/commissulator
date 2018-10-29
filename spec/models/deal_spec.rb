@@ -12,7 +12,7 @@ RSpec.describe Deal, type: :model do
               
               before do
                 commission.agent_split_percentage = 70
-                ap commission.inspect
+                ap commission.attributes
               end
               
               it 'should distribute 50 percent' do

@@ -27,13 +27,13 @@ class Deal < ApplicationRecord
   end
   
   def subcommissions
-    package = Hash.new 0
+    comms = Hash.new 0
     assists.each do |assist|
-      package[assist.agent.payable_name] += assist.payout
+      comms[assist.agent.payable_name] += assist.payout
     end
     
-    package[agent.name] += agent_commission
-    package
+    comms[agent.name] += agent_commission
+    comms
   end
   
   def inbound_commission

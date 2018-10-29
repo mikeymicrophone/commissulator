@@ -10,13 +10,14 @@ class Employer < ApplicationRecord
   
   def fub_create
     begin
-      similar_people = FubClient::Person.where(:lastName => name).fetch
+      similar_people = FubClient::Person.where(:name => name).fetch
       person = similar_people.first if similar_people.present?
       person ||= FubClient::Person.new :lastName => name
       person.emails = emails.map { |email| {:value => email.address} } if emails.any?
       person.phones = phones.map { |phone| {:value => phone.number, :type => phone.variety} } if phones.any?
       person.tags = ['Employer']
       person.stage = ENV['FOLLOW_UP_BOSS_STAGE_ID_EMPLOYER']
+      person.source = 'Commissulator'
       person.save
       update_attribute :follow_up_boss_id, person.id
     rescue NoMethodError => exception
