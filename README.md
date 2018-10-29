@@ -1,24 +1,15 @@
-# README
+#Acknowledgement
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Thank you in advance for your contribution to Commissulator.  This project is being managed in a fashion that is intended to create dozens of useful lessons for young developers to notice.  Clarity, thoroughness, and excellent naming conventions are appreciated.
 
-Things you may want to cover:
+#Getting Started
 
-* Ruby version
+Please refer to the Wiki for all instructions related to running Commissulator.
 
-* System dependencies
+#Security
 
-* Configuration
+If you suspect there is a problem with the way Commissulator is configured or run, please open an issue.
 
-* Database creation
+#Access
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+At this time, Commissulator is not intended for use by other brokerages.  If you are interested in asking for permission, get in touch via the email address in my GitHub profile.
