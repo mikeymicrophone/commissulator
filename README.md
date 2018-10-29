@@ -4,11 +4,11 @@ Thank you in advance for your contribution to Commissulator.  This project is be
 
 # Getting Started
 
-Please refer to the Wiki for all instructions related to running Commissulator.
+Please refer to the [Wiki](https://github.com/mikeymicrophone/commissulator/wiki) for all instructions related to running Commissulator.
 
 # Security
 
-If you suspect there is a problem with the way Commissulator is configured or run, please open an issue.
+If you suspect there is a problem with the way Commissulator is configured or run, please [open an issue](https://github.com/mikeymicrophone/commissulator/issues).
 
 # Access
 
