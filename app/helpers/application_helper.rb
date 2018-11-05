@@ -130,13 +130,13 @@ module ApplicationHelper
     ['Alegreya', 'Arvo', 'Bitter', 'Cinzel', 'Cormorant Infant', 'Fjalla One', 'Joana Correia', 'Jua', 'M PLUS Rounded 1c', 'Nunito', 'Quattrocento']
   end
 
-  def generate_edit_link_for object
+  def edit_link_for object
     if can? :edit, object
 			link_to fa_icon(:highlighter), send("edit_#{object.class.to_s.underscore}_path", object), :title => 'Edit'
 		end
 	end
 
-	def delete_employer_link object
+	def delete_link_for object
 		if can? :delete, object
 			link_to fa_icon(:backspace), send("#{object.class.to_s.underscore}_path", object), method: :delete, data: { confirm: 'Are you sure?' }, :title => 'Delete'
 		end

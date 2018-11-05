@@ -10,8 +10,8 @@ module EmployersHelper
 			content_tag(:td, link_to_associated(employer, :social_accounts)),
 			content_tag(:td, employer.address),
 			content_tag(:td, employer.url),
-			content_tag(:td, generate_edit_link_for(employer) ),
-			content_tag(:td, delete_employer_link(employer))
+			content_tag(:td, edit_link_for(employer) ),
+			content_tag(:td, delete_link_for(employer))
 		]
 		columns.join.html_safe
 	end
