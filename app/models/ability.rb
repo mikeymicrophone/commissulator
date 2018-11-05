@@ -3,7 +3,7 @@ class Ability
 
   def initialize avatar
     if avatar
-      # can :manage, :all
+      can :manage, :all
       cannot :activate, Avatar
       cannot :edit, Employer
       cannot :destroy, Employer
