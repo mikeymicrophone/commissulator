@@ -19,8 +19,8 @@ class AgentsController < ApplicationController
   end
 
   def show
-    @google_auth_uri = 'google_auth'#Agent.google_auth_uri
-    @microsoft_auth_uri = 'ms_auth'#Agent.microsoft_auth_uri
+    @google_auth_uri = Agent.google_auth_uri
+    @microsoft_auth_uri = Agent.microsoft_auth_uri
   end
 
   def new
