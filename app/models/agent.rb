@@ -20,7 +20,7 @@ class Agent < ApplicationRecord
   scope :alpha, lambda { order :first_name }
 
   def to_param
-    basic_slug([id, first_name, last_name])
+    basic_slug first_name, last_name
   end
   
   def name
