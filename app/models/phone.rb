@@ -1,4 +1,6 @@
 class Phone < ApplicationRecord
+  include Sluggable
+
   belongs_to :client, :optional => true
   belongs_to :employer, :optional => true
   validates :number, :presence => true
@@ -9,6 +11,10 @@ class Phone < ApplicationRecord
   scope :hiring, lambda { where :variety => :hiring }
   
   VARIETIES = ['cell', 'home', 'work', 'office']
+
+  def to_param
+    basic_slug client.first_name, client.last_name, variety
+  end
   
   def name
     number

@@ -4,7 +4,7 @@ class Apartment < ApplicationRecord
   belongs_to :registration
 
   def to_param
-    basic_slug([id, street_number, street_name, unit_number, zip_code])
+    basic_slug street_number, street_name, unit_number, zip_code
   end
   
   def name

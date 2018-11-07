@@ -11,7 +11,7 @@ class Employer < ApplicationRecord
   validates :name, :presence => true
 
   def to_param
-    basic_slug([id, name])
+    basic_slug name
   end
   
   def fub_create

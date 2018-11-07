@@ -34,7 +34,7 @@ class Avatar < ApplicationRecord
   end
 
   def to_param
-    basic_slug([id, first_name, last_name])
+    basic_slug first_name, last_name
   end
   
   def name

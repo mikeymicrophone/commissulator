@@ -21,8 +21,11 @@ class Deal < ApplicationRecord
   scope :this_week, -> { where Deal.arel_table[:created_at].gt 1.week.ago }
 
   def to_param
-    slug_array = name.present? ? [id, name] : [id, address, unit_number]
-    basic_slug(slug_array)
+    if name.present?
+      basic_slug name
+    else
+      basic_slug address, unit_number
+    end
   end
 
   def reference

@@ -12,7 +12,7 @@ class Document < ApplicationRecord
   scope :commission_payments, -> { where :role => ['Proof of Commission Payment', 'Owner Pay Invoice'] }
 
   def to_param
-    basic_slug([id, name, deal.to_param])
+    basic_slug name, deal.to_param
   end
   
   def remove_symbols

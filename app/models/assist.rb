@@ -18,7 +18,7 @@ class Assist < ApplicationRecord
   scope :chrono, lambda { order :role_id }
 
   def to_param
-    basic_slug([id, agent.first_name, agent.last_name])
+    basic_slug agent.first_name, agent.last_name
   end
   
   def name

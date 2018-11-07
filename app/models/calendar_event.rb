@@ -5,7 +5,7 @@ class CalendarEvent < ApplicationRecord
   belongs_to :agent, :optional => true
 
   def to_param
-    basic_slug([id, title])
+    basic_slug title
   end
   
   def push_to_google

@@ -17,7 +17,7 @@ class Client < ApplicationRecord
   has_many :registering_agents, :through => :registrations, :source => :agent
 
   def to_param
-    basic_slug([id, first_name, last_name])
+    basic_slug first_name, last_name
   end
   
   def name

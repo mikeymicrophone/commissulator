@@ -41,7 +41,7 @@ class Commission < ApplicationRecord
   acts_as_paranoid
 
   def to_param
-    basic_slug([id, property_address, apartment_number, zip_code])
+    basic_slug property_address, apartment_number, zip_code
   end
   
   def name

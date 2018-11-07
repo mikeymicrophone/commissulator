@@ -8,7 +8,7 @@ class Email < ApplicationRecord
   VARIETIES = ['home', 'school', 'work', 'office']
 
   def to_param
-    basic_slug([id, client.first_name, client.last_name])
+    basic_slug client.first_name, client.last_name
   end
   
   def name
