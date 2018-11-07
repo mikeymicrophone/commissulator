@@ -1,4 +1,6 @@
 class Assist < ApplicationRecord
+  include Sluggable
+
   belongs_to :deal
   belongs_to :agent
   belongs_to :role
@@ -14,6 +16,10 @@ class Assist < ApplicationRecord
   scope :showing, lambda { where :role_id => Role.where(:name => 'show').take }
   scope :closing, lambda { where :role_id => Role.where(:name => 'close').take }
   scope :chrono, lambda { order :role_id }
+
+  def to_param
+    basic_slug([id, agent.first_name, agent.last_name])
+  end
   
   def name
     "#{role.name} by #{agent.name}"

@@ -1,7 +1,12 @@
 class CalendarEvent < ApplicationRecord
   extend Memoist
+  include Sluggable
   
   belongs_to :agent, :optional => true
+
+  def to_param
+    basic_slug([id, title])
+  end
   
   def push_to_google
     google_event = CalendarEvent.google_calendar(agent).create_event do |e|

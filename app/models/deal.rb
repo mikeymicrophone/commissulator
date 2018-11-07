@@ -1,5 +1,7 @@
 include CommissionsHelper
 class Deal < ApplicationRecord
+  include Sluggable
+
   belongs_to :agent
   has_many :assists, :dependent => :destroy
   has_many :agents, -> { distinct }, :through => :assists
@@ -17,6 +19,11 @@ class Deal < ApplicationRecord
   attr_default :status, :preliminary
   
   scope :this_week, -> { where Deal.arel_table[:created_at].gt 1.week.ago }
+
+  def to_param
+    slug_array = name.present? ? [id, name] : [id, address, unit_number]
+    basic_slug(slug_array)
+  end
 
   def reference
     if name.present?

@@ -1,4 +1,6 @@
 class Avatar < ApplicationRecord
+  include Sluggable
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable#, :omniauthable, :omniauth_providers => [:contactually, :google_oauth2, :microsoft_office365]
 
@@ -29,6 +31,10 @@ class Avatar < ApplicationRecord
         avatar.skip_confirmation!
       end
     end
+  end
+
+  def to_param
+    basic_slug([id, first_name, last_name])
   end
   
   def name

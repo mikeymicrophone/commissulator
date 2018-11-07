@@ -2,6 +2,8 @@ include ActionView::Helpers::NumberHelper
 require 'contactually'
 
 class Commission < ApplicationRecord
+  include Sluggable
+
   belongs_to :deal, :optional => true
   belongs_to :agent, :optional => true
   belongs_to :landlord, :optional => true
@@ -37,6 +39,10 @@ class Commission < ApplicationRecord
   scope :assisted_by, lambda { |agent| joins(:agents).where('assists.agent_id' => agent).distinct }
   
   acts_as_paranoid
+
+  def to_param
+    basic_slug([id, property_address, apartment_number, zip_code])
+  end
   
   def name
     deal.reference
