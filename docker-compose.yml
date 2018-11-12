@@ -1,0 +1,11 @@
+version: "2"
+services:
+  app:
+    build: .
+    volumes:
+      - .:/orig
+  db:
+    image: postgres
+#    volumes:
+#      - .:/app
+

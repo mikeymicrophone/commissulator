@@ -39,3 +39,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master-development.key
+
+# Ignore master key for decrypting credentials and more.
+/config/master-development_batman.key
