@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :client_id %>
-    <%= form.select :client_id options_from_collection_for_select(Client.all, :id, :name, social_account.client_id), :include_blank => true %>
+    <%= form.select :client_id, options_from_collection_for_select(Client.all, :id, :name, social_account.client_id), :include_blank => true %>
   </div>
 
   <div class="field">

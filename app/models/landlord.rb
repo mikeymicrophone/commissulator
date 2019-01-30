@@ -1,6 +1,12 @@
 class Landlord < ApplicationRecord
+  include Sluggable
+
   has_many :commissions
   has_many :leases
+
+  def to_param
+    basic_slug name
+  end
   
   def recent_commission
     commissions.order('approval_date desc nulls last').first

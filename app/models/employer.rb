@@ -1,4 +1,6 @@
 class Employer < ApplicationRecord
+  include Sluggable
+
   has_many :employments, :dependent => :destroy
   has_many :clients, :through => :employments
   has_many :niches, :dependent => :destroy
@@ -7,6 +9,10 @@ class Employer < ApplicationRecord
   has_many :phones
   has_many :social_accounts
   validates :name, :presence => true
+
+  def to_param
+    basic_slug name
+  end
   
   def fub_create
     begin
