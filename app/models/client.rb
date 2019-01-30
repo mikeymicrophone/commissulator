@@ -1,4 +1,6 @@
 class Client < ApplicationRecord
+  include Sluggable
+
   has_many :registrants, :dependent => :destroy
   has_many :registrations, :through => :registrants
   has_many :apartments, :through => :registrations
@@ -13,6 +15,10 @@ class Client < ApplicationRecord
   has_many :leases, :through => :tenants
   has_many :commissions, :through => :leases
   has_many :registering_agents, :through => :registrations, :source => :agent
+
+  def to_param
+    basic_slug first_name, last_name
+  end
   
   def name
     "#{first_name} #{last_name}"

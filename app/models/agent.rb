@@ -1,6 +1,8 @@
 require 'google/api_client/client_secrets'
 
 class Agent < ApplicationRecord
+  include Sluggable
+
   has_many :assists, :dependent => :nullify
   belongs_to :avatar, :optional => true
   has_many :deals
@@ -16,6 +18,10 @@ class Agent < ApplicationRecord
   
   scope :active, lambda { where :status => 'active' }
   scope :alpha, lambda { order :first_name }
+
+  def to_param
+    basic_slug first_name, last_name
+  end
   
   def name
     "#{first_name} #{last_name}"

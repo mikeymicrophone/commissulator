@@ -1,7 +1,13 @@
 class Employment < ApplicationRecord
+  include Sluggable
+
   belongs_to :client
   belongs_to :employer
   validates_associated :employer
+
+  def to_param
+    basic_slug client.first_name, client.last_name
+  end
   
   def phones
     Phone.where :client => client, :employer => employer

@@ -1,5 +1,7 @@
 include CommissionsHelper
 class Lease < ApplicationRecord
+  include Sluggable
+
   belongs_to :landlord, :optional => true
   has_many :tenants
   has_many :clients, :through => :tenants
@@ -7,6 +9,10 @@ class Lease < ApplicationRecord
   belongs_to :registration, :optional => true
   validates :street_number, :presence => true
   validates :street_name, :presence => true
+
+  def to_param
+    basic_slug street_number, street_name, apartment_number, zip_code
+  end
   
   def name
     "#{address} with #{landlord&.name}"
