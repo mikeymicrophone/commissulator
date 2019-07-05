@@ -28,6 +28,9 @@
 
   <tbody id="commissions_table">
     <% @commissions.each do |commission| %>
+        <% cache commission do %>
+             <%= render commission %>
+             <% end %>
       <%= commission_row_for commission %>
     <% end %>
   </tbody>
